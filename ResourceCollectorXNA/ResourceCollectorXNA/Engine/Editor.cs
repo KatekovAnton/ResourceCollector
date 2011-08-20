@@ -25,7 +25,7 @@ namespace ResourceCollectorXNA.Engine
     public class GameEditor:IKeyboardUserInterface
     {
         GameScene gameScene;
-
+        
         public static BasicEffect _visualizationEffect;
         public static SpriteFont Font1;
 
@@ -36,6 +36,7 @@ namespace ResourceCollectorXNA.Engine
         private bool lmbwasreleased = true;
         public TransformManager transformator;
         List<HotKey> hotkeys1;
+
         public GameEditor(GameScene scene)
         {
             actions = new Actions.ActionStack();
