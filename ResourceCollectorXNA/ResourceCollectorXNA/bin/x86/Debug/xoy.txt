@@ -1,0 +1,20 @@
+VertexPositionColor[] vertices = new VertexPositionColor[]{
+new VertexPositionColor(new Vector3(-7.07107f,-7.071065f,-1.067702E-06f), Color.White),
+new VertexPositionColor(new Vector3(-3.826836f,-9.238794f,-5.778362E-07f), Color.White),
+new VertexPositionColor(new Vector3(-1.192488E-07f,-10f,-1.800607E-14f), Color.White),
+new VertexPositionColor(new Vector3(3.826836f,-9.238795f,5.778361E-07f), Color.White),
+new VertexPositionColor(new Vector3(7.07107f,-7.071066f,1.067702E-06f), Color.White),
+new VertexPositionColor(new Vector3(9.238796f,-3.826832f,1.395019E-06f), Color.White),
+new VertexPositionColor(new Vector3(10f,1.509958E-06f,1.509958E-06f), Color.White),
+new VertexPositionColor(new Vector3(9.238795f,3.826835f,1.395019E-06f), Color.White),
+new VertexPositionColor(new Vector3(7.071068f,7.071068f,1.067702E-06f), Color.White),
+new VertexPositionColor(new Vector3(3.826835f,9.238795f,5.77836E-07f), Color.White),
+new VertexPositionColor(new Vector3(4.371139E-07f,10f,6.600237E-14f), Color.White),
+new VertexPositionColor(new Vector3(-3.826834f,9.238795f,-5.778359E-07f), Color.White),
+new VertexPositionColor(new Vector3(-7.071068f,7.071068f,-1.067702E-06f), Color.White),
+new VertexPositionColor(new Vector3(-9.238795f,3.826835f,-1.395019E-06f), Color.White),
+new VertexPositionColor(new Vector3(-10f,0f,-1.509958E-06f), Color.White),
+new VertexPositionColor(new Vector3(-9.238797f,-3.82683f,-1.39502E-06f), Color.White),
+};
+short[] indices = {
+0, 1, 2, 2, 3, 4, 4, 5, 6, 2, 4, 6, 6, 7, 8, 8, 9, 10, 6, 8, 10, 10, 11, 12, 12, 13, 14, 10, 12, 14, 6, 10, 14, 2, 6, 14, 0, 2, 14, 15, 0, 14};

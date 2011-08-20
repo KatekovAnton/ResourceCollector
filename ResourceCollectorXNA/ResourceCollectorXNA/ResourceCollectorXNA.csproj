@@ -1,0 +1,509 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{3FE91DFD-FBC2-4626-8504-E714A85A2876}</ProjectGuid>
+    <ProjectTypeGuids>{6D335F3A-9D43-41b4-9D22-F6F17C4BE596};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ResourceCollectorXNA</RootNamespace>
+    <AssemblyName>ResourceCollectorXNA</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <XnaFrameworkVersion>v4.0</XnaFrameworkVersion>
+    <XnaPlatform>Windows</XnaPlatform>
+    <XnaProfile>Reach</XnaProfile>
+    <XnaCrossPlatformGroupID>d2ee9982-ee47-49a9-837a-b09160f459d1</XnaCrossPlatformGroupID>
+    <XnaOutputType>Game</XnaOutputType>
+    <ApplicationIcon>Game.ico</ApplicationIcon>
+    <Thumbnail>GameThumbnail.png</Thumbnail>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\x86\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE;WINDOWS</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoStdLib>true</NoStdLib>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <PlatformTarget>x86</PlatformTarget>
+    <XnaCompressContent>false</XnaCompressContent>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\x86\Release</OutputPath>
+    <DefineConstants>TRACE;WINDOWS</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoStdLib>true</NoStdLib>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <PlatformTarget>x86</PlatformTarget>
+    <XnaCompressContent>true</XnaCompressContent>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Xna.Framework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.Xna.Framework.Game, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.Xna.Framework.Graphics, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.Xna.Framework.GamerServices, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.Xna.Framework.Xact, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.Xna.Framework.Video, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.Xna.Framework.Avatar, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.Xna.Framework.Net, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.Xna.Framework.Storage, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="mscorlib">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Core">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Net">
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ConsoleWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConsoleWindow.Designer.cs">
+      <DependentUpon>ConsoleWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ContactCallback.cs" />
+    <Compile Include="Content\EngineCollisionMesh.cs" />
+    <Compile Include="Content\EngineMesh.cs" />
+    <Compile Include="Content\EngineSkinnedMesh.cs" />
+    <Compile Include="Content\TerrainMesh.cs" />
+    <Compile Include="Content\TerrainVertex.cs" />
+    <Compile Include="Content\EngineTexture.cs" />
+    <Compile Include="Content\EngineVertex.cs" />
+    <Compile Include="Engine\Actions\ActionManager.cs" />
+    <Compile Include="Engine\Actions\ActionStack.cs" />
+    <Compile Include="Engine\Actions\AddObjectPivotAction.cs" />
+    <Compile Include="Engine\Actions\ChangeActiveObject.cs" />
+    <Compile Include="Engine\Actions\DeleteObjectPivotAction.cs" />
+    <Compile Include="Engine\Actions\RotateLocalPivotAction.cs" />
+    <Compile Include="Engine\Actions\RotateSamePivotAction.cs" />
+    <Compile Include="Engine\Camera.cs" />
+    <Compile Include="Engine\ContentLoader\ContentLoader.cs" />
+    <Compile Include="Engine\Editor.cs" />
+    <Compile Include="Engine\Actions\EditorAction.cs" />
+    <Compile Include="Engine\Actions\DragPivotObject.cs" />
+    <Compile Include="Engine\Actions\PivotAction.cs" />
+    <Compile Include="Engine\EditorObject\EditorObject.cs" />
+    <Compile Include="Engine\Engine.cs" />
+    <Compile Include="Engine\Helpers\FPSCounter.cs" />
+    <Compile Include="Engine\Interface\IInterfaceUser.cs" />
+    <Compile Include="Engine\Interface\KeyboardManager.cs" />
+    <Compile Include="Engine\Interface\IKeyboardUserInterface.cs" />
+    <Compile Include="Engine\Interface\MouseManager.cs" />
+    <Compile Include="Engine\Interface\IMouseUserInterface.cs" />
+    <Compile Include="Engine\Interface\MoveArrows.cs" />
+    <Compile Include="Engine\Interface\RotateCircles.cs" />
+    <Compile Include="Engine\Interface\TransformManager.cs" />
+    <Compile Include="Engine\Log.cs" />
+    <Compile Include="Engine\Logic\Level.cs" />
+    <Compile Include="Engine\Logic\LevelTerrain.cs" />
+    <Compile Include="Engine\Logic\ObjectContainer.cs" />
+    <Compile Include="Engine\Logic\GameScene.cs" />
+    <Compile Include="Engine\Render\RenderObject\AnimRenderObject.cs" />
+    <Compile Include="Engine\Logic\BehaviourModel\ObjectBehaviourModel.cs" />
+    <Compile Include="Engine\Logic\BehaviourModel\ObjectMovingBehaviourModel.cs" />
+    <Compile Include="Engine\Logic\BehaviourModel\ObjectPhysicBehaviourModel.cs" />
+    <Compile Include="Engine\Logic\BehaviourModel\ObjectPhysicControllerBehaviourModel.cs" />
+    <Compile Include="Engine\Logic\BehaviourModel\ObjectStaticBehaviourModel.cs" />
+    <Compile Include="Engine\Logic\EditorAspect.cs" />
+    <Compile Include="Engine\Logic\GameBeing.cs" />
+    <Compile Include="Engine\Logic\GameObject.cs" />
+    <Compile Include="Engine\EditorObject\Level.cs" />
+    <Compile Include="Engine\Logic\LevelObject.cs" />
+    <Compile Include="Engine\Logic\LigthSource.cs" />
+    <Compile Include="Engine\Logic\OperatingModel\ObjectLevelGeometryOperatingModel.cs" />
+    <Compile Include="Engine\Logic\OperatingModel\ObjectOperatingModel.cs" />
+    <Compile Include="Engine\Logic\PivotObject.cs" />
+    <Compile Include="Engine\Logic\RaycastBoundObject.cs" />
+    <Compile Include="Engine\Logic\SceneGraph\OTAABoundingBox.cs" />
+    <Compile Include="Engine\Logic\SceneGraph\OTBoundingShape.cs" />
+    <Compile Include="Engine\Logic\SceneGraph\OTHelperBounds.cs" />
+    <Compile Include="Engine\Logic\SceneGraph\SceneGraph.cs" />
+    <Compile Include="Engine\Logic\SceneGraph\SGNode.cs" />
+    <Compile Include="Engine\Logic\SceneGraph\SGOcTree.cs" />
+    <Compile Include="Engine\Logic\SceneGraph\SGQdTree.cs" />
+    <Compile Include="Engine\Logic\TerrainObject.cs" />
+    <Compile Include="Engine\Render\RenderObject\TerrainRenderObject.cs" />
+    <Compile Include="Engine\Render\RenderObject\UnAnimRenderObject.cs" />
+    <Compile Include="Engine\Render\RenderObject\RenderObject.cs" />
+    <Compile Include="Engine\Logic\_GameObjects.cs" />
+    <Compile Include="Engine\MyContainer.cs" />
+    <Compile Include="Engine\Render\Render2D\BasicPrimitives.cs" />
+    <Compile Include="Engine\Render\DebugRender\DebugRenderer.cs" />
+    <Compile Include="Engine\Render\DebugRender\DebugRenderMesh.cs" />
+    <Compile Include="Engine\Render\Materials\Material.cs" />
+    <Compile Include="Engine\Render\Materials\TextureMaterial.cs" />
+    <Compile Include="Engine\Render\RenderEngine.cs" />
+    <Compile Include="Engine\Render\Shader.cs" />
+    <Compile Include="Extensions.cs" />
+    <Compile Include="MainWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainWindow.designer.cs">
+      <DependentUpon>MainWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MathExtensions.cs" />
+    <Compile Include="NotificationCenter.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Game1.cs" />
+    <Compile Include="RCViewControllers\RenderWindowVC.cs" />
+    <Compile Include="RenderWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RenderWindow.designer.cs">
+      <DependentUpon>RenderWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ResourceCollectorEditorWindows\Level.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ResourceCollectorEditorWindows\Level.Designer.cs">
+      <DependentUpon>Level.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ResourceCollector\Addition\AboutBox1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ResourceCollector\Addition\AboutBox1.designer.cs">
+      <DependentUpon>AboutBox1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ResourceCollector\Addition\ChangeNames.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ResourceCollector\Addition\ChangeNames.designer.cs">
+      <DependentUpon>ChangeNames.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ResourceCollector\Addition\Extensions.cs" />
+    <Compile Include="ResourceCollector\Addition\Math.cs" />
+    <Compile Include="ResourceCollector\Addition\OtherFunctions.cs" />
+    <Compile Include="ResourceCollector\Animation.cs" />
+    <Compile Include="ResourceCollector\CollisionMesh.cs" />
+    <Compile Include="ResourceCollector\ConvexMesh.cs" />
+    <Compile Include="ResourceCollector\EngineInterfaces\IEngineUpdatesObject.cs" />
+    <Compile Include="ResourceCollector\FormAnimationTools.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ResourceCollector\FormAnimationTools.designer.cs">
+      <DependentUpon>FormAnimationTools.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ResourceCollector\FormCollisionMesh.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ResourceCollector\FormCollisionMesh.designer.cs">
+      <DependentUpon>FormCollisionMesh.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ResourceCollector\FormCollisionMeshProperties.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ResourceCollector\FormCollisionMeshProperties.designer.cs">
+      <DependentUpon>FormCollisionMeshProperties.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ResourceCollector\FormLODInterface.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ResourceCollector\FormLODInterface.designer.cs">
+      <DependentUpon>FormLODInterface.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ResourceCollector\FormMainPackExplorer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ResourceCollector\FormMainPackExplorer.designer.cs">
+      <DependentUpon>FormMainPackExplorer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ResourceCollector\FormMaterial.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ResourceCollector\FormMaterial.Designer.cs">
+      <DependentUpon>FormMaterial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ResourceCollector\FormMeshCombiner.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ResourceCollector\FormMeshCombiner.Designer.cs">
+      <DependentUpon>FormMeshCombiner.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ResourceCollector\FormMeshProperties.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ResourceCollector\FormMeshProperties.designer.cs">
+      <DependentUpon>FormMeshProperties.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ResourceCollector\FormNewElement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ResourceCollector\FormNewElement.Designer.cs">
+      <DependentUpon>FormNewElement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ResourceCollector\FormObjectPicker.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ResourceCollector\FormObjectPicker.Designer.cs">
+      <DependentUpon>FormObjectPicker.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ResourceCollector\FormRenderObjectProperties.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ResourceCollector\FormRenderObjectProperties.Designer.cs">
+      <DependentUpon>FormRenderObjectProperties.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ResourceCollector\FormSelectSkeletonType.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ResourceCollector\FormSelectSkeletonType.Designer.cs">
+      <DependentUpon>FormSelectSkeletonType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ResourceCollector\FormSkeletonViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ResourceCollector\FormSkeletonViewer.Designer.cs">
+      <DependentUpon>FormSkeletonViewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ResourceCollector\FormTexture.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ResourceCollector\FormTexture.Designer.cs">
+      <DependentUpon>FormTexture.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ResourceCollector\FormTextureCreator.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ResourceCollector\FormTextureCreator.Designer.cs">
+      <DependentUpon>FormTextureCreator.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ResourceCollector\FormTextureList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ResourceCollector\FormTextureList.Designer.cs">
+      <DependentUpon>FormTextureList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ResourceCollector\FormLevelObjectDescriptionProperties.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ResourceCollector\FormLevelObjectDescriptionProperties.Designer.cs">
+      <DependentUpon>FormLevelObjectDescriptionProperties.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ResourceCollector\FormXNAMonitor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ResourceCollector\FormXNAMonitor.Designer.cs">
+      <DependentUpon>FormXNAMonitor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ResourceCollector\GameObjectDescription.cs" />
+    <Compile Include="ResourceCollector\ImageContent.cs" />
+    <Compile Include="ResourceCollector\LodBuilder.cs" />
+    <Compile Include="ResourceCollector\Material.cs" />
+    <Compile Include="ResourceCollector\Mesh.cs" />
+    <Compile Include="ResourceCollector\MeshImportList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ResourceCollector\MeshImportList.Designer.cs">
+      <DependentUpon>MeshImportList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ResourceCollector\MeshListContent.cs" />
+    <Compile Include="ResourceCollector\MeshOther.cs" />
+    <Compile Include="ResourceCollector\MeshStructures.cs" />
+    <Compile Include="ResourceCollector\meshviewer.cs" />
+    <Compile Include="ResourceCollector\meshviewer.designer.cs">
+      <DependentUpon>meshviewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ResourceCollector\Mesh_loaders.cs" />
+    <Compile Include="ResourceCollector\Pack.cs" />
+    <Compile Include="ResourceCollector\PackContent.cs" />
+    <Compile Include="ResourceCollector\PackList.cs" />
+    <Compile Include="ResourceCollector\RenderObject.cs" />
+    <Compile Include="ResourceCollector\Skeleton.cs" />
+    <Compile Include="ResourceCollector\SkeletonWithAddInfo.cs" />
+    <Compile Include="ResourceCollector\TextureListContent.cs" />
+    <Compile Include="ResourceCollector\LevelObjectDescription.cs" />
+    <Compile Include="WindowsFormsElements.cs">
+      <SubType>Component</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Game.ico" />
+    <Content Include="GameThumbnail.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ResourceCollectorXNAContent\ResourceCollectorXNAContent.contentproj">
+      <Name>ResourceCollectorXNAContent</Name>
+      <XnaReferenceType>Content</XnaReferenceType>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">
+      <Visible>False</Visible>
+      <ProductName>Клиентский профиль Microsoft .NET Framework 4 %28x86 и x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>Клиентский профиль .NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Установщик Windows 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Xna.Framework.4.0">
+      <Visible>False</Visible>
+      <ProductName>Microsoft XNA Framework Redistributable 4.0</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ConsoleWindow.resx">
+      <DependentUpon>ConsoleWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainWindow.resx">
+      <DependentUpon>MainWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RenderWindow.resx">
+      <DependentUpon>RenderWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ResourceCollectorEditorWindows\Level.resx">
+      <DependentUpon>Level.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ResourceCollector\Addition\AboutBox1.resx">
+      <DependentUpon>AboutBox1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ResourceCollector\Addition\ChangeNames.resx">
+      <DependentUpon>ChangeNames.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ResourceCollector\FormAnimationTools.resx">
+      <DependentUpon>FormAnimationTools.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ResourceCollector\FormCollisionMesh.resx">
+      <DependentUpon>FormCollisionMesh.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ResourceCollector\FormCollisionMeshProperties.resx">
+      <DependentUpon>FormCollisionMeshProperties.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ResourceCollector\FormLODInterface.resx">
+      <DependentUpon>FormLODInterface.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ResourceCollector\FormMainPackExplorer.resx">
+      <DependentUpon>FormMainPackExplorer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ResourceCollector\FormMaterial.resx">
+      <DependentUpon>FormMaterial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ResourceCollector\FormMeshCombiner.resx">
+      <DependentUpon>FormMeshCombiner.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ResourceCollector\FormMeshProperties.resx">
+      <DependentUpon>FormMeshProperties.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ResourceCollector\FormNewElement.resx">
+      <DependentUpon>FormNewElement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ResourceCollector\FormObjectPicker.resx">
+      <DependentUpon>FormObjectPicker.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ResourceCollector\FormRenderObjectProperties.resx">
+      <DependentUpon>FormRenderObjectProperties.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ResourceCollector\FormSelectSkeletonType.resx">
+      <DependentUpon>FormSelectSkeletonType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ResourceCollector\FormSkeletonViewer.resx">
+      <DependentUpon>FormSkeletonViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ResourceCollector\FormTexture.resx">
+      <DependentUpon>FormTexture.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ResourceCollector\FormTextureCreator.resx">
+      <DependentUpon>FormTextureCreator.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ResourceCollector\FormTextureList.resx">
+      <DependentUpon>FormTextureList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ResourceCollector\FormLevelObjectDescriptionProperties.resx">
+      <DependentUpon>FormLevelObjectDescriptionProperties.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ResourceCollector\FormXNAMonitor.resx">
+      <DependentUpon>FormXNAMonitor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ResourceCollector\MeshImportList.resx">
+      <DependentUpon>MeshImportList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ResourceCollector\meshviewer.resx">
+      <DependentUpon>meshviewer.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\Microsoft.Xna.GameStudio.targets" />
+  <!--
+      To modify your build process, add your task inside one of the targets below and uncomment it. 
+      Other similar extension points exist, see Microsoft.Common.targets.
+      <Target Name="BeforeBuild">
+      </Target>
+      <Target Name="AfterBuild">
+      </Target>
+    -->
+</Project>
