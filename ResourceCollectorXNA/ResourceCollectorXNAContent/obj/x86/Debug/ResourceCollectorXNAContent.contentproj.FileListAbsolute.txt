@@ -1,3 +1,4 @@
 C:\Users\с\Desktop\ResourceCollectorXNA\ResourceCollectorXNA\ResourceCollectorXNAContent\obj\x86\Debug\ResolveAssemblyReference.cache
 C:\Users\с\Desktop\GAME\ResourceCollectorXNA\ResourceCollectorXNA\ResourceCollectorXNAContent\obj\x86\Debug\ResolveAssemblyReference.cache
 C:\Users\Хозяин\Desktop\GAME\ResourceCollectorXNA\ResourceCollectorXNA\ResourceCollectorXNAContent\obj\x86\Debug\ResolveAssemblyReference.cache
+E:\ResourceCollector\ResourceCollector\ResourceCollectorXNA\ResourceCollectorXNAContent\obj\x86\Debug\ResolveAssemblyReference.cache

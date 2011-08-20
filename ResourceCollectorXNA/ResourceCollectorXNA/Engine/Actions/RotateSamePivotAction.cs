@@ -66,7 +66,7 @@ namespace ResourceCollectorXNA.Engine.Actions
                 throw new Exception("Invalid parameter in RotatePivotAction::UpdateAction");
 
             Vector2 delta = data.mousepos - startMousePos;
-            float length = delta.X;
+            float length = delta.Y;
             if (length != 0)
             {
                 float angle = length / 100;

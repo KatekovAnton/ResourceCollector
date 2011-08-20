@@ -22,6 +22,8 @@ namespace ResourceCollectorXNA.Engine.Actions
         Quaternion[] startRotation;
         Vector3[] starTranslation;
         Vector3[] startScale;
+
+
         public RotateLocalPivotAction(ObjectContainer dragableObject, Axis _axis, object _data)
             : base(dragableObject)
         {
@@ -49,6 +51,8 @@ namespace ResourceCollectorXNA.Engine.Actions
             ActionResult = Quaternion.CreateFromAxisAngle(objectRotatingUnit1, 0);
 
         }
+
+
         public override void CancelAction(Engine.GameEditor Editor)
         {
             for (int i = 0; i < this.operatingObject.Length;i++ )
@@ -58,6 +62,8 @@ namespace ResourceCollectorXNA.Engine.Actions
             }
             Editor.SetActiveObjects(operatingObject, true);
         }
+
+
         public override void UpdateAction(object parameters)
         {
             PivotActionUpdateParameters data = parameters as PivotActionUpdateParameters;
@@ -65,7 +71,7 @@ namespace ResourceCollectorXNA.Engine.Actions
                 throw new Exception("Invalid parameter in RotatePivotAction::UpdateAction");
 
             Vector2 delta = data.mousepos - startMousePos;
-            float length = delta.X;
+            float length = delta.Y;
             if (length != 0)
             {
                 float angle = length/100;
