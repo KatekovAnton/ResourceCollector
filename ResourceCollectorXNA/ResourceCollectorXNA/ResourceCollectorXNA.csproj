@@ -149,7 +149,7 @@
     <Compile Include="Engine\Interface\RotateCircles.cs" />
     <Compile Include="Engine\Interface\TransformManager.cs" />
     <Compile Include="Engine\Log.cs" />
-    <Compile Include="Engine\Logic\Level.cs" />
+    <Compile Include="Engine\Logic\LevelEditor.cs" />
     <Compile Include="Engine\Logic\LevelTerrain.cs" />
     <Compile Include="Engine\Logic\ObjectContainer.cs" />
     <Compile Include="Engine\Logic\GameScene.cs" />
@@ -202,7 +202,6 @@
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="RCViewControllers\RenderWindowVC.cs" />
-    <Compile Include="RCViewControllers\LevelWindowVC.cs" />
     <Compile Include="RenderWindow.cs">
       <SubType>Form</SubType>
     </Compile>

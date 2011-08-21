@@ -13,7 +13,6 @@ namespace ResourceCollectorXNA.Engine.Logic
         public MyContainer<PivotObject> VisibleObjects;
         public MyContainer<PivotObject> ShadowObjects;
         public SceneGraph.SceneGraph sceneGraph;
-        private Level levelWindow;
 
 
         public GameScene()
@@ -21,39 +20,50 @@ namespace ResourceCollectorXNA.Engine.Logic
             objects = new MyContainer<PivotObject>(100, 10);
             VisibleObjects = new MyContainer<PivotObject>(100, 2);
             ShadowObjects = new MyContainer<PivotObject>(100, 2);
-            sceneGraph = new Logic.SceneGraph.SceneGraph(this);
-            levelWindow = new Level();
+            sceneGraph = new SceneGraph.SceneGraph(this);
         }
-        virtual public void Clear()
+
+
+        public void Clear()
         {
             VisibleObjects.Clear();
             ShadowObjects.Clear();
             sceneGraph.Clear();
             objects.Clear();
-            levelWindow.Cleared();
+            LevelEditor.Cleared();
         }
-        virtual public void AddObject(PivotObject newObject)
+
+
+        public void AddObject(PivotObject newObject)
         {
             objects.Add(newObject);
             sceneGraph.AddObject(newObject);
-            levelWindow.ObjectAdded(newObject);
+            LevelEditor.ObjectAdded(newObject);
         }
-        virtual public void DeleteObjects(MyContainer<PivotObject> deletingobjects)
+
+
+        public void DeleteObjects(MyContainer<PivotObject> deletingobjects)
         {
             for (int i = 0; i < deletingobjects.Count; i++)
             {
                 objects.Remove(deletingobjects[i]);
                 sceneGraph.DeleteObject(deletingobjects[i]);
             }
+            LevelEditor.ObjectsDeleted(deletingobjects);
         }
-        virtual public void AddObjects(MyContainer<PivotObject> newobjects)
+
+
+        public void AddObjects(MyContainer<PivotObject> newobjects)
         {
             for (int i = 0; i < newobjects.Count; i++)
             {
                 objects.Add(newobjects[i]);
                 sceneGraph.AddObject(newobjects[i]);
             }
+            LevelEditor.ObjectsAdded(newobjects);
         }        
+        
+        
         public void UpdateScene()
         {
             foreach (PivotObject po in objects)

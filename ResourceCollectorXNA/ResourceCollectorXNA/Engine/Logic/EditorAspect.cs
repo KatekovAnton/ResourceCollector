@@ -14,6 +14,7 @@ namespace ResourceCollectorXNA.Engine.Logic
     {
         public string DescriptionName;
         public bool isActive;
+        public int id;
         public ObjectEditorType objtype;
         public EditorData(string name, ObjectEditorType type)
         {

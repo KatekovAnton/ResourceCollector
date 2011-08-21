@@ -1,26 +1,30 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
+
+
 
 namespace ResourceCollectorXNA.ResourceCollectorEditorWindows
 {
     public partial class Level : Form
     {
-        public Level()
-        {
+        public Level() {
             InitializeComponent();
         }
 
-        private void Level_Resize(object sender, EventArgs e)
-        {
+        private void Level_Resize(object sender, EventArgs e) {
             Width = 470;
             Height = 674;
         }
-        
+
+        public void AddObject(String id, String name, String description, Boolean isActive = false) {
+            String[] text = {id, name, description};
+            int curRow = dataGridView_ObjectsList.Rows.Add(text);
+            dataGridView_ObjectsList.Rows[curRow].Selected = isActive;
+        }
+
+    
+        public void ClearAllObjectsInGrid() {
+            dataGridView_ObjectsList.Rows.Clear();
+        }
     }
 }

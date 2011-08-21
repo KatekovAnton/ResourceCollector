@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
-
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 //using StillDesign.PhysX;
@@ -21,8 +19,7 @@ namespace ResourceCollectorXNA.Engine.Logic
         public Matrix transform = Matrix.Identity;
 
         public bool neetforceupdate = false;
-        public PivotObject()
-        { }
+        protected PivotObject(){ }
 
         public bool moved;
         public abstract void SetActive(bool active);

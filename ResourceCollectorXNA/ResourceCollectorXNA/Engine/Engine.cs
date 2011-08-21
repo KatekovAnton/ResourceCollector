@@ -23,14 +23,14 @@ namespace ResourceCollectorXNA.Engine
     public class GameEngine
 	{
         public static GameEngine Instance;
-        public static ResourceCollectorXNA.RCViewControllers.RenderWindowVC windowController;
+        public static RCViewControllers.RenderWindowVC windowController;
         public static bool actionToInterface;
         public static bool actionFromInterface;
         public RenderPipeline GraphicPipeleine;
 
 
 
-        public ResourceCollectorXNA.Engine.Helpers.FpsCounter FPSCounter;
+        public Helpers.FpsCounter FPSCounter;
 
         public SpriteBatch spriteBatch;
         public SpriteFont Font1;
