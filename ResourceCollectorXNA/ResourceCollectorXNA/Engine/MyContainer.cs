@@ -6,7 +6,6 @@ using System.Text;
 
 namespace ResourceCollectorXNA
 {
-
     public class MyContainer<T>:IEnumerable<T>
         where T : class
     {

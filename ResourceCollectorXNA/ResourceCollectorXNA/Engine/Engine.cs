@@ -55,6 +55,7 @@ namespace ResourceCollectorXNA.Engine
             objectstoadd.Add(newobject);
         }
 
+
         public GameEngine(MyGame game)
 		{
             lightDir.Normalize();
@@ -74,6 +75,8 @@ namespace ResourceCollectorXNA.Engine
         {
             needclear = true;
         }
+
+
         public void ResetDevice(System.Drawing.Size ClientSize)
         {
             locked = true;
@@ -100,6 +103,8 @@ namespace ResourceCollectorXNA.Engine
             }
             locked = false;
         }
+
+
         public void Initalize()
         {
             FPSCounter = new Helpers.FpsCounter();
@@ -132,6 +137,7 @@ namespace ResourceCollectorXNA.Engine
             editor.SetDestEngine();
             editor.SetFont(Font1);
         }
+
 
         void CreateShader()
         {

@@ -10,11 +10,10 @@ namespace ResourceCollectorXNA.Engine.Logic
     public class GameScene
     {
         public MyContainer<PivotObject> objects;
-
         public MyContainer<PivotObject> VisibleObjects;
         public MyContainer<PivotObject> ShadowObjects;
-
         public SceneGraph.SceneGraph sceneGraph;
+        private Level levelWindow;
 
 
         public GameScene()
@@ -23,20 +22,23 @@ namespace ResourceCollectorXNA.Engine.Logic
             VisibleObjects = new MyContainer<PivotObject>(100, 2);
             ShadowObjects = new MyContainer<PivotObject>(100, 2);
             sceneGraph = new Logic.SceneGraph.SceneGraph(this);
+            levelWindow = new Level();
         }
-        public void Clear()
+        virtual public void Clear()
         {
             VisibleObjects.Clear();
             ShadowObjects.Clear();
             sceneGraph.Clear();
             objects.Clear();
+            levelWindow.Cleared();
         }
-        public void AddObject(PivotObject newObject)
+        virtual public void AddObject(PivotObject newObject)
         {
             objects.Add(newObject);
             sceneGraph.AddObject(newObject);
+            levelWindow.ObjectAdded(newObject);
         }
-        public void DeleteObjects(MyContainer<PivotObject> deletingobjects)
+        virtual public void DeleteObjects(MyContainer<PivotObject> deletingobjects)
         {
             for (int i = 0; i < deletingobjects.Count; i++)
             {
@@ -44,7 +46,7 @@ namespace ResourceCollectorXNA.Engine.Logic
                 sceneGraph.DeleteObject(deletingobjects[i]);
             }
         }
-        public void AddObjects(MyContainer<PivotObject> newobjects)
+        virtual public void AddObjects(MyContainer<PivotObject> newobjects)
         {
             for (int i = 0; i < newobjects.Count; i++)
             {

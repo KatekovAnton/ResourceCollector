@@ -1,11 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace ResourceCollectorXNA.Engine.Logic
 {
-    public class Level:GameScene
-    {
+    public class Level:GameScene{
+        public void ObjectAdded(PivotObject newObject) {
+            Console.WriteLine("ObjectAdded");
+        }
+
+
+        public void Cleared() {
+            Console.WriteLine("Cleared");
+        }
     }
 }
