@@ -3,8 +3,6 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
 
-
-
 namespace ResourceCollectorXNA.Engine{
     public class Camera{
         #region Variables

@@ -71,18 +71,27 @@ namespace ResourceCollectorXNA.Engine.Actions
                 throw new Exception("Invalid parameter in RotatePivotAction::UpdateAction");
 
             Vector2 delta = data.mousepos - startMousePos;
-            float length = delta.Y;
+            float length = 0;
+            switch(axis) {
+                case Axis.X:
+                    length = delta.Y;
+                    break;
+                case Axis.Y:
+                    length = delta.X;
+                    break;
+                case Axis.Z:
+                    length = delta.Y;
+                    break;
+            }
+
             if (length != 0)
             {
                 float angle = length/100;
-                if (DragPivotObject.currentstate == state.one)
-                {
-                    float pi = MathHelper.Pi / 180;
+                if (DragPivotObject.currentstate == state.one) {
+                    const float pi = MathHelper.Pi / 180;
                     angle = ((float)((int)(angle / pi))) * pi;
-                }
-                else if (DragPivotObject.currentstate == state.five)
-                {
-                    float pi = MathHelper.Pi / 180 * 5;
+                } else if (DragPivotObject.currentstate == state.five) {
+                    const float pi = MathHelper.Pi / 180 * 5;
                     angle = ((float)((int)(angle / pi))) * pi;
                 }
                 Quaternion roa = Quaternion.CreateFromAxisAngle(objectRotatingUnit1, angle);
@@ -93,10 +102,7 @@ namespace ResourceCollectorXNA.Engine.Actions
                     Matrix result = Matrix.CreateFromQuaternion(qr )* Matrix.CreateTranslation(starTranslation[i]);
                     operatingObject[i].SetGlobalPose(result);
                 }
-                if (operatingObject.Length == 1)
-                    ActionResult = qr;
-                else
-                    ActionResult = roa;
+                ActionResult = operatingObject.Length == 1 ? qr : roa;
             }
         }
     }
