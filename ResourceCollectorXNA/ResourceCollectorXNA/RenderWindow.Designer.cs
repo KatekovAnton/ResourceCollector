@@ -279,7 +279,8 @@
             this.Controls.Add(this.xnaButton3);
             this.Controls.Add(this.xnaGroupBox1);
             this.Controls.Add(this.xnaPanel1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "RenderWindow";

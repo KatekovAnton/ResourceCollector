@@ -35,6 +35,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1227, 441);
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.IsMdiContainer = true;
             this.Name = "MainWindow";
             this.Text = "MainWindow";

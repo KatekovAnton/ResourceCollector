@@ -19,6 +19,8 @@ namespace ResourceCollectorXNA.ResourceCollectorEditorWindows
         private void Level_Resize(object sender, EventArgs e)
         {
             Width = 470;
+            Height = 674;
         }
+        
     }
 }

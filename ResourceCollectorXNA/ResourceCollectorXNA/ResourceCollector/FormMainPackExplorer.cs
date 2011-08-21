@@ -87,7 +87,7 @@ namespace ResourceCollector
             comboBox2.Enabled = false;
             textBox1.Enabled = false;
             button2.Enabled = false;
-            button1.Enabled = true;
+            //button1.Enabled = true;
             label1.Text = "";
             label2.Text = "";
             label3.Text = "";
@@ -168,7 +168,7 @@ namespace ResourceCollector
         private void button1_Click(object sender, EventArgs e)
         {
             CurrentContent = packs.findobject(textBox1.Text+"\0", ref contentcoords);
-            if (CurrentContent.Enginereadedobject.Count == 0)
+            if (CurrentContent!= null && CurrentContent.Enginereadedobject.Count == 0)
             {
                 if (MessageBox.Show("Are you shure want to drop this object (operation cannot to be canceled!)?", "Droping object", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == System.Windows.Forms.DialogResult.Yes)
                 {
