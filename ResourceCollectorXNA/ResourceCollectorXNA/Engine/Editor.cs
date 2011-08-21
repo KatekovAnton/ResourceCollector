@@ -10,8 +10,10 @@ using ResourceCollectorXNA.Engine.Logic;
 
 
 
-namespace ResourceCollectorXNA.Engine{
-    public class GameEditor : IKeyboardUserInterface{
+namespace ResourceCollectorXNA.Engine
+{
+    public class GameEditor : IKeyboardUserInterface
+    {
         public static BasicEffect _visualizationEffect;
         public static SpriteFont Font1;
 
@@ -25,42 +27,48 @@ namespace ResourceCollectorXNA.Engine{
         public TransformManager transformator;
 
 
-        public GameEditor(GameScene scene) {
+        public GameEditor(GameScene scene)
+        {
             actions = new ActionStack();
             gameScene = scene;
 
             hotkeys1 = new List<HotKey>();
             KeyboardManager.Manager.AddKeyboardUser(this);
-            var ctrlz = new HotKey(new[]{Keys.LeftControl, Keys.Z}, revertAction);
+            var ctrlz = new HotKey(new[] { Keys.LeftControl, Keys.Z }, revertAction);
             hotkeys1.Add(ctrlz);
-            var biggerarrows = new HotKey(new[]{Keys.OemPlus}, biggerArrows);
+            var biggerarrows = new HotKey(new[] { Keys.OemPlus }, biggerArrows);
             hotkeys1.Add(biggerarrows);
-            var smallerarrows = new HotKey(new[]{Keys.OemMinus}, smallerArrows);
+            var smallerarrows = new HotKey(new[] { Keys.OemMinus }, smallerArrows);
             hotkeys1.Add(smallerarrows);
-            var deleteobjects = new HotKey(new[]{Keys.Delete}, DeleteSelectedObjects);
+            var deleteobjects = new HotKey(new[] { Keys.Delete }, DeleteSelectedObjects);
             hotkeys1.Add(deleteobjects);
             activeObject = new ObjectContainer();
         }
 
 
-        public float ArrowSize {
+        public float ArrowSize
+        {
             get { return transformator.ArrowSize; }
             set { transformator.ArrowSize = value; }
         }
 
         #region IKeyboardUserInterface Members
-        public bool IsKeyboardCaptured() {
+        public bool IsKeyboardCaptured()
+        {
             return true;
         }
 
 
-        public List<HotKey> hotkeys() {
+        public List<HotKey> hotkeys()
+        {
             return hotkeys1;
         }
         #endregion
 
-        public void DeleteSelectedObjects() {
-            if(activeObject.Length != 0) {
+        public void DeleteSelectedObjects()
+        {
+            if (activeObject.Length != 0)
+            {
                 var deletingObjects = new MyContainer<PivotObject>(activeObject.Length, 1);
                 deletingObjects.AddRange(activeObject.objects.ToArray());
                 SetActiveObjects(new ObjectContainer(), true);
@@ -69,48 +77,58 @@ namespace ResourceCollectorXNA.Engine{
         }
 
 
-        public void AddObjects(MyContainer<PivotObject> objects, bool back = false) {
+        public void AddObjects(MyContainer<PivotObject> objects, bool back = false)
+        {
             gameScene.AddObjects(objects);
-            if(!back) {
+            if (!back)
+            {
                 var action = new AddObjectPivotAction(new ObjectContainer(objects));
                 actions.AddNewAction(action);
             }
         }
 
 
-        public void DeleteObjects(MyContainer<PivotObject> objects, bool back = false) {
+        public void DeleteObjects(MyContainer<PivotObject> objects, bool back = false)
+        {
             gameScene.DeleteObjects(objects);
-            if(!back) {
+            if (!back)
+            {
                 var action = new DeleteObjectPivotAction(new ObjectContainer(objects));
                 actions.AddNewAction(action);
             }
         }
 
 
-        public void clear() {
+        public void clear()
+        {
             actions.clear();
 
             SetActiveObjects(new ObjectContainer(), true);
         }
 
 
-        public void SetDestEngine() {
-            if(_visualizationEffect != null) {
+        public void SetDestEngine()
+        {
+            if (_visualizationEffect != null)
+            {
                 _visualizationEffect.Dispose();
                 _visualizationEffect = null;
             }
-            _visualizationEffect = new BasicEffect(GameEngine.Device){VertexColorEnabled = true};
+            _visualizationEffect = new BasicEffect(GameEngine.Device) { VertexColorEnabled = true };
             transformator = new TransformManager(this);
         }
 
 
-        public void SetFont(SpriteFont font) {
+        public void SetFont(SpriteFont font)
+        {
             Font1 = font;
         }
 
 
-        public void SetActiveObjects(ObjectContainer lo, bool back) {
-            if(!back && !lo.Same(activeObject)) {
+        public void SetActiveObjects(ObjectContainer lo, bool back)
+        {
+            if (!back && !lo.Same(activeObject))
+            {
                 NotificationCenter.postNotification("NOTIFICATION_ACTIVE_OBJECT_CHANGED", activeObject);
                 var newaction = new ChangeActiveObject(activeObject);
                 actions.AddNewAction(newaction);
@@ -120,47 +138,58 @@ namespace ResourceCollectorXNA.Engine{
         }
 
 
-        public void biggerArrows() {
+        public void biggerArrows()
+        {
             ArrowSize *= 2;
         }
 
 
-        public void smallerArrows() {
+        public void smallerArrows()
+        {
             ArrowSize *= 0.5f;
         }
 
 
-        public void revertAction() {
-            if(transformator.IsFree()) {
+        public void revertAction()
+        {
+            if (transformator.IsFree())
+            {
                 EditorAction laastaction = actions.RemoveLastAction();
-                if(laastaction != null) {
+                if (laastaction != null)
+                {
                     laastaction.CancelAction(this);
 
                     transformator.UpdateView();
                     ConsoleWindow.TraceMessage("Reverting last action, action stack contains " + actions.Count + " elements");
-                } else
+                }
+                else
                     ConsoleWindow.TraceMessage("Cannot to revert last action - stack is empty");
             }
         }
 
 
-        public void Update() {
+        public void Update()
+        {
             transformator.Update();
         }
 
 
-        private PivotObject SearchClickedObject(Ray mr) {
+        private PivotObject SearchClickedObject(Ray mr)
+        {
             //ищем объект на кот тыкнули
             PivotObject clickedlo = null;
             float distance = 10000;
 
 
             Vector3 camerapos = mr.Position;
-            foreach(PivotObject lo in gameScene.VisibleObjects) {
+            foreach (PivotObject lo in gameScene.VisibleObjects)
+            {
                 Vector3? point = lo.raycastaspect.IntersectionClosest(mr, lo.transform);
-                if(point != null) {
+                if (point != null)
+                {
                     float range = (point.Value - camerapos).Length();
-                    if(range < distance) {
+                    if (range < distance)
+                    {
                         clickedlo = lo;
                         distance = range;
                     }
@@ -170,48 +199,67 @@ namespace ResourceCollectorXNA.Engine{
         }
 
 
-        public void Update(Ray mouseary, Vector2 mousepos) {
+        public void Update(Ray mouseary, Vector2 mousepos)
+        {
             MouseState mouseState = Mouse.GetState();
-            if(GameEngine.actionToInterface) {
-                if(GameEngine.actionFromInterface) {
+            if (GameEngine.actionToInterface)
+            {
+                if (GameEngine.actionFromInterface)
+                {
                     GameEngine.actionFromInterface = false;
                     needUpdate = true;
-                } else {
+                }
+                else
+                {
                     transformator.Update();
                     return;
                 }
             }
 
-            if(needUpdate) {
+            if (needUpdate)
+            {
                 needUpdate = false;
                 transformator.Update(mouseary);
-                if(!MouseManager.IsMouseCaptured) {
-                    if(mouseState.LeftButton == ButtonState.Pressed && lmbwasreleased) {
+                if (!MouseManager.IsMouseCaptured)
+                {
+                    if (mouseState.LeftButton == ButtonState.Pressed && lmbwasreleased)
+                    {
                         PivotObject lo = SearchClickedObject(mouseary);
                         KeyboardState ks = Keyboard.GetState();
-                        if(lo != null) {
-                            if(ks.IsKeyDown(Keys.LeftControl)) {
+                        if (lo != null)
+                        {
+                            if (ks.IsKeyDown(Keys.LeftControl))
+                            {
                                 var newactiveobjects = new ObjectContainer(activeObject.objects.ToArray());
-                                if(activeObject.Contains(lo)) {
+                                if (activeObject.Contains(lo))
+                                {
                                     lo.SetActive(false);
                                     newactiveobjects.RemoveObject(lo);
-                                } else {
-                                    lo.SetActive(true);
-                                    newactiveobjects.AddObject(lo);
                                 }
-                                SetActiveObjects(newactiveobjects, false);
-                            } else {
-                                var newactiveobjects = new ObjectContainer();
-                                if(activeObject.Contains(lo)) {
-                                    lo.SetActive(false);
-                                    newactiveobjects.RemoveObject(lo);
-                                } else {
+                                else
+                                {
                                     lo.SetActive(true);
                                     newactiveobjects.AddObject(lo);
                                 }
                                 SetActiveObjects(newactiveobjects, false);
                             }
-                        } else if(!ks.IsKeyDown(Keys.LeftControl))
+                            else
+                            {
+                                var newactiveobjects = new ObjectContainer();
+                                if (activeObject.Contains(lo))
+                                {
+                                    lo.SetActive(false);
+                                    newactiveobjects.RemoveObject(lo);
+                                }
+                                else
+                                {
+                                    lo.SetActive(true);
+                                    newactiveobjects.AddObject(lo);
+                                }
+                                SetActiveObjects(newactiveobjects, false);
+                            }
+                        }
+                        else if (!ks.IsKeyDown(Keys.LeftControl))
                             SetActiveObjects(new ObjectContainer(), false);
                     }
                 }
@@ -220,10 +268,12 @@ namespace ResourceCollectorXNA.Engine{
         }
 
 
-        public void Draw(SpriteBatch sb) {
+        public void Draw(SpriteBatch sb)
+        {
             needUpdate = true;
 
-            if(activeObject != null) {
+            if (activeObject != null)
+            {
                 _visualizationEffect.View = GameEngine.Instance.Camera.View;
                 _visualizationEffect.Projection = GameEngine.Instance.Camera.Projection;
                 _visualizationEffect.CurrentTechnique.Passes[0].Apply();
@@ -233,7 +283,8 @@ namespace ResourceCollectorXNA.Engine{
         }
 
 
-        ~GameEditor() {
+        ~GameEditor()
+        {
             KeyboardManager.Manager.RemoveKeyboardUser(this);
         }
     }
