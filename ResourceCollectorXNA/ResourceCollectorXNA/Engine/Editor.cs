@@ -1,184 +1,166 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
-using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-
+using ResourceCollectorXNA.Engine.Actions;
+using ResourceCollectorXNA.Engine.Interface;
+using ResourceCollectorXNA.Engine.Logic;
 //using StillDesign.PhysX;
 
 
-using ResourceCollectorXNA.Content;
-using ResourceCollectorXNA.Engine;
-using ResourceCollectorXNA.Engine.Render;
-using ResourceCollectorXNA.Engine.ContentLoader;
-using ResourceCollectorXNA.Engine.Logic;
-using ResourceCollectorXNA.Engine.Interface;
 
-namespace ResourceCollectorXNA.Engine
-{
-    
-    public class GameEditor:IKeyboardUserInterface
-    {
-        GameScene gameScene;
-        
+
+namespace ResourceCollectorXNA.Engine{
+    public class GameEditor : IKeyboardUserInterface{
         public static BasicEffect _visualizationEffect;
         public static SpriteFont Font1;
 
+        public ActionStack actions;
         private ObjectContainer activeObject;
-        private bool needUpdate = true;
-        public Actions.ActionStack actions;
-        
-        private bool lmbwasreleased = true;
-        public TransformManager transformator;
-        List<HotKey> hotkeys1;
+        private GameScene gameScene;
+        private List<HotKey> hotkeys1;
 
-        public GameEditor(GameScene scene)
-        {
-            actions = new Actions.ActionStack();
+        private bool lmbwasreleased = true;
+        private bool needUpdate = true;
+        public TransformManager transformator;
+
+
+        public GameEditor(GameScene scene) {
+            actions = new ActionStack();
             gameScene = scene;
 
             hotkeys1 = new List<HotKey>();
             KeyboardManager.Manager.AddKeyboardUser(this);
-            HotKey ctrlz = new HotKey(new Keys[] { Keys.LeftControl, Keys.Z }, revertAction);
+            var ctrlz = new HotKey(new[]{Keys.LeftControl, Keys.Z}, revertAction);
             hotkeys1.Add(ctrlz);
-            HotKey biggerarrows = new HotKey(new Keys[] { Keys.OemPlus }, biggerArrows);
+            var biggerarrows = new HotKey(new[]{Keys.OemPlus}, biggerArrows);
             hotkeys1.Add(biggerarrows);
-            HotKey smallerarrows = new HotKey(new Keys[] { Keys.OemMinus }, smallerArrows);
+            var smallerarrows = new HotKey(new[]{Keys.OemMinus}, smallerArrows);
             hotkeys1.Add(smallerarrows);
-            HotKey deleteobjects = new HotKey(new Keys[] { Keys.Delete }, DeleteSelectedObjects);
+            var deleteobjects = new HotKey(new[]{Keys.Delete}, DeleteSelectedObjects);
             hotkeys1.Add(deleteobjects);
             activeObject = new ObjectContainer();
         }
-        public void DeleteSelectedObjects()
-        {
-            if (activeObject.Length != 0)
-            {
-                MyContainer<PivotObject> deletingObjects = new MyContainer<PivotObject>(activeObject.Length, 1);
+
+
+        public float ArrowSize {
+            get { return transformator.ArrowSize; }
+            set { transformator.ArrowSize = value; }
+        }
+
+        #region IKeyboardUserInterface Members
+        public bool IsKeyboardCaptured() {
+            return true;
+        }
+
+
+        public List<HotKey> hotkeys() {
+            return hotkeys1;
+        }
+        #endregion
+
+        public void DeleteSelectedObjects() {
+            if(activeObject.Length != 0) {
+                var deletingObjects = new MyContainer<PivotObject>(activeObject.Length, 1);
                 deletingObjects.AddRange(activeObject.objects.ToArray());
                 SetActiveObjects(new ObjectContainer(), true);
                 DeleteObjects(deletingObjects, false);
-                
             }
         }
-        public void AddObjects(MyContainer<PivotObject> objects, bool back = false)
-        {
+
+
+        public void AddObjects(MyContainer<PivotObject> objects, bool back = false) {
             gameScene.AddObjects(objects);
-            if (!back)
-            {
-                Actions.AddObjectPivotAction action = new Actions.AddObjectPivotAction(new ObjectContainer(objects));
+            if(!back) {
+                var action = new AddObjectPivotAction(new ObjectContainer(objects));
                 actions.AddNewAction(action);
             }
         }
-        public void DeleteObjects(MyContainer<PivotObject> objects, bool back = false)
-        {
+
+
+        public void DeleteObjects(MyContainer<PivotObject> objects, bool back = false) {
             gameScene.DeleteObjects(objects);
-            if (!back)
-            {
-                Actions.DeleteObjectPivotAction action = new Actions.DeleteObjectPivotAction(new ObjectContainer(objects));
+            if(!back) {
+                var action = new DeleteObjectPivotAction(new ObjectContainer(objects));
                 actions.AddNewAction(action);
             }
         }
-        public void clear()
-        {
+
+
+        public void clear() {
             actions.clear();
 
             SetActiveObjects(new ObjectContainer(), true);
         }
-        public bool IsKeyboardCaptured()
-        {
-            return true;
-        }
-        public List<HotKey> hotkeys()
-        {
-            return hotkeys1;
-        }
-        public void SetDestEngine()
-        {
-            if (_visualizationEffect != null)
-            {
+
+
+        public void SetDestEngine() {
+            if(_visualizationEffect != null) {
                 _visualizationEffect.Dispose();
                 _visualizationEffect = null;
             }
-            _visualizationEffect = new BasicEffect(GameEngine.Device)
-            {
-                VertexColorEnabled = true
-            };
+            _visualizationEffect = new BasicEffect(GameEngine.Device){VertexColorEnabled = true};
             transformator = new TransformManager(this);
         }
 
-        public void SetFont(SpriteFont font)
-        {
+
+        public void SetFont(SpriteFont font) {
             Font1 = font;
         }
 
-        public void SetActiveObjects(ObjectContainer lo, bool back)
-        {
-            if (!back && !lo.Same(activeObject))
-            {
+
+        public void SetActiveObjects(ObjectContainer lo, bool back) {
+            if(!back && !lo.Same(activeObject)) {
                 NotificationCenter.postNotification("NOTIFICATION_ACTIVE_OBJECT_CHANGED", activeObject);
-                Actions.ChangeActiveObject newaction = new Actions.ChangeActiveObject(activeObject);
+                var newaction = new ChangeActiveObject(activeObject);
                 actions.AddNewAction(newaction);
             }
             activeObject = lo;
             transformator.SetActiveObject(lo);
         }
-        public void biggerArrows()
-        {
+
+
+        public void biggerArrows() {
             ArrowSize *= 2;
         }
-        public void smallerArrows()
-        {
+
+
+        public void smallerArrows() {
             ArrowSize *= 0.5f;
         }
-        public void revertAction()
-        {
-            if (transformator.IsFree())
-            {
-                Actions.EditorAction laastaction = actions.RemoveLastAction();
-                if (laastaction != null)
-                {
+
+
+        public void revertAction() {
+            if(transformator.IsFree()) {
+                EditorAction laastaction = actions.RemoveLastAction();
+                if(laastaction != null) {
                     laastaction.CancelAction(this);
 
                     transformator.UpdateView();
                     ConsoleWindow.TraceMessage("Reverting last action, action stack contains " + actions.Count + " elements");
-                }
-                else
+                } else
                     ConsoleWindow.TraceMessage("Cannot to revert last action - stack is empty");
             }
         }
 
-        public float ArrowSize
-        {
-            get { return transformator.ArrowSize; }
-            set { transformator.ArrowSize = value; }
-        }
 
-        public void Update()
-        {
+        public void Update() {
             transformator.Update();
         }
 
-        private PivotObject SearchClickedObject(Ray mr)
-        {
+
+        private PivotObject SearchClickedObject(Ray mr) {
             //ищем объект на кот тыкнули
             PivotObject clickedlo = null;
             float distance = 10000;
 
 
             Vector3 camerapos = mr.Position;
-            foreach (PivotObject lo in gameScene.VisibleObjects)
-            {
+            foreach(PivotObject lo in gameScene.VisibleObjects) {
                 Vector3? point = lo.raycastaspect.IntersectionClosest(mr, lo.transform);
-                if (point != null)
-                {
+                if(point != null) {
                     float range = (point.Value - camerapos).Length();
-                    if (range < distance)
-                    {
+                    if(range < distance) {
                         clickedlo = lo;
                         distance = range;
                     }
@@ -188,98 +170,70 @@ namespace ResourceCollectorXNA.Engine
         }
 
 
-
-        public void Update(Ray mouseary, Vector2 mousepos)
-        {
+        public void Update(Ray mouseary, Vector2 mousepos) {
             MouseState mouseState = Mouse.GetState();
-            if (GameEngine.actionToInterface)
-            {
-                if (GameEngine.actionFromInterface)
-                {
+            if(GameEngine.actionToInterface) {
+                if(GameEngine.actionFromInterface) {
                     GameEngine.actionFromInterface = false;
                     needUpdate = true;
-                }
-                else
-                {
+                } else {
                     transformator.Update();
                     return;
                 }
             }
 
-            if (needUpdate)
-            {
+            if(needUpdate) {
                 needUpdate = false;
                 transformator.Update(mouseary);
-                if (!Interface.MouseManager.IsMouseCaptured)
-                {
-                    if (mouseState.LeftButton == ButtonState.Pressed && lmbwasreleased)
-                    {
+                if(!MouseManager.IsMouseCaptured) {
+                    if(mouseState.LeftButton == ButtonState.Pressed && lmbwasreleased) {
                         PivotObject lo = SearchClickedObject(mouseary);
                         KeyboardState ks = Keyboard.GetState();
-                        if (lo != null)
-                        {
-
-                            if (ks.IsKeyDown(Keys.LeftControl))
-                            {
-                                ObjectContainer newactiveobjects = new ObjectContainer(activeObject.objects.ToArray());
-                                if (activeObject.Contains(lo))
-                                {
+                        if(lo != null) {
+                            if(ks.IsKeyDown(Keys.LeftControl)) {
+                                var newactiveobjects = new ObjectContainer(activeObject.objects.ToArray());
+                                if(activeObject.Contains(lo)) {
                                     lo.SetActive(false);
                                     newactiveobjects.RemoveObject(lo);
+                                } else {
+                                    lo.SetActive(true);
+                                    newactiveobjects.AddObject(lo);
                                 }
-                                else
-                                {
+                                SetActiveObjects(newactiveobjects, false);
+                            } else {
+                                var newactiveobjects = new ObjectContainer();
+                                if(activeObject.Contains(lo)) {
+                                    lo.SetActive(false);
+                                    newactiveobjects.RemoveObject(lo);
+                                } else {
                                     lo.SetActive(true);
                                     newactiveobjects.AddObject(lo);
                                 }
                                 SetActiveObjects(newactiveobjects, false);
                             }
-                            else
-                            {
-                                ObjectContainer newactiveobjects = new ObjectContainer();
-                                if (activeObject.Contains(lo))
-                                {
-                                    lo.SetActive(false);
-                                    newactiveobjects.RemoveObject(lo);
-                                }
-                                else
-                                {
-                                    lo.SetActive(true);
-                                    newactiveobjects.AddObject(lo);
-                                }
-                                SetActiveObjects(newactiveobjects, false);
-                            }
-                        }
-                        else
-                            if (!ks.IsKeyDown(Keys.LeftControl))
-                                SetActiveObjects(new ObjectContainer(), false);
+                        } else if(!ks.IsKeyDown(Keys.LeftControl))
+                            SetActiveObjects(new ObjectContainer(), false);
                     }
                 }
-
             }
-            if (mouseState.LeftButton == ButtonState.Pressed)
-                lmbwasreleased = false;
-            else
-                lmbwasreleased = true;
-
+            lmbwasreleased = (mouseState.LeftButton != ButtonState.Pressed);
         }
-        
-        public void Draw(SpriteBatch sb)
-        {
+
+
+        public void Draw(SpriteBatch sb) {
             needUpdate = true;
 
-            if (activeObject != null)
-            {
+            if(activeObject != null) {
                 _visualizationEffect.View = GameEngine.Instance.Camera.View;
                 _visualizationEffect.Projection = GameEngine.Instance.Camera.Projection;
                 _visualizationEffect.CurrentTechnique.Passes[0].Apply();
 
                 transformator.Draw(sb, GameEngine.Instance.mousePos);
             }
-            
         }
-        ~GameEditor()
-        {
+
+
+        ~GameEditor() {
             KeyboardManager.Manager.RemoveKeyboardUser(this);
         }
     }
