@@ -23,6 +23,14 @@
             LevelEditor.Cleared();
         }
 
+        public PivotObject GetObjectWithID(int id)
+        {
+            for (int i = 0; i < objects.Count; i++)
+                if (objects[i].editorAspect.id == id)
+                    return objects[i];
+            ConsoleWindow.TraceMessage("Unable to find object with id = " + id.ToString());
+            return null;
+        }
 
         public void AddObject(PivotObject newObject) {
             objects.Add(newObject);

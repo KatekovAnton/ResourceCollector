@@ -58,6 +58,7 @@ namespace ResourceCollectorXNA.Engine
 
         public GameEngine(MyGame game)
 		{
+            
             lightDir.Normalize();
 			DeviceManager = new GraphicsDeviceManager( game );
             //разме рэкрана1158; 708

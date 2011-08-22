@@ -126,7 +126,7 @@ namespace ResourceCollectorXNA.Engine
         }
 
 
-        public void SetActiveObjects(ObjectContainer lo, bool back)
+        public void SetActiveObjects(ObjectContainer lo, bool back = false)
         {
             if (!back && !lo.Same(activeObject))
             {
@@ -138,6 +138,14 @@ namespace ResourceCollectorXNA.Engine
             transformator.SetActiveObject(lo);
         }
 
+        public void SetActiveObjects(int[] object_ids, bool back = false)
+        {
+            PivotObject[] objects = new PivotObject[object_ids.Length];
+            for (int i = 0; i < object_ids.Length; i++)
+                objects[i] = gameScene.GetObjectWithID(object_ids[i]);
+
+            SetActiveObjects(new ObjectContainer(objects), back);
+        }
 
         public void biggerArrows()
         {
