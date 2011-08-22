@@ -19,6 +19,7 @@
     public class EditorData {
         public string DescriptionName;
         public int id = IdGenerator.NewId();
+        public int group_id = -1;
         public bool isActive;
         public ObjectEditorType objtype;
 

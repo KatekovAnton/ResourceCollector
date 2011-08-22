@@ -3,6 +3,7 @@
         public MyContainer<PivotObject> ShadowObjects;
         public MyContainer<PivotObject> VisibleObjects;
         public MyContainer<PivotObject> objects;
+        //мы же хотим переключать сцены?? поэтому каждой - свой сценграф
         public SceneGraph.SceneGraph sceneGraph;
 
 
@@ -12,7 +13,9 @@
             ShadowObjects = new MyContainer<PivotObject>(100, 2);
             sceneGraph = new SceneGraph.SceneGraph(this);
         }
-
+        public GameScene(int t)
+        {
+        }
 
         public void Clear() {
             VisibleObjects.Clear();
@@ -23,6 +26,7 @@
             LevelEditor.Cleared();
         }
 
+
         public PivotObject GetObjectWithID(int id)
         {
             for (int i = 0; i < objects.Count; i++)
@@ -32,14 +36,17 @@
             return null;
         }
 
-        public void AddObject(PivotObject newObject) {
+
+        public void AddObject(PivotObject newObject)
+        {
             objects.Add(newObject);
             sceneGraph.AddObject(newObject);
             LevelEditor.ObjectAdded(newObject);
         }
 
 
-        public void DeleteObjects(MyContainer<PivotObject> deletingobjects) {
+        public void DeleteObjects(MyContainer<PivotObject> deletingobjects)
+        {
             foreach(PivotObject t in deletingobjects) {
                 objects.Remove(t);
                 sceneGraph.DeleteObject(t);
@@ -53,7 +60,8 @@
         }
 
 
-        public void AddObjects(MyContainer<PivotObject> newobjects) {
+        public void AddObjects(MyContainer<PivotObject> newobjects)
+        {
             foreach(PivotObject t in newobjects) {
                 objects.Add(t);
                 sceneGraph.AddObject(t);
@@ -62,7 +70,8 @@
         }
 
 
-        public void UpdateScene() {
+        public void UpdateScene()
+        {
             foreach(PivotObject po in objects) {
                 po.Update();
             }

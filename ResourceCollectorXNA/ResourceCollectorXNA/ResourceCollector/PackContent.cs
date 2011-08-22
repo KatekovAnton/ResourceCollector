@@ -194,8 +194,8 @@ namespace ResourceCollector
         /// <param name="toolStripProgressBar">for progress output</param>
         /// <returns>returns size</returns>
         public abstract int loadbody(System.IO.BinaryReader br, ToolStripProgressBar toolStripProgressBar);
-        public abstract void saveheader(System.IO.BinaryWriter br);
-        public abstract void savebody(System.IO.BinaryWriter br, ToolStripProgressBar toolStripProgressBar);
+        public abstract void saveheader(System.IO.BinaryWriter bw);
+        public abstract void savebody(System.IO.BinaryWriter bw, ToolStripProgressBar toolStripProgressBar);
 
         public abstract void calcheadersize();
         public abstract System.Windows.Forms.DialogResult createpropertieswindow(Pack p, TreeView outputtreeview);
