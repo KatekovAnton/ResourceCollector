@@ -126,6 +126,13 @@ namespace ResourceCollector
                                 Objects.Add(content);
                                 content.loadobjectheader(hi, br);
                             } break;
+                        case ElementType.LevelContent  :
+                            {
+                                var content = new LevelContent();
+                                content.pack = this;
+                                Objects.Add(content);
+                                content.loadobjectheader(hi, br);
+                            } break;
                         default:
                             {
                                 MissingObject msh = new MissingObject(i);

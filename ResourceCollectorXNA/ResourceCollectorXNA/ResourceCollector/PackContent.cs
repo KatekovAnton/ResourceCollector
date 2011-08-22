@@ -41,7 +41,7 @@ namespace ResourceCollector
         public const int TextureList = 60;
         public const int Material = 61;
 
-
+        public const int LevelContent = 100;
 
 
         public static string ReturnString(int format)
@@ -80,6 +80,8 @@ namespace ResourceCollector
                     return "Render object description";
                 case ElementType.Material:
                     return "Material";
+                case ElementType.LevelContent:
+                    return "Level";
                 default:
                     return "wrong format";
             }
@@ -121,6 +123,8 @@ namespace ResourceCollector
                     return ElementType.RenderObjectDescription;
                 case "Material":
                     return ElementType.Material;
+                case "Leve":
+                    return ElementType.LevelContent;
                 default:
                     return -1;
             }
