@@ -22,9 +22,21 @@ namespace ResourceCollectorXNA.ResourceCollectorEditorWindows
             dataGridView_ObjectsList.Rows[curRow].Selected = isActive;
         }
 
-    
         public void ClearAllObjectsInGrid() {
             dataGridView_ObjectsList.Rows.Clear();
+        }
+
+        // удаляет из таблицы строку в соответствии с переданным идом
+        public void RemoveObject(int id) {
+            int length = dataGridView_ObjectsList.Rows.Count;
+            for(int i = 0; i < length; ++i) {
+                int curValue = Convert.ToInt32(dataGridView_ObjectsList.Rows[i].Cells[0].Value);
+                if (curValue == id) {
+                    dataGridView_ObjectsList.Rows.RemoveAt(i);
+                    i = length;
+                }
+            }
+            
         }
     }
 }

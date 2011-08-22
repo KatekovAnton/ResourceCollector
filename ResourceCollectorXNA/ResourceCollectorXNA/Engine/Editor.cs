@@ -65,6 +65,7 @@ namespace ResourceCollectorXNA.Engine
         }
         #endregion
 
+        // метод вызывается при нажатии на delete, происходит удаление объекта со сцены
         public void DeleteSelectedObjects()
         {
             if (activeObject.Length != 0)

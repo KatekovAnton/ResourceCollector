@@ -1,30 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿namespace ResourceCollectorXNA.Engine.Logic {
+    internal static class IdGenerator {
+        private static int _lastValue;
 
-namespace ResourceCollectorXNA.Engine.Logic
-{
-    public enum ObjectEditorType
-    {
+        public static int NewId() {
+            return _lastValue++;
+        }
+
+        public static void ClearIdsCounter() {
+            _lastValue = 0;
+        }
+    }
+
+    public enum ObjectEditorType {
         SolidObject,
         TerrainObject
     };
-    public class EditorData
-    {
+
+    public class EditorData {
         public string DescriptionName;
+        public int id = IdGenerator.NewId();
         public bool isActive;
-        public int id;
         public ObjectEditorType objtype;
-        public EditorData(string name, ObjectEditorType type)
-        {
+
+        public EditorData(string name,
+                          ObjectEditorType type) {
             objtype = type;
             DescriptionName = name;
-        }
-
-        ~EditorData()
-        {
- 
         }
     }
 }

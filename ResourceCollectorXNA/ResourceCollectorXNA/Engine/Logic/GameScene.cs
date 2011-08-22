@@ -1,22 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Microsoft.Xna.Framework;
-
-namespace ResourceCollectorXNA.Engine.Logic
-{
-    public class GameScene
-    {
-        public MyContainer<PivotObject> objects;
-        public MyContainer<PivotObject> VisibleObjects;
+﻿namespace ResourceCollectorXNA.Engine.Logic {
+    public class GameScene {
         public MyContainer<PivotObject> ShadowObjects;
+        public MyContainer<PivotObject> VisibleObjects;
+        public MyContainer<PivotObject> objects;
         public SceneGraph.SceneGraph sceneGraph;
 
 
-        public GameScene()
-        {
+        public GameScene() {
             objects = new MyContainer<PivotObject>(100, 10);
             VisibleObjects = new MyContainer<PivotObject>(100, 2);
             ShadowObjects = new MyContainer<PivotObject>(100, 2);
@@ -24,50 +14,48 @@ namespace ResourceCollectorXNA.Engine.Logic
         }
 
 
-        public void Clear()
-        {
+        public void Clear() {
             VisibleObjects.Clear();
             ShadowObjects.Clear();
             sceneGraph.Clear();
             objects.Clear();
+            IdGenerator.ClearIdsCounter();
             LevelEditor.Cleared();
         }
 
 
-        public void AddObject(PivotObject newObject)
-        {
+        public void AddObject(PivotObject newObject) {
             objects.Add(newObject);
             sceneGraph.AddObject(newObject);
             LevelEditor.ObjectAdded(newObject);
         }
 
 
-        public void DeleteObjects(MyContainer<PivotObject> deletingobjects)
-        {
-            for (int i = 0; i < deletingobjects.Count; i++)
-            {
-                objects.Remove(deletingobjects[i]);
-                sceneGraph.DeleteObject(deletingobjects[i]);
+        public void DeleteObjects(MyContainer<PivotObject> deletingobjects) {
+            foreach(PivotObject t in deletingobjects) {
+                objects.Remove(t);
+                sceneGraph.DeleteObject(t);
             }
+            // счетчик идов будет начинать все делать с 0
+            if(objects.Count == 0) {
+                IdGenerator.ClearIdsCounter();
+            }
+
             LevelEditor.ObjectsDeleted(deletingobjects);
         }
 
 
-        public void AddObjects(MyContainer<PivotObject> newobjects)
-        {
-            for (int i = 0; i < newobjects.Count; i++)
-            {
-                objects.Add(newobjects[i]);
-                sceneGraph.AddObject(newobjects[i]);
+        public void AddObjects(MyContainer<PivotObject> newobjects) {
+            foreach(PivotObject t in newobjects) {
+                objects.Add(t);
+                sceneGraph.AddObject(t);
             }
             LevelEditor.ObjectsAdded(newobjects);
-        }        
-        
-        
-        public void UpdateScene()
-        {
-            foreach (PivotObject po in objects)
-            {
+        }
+
+
+        public void UpdateScene() {
+            foreach(PivotObject po in objects) {
                 po.Update();
             }
             sceneGraph.NewFrame();
