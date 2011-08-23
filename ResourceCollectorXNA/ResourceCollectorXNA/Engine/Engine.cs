@@ -45,7 +45,7 @@ namespace ResourceCollectorXNA.Engine
         public int visibleobjectscount = 0;
         private MyContainer<PivotObject> objectstoadd;
 
-        public GameScene gameScene;
+        public Engine.Level.EngineLevel gameLevel;
         /// <summary>
         /// ПОЛЬЗУЙСЯ ИМ!!!!!!!!!!!!!!
         /// </summary>
@@ -65,7 +65,7 @@ namespace ResourceCollectorXNA.Engine
             DeviceManager.PreferredBackBufferWidth = 1158;
             DeviceManager.PreferredBackBufferHeight = 708;
             objectstoadd = new MyContainer<PivotObject>();
-            gameScene = new GameScene();
+            gameLevel = new Level.EngineLevel();
             Instance = this;
             
 		}
@@ -132,7 +132,7 @@ namespace ResourceCollectorXNA.Engine
            */
             #endregion
            // _sceneGraph = new Logic.SceneGraph.SceneGraph();
-            editor = new GameEditor(gameScene);
+            editor = new GameEditor(gameLevel);
             GraphicPipeleine = new RenderPipeline(DeviceManager.GraphicsDevice, Camera);
             CreateShader();
             editor.SetDestEngine();
@@ -159,13 +159,13 @@ namespace ResourceCollectorXNA.Engine
             if (needclear)
             {
                 editor.clear();
-                foreach (PivotObject lo in gameScene.objects)
+                foreach (PivotObject lo in gameLevel.objects)
                 {
                     LevelObject levobj = lo as LevelObject;
                     if(levobj!=null)
                         ContentLoader.ContentLoader.UnloadPivotObject(lo);
                 }
-                gameScene.Clear();
+                gameLevel.Clear();
                 needclear = false;
                 objectstoadd.Clear();
             }
@@ -183,7 +183,7 @@ namespace ResourceCollectorXNA.Engine
             }
 
 
-            foreach (PivotObject lo in gameScene.objects)
+            foreach (PivotObject lo in gameLevel.objects)
                 lo.BeginDoFrame();
             KeyboardManager.Manager.Update();
             editor.Update(ray, mouseScreenPos);
@@ -232,13 +232,13 @@ namespace ResourceCollectorXNA.Engine
             _sceneGraph.calculateShadowVisibleObjects(GraphicPipeleine.frustumForShadow);
             //добавляем все нобходимые объекты на отрисовку
             */
-            gameScene.UpdateScene();
+            gameLevel.UpdateScene();
 
 
 
-            GraphicPipeleine.AddObjectToPipeline(gameScene.VisibleObjects);
-            GraphicPipeleine.AddObjectToShadow(gameScene.ShadowObjects);
-            visibleobjectscount = gameScene.VisibleObjects.Count;
+            GraphicPipeleine.AddObjectToPipeline(gameLevel.VisibleObjects);
+            GraphicPipeleine.AddObjectToShadow(gameLevel.ShadowObjects);
+            visibleobjectscount = gameLevel.VisibleObjects.Count;
 
             FPSCounter.Update(gameTime);
 		}
@@ -260,7 +260,7 @@ namespace ResourceCollectorXNA.Engine
 
             //очищаем конвейер
             GraphicPipeleine.NewFrame(lightDir);
-            gameScene.UpdateScene();
+            gameLevel.UpdateScene();
             /*
             foreach (PivotObject lo in objects)
                 lo.Update();
@@ -278,9 +278,9 @@ namespace ResourceCollectorXNA.Engine
             
             _sceneGraph.calculateShadowVisibleObjects(GraphicPipeleine.frustumForShadow);*/
             //добавляем все нобходимые объекты на отрисовку
-            GraphicPipeleine.AddObjectToPipeline(gameScene.VisibleObjects);
-            GraphicPipeleine.AddObjectToShadow(gameScene.ShadowObjects);
-            visibleobjectscount = gameScene.VisibleObjects.Count;
+            GraphicPipeleine.AddObjectToPipeline(gameLevel.VisibleObjects);
+            GraphicPipeleine.AddObjectToShadow(gameLevel.ShadowObjects);
+            visibleobjectscount = gameLevel.VisibleObjects.Count;
            // ma.UpdateData();
             editor.Update();
         }
