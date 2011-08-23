@@ -1,8 +1,9 @@
 ﻿namespace ResourceCollectorXNA.Engine.Logic {
     internal static class IdGenerator {
-        private static int _lastValue;
+        private static uint _lastValue;
 
-        public static int NewId() {
+        public static uint NewId()
+        {
             return _lastValue++;
         }
 
@@ -11,20 +12,22 @@
         }
     }
 
-    public enum ObjectEditorType {
-        SolidObject,
-        TerrainObject
+    public class ObjectEditorType {
+        public const uint SolidObject = 0;
+        public const uint TerrainObject = 10;
+        public const uint LightSource = 20;
     };
 
     public class EditorData {
         public string DescriptionName;
-        public int id = IdGenerator.NewId();
-        public int group_id = -1;
+        public uint id = IdGenerator.NewId();
+        public uint group_id = 0;
         public bool isActive;
-        public ObjectEditorType objtype;
+        public uint objtype;
 
         public EditorData(string name,
-                          ObjectEditorType type) {
+                          uint type)
+        {
             objtype = type;
             DescriptionName = name;
         }

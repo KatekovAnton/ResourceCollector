@@ -17,8 +17,9 @@ namespace ResourceCollector
         public Pack pack;
         public class ObjectElement
         {
-            public int id;
-            public int group_id;
+            public uint id;
+            public uint group_id;
+            public uint type;
             public string descriptionName;
             public Matrix objectMatrix;
             //сюда надо добавить логическую инфу - мб это моб? 
@@ -26,13 +27,16 @@ namespace ResourceCollector
 
             public ObjectElement()
             { }
-            public ObjectElement(int id, int group_id, string descriptionName, Matrix objectMatrix)
+
+            public ObjectElement(uint id, uint group_id, uint type, string descriptionName, Matrix objectMatrix)
             {
                 this.id = id; ;
                 this.group_id = group_id;
+                this.type = type;
                 this.descriptionName = descriptionName;
                 this.objectMatrix = objectMatrix;
             }
+
             public ObjectElement(System.IO.BinaryReader br)
             {
                 FromStream(br);
@@ -42,13 +46,16 @@ namespace ResourceCollector
             {
                 bw.Write(id);
                 bw.Write(group_id);
+                bw.Write(type);
                 bw.WritePackString(descriptionName);
                 bw.WriteMatrixFull(objectMatrix);
             }
+
             public void FromStream(System.IO.BinaryReader br)
             {
-                id = br.ReadInt32();
-                group_id = br.ReadInt32();
+                id = br.ReadUInt32();
+                group_id = br.ReadUInt32();
+                type = br.ReadUInt32();
                 descriptionName = br.ReadPackString();
                 objectMatrix = br.ReadMatrixFull();
             }
@@ -62,9 +69,9 @@ namespace ResourceCollector
             objectInformation = new MyContainer<ObjectElement>(100, 2);
         }
 
-        public void AddNewObject(int id, int group_id, string descriptionName, Matrix objectMatrix)
+        public void AddNewObject(uint id, uint group_id, uint type, string descriptionName, Matrix objectMatrix)
         {
-            objectInformation.Add(new ObjectElement(id, group_id, descriptionName, objectMatrix));
+            objectInformation.Add(new ObjectElement(id, group_id, type, descriptionName, objectMatrix));
         }
 
         public void DeleteObject(int id)

@@ -13,8 +13,13 @@
             ShadowObjects = new MyContainer<PivotObject>(100, 2);
             sceneGraph = new SceneGraph.SceneGraph(this);
         }
-        public GameScene(int t)
+
+        public GameScene(GameScene s)
         {
+            ShadowObjects = s.ShadowObjects;
+            VisibleObjects = s.VisibleObjects;
+            objects = s.objects;
+            sceneGraph = s.sceneGraph;
         }
 
         public void Clear() {
@@ -22,6 +27,11 @@
             ShadowObjects.Clear();
             sceneGraph.Clear();
             objects.Clear();
+
+            //вот тут странно- вдруг мы хотим юзать редактор идешников в какомто другом
+            //месте? получается идешники одни на весь пак? а если паков несколько? 
+            //надобе сделать его не статическим- тогда будем сохранять где надо
+            //а при загрузке инициализировать просто и сё.
             IdGenerator.ClearIdsCounter();
             LevelEditor.Cleared();
         }
