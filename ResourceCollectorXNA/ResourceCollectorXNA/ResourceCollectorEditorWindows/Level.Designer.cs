@@ -64,6 +64,7 @@
             // dataGridView_ObjectsList
             // 
             this.dataGridView_ObjectsList.AllowUserToAddRows = false;
+            this.dataGridView_ObjectsList.AllowUserToDeleteRows = false;
             this.dataGridView_ObjectsList.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.dataGridView_ObjectsList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dataGridView_ObjectsList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -76,6 +77,7 @@
             this.dataGridView_ObjectsList.ReadOnly = true;
             this.dataGridView_ObjectsList.RowHeadersVisible = false;
             this.dataGridView_ObjectsList.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.dataGridView_ObjectsList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView_ObjectsList.Size = new System.Drawing.Size(457, 618);
             this.dataGridView_ObjectsList.TabIndex = 2;
             // 
@@ -171,7 +173,7 @@
             this.MinimizeBox = false;
             this.Name = "Level";
             this.Text = "Level";
-            this.Resize += new System.EventHandler(this.Level_Resize);
+            this.Resize += new System.EventHandler(this.LevelResize);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_ObjectsList)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);

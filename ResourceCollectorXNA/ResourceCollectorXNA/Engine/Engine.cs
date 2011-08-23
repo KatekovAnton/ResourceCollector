@@ -158,7 +158,7 @@ namespace ResourceCollectorXNA.Engine
             mousePos = mouseScreenPos;
             if (needclear)
             {
-                editor.clear();
+                editor.Clear();
                 foreach (PivotObject lo in gameLevel.objects)
                 {
                     LevelObject levobj = lo as LevelObject;

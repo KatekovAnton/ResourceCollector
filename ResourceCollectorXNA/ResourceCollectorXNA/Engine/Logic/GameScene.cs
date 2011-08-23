@@ -37,11 +37,11 @@
         }
 
 
-        public PivotObject GetObjectWithID(int id)
+        public PivotObject GetObjectWithID(uint id)
         {
-            for (int i = 0; i < objects.Count; i++)
-                if (objects[i].editorAspect.id == id)
-                    return objects[i];
+            foreach(PivotObject t in objects)
+                if (t.editorAspect.id == id)
+                    return t;
             ConsoleWindow.TraceMessage("Unable to find object with id = " + id.ToString());
             return null;
         }
