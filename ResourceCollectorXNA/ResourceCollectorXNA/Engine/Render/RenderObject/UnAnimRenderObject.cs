@@ -68,7 +68,6 @@ namespace ResourceCollectorXNA.Engine.Render
 
             ~Model()
             {
-
                 Dispose();
             }
         }

@@ -126,12 +126,18 @@ namespace ResourceCollectorXNA.Engine {
         }
 
 
-        public void SetActiveObjects(uint[] objectIds, bool back = false) {                                      
-            PivotObject[] objects = new PivotObject[objectIds.Length];
-            for(int i = 0; i < objectIds.Length; i++)
-                objects[i] = gameScene.GetObjectWithID(objectIds[i]);
+        public void SetActiveObjects(uint[] objectIds, bool back = false) 
+        {
+            List<PivotObject> objectslist = new List<PivotObject>();
+            for (int i = 0; i < objectIds.Length; i++)
+            {
+                PivotObject obj = gameScene.GetObjectWithID(objectIds[i]);
+                if(obj!=null)
+                    objectslist.Add(obj);
+            }
 
-            SetActiveObjects(new ObjectContainer(objects), back);
+
+            SetActiveObjects(new ObjectContainer(objectslist.ToArray()), back);
         }
 
 
