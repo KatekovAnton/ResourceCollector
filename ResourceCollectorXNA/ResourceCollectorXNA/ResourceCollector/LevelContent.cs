@@ -64,6 +64,8 @@ namespace ResourceCollector
         //сюда надо ещё добавить кучу ины по самому уровню -
         //уровень гравитации, ид персонажа игрока(чтоб знать к чему камеру крепить)
         //и прочее прочее прочее
+
+        public uint generator;
         public LevelContent()
         {
             objectInformation = new MyContainer<ObjectElement>(100, 2);
@@ -88,8 +90,10 @@ namespace ResourceCollector
         public override int loadbody(System.IO.BinaryReader br, ToolStripProgressBar toolStripProgressBar)
         {
             long pos = br.BaseStream.Position;
+            generator = br.ReadUInt32();
+            int elementcount = br.ReadInt32();
             //objectInformation = new ObjectElement[br.ReadInt32()];
-            for (int i = 0; i < objectInformation.Count; i++)
+            for (int i = 0; i < elementcount; i++)
             {
                 objectInformation.Add(new ObjectElement(br));
             }
@@ -110,6 +114,7 @@ namespace ResourceCollector
 
         public override void savebody(System.IO.BinaryWriter bw, ToolStripProgressBar toolStripProgressBar)
         {
+            bw.Write(generator);
             bw.Write(objectInformation.Count);
             for (int i = 0; i < objectInformation.Count; i++)
             {
@@ -125,6 +130,7 @@ namespace ResourceCollector
         public override void calcbodysize(ToolStripProgressBar targetbar)
         {
             System.IO.BinaryWriter bw = new System.IO.BinaryWriter(new System.IO.MemoryStream());
+            bw.Write(generator);
             bw.Write(objectInformation.Count);
             for (int i = 0; i < objectInformation.Count; i++)
             {

@@ -5,21 +5,23 @@
         public MyContainer<PivotObject> objects;
         //мы же хотим переключать сцены?? поэтому каждой - свой сценграф
         public SceneGraph.SceneGraph sceneGraph;
-
+        public IdGenerator idgenertor;
 
         public GameScene() {
             objects = new MyContainer<PivotObject>(100, 10);
             VisibleObjects = new MyContainer<PivotObject>(100, 2);
             ShadowObjects = new MyContainer<PivotObject>(100, 2);
             sceneGraph = new SceneGraph.SceneGraph(this);
+            idgenertor = new IdGenerator(0);
         }
 
-        public GameScene(GameScene s)
+        public GameScene(GameScene s, uint generatorId = 0)
         {
             ShadowObjects = s.ShadowObjects;
             VisibleObjects = s.VisibleObjects;
             objects = s.objects;
             sceneGraph = s.sceneGraph;
+            idgenertor = new IdGenerator(generatorId);
         }
 
         public void Clear() {
@@ -28,11 +30,7 @@
             sceneGraph.Clear();
             objects.Clear();
 
-            //вот тут странно- вдруг мы хотим юзать редактор идешников в какомто другом
-            //месте? получается идешники одни на весь пак? а если паков несколько? 
-            //надобе сделать его не статическим- тогда будем сохранять где надо
-            //а при загрузке инициализировать просто и сё.
-            IdGenerator.ClearIdsCounter();
+            idgenertor.ClearIdsCounter();
             LevelEditor.Cleared();
         }
 
@@ -49,6 +47,7 @@
 
         public void AddObject(PivotObject newObject)
         {
+            newObject.editorAspect.id = idgenertor.NewId();
             objects.Add(newObject);
             sceneGraph.AddObject(newObject);
             LevelEditor.ObjectAdded(newObject);
@@ -63,7 +62,7 @@
             }
             // счетчик идов будет начинать все делать с 0
             if(objects.Count == 0) {
-                IdGenerator.ClearIdsCounter();
+                idgenertor.ClearIdsCounter(); ;
             }
 
             LevelEditor.ObjectsDeleted(deletingobjects);
@@ -73,6 +72,7 @@
         public void AddObjects(MyContainer<PivotObject> newobjects)
         {
             foreach(PivotObject t in newobjects) {
+                t.editorAspect.id = idgenertor.NewId();
                 objects.Add(t);
                 sceneGraph.AddObject(t);
             }

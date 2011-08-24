@@ -1,13 +1,16 @@
 ﻿namespace ResourceCollectorXNA.Engine.Logic {
-    internal static class IdGenerator {
-        private static uint _lastValue;
-
-        public static uint NewId()
+    public class IdGenerator {
+        private uint _lastValue;
+        public IdGenerator(uint lastEnd)
+        {
+            _lastValue = lastEnd;
+        }
+        public uint NewId()
         {
             return _lastValue++;
         }
 
-        public static void ClearIdsCounter() {
+        public void ClearIdsCounter() {
             _lastValue = 0;
         }
     }
@@ -20,7 +23,7 @@
 
     public class EditorData {
         public string DescriptionName;
-        public uint id = IdGenerator.NewId();
+        public uint id;// = IdGenerator.NewId();
         public uint group_id = 0;
         public bool isActive;
         public uint objtype;
