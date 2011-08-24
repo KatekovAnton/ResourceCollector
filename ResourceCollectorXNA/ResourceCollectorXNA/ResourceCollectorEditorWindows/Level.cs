@@ -21,8 +21,9 @@ namespace ResourceCollectorXNA.ResourceCollectorEditorWindows {
             var resultIds = new uint[length];
             for(int i = 0; i < length; i++) {
                 resultIds[i] = Convert.ToUInt32(dataGridView_ObjectsList.SelectedRows[i].Cells[0].Value);
-            }
-            GameEngine.Instance.editor.SetActiveObjects(resultIds);
+            } 
+                GameEngine.Instance.editor.SetActiveObjects(resultIds, wassbavk);
+            wassbavk = false;
         }
 
 
@@ -43,9 +44,11 @@ namespace ResourceCollectorXNA.ResourceCollectorEditorWindows {
             dataGridView_ObjectsList.Rows.Clear();
         }
 
-
+        bool wassbavk = false;
         // метод, выделяющий элементы в таблице в соответствии с переданными идами
-        public void SetActiveObjects(uint[] ids) {
+        public void SetActiveObjects(uint[] ids, bool back = false) {
+            if (back)
+                wassbavk = true;
             int gridLen = dataGridView_ObjectsList.Rows.Count;
             int isSelectedNow = 0;
             int idsLen = ids.Length;
@@ -69,6 +72,7 @@ namespace ResourceCollectorXNA.ResourceCollectorEditorWindows {
                     dataGridView_ObjectsList.Rows[i].Selected = false;
                 }
             }
+            
         }
 
 
