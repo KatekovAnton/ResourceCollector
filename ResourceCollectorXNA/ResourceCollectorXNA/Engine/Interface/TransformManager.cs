@@ -39,7 +39,7 @@ namespace ResourceCollectorXNA.Engine.Interface
             editor = edit;
             currentState = TransformManagerState.select;
             activeObject = new ObjectContainer();
-            GameEngine.windowController.setSelect();
+            GameEngine.renderController.setSelect();
         }
         public bool IsFree()
         {
@@ -94,9 +94,9 @@ namespace ResourceCollectorXNA.Engine.Interface
                     {
                         Vector3 transl = ma.transform.Translation;
                         if (activeObject.Length == 1)
-                            GameEngine.windowController.setMove(new string[] { transl.X.ToString(), transl.Y.ToString(), transl.Z.ToString() });
+                            GameEngine.renderController.setMove(new string[] { transl.X.ToString(), transl.Y.ToString(), transl.Z.ToString() });
                         else
-                            GameEngine.windowController.setRelative(threezeros);
+                            GameEngine.renderController.setRelative(threezeros);
                     }break;
                 default: break;
             }
@@ -125,9 +125,9 @@ namespace ResourceCollectorXNA.Engine.Interface
 
                             Vector3 transl = ma.transform.Translation;
                             if (activeObject.Length == 1)
-                                GameEngine.windowController.setMove(new string[] { transl.X.ToString(), transl.Y.ToString(), transl.Z.ToString() });
+                                GameEngine.renderController.setMove(new string[] { transl.X.ToString(), transl.Y.ToString(), transl.Z.ToString() });
                             else
-                                GameEngine.windowController.setRelative(threezeros);
+                                GameEngine.renderController.setRelative(threezeros);
                         }break;
                     case TransformManagerState.rotatelocal:
                     case TransformManagerState.rotatesame:
@@ -183,16 +183,16 @@ namespace ResourceCollectorXNA.Engine.Interface
                     //Vector3 transl = ma.transform.Translation;
                     currentaction = new Actions.DragPivotObject(activeObject, axis, new Actions.PivotActionUpdateParameters(mouseary, new Vector2(mouseState.X, mouseState.Y), transl));
                     if (activeObject.Length == 1)
-                        GameEngine.windowController.setMove(new string[] { transl.X.ToString(), transl.Y.ToString(), transl.Z.ToString() });
+                        GameEngine.renderController.setMove(new string[] { transl.X.ToString(), transl.Y.ToString(), transl.Z.ToString() });
                     else
-                        GameEngine.windowController.setRelative(threezeros);
+                        GameEngine.renderController.setRelative(threezeros);
                 }
                 else
                     if (activeObject.Length == 0)
-                        GameEngine.windowController.setRelative(null);
+                        GameEngine.renderController.setRelative(null);
                     else if (activeObject.Length == 1)
-                        GameEngine.windowController.setMove(new string[] { transl.X.ToString(), transl.Y.ToString(), transl.Z.ToString() });
-                    else GameEngine.windowController.setRelative(threezeros);
+                        GameEngine.renderController.setMove(new string[] { transl.X.ToString(), transl.Y.ToString(), transl.Z.ToString() });
+                    else GameEngine.renderController.setRelative(threezeros);
             }
             else
             {
@@ -205,7 +205,7 @@ namespace ResourceCollectorXNA.Engine.Interface
                     ma.SetTransformMatrix(activeObject.middleMarix);
 
                     Vector3 difference = (Vector3)currentaction.ActionResult;
-                    GameEngine.windowController.setRelative(new string[] { difference.X.ToString(), difference.Y.ToString(), difference.Z.ToString() });
+                    GameEngine.renderController.setRelative(new string[] { difference.X.ToString(), difference.Y.ToString(), difference.Z.ToString() });
 
                     return;
                 }
@@ -222,10 +222,10 @@ namespace ResourceCollectorXNA.Engine.Interface
                     if (activeObject.Length == 1)
                     {
                         Vector3 transl = ma.transform.Translation;
-                        GameEngine.windowController.setMove(new string[] { transl.X.ToString(), transl.Y.ToString(), transl.Z.ToString() });
+                        GameEngine.renderController.setMove(new string[] { transl.X.ToString(), transl.Y.ToString(), transl.Z.ToString() });
                     }
                     else
-                        GameEngine.windowController.setRelative(threezeros);
+                        GameEngine.renderController.setRelative(threezeros);
 
                     return;
                 }
@@ -239,9 +239,9 @@ namespace ResourceCollectorXNA.Engine.Interface
                     ma.SetTransformMatrix(activeObject.middleMarix);
                     Vector3 transl = ma.transform.Translation;
                     if (activeObject.Length == 1)
-                        GameEngine.windowController.setMove(new string[] { transl.X.ToString(), transl.Y.ToString(), transl.Z.ToString() });
+                        GameEngine.renderController.setMove(new string[] { transl.X.ToString(), transl.Y.ToString(), transl.Z.ToString() });
                     else
-                        GameEngine.windowController.setRelative(threezeros);
+                        GameEngine.renderController.setRelative(threezeros);
                     
 
 
@@ -281,13 +281,13 @@ namespace ResourceCollectorXNA.Engine.Interface
                                 Vector3 v, vs;
 
                                 activeObject[0].transform.Decompose(out vs, out q, out v);
-                                GameEngine.windowController.setRotationLocal(new string[]{q.X.ToString(), q.Y.ToString(), q.Z.ToString(), q.W.ToString()});
+                                GameEngine.renderController.setRotationLocal(new string[]{q.X.ToString(), q.Y.ToString(), q.Z.ToString(), q.W.ToString()});
                             }
                             else
-                                GameEngine.windowController.setRotationLocal(new string[] { "0", "0", "0", "1" });
+                                GameEngine.renderController.setRotationLocal(new string[] { "0", "0", "0", "1" });
                         }
                     }
-                    else GameEngine.windowController.setRelative(null);
+                    else GameEngine.renderController.setRelative(null);
                 }
             }
 
@@ -301,7 +301,7 @@ namespace ResourceCollectorXNA.Engine.Interface
 
                     Quaternion res = (Quaternion)currentaction.ActionResult;
 
-                    GameEngine.windowController.setRotationLocal(new string[] { res.X.ToString(), res.Y.ToString(), res.Z.ToString(), res.W.ToString() });
+                    GameEngine.renderController.setRotationLocal(new string[] { res.X.ToString(), res.Y.ToString(), res.Z.ToString(), res.W.ToString() });
                 }
             }
             else
@@ -314,7 +314,7 @@ namespace ResourceCollectorXNA.Engine.Interface
                    // ma.SetTransformMatrix(activeObject.transform.TranslationMatrix());
                     rc.SetTransformMatrix(activeObject.middleMarix);
                     Quaternion res = (Quaternion)currentaction.ActionResult;
-                    GameEngine.windowController.setRotationLocal(new string[] { res.X.ToString(), res.Y.ToString(), res.Z.ToString(), res.W.ToString() });
+                    GameEngine.renderController.setRotationLocal(new string[] { res.X.ToString(), res.Y.ToString(), res.Z.ToString(), res.W.ToString() });
                     return;
                 }
                 if (mouseState.LeftButton == ButtonState.Released && mouseState.RightButton == ButtonState.Released)
@@ -327,7 +327,7 @@ namespace ResourceCollectorXNA.Engine.Interface
                     if (activeObject.Length == 1)
                     {
                         Quaternion res = (Quaternion)currentaction.ActionResult;
-                        GameEngine.windowController.setRotationLocal(new string[] { res.X.ToString(), res.Y.ToString(), res.Z.ToString(), res.W.ToString() });
+                        GameEngine.renderController.setRotationLocal(new string[] { res.X.ToString(), res.Y.ToString(), res.Z.ToString(), res.W.ToString() });
                     }
                     currentaction = null;
                     axis = Axis.none;
@@ -343,7 +343,7 @@ namespace ResourceCollectorXNA.Engine.Interface
                     if (activeObject.Length == 1)
                     {
                         Quaternion res = (Quaternion)currentaction.ActionResult;
-                        GameEngine.windowController.setRotationLocal(new string[] { res.X.ToString(), res.Y.ToString(), res.Z.ToString(), res.W.ToString() });
+                        GameEngine.renderController.setRotationLocal(new string[] { res.X.ToString(), res.Y.ToString(), res.Z.ToString(), res.W.ToString() });
                     }
                     currentaction = null;
                     axis = Axis.none;
@@ -378,13 +378,13 @@ namespace ResourceCollectorXNA.Engine.Interface
                                 Vector3 v, vs;
 
                                 activeObject[0].transform.Decompose(out vs, out q, out v);
-                                GameEngine.windowController.setRotationSame(new string[] { q.X.ToString(), q.Y.ToString(), q.Z.ToString(), q.W.ToString() });
+                                GameEngine.renderController.setRotationSame(new string[] { q.X.ToString(), q.Y.ToString(), q.Z.ToString(), q.W.ToString() });
                             }
                             else
-                                GameEngine.windowController.setRotationSame(new string[] { "0", "0", "0", "1" });
+                                GameEngine.renderController.setRotationSame(new string[] { "0", "0", "0", "1" });
                         }
                     }
-                    else GameEngine.windowController.setRelative(null);
+                    else GameEngine.renderController.setRelative(null);
                 }
             }
 
@@ -397,7 +397,7 @@ namespace ResourceCollectorXNA.Engine.Interface
                     currentaction = new Actions.RotateSamePivotAction(activeObject, axis, new Actions.PivotActionUpdateParameters(mouseary, new Vector2(mouseState.X, mouseState.Y), rc.transform.Translation));
                     Quaternion res = (Quaternion)currentaction.ActionResult;
 
-                    GameEngine.windowController.setRotationSame(new string[] { res.X.ToString(), res.Y.ToString(), res.Z.ToString(), res.W.ToString() });
+                    GameEngine.renderController.setRotationSame(new string[] { res.X.ToString(), res.Y.ToString(), res.Z.ToString(), res.W.ToString() });
                 }
               
             }
@@ -411,7 +411,7 @@ namespace ResourceCollectorXNA.Engine.Interface
                     // ma.SetTransformMatrix(activeObject.transform.TranslationMatrix());
                     rc.SetTransformMatrix(activeObject.middleMarix);
                     Quaternion res = (Quaternion)currentaction.ActionResult;
-                    GameEngine.windowController.setRotationSame(new string[] { res.X.ToString(), res.Y.ToString(), res.Z.ToString(), res.W.ToString() });
+                    GameEngine.renderController.setRotationSame(new string[] { res.X.ToString(), res.Y.ToString(), res.Z.ToString(), res.W.ToString() });
                     return;
                 }
                 if (mouseState.LeftButton == ButtonState.Released && mouseState.RightButton == ButtonState.Released)
@@ -423,7 +423,7 @@ namespace ResourceCollectorXNA.Engine.Interface
                     if (activeObject.Length == 1)
                     {
                         Quaternion res = (Quaternion)currentaction.ActionResult;
-                        GameEngine.windowController.setRotationSame(new string[] { res.X.ToString(), res.Y.ToString(), res.Z.ToString(), res.W.ToString() });
+                        GameEngine.renderController.setRotationSame(new string[] { res.X.ToString(), res.Y.ToString(), res.Z.ToString(), res.W.ToString() });
                     }
                     
                     currentaction = null;
@@ -440,7 +440,7 @@ namespace ResourceCollectorXNA.Engine.Interface
                     if (activeObject.Length == 1)
                     {
                         Quaternion res = (Quaternion)currentaction.ActionResult;
-                        GameEngine.windowController.setRotationSame(new string[] { res.X.ToString(), res.Y.ToString(), res.Z.ToString(), res.W.ToString() });
+                        GameEngine.renderController.setRotationSame(new string[] { res.X.ToString(), res.Y.ToString(), res.Z.ToString(), res.W.ToString() });
                     }
                     currentaction = null;
                     axis = Axis.none;

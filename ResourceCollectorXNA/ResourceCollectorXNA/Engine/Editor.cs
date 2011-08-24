@@ -86,6 +86,7 @@ namespace ResourceCollectorXNA.Engine
                 var action = new AddObjectPivotAction(new ObjectContainer(objects));
                 actions.AddNewAction(action);
             }
+            GameEngine.levelController.ObjectsAdded(objects);
         }
 
 
@@ -97,6 +98,7 @@ namespace ResourceCollectorXNA.Engine
                 var action = new DeleteObjectPivotAction(new ObjectContainer(objects));
                 actions.AddNewAction(action);
             }
+            GameEngine.levelController.ObjectsDeleted(objects);
         }
 
 
@@ -104,6 +106,7 @@ namespace ResourceCollectorXNA.Engine
         {
             actions.clear();
             SetActiveObjects(new ObjectContainer(), true);
+            GameEngine.levelController.Cleared();
         }
 
 

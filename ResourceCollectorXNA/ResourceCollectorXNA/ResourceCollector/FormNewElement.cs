@@ -44,9 +44,7 @@ namespace ResourceCollector
             tl.Pack = packs.packs[0];
             if (tl.createpropertieswindow(packs.packs[0], tv) == System.Windows.Forms.DialogResult.OK)
             { 
-
-                packs.packs[0].Attach(tl, tv); 
-
+                packs.packs[0].Attach(tl, tv);
             }
         }
 

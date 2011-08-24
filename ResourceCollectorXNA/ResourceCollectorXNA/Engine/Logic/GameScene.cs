@@ -31,7 +31,7 @@
             objects.Clear();
 
             idgenertor.ClearIdsCounter();
-            LevelEditor.Cleared();
+            
         }
 
 
@@ -50,7 +50,13 @@
             newObject.editorAspect.id = idgenertor.NewId();
             objects.Add(newObject);
             sceneGraph.AddObject(newObject);
-            LevelEditor.ObjectAdded(newObject);
+        }
+
+
+        public void AddObjectWithoutId(PivotObject newObject)
+        {
+            objects.Add(newObject);
+            sceneGraph.AddObject(newObject);
         }
 
 
@@ -65,7 +71,7 @@
                 idgenertor.ClearIdsCounter(); ;
             }
 
-            LevelEditor.ObjectsDeleted(deletingobjects);
+           
         }
 
 
@@ -76,7 +82,7 @@
                 objects.Add(t);
                 sceneGraph.AddObject(t);
             }
-            LevelEditor.ObjectsAdded(newobjects);
+            
         }
 
 

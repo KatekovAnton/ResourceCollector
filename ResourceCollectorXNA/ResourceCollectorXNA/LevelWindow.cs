@@ -3,10 +3,11 @@ using System.Windows.Forms;
 using ResourceCollectorXNA.Engine;
 
 
-namespace ResourceCollectorXNA.ResourceCollectorEditorWindows {
-    public partial class Level : Form {
+namespace ResourceCollectorXNA {
+    public partial class LevelWindow : Form {
 
-        public Level() {
+        public LevelWindow() {
+            GameEngine.levelController = new RCViewControllers.LevelWindowVC(this);
             InitializeComponent();
             dataGridView_ObjectsList.SelectionChanged += DataGridViewSelectionChanged;
         }

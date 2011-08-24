@@ -23,12 +23,15 @@ namespace ResourceCollectorXNA.Engine
     public class GameEngine
 	{
         public static GameEngine Instance;
-        public static RCViewControllers.RenderWindowVC windowController;
+        public static GraphicsDeviceManager DeviceManager;
+        public static GraphicsDevice Device;
+
+
+        public static RCViewControllers.RenderWindowVC renderController;
+        public static RCViewControllers.LevelWindowVC levelController;
         public static bool actionToInterface;
         public static bool actionFromInterface;
         public RenderPipeline GraphicPipeleine;
-
-
 
         public Helpers.FpsCounter FPSCounter;
 
@@ -39,9 +42,8 @@ namespace ResourceCollectorXNA.Engine
 
         public Vector3 lightDir = new Vector3(-1, -1, -1);
 
-        public static GraphicsDeviceManager DeviceManager;
-        public static GraphicsDevice Device;
 
+        private bool needclear;
         public int visibleobjectscount = 0;
         private MyContainer<PivotObject> objectstoadd;
 
@@ -66,12 +68,11 @@ namespace ResourceCollectorXNA.Engine
             DeviceManager.PreferredBackBufferHeight = 708;
             objectstoadd = new MyContainer<PivotObject>();
             gameLevel = new Level.EngineLevel();
-            Instance = this;
-            
+
 		}
         
         bool locked;
-        private bool needclear;
+        
         public void clear()
         {
             needclear = true;

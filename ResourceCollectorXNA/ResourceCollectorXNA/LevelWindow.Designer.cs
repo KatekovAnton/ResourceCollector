@@ -1,6 +1,6 @@
-﻿namespace ResourceCollectorXNA.ResourceCollectorEditorWindows
+﻿namespace ResourceCollectorXNA
 {
-    partial class Level
+    partial class LevelWindow
     {
         /// <summary>
         /// Required designer variable.

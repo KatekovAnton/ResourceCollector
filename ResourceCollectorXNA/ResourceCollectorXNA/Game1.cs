@@ -23,12 +23,12 @@ namespace ResourceCollectorXNA
         public static RenderWindow renderWindow;
         public static ResourceCollector.FormMainPackExplorer packexplorer;
         public static MainWindow MDIParent;
-        public static ResourceCollectorEditorWindows.Level levelform;
+        public static LevelWindow levelform;
 
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
         private SpriteFont Font1;
-        public static GameEngine _engine;
+
         private Vector2 FontPos;
         private Log log;
         string outputstring = string.Empty;
@@ -37,7 +37,7 @@ namespace ResourceCollectorXNA
         public MyGame()
         {
             log = new Log();
-            _engine = new GameEngine(this);
+            GameEngine.Instance = new GameEngine(this);
 
             graphics = GameEngine.DeviceManager;
             if(Microsoft.Xna.Framework.Graphics.GraphicsAdapter.DefaultAdapter.IsProfileSupported(GraphicsProfile.HiDef))
@@ -65,7 +65,7 @@ namespace ResourceCollectorXNA
             p.Y -= 20;
             renderWindow = new RenderWindow();
             MDIParent = new MainWindow();
-            levelform = new ResourceCollectorEditorWindows.Level();
+            levelform = new LevelWindow();
             console = new ConsoleWindow();
             packexplorer = new ResourceCollector.FormMainPackExplorer();
             MDIParent.HandleDestroyed += new EventHandler(MDIParent_HandleDestroyed);
@@ -80,14 +80,14 @@ namespace ResourceCollectorXNA
             packexplorer.Show();
             console.Show();
             MDIParent.Show();
-            _engine.Initalize();
+            GameEngine.Instance.Initalize();
 
             // TODO: Add your initialization logic here
 
 
             this.IsMouseVisible = true;
 
-            _engine.Update();
+            GameEngine.Instance.Update();
 
         }
 
@@ -110,7 +110,7 @@ namespace ResourceCollectorXNA
             Font1 = Content.Load<SpriteFont>("Courier New");
             FontPos = new Vector2(10.0f, 10.0f);
 
-            _engine.Font1 = Font1;
+            GameEngine.Instance.Font1 = Font1;
            
           //  outputstring = packs.packs.Length.ToString();
         }
@@ -121,53 +121,15 @@ namespace ResourceCollectorXNA
         /// </summary>
         protected override void UnloadContent()
         {
-            _engine.UnLoad();
+            GameEngine.Instance.UnLoad();
         }
-        bool lfirst = false;
-
-
         private void HandleKeyboard(KeyboardState keyboardState)
         {
-          /*  if (keyboardState.IsKeyDown(Keys.L) && !lfirst)
-            {
-                lfirst = true;
-
-             //   _engine.WorldObjectCharacterBox.behaviourmodel.SetGlobalPose(Matrix.CreateRotationX(-MathHelper.PiOver2) * Matrix.CreateTranslation(0, 20, 0), null);
-            }
-            if (keyboardState.IsKeyUp(Keys.L) && lfirst)
-                lfirst = false;
-
-            */
-
-
-          /*  if (keyboardState.IsKeyDown(Keys.K))
-                _engine.WorldObjectCharacterBox.behaviourmodel.Move(new Vector3(5.0f, 0, 0));
-
-            if (keyboardState.IsKeyDown(Keys.H))
-                _engine.WorldObjectCharacterBox.behaviourmodel.Move(new Vector3(-5.0f, 0, 0));
-
-            if (keyboardState.IsKeyDown(Keys.J))
-                _engine.WorldObjectCharacterBox.behaviourmodel.Move(new Vector3(0, 0, 5.0f));
-
-            if (keyboardState.IsKeyDown(Keys.U))
-                _engine.WorldObjectCharacterBox.behaviourmodel.Move(new Vector3(0, 0, -5.0f));
-            */
-
-
-         /*   if (keyboardState.IsKeyDown(Keys.Escape))
-                Exit();*/
-            
-
-
-           /* Vector3? point = _engine.WorldObjectTestSide.RCCM.IntersectionClosest(ray, _engine.WorldObjectTestSide.behaviourmodel.GetGlobalPose());
-            if (point != null)
-                _engine.WorldObjectCursorSphere.behaviourmodel.SetGlobalPose(Matrix.CreateTranslation(point.Value), null);
-            */
         }
         public static bool NeedForceUpdate = false;
         public static void AddOject(Engine.Logic.PivotObject newobject)
         {
-            _engine.AddObject(newobject);
+            GameEngine.Instance.AddObject(newobject);
             NeedForceUpdate = true;
         }
         protected override void Update(GameTime gameTime)
@@ -183,13 +145,13 @@ namespace ResourceCollectorXNA
                 var ray = Extensions.FromScreenPoint(
                     GraphicsDevice.Viewport,
                     mousepos,
-                    _engine.Camera.View,
-                    _engine.Camera.Projection);
-                _engine.Update(gameTime, ray, mousepos);
+                    GameEngine.Instance.Camera.View,
+                    GameEngine.Instance.Camera.Projection);
+                GameEngine.Instance.Update(gameTime, ray, mousepos);
             }
             else if (NeedForceUpdate)
             {
-                _engine.Update();
+                GameEngine.Instance.Update();
             }
             base.Update(gameTime);
             NeedForceUpdate = false;
@@ -200,7 +162,7 @@ namespace ResourceCollectorXNA
         protected override void Draw(GameTime gameTime)
         {
             base.Draw(gameTime);
-            _engine.Draw();
+            GameEngine.Instance.Draw();
 
             drawstring();
             GraphicsDevice.Present(null, null, renderWindow.PanelHandle);
@@ -208,7 +170,7 @@ namespace ResourceCollectorXNA
 
         public void drawstring()
         {
-
+            GameEngine _engine = GameEngine.Instance;
             outputstring = _engine.Camera.View.Translation.ToString() + '\n' + _engine.Camera.View.Up.ToString(); ;
             spriteBatch.Begin();
            // if (_engine.BoxScreenPosition.Z < 1.0)

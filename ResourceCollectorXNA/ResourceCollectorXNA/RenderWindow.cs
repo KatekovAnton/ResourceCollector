@@ -53,16 +53,16 @@ namespace ResourceCollectorXNA
         {
             InitializeComponent();
             PanelHandle = xnaPanel1.Handle;
-            
-            engine = MyGame._engine;
-            Engine.GameEngine.windowController = new RCViewControllers.RenderWindowVC(this);
+
+            engine = ResourceCollectorXNA.Engine.GameEngine.Instance; ;
+            Engine.GameEngine.renderController = new RCViewControllers.RenderWindowVC(this);
             capturer = new mosecapturer();
             
         }
 
         private void xnaPanel1_SizeChanged(object sender, EventArgs e)
         {
-            MyGame._engine.ResetDevice(ClientSize);
+            engine.ResetDevice(ClientSize);
         }
 
 
