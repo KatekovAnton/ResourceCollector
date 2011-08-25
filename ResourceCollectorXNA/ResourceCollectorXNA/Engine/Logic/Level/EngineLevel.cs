@@ -15,12 +15,11 @@ namespace ResourceCollectorXNA.Engine.Level
     /// </summary>
     public class EngineLevel:GameScene
     {
-        LevelContent levelContent;
+        public LevelContent levelContent;
 
         public EngineLevel()
         {
             levelContent = new LevelContent();
-            levelContent.Enginereadedobject.Add(this);
         }
 
         public EngineLevel(LevelContent _levelContent)
@@ -41,7 +40,6 @@ namespace ResourceCollectorXNA.Engine.Level
                 GameEngine.Instance.GraphicPipeleine.ProceedObject(lo.renderaspect);
                 AddObjectWithoutId(lo);
             }
-            levelContent.Enginereadedobject.Add(this);
         }
 
         public void unload()
@@ -50,7 +48,7 @@ namespace ResourceCollectorXNA.Engine.Level
             {
                 ContentLoader.ContentLoader.UnloadPivotObject(objects[i]);
             }
-            levelContent.Enginereadedobject.RemoveAt(0);
+            Clear();
         }
 
         public EngineLevel(GameScene scene)

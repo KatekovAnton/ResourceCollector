@@ -68,6 +68,7 @@ namespace ResourceCollector
         public uint generator;
         public LevelContent()
         {
+            loadedformat = forsavingformat = ElementType.LevelContent;
             objectInformation = new MyContainer<ObjectElement>(100, 2);
         }
 
@@ -104,7 +105,7 @@ namespace ResourceCollector
         {
             br.WritePackString(name);
             br.Write(offset);
-            br.Write(ElementType.CollisionMesh);
+            br.Write(forsavingformat);
 
             calcheadersize();
             br.Write(headersize);

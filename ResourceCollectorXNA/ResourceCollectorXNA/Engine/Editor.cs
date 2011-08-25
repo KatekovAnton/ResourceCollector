@@ -19,7 +19,7 @@ namespace ResourceCollectorXNA.Engine
 
         public ActionStack actions;
         private ObjectContainer activeObject;
-        private GameScene gameScene;
+        public GameScene gameScene;
         private List<HotKey> hotkeys1;
 
         private bool lmbwasreleased = true;

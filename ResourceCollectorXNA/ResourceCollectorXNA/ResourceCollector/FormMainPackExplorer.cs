@@ -16,8 +16,10 @@ namespace ResourceCollector
         Point contentcoords = new Point(-1, -1);
         System.IO.BinaryReader br;
         TreeNode lastselectednode;
+        public static FormMainPackExplorer Instance;
         public FormMainPackExplorer()
         {
+            Instance = this;
             InitializeComponent();
 
             groupBox1.Height = Height - groupBox1.Location.Y - 90;

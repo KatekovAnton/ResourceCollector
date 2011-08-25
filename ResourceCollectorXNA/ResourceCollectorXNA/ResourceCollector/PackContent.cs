@@ -123,7 +123,7 @@ namespace ResourceCollector
                     return ElementType.RenderObjectDescription;
                 case "Material":
                     return ElementType.Material;
-                case "Leve":
+                case "Level":
                     return ElementType.LevelContent;
                 default:
                     return -1;

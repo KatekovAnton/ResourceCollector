@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace ResourceCollector.Content
+namespace ResourceCollector
 {
     public partial class FormObjectPicker : Form
     {

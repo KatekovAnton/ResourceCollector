@@ -44,6 +44,7 @@ namespace ResourceCollectorXNA.Engine
 
 
         private bool needclear;
+        private bool neednewlevel;
         public int visibleobjectscount = 0;
         private MyContainer<PivotObject> objectstoadd;
 
@@ -78,6 +79,10 @@ namespace ResourceCollectorXNA.Engine
             needclear = true;
         }
 
+        public void CreateNewLevel()
+        {
+            neednewlevel = true;
+        }
 
         public void ResetDevice(System.Drawing.Size ClientSize)
         {
@@ -160,17 +165,35 @@ namespace ResourceCollectorXNA.Engine
             if (needclear)
             {
                 editor.Clear();
-                foreach (PivotObject lo in gameLevel.objects)
-                {
-                    LevelObject levobj = lo as LevelObject;
-                    if(levobj!=null)
-                        ContentLoader.ContentLoader.UnloadPivotObject(lo);
-                }
-                gameLevel.Clear();
-                needclear = false;
+                if (objectstoadd.Count != 0)
+                    foreach (PivotObject p in objectstoadd)
+                        ContentLoader.ContentLoader.UnloadPivotObject(p);
                 objectstoadd.Clear();
+                gameLevel.unload();
+                needclear = false;
+                
+                GraphicPipeleine.NewFrame(lightDir);
+                return;
+              
             }
-            else if (objectstoadd.Count != 0)
+            if (neednewlevel)
+            {
+                editor.Clear();
+                if (objectstoadd.Count != 0)
+                    foreach (PivotObject p in objectstoadd)
+                        ContentLoader.ContentLoader.UnloadPivotObject(p);
+                objectstoadd.Clear();
+                gameLevel.unload();
+                neednewlevel = false;
+
+                GraphicPipeleine.NewFrame(lightDir);
+                gameLevel = new Level.EngineLevel();
+                editor.gameScene = gameLevel;
+               // MyGame.Instance.Tick();
+               return;
+             
+            }
+            if (objectstoadd.Count != 0)
             {
                 foreach (PivotObject lo in objectstoadd)
                 {
@@ -188,31 +211,6 @@ namespace ResourceCollectorXNA.Engine
                 lo.BeginDoFrame();
             KeyboardManager.Manager.Update();
             editor.Update(ray, mouseScreenPos);
-            //Begin update world objects
-        /*    WorldObjectBox.behaviourmodel.BeginDoFrame();
-            WorldObjectTestSide.behaviourmodel.BeginDoFrame();
-            WorldObjectCharacterBox.behaviourmodel.BeginDoFrame();
-            WorldObjectCursorSphere.behaviourmodel.BeginDoFrame();
-            //Update world(calc ray trace, deleting bullets, applying forces and other)
-            //------
-
-            WorldObjectCursorSphere.behaviourmodel.DoFrame(gameTime);
-            WorldObjectBox.behaviourmodel.DoFrame(gameTime);
-            WorldObjectTestSide.behaviourmodel.DoFrame(gameTime);
-            WorldObjectCharacterBox.behaviourmodel.DoFrame(gameTime);*/
-         /*   // Update Physics
-            Scene.Simulate((float)gameTime.ElapsedGameTime.TotalMilliseconds / 1000.0f);
-
-            //update world objects
-			Scene.FlushStream();
-			Scene.FetchResults( SimulationStatus.RigidBodyFinished, true );*/
-
-            //End updating world objects
-          /*  WorldObjectCursorSphere.behaviourmodel.EndDoFrame();
-            WorldObjectBox.behaviourmodel.EndDoFrame();
-            WorldObjectTestSide.behaviourmodel.EndDoFrame();
-            WorldObjectCharacterBox.behaviourmodel.EndDoFrame();
-            */
 
             //Updating camera
             Camera.Update(gameTime);
@@ -220,19 +218,12 @@ namespace ResourceCollectorXNA.Engine
             GraphicPipeleine.NewFrame(lightDir);
 
 
-            /*foreach (PivotObject lo in objects)
-                lo.Update();
-       
             //Garbage collection(nulling deleted objects)
             //------
             //вот так вот примерно будет происходить рисование
             //тут идёт обновление сценграфа = (фрустумкулинг=> получение списка видимых объектов) 
-            _sceneGraph.NewFrame();
-            _sceneGraph.calculateVisibleObjects(Camera.cameraFrustum);
-
-            _sceneGraph.calculateShadowVisibleObjects(GraphicPipeleine.frustumForShadow);
             //добавляем все нобходимые объекты на отрисовку
-            */
+   
             gameLevel.UpdateScene();
 
 

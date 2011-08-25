@@ -1,4 +1,4 @@
-﻿namespace ResourceCollector.Content
+﻿namespace ResourceCollector
 {
     partial class FormObjectPicker
     {

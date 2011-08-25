@@ -19,7 +19,7 @@ namespace ResourceCollectorXNA
     /// </summary>
     public class MyGame : Microsoft.Xna.Framework.Game
     {
-        
+        public static MyGame Instance;
         public static RenderWindow renderWindow;
         public static ResourceCollector.FormMainPackExplorer packexplorer;
         public static MainWindow MDIParent;
@@ -37,6 +37,7 @@ namespace ResourceCollectorXNA
         public MyGame()
         {
             log = new Log();
+            Instance = this;
             GameEngine.Instance = new GameEngine(this);
 
             graphics = GameEngine.DeviceManager;
