@@ -36,7 +36,6 @@
             this.samePointToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.localPointToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.xnaButton3 = new ResourceCollectorXNA.XnaButton();
             this.xnaGroupBox1 = new ResourceCollectorXNA.XNAGroupBox();
             this.textBox4 = new ResourceCollectorXNA.XnaTextBox();
             this.textBox3 = new ResourceCollectorXNA.XnaTextBox();
@@ -116,16 +115,6 @@
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(105, 6);
-            // 
-            // xnaButton3
-            // 
-            this.xnaButton3.Location = new System.Drawing.Point(991, 166);
-            this.xnaButton3.Name = "xnaButton3";
-            this.xnaButton3.Size = new System.Drawing.Size(155, 30);
-            this.xnaButton3.TabIndex = 6;
-            this.xnaButton3.Text = "Clear";
-            this.xnaButton3.UseVisualStyleBackColor = true;
-            this.xnaButton3.Click += new System.EventHandler(this.xnaButton3_Click);
             // 
             // xnaGroupBox1
             // 
@@ -276,7 +265,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1158, 708);
             this.ControlBox = false;
-            this.Controls.Add(this.xnaButton3);
             this.Controls.Add(this.xnaGroupBox1);
             this.Controls.Add(this.xnaPanel1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
@@ -313,7 +301,6 @@
         private XNARadioButton xnaRadioButton3;
         private XNARadioButton xnaRadioButton2;
         private XNARadioButton xnaRadioButton1;
-        private XnaButton xnaButton3;
         private XnaTextBox textBox4;
         private XnaTextBox textBox3;
         private XnaTextBox textBox2;

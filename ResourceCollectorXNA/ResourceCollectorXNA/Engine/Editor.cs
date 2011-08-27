@@ -19,7 +19,11 @@ namespace ResourceCollectorXNA.Engine
 
         public ActionStack actions;
         private ObjectContainer activeObject;
-        public GameScene gameScene;
+        public GameScene gameScene
+        {
+            get;
+            private set;
+        }
         private List<HotKey> hotkeys1;
 
         private bool lmbwasreleased = true;
@@ -45,6 +49,12 @@ namespace ResourceCollectorXNA.Engine
             activeObject = new ObjectContainer();
         }
 
+        public void setNewLevel(GameScene scene)
+        {
+            Clear();
+            gameScene = scene;
+            GameEngine.levelController.ObjectsAdded(scene.objects);
+        }
 
         public float ArrowSize
         {
@@ -145,6 +155,7 @@ namespace ResourceCollectorXNA.Engine
             }
             MyGame.levelform.SetActiveObjects(ids, back);
             transformator.SetActiveObject(lo);
+            transformator.UpdateView();
         }
 
 

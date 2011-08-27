@@ -47,6 +47,7 @@
 
         public void AddObject(PivotObject newObject)
         {
+           
             newObject.editorAspect.id = idgenertor.NewId();
             objects.Add(newObject);
             sceneGraph.AddObject(newObject);
@@ -55,6 +56,7 @@
 
         public void AddObjectWithoutId(PivotObject newObject)
         {
+            
             objects.Add(newObject);
             sceneGraph.AddObject(newObject);
         }
@@ -78,6 +80,7 @@
         public void AddObjects(MyContainer<PivotObject> newobjects)
         {
             foreach(PivotObject t in newobjects) {
+                
                 t.editorAspect.id = idgenertor.NewId();
                 objects.Add(t);
                 sceneGraph.AddObject(t);

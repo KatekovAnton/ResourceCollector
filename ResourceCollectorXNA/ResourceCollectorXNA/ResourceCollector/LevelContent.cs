@@ -60,7 +60,30 @@ namespace ResourceCollector
                 objectMatrix = br.ReadMatrixFull();
             }
         }
+        public class CameraInfo
+        {
+            public float _cameraPitch;
+            public float _cameraYaw;
+            public Matrix _projection;
+            public Matrix _view;
+
+            public void toStream(System.IO.BinaryWriter bw)
+            {
+                bw.Write(_cameraPitch);
+                bw.Write(_cameraYaw);
+                bw.WriteMatrixFull(_view);
+            }
+
+            public void toStream(System.IO.BinaryReader br)
+            {
+                _cameraPitch = br.ReadSingle();
+                _cameraYaw = br.ReadSingle();
+                _view = br.ReadMatrixFull();
+            }
+        }
         public MyContainer<ObjectElement> objectInformation;
+
+        
         //сюда надо ещё добавить кучу ины по самому уровню -
         //уровень гравитации, ид персонажа игрока(чтоб знать к чему камеру крепить)
         //и прочее прочее прочее

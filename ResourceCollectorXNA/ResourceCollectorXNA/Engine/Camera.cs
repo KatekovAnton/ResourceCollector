@@ -8,6 +8,8 @@ namespace ResourceCollectorXNA.Engine{
         #region Variables
         private float _cameraPitch,
                       _cameraYaw;
+        public Matrix Projection;
+        public Matrix View;
         private GameEngine _engine;
         public BoundingFrustum cameraFrustum = new BoundingFrustum(Matrix.Identity);
         #endregion
@@ -106,10 +108,5 @@ namespace ResourceCollectorXNA.Engine{
             lastmousepos = cursorPosition;
             cameraFrustum.Matrix = View * Projection;
         }
-
-        #region Properties
-        public Matrix Projection;
-        public Matrix View;
-        #endregion
     }
 }

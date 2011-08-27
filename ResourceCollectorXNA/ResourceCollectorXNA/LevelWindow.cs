@@ -123,15 +123,31 @@ namespace ResourceCollectorXNA
                 return;
             }
             ResourceCollectorXNA.Engine.Level.EngineLevel level = GameEngine.Instance.gameLevel;
-            level.levelContent.pack = PackList.Instance.packs[0];
+            if (level.levelContent.pack == null)
+            {
+
+                level.levelContent.pack = PackList.Instance.packs[0];
+                PackList.Instance.packs[0].Attach(level.levelContent, FormMainPackExplorer.Instance.treeView1);
+            }
             level.levelContent.name = textBox1.Text + "\0";
-            PackList.Instance.packs[0].Attach(level.levelContent, FormMainPackExplorer.Instance.treeView1);
             level.FillContent();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-
+            if (PackList.Instance.packs.Count == 0)
+            {
+                MessageBox.Show("no packs loaded!");
+                return;
+            }
+            FormObjectPicker fop = new FormObjectPicker(PackList.Instance.packs[0], ElementType.LevelContent);
+            if (fop.ShowDialog() != System.Windows.Forms.DialogResult.OK)
+                return;
+            LevelContent lc = PackList.Instance.packs[0].getobject(fop.PickedContent[0]) as LevelContent;
+            Engine.Level.EngineLevel el = new Engine.Level.EngineLevel(lc);
+            textBox1.Text = lc.name.Substring(0,lc.name.Length-1);
+            GameEngine.Instance.LoadNewLevel(el);
+            GameEngine.Instance.UpdateLevelPart();
         }
 
         private void button2_Click(object sender, EventArgs e)

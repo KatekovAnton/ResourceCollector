@@ -34,6 +34,7 @@ namespace ResourceCollector
                 if (ofd.ShowDialog() == DialogResult.OK)
                 {
                     ResourceCollectorXNA.Engine.GameEngine.Instance.CreateNewLevel();
+                    ResourceCollectorXNA.Engine.GameEngine.Instance.UpdateLevelPart();
                     treeView1.Nodes.Clear();
                     ClearInterface();
                     packs.packs = new List<Pack>();
