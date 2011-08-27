@@ -75,7 +75,7 @@ namespace ResourceCollector
                             } break;
                         case ElementType.BaseAnimation:
                             {
-                                var content = new BaseAnimation();
+                                var content = new AnimationBase();
                                 Objects.Add(content);
                                 content.loadobjectheader(hi, br);
                             } break;

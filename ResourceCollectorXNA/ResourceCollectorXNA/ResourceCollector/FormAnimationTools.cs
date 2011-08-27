@@ -13,6 +13,7 @@ namespace ResourceCollector
 {
     public partial class FormAnimationTools : Form
     {
+
         public SkeletonWithAddInfo skelet
         {
             get;
@@ -29,6 +30,7 @@ namespace ResourceCollector
         public FormAnimationTools(Skeleton s)
         {
             InitializeComponent();
+
 
             treeView1.Nodes.Clear();
             skelet = null;
@@ -72,20 +74,18 @@ namespace ResourceCollector
             addchildrens(skelet.baseskelet.Root, root, 0);
             treeView1.Nodes.Add(root);
             treeView1.ExpandAll();
-            finalstepredy = s.TopIndexes.Length + s.BottomIndexes.Length == s.baseskelet.bones.Length;
+            finalstepredy = ((s.TopIndexes.Length + s.BottomIndexes.Length) == s.baseskelet.bones.Length);
             button6.Enabled = !finalstepredy;
+            button8.Enabled = true;
             OutInfo();
-
             button5.Enabled = true;
             skeletonviever = new SkeletonViewer(skelet.baseskelet);
             skinfo = new SkeletonInformation(skelet.baseskelet);
             groupBox2.Enabled = true;
             checkBox1.Enabled = false;
             checkBox1.Checked = false;
-            button8.Enabled = true;
             button1.Enabled = button4.Enabled = button9.Enabled = false;
             this.WindowState = FormWindowState.Maximized;
-            finalstepredy = s.TopIndexes.Length + s.BottomIndexes.Length == s.baseskelet.bones.Length;
         }
 
         private void addchildrens(Bone b,TreeNode _tn,int level)
@@ -163,14 +163,13 @@ namespace ResourceCollector
                     OutInfo();
                     finalstepredy = true;
                 }
-                button5.Enabled = true;
+            }
+            button5.Enabled = true;
             skeletonviever = new SkeletonViewer(skelet.baseskelet);
             skinfo = new SkeletonInformation(skelet.baseskelet);
             groupBox2.Enabled = true;
             checkBox1.Enabled = true;
             checkBox1.Checked = true;
-            }
-            
         }
         private void button5_Click(object sender, EventArgs e)
         {
@@ -427,10 +426,17 @@ namespace ResourceCollector
         /// <param name="e">Thats it</param>
         private void button2_Click(object sender, EventArgs e)
         {
+            AnimGrafEditor dlg = new AnimGrafEditor(skelet.baseskelet);
+            //dlg.ShowDialog();
+
             if (skelet != null && skelet.BottomIndexes != null && skelet.TopIndexes != null && finalstepredy)
             {
                 //load animation
-                MessageBox.Show("READY FOR LOAD ANIMATIONS!!!!!!");
+
+                if (dlg.ShowDialog() == DialogResult.OK)
+                {
+                    MessageBox.Show("READY FOR LOAD ANIMATIONS!!!!!!");
+                }
             }
         }
     }

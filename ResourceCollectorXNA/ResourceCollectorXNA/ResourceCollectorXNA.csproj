@@ -117,6 +117,13 @@
       <DependentUpon>ConsoleWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="ContactCallback.cs" />
+    <Compile Include="ResourceCollector\Animation\AnimationBase.cs" />
+    <Compile Include="ResourceCollector\Animation\AnimationFull.cs" />
+    <Compile Include="ResourceCollector\Animation\AnimationGraph.cs" />
+    <Compile Include="ResourceCollector\Animation\Character.cs" />
+    <Compile Include="ResourceCollector\Animation\DecompresedMatrix.cs" />
+    <Compile Include="ResourceCollector\Animation\KeyFrameAnim.cs" />
+    <Compile Include="ResourceCollector\CharacterClass.cs" />
     <Compile Include="Content\EngineCollisionMesh.cs" />
     <Compile Include="Content\EngineMesh.cs" />
     <Compile Include="Content\EngineSkinnedMesh.cs" />
@@ -230,7 +237,31 @@
     <Compile Include="ResourceCollector\Addition\Extensions.cs" />
     <Compile Include="ResourceCollector\Addition\Math.cs" />
     <Compile Include="ResourceCollector\Addition\OtherFunctions.cs" />
-    <Compile Include="ResourceCollector\Animation.cs" />
+    <Compile Include="ResourceCollector\Animation\Animation.cs" />
+    <Compile Include="ResourceCollector\Animation\AddAnim.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ResourceCollector\Animation\AddAnim.designer.cs">
+      <DependentUpon>AddAnim.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ResourceCollector\Animation\AnimGrafEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ResourceCollector\Animation\AnimGrafEditor.designer.cs">
+      <DependentUpon>AnimGrafEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ResourceCollector\Animation\CharEvents.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ResourceCollector\Animation\CharEvents.designer.cs">
+      <DependentUpon>CharEvents.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ResourceCollector\Animation\NodeEventEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ResourceCollector\Animation\NodeEventEditor.designer.cs">
+      <DependentUpon>NodeEventEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="ResourceCollector\CollisionMesh.cs" />
     <Compile Include="ResourceCollector\ConvexMesh.cs" />
     <Compile Include="ResourceCollector\EngineInterfaces\IEngineUpdatesObject.cs" />
@@ -429,6 +460,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ResourceCollector\Addition\ChangeNames.resx">
       <DependentUpon>ChangeNames.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ResourceCollector\Animation\AddAnim.resx">
+      <DependentUpon>AddAnim.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ResourceCollector\Animation\AnimGrafEditor.resx">
+      <DependentUpon>AnimGrafEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ResourceCollector\Animation\CharEvents.resx">
+      <DependentUpon>CharEvents.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ResourceCollector\Animation\NodeEventEditor.resx">
+      <DependentUpon>NodeEventEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ResourceCollector\FormAnimationTools.resx">
       <DependentUpon>FormAnimationTools.cs</DependentUpon>

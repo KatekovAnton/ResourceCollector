@@ -2,13 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+
 using System.IO;
 using Microsoft.Xna.Framework;
+
 namespace ResourceCollector
 {
-    public class BaseAnimation : PackContent//int BaseAnimation = 40;
+    public class AnimationBase : PackContent//int BaseAnimation = 40;
     {
         public bool needtosave;
+
         public override void calcbodysize(System.Windows.Forms.ToolStripProgressBar targetbar)
         {
             throw new NotImplementedException();
@@ -64,13 +67,15 @@ namespace ResourceCollector
             protected set;
         }
 
-        public BaseAnimation()
-        { }
-
-        public static BaseAnimation FromStream(System.IO.Stream stream, Skeleton skeleton)
+        public AnimationBase()
         {
-            
-            var clip = new BaseAnimation();
+            loadedformat = forsavingformat = ElementType.BaseAnimation;
+        }
+
+        public static AnimationBase FromStream(System.IO.Stream stream, Skeleton skeleton)
+        {
+
+            var clip = new AnimationBase();
             var reader = new System.IO.BinaryReader(stream);
 
             var start = reader.ReadInt32();
@@ -93,19 +98,11 @@ namespace ResourceCollector
                     clip.Frames[j][i] = reader.ReadMatrix();
                 }
             }
-            /*
-            for (int i = 0; i < clip.BonesCount; i++)
-            {
-                for (int @in = 0; @in < length; @in++)
-                {
-                    //MUST DO IT
-                 //   clip.Frames[@in][i] = skeleton.bones[i].BaseInverseMatrix * clip.Frames[@in][i];
-                }
-            }*/
+
             clip.Skeleton = skeleton;
 
             return clip;
         }
-        
+
     }
 }

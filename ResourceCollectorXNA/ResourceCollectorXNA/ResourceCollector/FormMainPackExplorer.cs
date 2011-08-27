@@ -33,6 +33,7 @@ namespace ResourceCollector
                 ofd.Filter = "Паки *.pack|*.pack";
                 if (ofd.ShowDialog() == DialogResult.OK)
                 {
+                    ResourceCollectorXNA.Engine.GameEngine.Instance.CreateNewLevel();
                     treeView1.Nodes.Clear();
                     ClearInterface();
                     packs.packs = new List<Pack>();
