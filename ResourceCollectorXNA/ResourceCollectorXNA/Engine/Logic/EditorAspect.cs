@@ -28,6 +28,9 @@
         public bool isActive;
         public uint objtype;
 
+        public bool isGroundRayCasted;
+        public bool isBulletRayCasted;
+
         public EditorData(string name,
                           uint type)
         {

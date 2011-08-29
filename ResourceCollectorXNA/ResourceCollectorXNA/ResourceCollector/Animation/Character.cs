@@ -10,7 +10,7 @@ namespace ResourceCollector
     public class CharacterEvent // событие обрабатываемое анимацией
     {
         public string eventName;
-        DateTime createdTime;
+        public DateTime createdTime;
 
         public CharacterEvent(string _eventname)
         {
@@ -26,7 +26,7 @@ namespace ResourceCollector
 
     public class CharacterPart //класс частей персонажа(например верх и низ)
     {
-        AnimationGraph animgraph;
+        public AnimationGraph animgraph;
         public void ReceiveEvent(CharacterEvent _event)
         {
             animgraph.Advance(_event);
@@ -35,7 +35,7 @@ namespace ResourceCollector
 
     public class Character // класс перса
     {
-        CharacterPart[] parts;// список частей
+        public CharacterPart[] parts;// список частей
         public Skeleton Skeleton
         {
             get;

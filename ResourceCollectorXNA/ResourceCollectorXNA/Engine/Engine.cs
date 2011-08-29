@@ -49,6 +49,8 @@ namespace ResourceCollectorXNA.Engine
         private MyContainer<PivotObject> objectstoadd;
 
         public Engine.Level.EngineLevel gameLevel;
+
+        public Engine.Level.EngineLevel futureGameLevel;
         /// <summary>
         /// ПОЛЬЗУЙСЯ ИМ!!!!!!!!!!!!!!
         /// </summary>
@@ -61,7 +63,6 @@ namespace ResourceCollectorXNA.Engine
 
         public GameEngine(MyGame game)
 		{
-            
             lightDir.Normalize();
 			DeviceManager = new GraphicsDeviceManager( game );
             //разме рэкрана1158; 708
@@ -69,7 +70,6 @@ namespace ResourceCollectorXNA.Engine
             DeviceManager.PreferredBackBufferHeight = 708;
             objectstoadd = new MyContainer<PivotObject>();
             gameLevel = new Level.EngineLevel();
-
 		}
         
         bool locked;
@@ -82,6 +82,11 @@ namespace ResourceCollectorXNA.Engine
         public void CreateNewLevel()
         {
             neednewlevel = true;
+        }
+
+        public void LoadNewLevel(Engine.Level.EngineLevel _futureGameLevel)
+        {
+            futureGameLevel = _futureGameLevel;
         }
 
         public void ResetDevice(System.Drawing.Size ClientSize)
@@ -156,12 +161,10 @@ namespace ResourceCollectorXNA.Engine
         }
 
 
-
         public Vector3 BoxScreenPosition;
         public Vector2 mousePos;
-		public void Update( GameTime gameTime ,Ray ray, Vector2 mouseScreenPos)
-		{
-            mousePos = mouseScreenPos;
+        public void UpdateLevelPart()
+        {
             if (needclear)
             {
                 editor.Clear();
@@ -171,14 +174,14 @@ namespace ResourceCollectorXNA.Engine
                 objectstoadd.Clear();
                 gameLevel.unload();
                 needclear = false;
-                
-                GraphicPipeleine.NewFrame(lightDir);
-                return;
-              
+
+                //GraphicPipeleine.NewFrame(lightDir);
+                //   return;
+
             }
+
             if (neednewlevel)
             {
-                editor.Clear();
                 if (objectstoadd.Count != 0)
                     foreach (PivotObject p in objectstoadd)
                         ContentLoader.ContentLoader.UnloadPivotObject(p);
@@ -188,11 +191,29 @@ namespace ResourceCollectorXNA.Engine
 
                 GraphicPipeleine.NewFrame(lightDir);
                 gameLevel = new Level.EngineLevel();
-                editor.gameScene = gameLevel;
-               // MyGame.Instance.Tick();
-               return;
-             
+                editor.setNewLevel(gameLevel);
+                // return;
             }
+
+            if (futureGameLevel != null)
+            {
+                if (objectstoadd.Count != 0)
+                    foreach (PivotObject p in objectstoadd)
+                        ContentLoader.ContentLoader.UnloadPivotObject(p);
+                objectstoadd.Clear();
+                futureGameLevel.load();
+                GraphicPipeleine.NewFrame(lightDir);
+                gameLevel.unload();
+                gameLevel = futureGameLevel;
+                editor.setNewLevel(gameLevel);
+                futureGameLevel = null;
+            }
+        }
+		public void Update( GameTime gameTime ,Ray ray, Vector2 mouseScreenPos)
+		{
+            mousePos = mouseScreenPos;
+            UpdateLevelPart();
+
             if (objectstoadd.Count != 0)
             {
                 foreach (PivotObject lo in objectstoadd)

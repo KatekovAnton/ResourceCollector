@@ -98,6 +98,20 @@ namespace ResourceCollectorXNA.Engine.Interface
                         else
                             GameEngine.renderController.setRelative(threezeros);
                     }break;
+                case TransformManagerState.rotatelocal:
+                case TransformManagerState.rotatesame:
+                    {
+                        if (activeObject.Length == 1)
+                        {
+                            Quaternion q;
+                            Vector3 v, vs;
+
+                            activeObject[0].transform.Decompose(out vs, out q, out v);
+                            GameEngine.renderController.setRotationLocal(new string[] { q.X.ToString(), q.Y.ToString(), q.Z.ToString(), q.W.ToString() });
+                        }
+                        else
+                            GameEngine.renderController.setRotationLocal(new string[] { "0", "0", "0", "1" });
+                    }break;
                 default: break;
             }
         }
@@ -134,9 +148,6 @@ namespace ResourceCollectorXNA.Engine.Interface
                         {
                             if (activeObject.Length != 0)
                                 rc.SetTransformMatrix(activeObject.middleMarix);
-
-                            
-                            
                         }break;
                 }
                 currentState = newstate;
