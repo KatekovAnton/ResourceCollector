@@ -7,11 +7,14 @@ namespace ResourceCollectorXNA
 {
     public partial class LevelWindow : Form
     {
+        private bool _inGridSelected;
+        private bool _inSceneSel;
 
         public LevelWindow()
         {
             GameEngine.levelController = new RCViewControllers.LevelWindowVC(this);
             InitializeComponent();
+            dataGridView_ObjectsList.MultiSelect = true;
             dataGridView_ObjectsList.SelectionChanged += DataGridViewSelectionChanged;
         }
 
@@ -24,6 +27,16 @@ namespace ResourceCollectorXNA
             {
                 return;
             }
+            if (_inSceneSel)
+            {
+                _inSceneSel = false;
+                return;
+            }
+/*            for (int i = 0; i < dataGridView_ObjectsList.Rows.Count; i++)
+            {
+                dataGridView_ObjectsList.Rows[i].Selected = true;
+            }*/
+            _inGridSelected = true;
             var resultIds = new uint[length];
             for (int i = 0; i < length; i++)
             {
@@ -45,7 +58,7 @@ namespace ResourceCollectorXNA
         {
             String[] text = { id, name, description };
             int curRow = dataGridView_ObjectsList.Rows.Add(text);
-            dataGridView_ObjectsList.Rows[curRow].Selected = isActive;
+            //dataGridView_ObjectsList.Rows[curRow].Selected = isActive;
         }
 
 
@@ -58,39 +71,38 @@ namespace ResourceCollectorXNA
         // метод, выделяющий элементы в таблице в соответствии с переданными идами
         public void SetActiveObjects(uint[] ids, bool back = false)
         {
+
             if (back)
                 wassbavk = true;
+            if (_inGridSelected)
+            {
+                _inGridSelected = false;
+                return;
+            }
             int gridLen = dataGridView_ObjectsList.Rows.Count;
-            int isSelectedNow = 0;
+            _inSceneSel = true;
             int idsLen = ids.Length;
             for (int i = 0; i < gridLen; i++)
             {
                 uint curId = Convert.ToUInt32(dataGridView_ObjectsList.Rows[i].Cells[0].Value);
                 // ids.contains почему-то отказывается работать
                 bool flag = false;
+                dataGridView_ObjectsList.Rows[i].Selected = false;
                 for (int j = 0; j < idsLen; ++j)
                 {
                     if (ids[j] == curId)
                     {
                         flag = true;
+                        j = idsLen;
                     }
-                    j = idsLen;
                 }
 
                 if (flag)
                 {
+                    Console.WriteLine("selected");
                     dataGridView_ObjectsList.Rows[i].Selected = true;
-                    if (++isSelectedNow == idsLen)
-                    {
-                        i = gridLen; // return analog
-                    }
-                }
-                else
-                {
-                    dataGridView_ObjectsList.Rows[i].Selected = false;
                 }
             }
-
         }
 
 
