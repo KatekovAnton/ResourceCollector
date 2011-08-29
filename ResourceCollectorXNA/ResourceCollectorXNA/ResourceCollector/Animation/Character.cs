@@ -36,7 +36,7 @@ namespace ResourceCollector
     public class Character // класс перса
     {
         public CharacterPart[] parts;// список частей
-        public Skeleton Skeleton
+        public SkeletonWithAddInfo Skeleton
         {
             get;
             protected set;

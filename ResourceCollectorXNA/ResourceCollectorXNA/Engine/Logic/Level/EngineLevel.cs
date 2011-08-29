@@ -6,7 +6,7 @@ using System.Text;
 using ResourceCollector;
 using ResourceCollectorXNA.Engine.Logic;
 
-namespace ResourceCollectorXNA.Engine.Level
+namespace ResourceCollectorXNA.Engine
 {
     /// <summary>
     /// Вот этот класс и будет разростаться для перемещения данных из 
@@ -65,6 +65,7 @@ namespace ResourceCollectorXNA.Engine.Level
 
         public void FillContent()
         {
+            levelContent.generator = idgenertor._lastValue;
             levelContent.objectInformation.Clear();
             for (int i = 0; i < objects.Count; i++)
             {
@@ -78,6 +79,7 @@ namespace ResourceCollectorXNA.Engine.Level
                     default: break;
                 }
             }
+            levelContent.camera = new LevelContent.CameraInfo(GameEngine.Instance.Camera);
         }
     }
 }

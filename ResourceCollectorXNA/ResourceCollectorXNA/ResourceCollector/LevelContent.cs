@@ -64,8 +64,16 @@ namespace ResourceCollector
         {
             public float _cameraPitch;
             public float _cameraYaw;
-            public Matrix _projection;
             public Matrix _view;
+
+            public CameraInfo() { }
+            public CameraInfo(ResourceCollectorXNA.Engine.Camera cam)
+            {
+                _cameraPitch = cam._cameraPitch;
+                _cameraYaw = cam._cameraYaw;
+
+                _view = cam.View;
+            }
 
             public void toStream(System.IO.BinaryWriter bw)
             {
@@ -74,7 +82,7 @@ namespace ResourceCollector
                 bw.WriteMatrixFull(_view);
             }
 
-            public void toStream(System.IO.BinaryReader br)
+            public void fromStream(System.IO.BinaryReader br)
             {
                 _cameraPitch = br.ReadSingle();
                 _cameraYaw = br.ReadSingle();
@@ -82,7 +90,7 @@ namespace ResourceCollector
             }
         }
         public MyContainer<ObjectElement> objectInformation;
-
+        public CameraInfo camera;
         
         //сюда надо ещё добавить кучу ины по самому уровню -
         //уровень гравитации, ид персонажа игрока(чтоб знать к чему камеру крепить)
@@ -121,6 +129,8 @@ namespace ResourceCollector
             {
                 objectInformation.Add(new ObjectElement(br));
             }
+            camera = new CameraInfo();
+            camera.fromStream(br);
             return Convert.ToInt32(br.BaseStream.Position - pos);
         }
         
@@ -144,6 +154,7 @@ namespace ResourceCollector
             {
                 objectInformation[i].ToStream(bw);
             }
+            camera.toStream(bw);
         }
 
         public override void calcheadersize()
@@ -160,7 +171,9 @@ namespace ResourceCollector
             {
                 objectInformation[i].ToStream(bw);
             }
+            camera.toStream(bw);
             size = Convert.ToInt32(bw.BaseStream.Length);
+            
         }
 
         public override System.Windows.Forms.DialogResult createpropertieswindow(Pack p, System.Windows.Forms.TreeView outputtreeview)
@@ -178,6 +191,26 @@ namespace ResourceCollector
             headersize = hi.headersize;
 
             size = br.ReadInt32();
+        }
+        public override void ViewBasicInfo(
+            ComboBox comboBox1, ComboBox comboBox2, Label label1, Label label2, Label label3,
+            Label label4, GroupBox groupBox1, TextBox tb, Button button2, Button button1)
+        {
+            comboBox1.Items.Clear();
+            comboBox2.Items.Clear();
+            comboBox1.Text = ElementType.ReturnString(this.loadedformat);
+            comboBox2.Text = ElementType.ReturnString(this.forsavingformat);
+            groupBox1.Text = tb.Text = name + "- missing format";
+            comboBox1.Enabled = false;
+            comboBox2.Enabled = false;
+            tb.Enabled = false;
+            button2.Enabled = true;
+            button1.Enabled = false;
+            label1.Text = this.number.ToString();
+            label2.Text = this.offset.ToString();
+            label3.Text = this.headersize.ToString();
+            label4.Text = this.size.ToString();
+            tb.Enabled = false;
         }
         #endregion
     }

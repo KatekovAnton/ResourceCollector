@@ -48,9 +48,9 @@ namespace ResourceCollectorXNA.Engine
         public int visibleobjectscount = 0;
         private MyContainer<PivotObject> objectstoadd;
 
-        public Engine.Level.EngineLevel gameLevel;
+        public Engine.EngineLevel gameLevel;
 
-        public Engine.Level.EngineLevel futureGameLevel;
+        public Engine.EngineLevel futureGameLevel;
         /// <summary>
         /// ПОЛЬЗУЙСЯ ИМ!!!!!!!!!!!!!!
         /// </summary>
@@ -69,7 +69,7 @@ namespace ResourceCollectorXNA.Engine
             DeviceManager.PreferredBackBufferWidth = 1158;
             DeviceManager.PreferredBackBufferHeight = 708;
             objectstoadd = new MyContainer<PivotObject>();
-            gameLevel = new Level.EngineLevel();
+            gameLevel = new EngineLevel();
 		}
         
         bool locked;
@@ -84,7 +84,7 @@ namespace ResourceCollectorXNA.Engine
             neednewlevel = true;
         }
 
-        public void LoadNewLevel(Engine.Level.EngineLevel _futureGameLevel)
+        public void LoadNewLevel(Engine.EngineLevel _futureGameLevel)
         {
             futureGameLevel = _futureGameLevel;
         }
@@ -190,7 +190,7 @@ namespace ResourceCollectorXNA.Engine
                 neednewlevel = false;
 
                 GraphicPipeleine.NewFrame(lightDir);
-                gameLevel = new Level.EngineLevel();
+                gameLevel = new EngineLevel();
                 editor.setNewLevel(gameLevel);
                 // return;
             }
@@ -202,11 +202,15 @@ namespace ResourceCollectorXNA.Engine
                         ContentLoader.ContentLoader.UnloadPivotObject(p);
                 objectstoadd.Clear();
                 futureGameLevel.load();
+                Camera._cameraPitch = futureGameLevel.levelContent.camera._cameraPitch;
+                Camera._cameraYaw = futureGameLevel.levelContent.camera._cameraYaw;
+                Camera.View = futureGameLevel.levelContent.camera._view;
                 GraphicPipeleine.NewFrame(lightDir);
                 gameLevel.unload();
                 gameLevel = futureGameLevel;
                 editor.setNewLevel(gameLevel);
                 futureGameLevel = null;
+               
             }
         }
 		public void Update( GameTime gameTime ,Ray ray, Vector2 mouseScreenPos)

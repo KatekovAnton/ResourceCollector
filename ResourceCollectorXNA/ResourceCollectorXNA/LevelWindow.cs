@@ -46,7 +46,21 @@ namespace ResourceCollectorXNA
             wassbavk = false;
         }
 
+        private void SetProperties(ResourceCollectorXNA.Engine.Logic.EditorData editordata)
+        {
+            textBox3.Text = editordata.DescriptionName;
+            textBox4.Text = editordata.group_id.ToString();
+            textBox3.Text = editordata.id.ToString();
+        }
 
+        private void ClearProperties()
+        {
+            textBox3.Text = "";
+            textBox5.Text = "";
+            textBox4.Text = "";
+            textBox6.Text = "";
+            //checkBox1.Checked = checkBox2.Checked = false;
+        }
         private void LevelResize(object sender, EventArgs e)
         {
             Width = 470;
@@ -134,14 +148,18 @@ namespace ResourceCollectorXNA
                 MessageBox.Show("no packs loaded!");
                 return;
             }
-            ResourceCollectorXNA.Engine.Level.EngineLevel level = GameEngine.Instance.gameLevel;
+            
+            ResourceCollectorXNA.Engine.EngineLevel level = GameEngine.Instance.gameLevel;
+
             if (level.levelContent.pack == null)
             {
-
+                level.levelContent.name = textBox1.Text + "\0";
                 level.levelContent.pack = PackList.Instance.packs[0];
                 PackList.Instance.packs[0].Attach(level.levelContent, FormMainPackExplorer.Instance.treeView1);
             }
-            level.levelContent.name = textBox1.Text + "\0";
+            else
+                textBox1.Text = level.levelContent.name.Substring(0,level.levelContent.name.Length-1);
+            
             level.FillContent();
         }
 
@@ -156,7 +174,7 @@ namespace ResourceCollectorXNA
             if (fop.ShowDialog() != System.Windows.Forms.DialogResult.OK)
                 return;
             LevelContent lc = PackList.Instance.packs[0].getobject(fop.PickedContent[0]) as LevelContent;
-            Engine.Level.EngineLevel el = new Engine.Level.EngineLevel(lc);
+            Engine.EngineLevel el = new Engine.EngineLevel(lc);
             textBox1.Text = lc.name.Substring(0,lc.name.Length-1);
             GameEngine.Instance.LoadNewLevel(el);
             GameEngine.Instance.UpdateLevelPart();

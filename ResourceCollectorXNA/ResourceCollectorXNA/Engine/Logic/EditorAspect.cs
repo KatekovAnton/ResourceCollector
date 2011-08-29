@@ -1,6 +1,6 @@
 ﻿namespace ResourceCollectorXNA.Engine.Logic {
     public class IdGenerator {
-        private uint _lastValue;
+        public uint _lastValue;
         public IdGenerator(uint lastEnd)
         {
             _lastValue = lastEnd;
@@ -28,8 +28,6 @@
         public bool isActive;
         public uint objtype;
 
-        public bool isGroundRayCasted;
-        public bool isBulletRayCasted;
 
         public EditorData(string name,
                           uint type)

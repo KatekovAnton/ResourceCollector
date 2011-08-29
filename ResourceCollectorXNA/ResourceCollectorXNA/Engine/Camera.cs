@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Input;
 namespace ResourceCollectorXNA.Engine{
     public class Camera{
         #region Variables
-        private float _cameraPitch,
+        public float _cameraPitch,
                       _cameraYaw;
         public Matrix Projection;
         public Matrix View;
