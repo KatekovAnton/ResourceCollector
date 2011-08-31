@@ -60,6 +60,10 @@
     <XnaCompressContent>true</XnaCompressContent>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Community.CsharpSqlite, Version=3.7.7.1, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\x86\Debug\Community.CsharpSqlite.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Xna.Framework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86">
       <Private>False</Private>
     </Reference>
@@ -376,6 +380,10 @@
     <Compile Include="ResourceCollector\ImageContent.cs" />
     <Compile Include="ResourceCollector\LevelContent.cs" />
     <Compile Include="ResourceCollector\LodBuilder.cs" />
+    <Compile Include="ResourceCollector\Logic\DatabaseManager.cs" />
+    <Compile Include="ResourceCollector\Logic\SQliteShell\Class1.cs" />
+    <Compile Include="ResourceCollector\Logic\SQliteShell\SQliteConnector.cs" />
+    <Compile Include="ResourceCollector\Logic\SQliteShell\SQliteResultSet.cs" />
     <Compile Include="ResourceCollector\Material.cs" />
     <Compile Include="ResourceCollector\Mesh.cs" />
     <Compile Include="ResourceCollector\MeshImportList.cs">
@@ -405,6 +413,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Community.CsharpSqlite.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Game.ico" />
     <Content Include="GameThumbnail.png" />
   </ItemGroup>
@@ -535,6 +546,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />
+    <None Include="Data\Data.sqlite">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Effect.shader">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

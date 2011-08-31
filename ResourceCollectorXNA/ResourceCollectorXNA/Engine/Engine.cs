@@ -26,7 +26,7 @@ namespace ResourceCollectorXNA.Engine
         public static GraphicsDeviceManager DeviceManager;
         public static GraphicsDevice Device;
 
-
+        private ResourceCollector.Logic.DatabaseManager databaseManager;
         public static RCViewControllers.RenderWindowVC renderController;
         public static RCViewControllers.LevelWindowVC levelController;
         public static bool actionToInterface;
@@ -70,6 +70,7 @@ namespace ResourceCollectorXNA.Engine
             DeviceManager.PreferredBackBufferHeight = 708;
             objectstoadd = new MyContainer<PivotObject>();
             gameLevel = new EngineLevel();
+            databaseManager = ResourceCollector.Logic.DatabaseManager.Manager;
 		}
         
         bool locked;
@@ -259,6 +260,7 @@ namespace ResourceCollectorXNA.Engine
 
             FPSCounter.Update(gameTime);
 		}
+
         public void Update()
         {
             if (objectstoadd.Count != 0)
