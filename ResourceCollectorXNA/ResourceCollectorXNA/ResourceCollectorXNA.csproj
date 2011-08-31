@@ -381,7 +381,6 @@
     <Compile Include="ResourceCollector\LevelContent.cs" />
     <Compile Include="ResourceCollector\LodBuilder.cs" />
     <Compile Include="ResourceCollector\Logic\DatabaseManager.cs" />
-    <Compile Include="ResourceCollector\Logic\SQliteShell\Class1.cs" />
     <Compile Include="ResourceCollector\Logic\SQliteShell\SQliteConnector.cs" />
     <Compile Include="ResourceCollector\Logic\SQliteShell\SQliteResultSet.cs" />
     <Compile Include="ResourceCollector\Material.cs" />
