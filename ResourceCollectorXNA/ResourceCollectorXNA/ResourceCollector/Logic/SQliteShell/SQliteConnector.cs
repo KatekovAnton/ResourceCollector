@@ -7,10 +7,10 @@ using Community.CsharpSqlite;
 
 namespace ResourceCollector.Logic.SQliteShell
 {
-    public delegate void ActionForError(string s);
+    public delegate void ActionForError(string errorName);
     class SQliteConnector
     {
-        private static List<string[]> data;
+        //private static List<string[]> data;
         Sqlite3.sqlite3 dbconnector;
         public SQliteConnector(string dbname)
         {
@@ -23,10 +23,10 @@ namespace ResourceCollector.Logic.SQliteShell
         /// <param name="errorAct"></param>
         public void executeNonQuery(string query,ActionForError errorAct)
         {
-            string s = "";
-            Sqlite3.sqlite3_exec(dbconnector, query, null, null, ref s);
-            if (s != "" && errorAct != null)
-                errorAct(s);
+            string errorName = "";
+            Sqlite3.sqlite3_exec(dbconnector, query, null, null, ref errorName);
+            if (errorName != "" && errorAct != null)
+                errorAct(errorName);
         }
         /// <summary>
         /// executes select query, returns selection result
