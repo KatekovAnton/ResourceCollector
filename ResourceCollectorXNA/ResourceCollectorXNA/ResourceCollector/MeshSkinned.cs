@@ -6,7 +6,7 @@ using System.Windows.Forms;
 using Microsoft.Xna.Framework;
 namespace ResourceCollector
 {
-    public partial class Mesh : PackContent
+    public partial class MeshSkinned : PackContent
     {
         public int num_verts;
         public int num_faces;
@@ -14,10 +14,10 @@ namespace ResourceCollector
         public int bonenumber;
         public int skinvertexnumber;
         public int skinsize;
-        public vertex[] vertexes;
+        public skinnedVertex[] vertexes;
         public vertexskin[] vertskins;
         public Vector2[] tvertexes;
-        public face[] faces;
+        public skinnedFace[] faces;
         public string filename;
         public int isstatic;
         public int ismaxdetalized = 1;
@@ -30,7 +30,7 @@ namespace ResourceCollector
         //для ускоренного поиска вырожденных треугольников
         public int Last;
         //##############################################################################
-        public Mesh()
+        public MeshSkinned()
         {
 
         }
@@ -42,7 +42,7 @@ namespace ResourceCollector
                     BufferVertex[i].pos *= coef;
                 }
         }
-        public Mesh(Mesh oldmesh)
+        public MeshSkinned(MeshSkinned oldmesh)
         {
             num_verts = oldmesh.num_verts;
             num_faces = oldmesh.num_faces;
@@ -116,10 +116,10 @@ namespace ResourceCollector
 
             if (oldmesh.faces != null)
             {
-                vertexes = new vertex[oldmesh.vertexes.Length];
+                vertexes = new skinnedVertex[oldmesh.vertexes.Length];
                 for (int i = 0; i < oldmesh.vertexes.Length; i++)
                 {
-                    vertexes[i] = new vertex();
+                    vertexes[i] = new skinnedVertex();
                     vertexes[i].coordinates = new Vector3(oldmesh.vertexes[i].coordinates.X, oldmesh.vertexes[i].coordinates.Y, oldmesh.vertexes[i].coordinates.Z);
                     vertexes[i].normal = new Vector3(oldmesh.vertexes[i].normal.X, oldmesh.vertexes[i].normal.Y, oldmesh.vertexes[i].normal.Z);
                     if (oldmesh.isstatic == 0)
@@ -148,10 +148,10 @@ namespace ResourceCollector
                 {
                     tvertexes[i] = new Vector2(oldmesh.tvertexes[i].X,oldmesh.tvertexes[i].Y);
                 }
-                faces = new face[oldmesh.faces.Length];
+                faces = new skinnedFace[oldmesh.faces.Length];
                 for (int i = 0; i < oldmesh.faces.Length; i++)
                 {
-                    faces[i] = new face(oldmesh.faces[i]);
+                    faces[i] = new skinnedFace(oldmesh.faces[i]);
                 }
             }
 
@@ -202,7 +202,7 @@ namespace ResourceCollector
                 return false;
             return true;
         }
-        bool compareverts(vertex v1, vertex v2, bool comskins)
+        bool compareverts(skinnedVertex v1, skinnedVertex v2, bool comskins)
         {
             if (v1.coordinates.Near(v2.coordinates))
             {
@@ -220,7 +220,7 @@ namespace ResourceCollector
                 return false;
 
         }
-        int insertvertex(ref List<vertex> destverts, vertex source)
+        int insertvertex(ref List<skinnedVertex> destverts, skinnedVertex source)
         {
             for (int i = 0; i < destverts.Count; i++)
             {
@@ -235,13 +235,13 @@ namespace ResourceCollector
             if (BufferIndex == null)
                 return;
             float pos = 0.0f; float step1 = 70.0f / Convert.ToSingle(BufferIndex.Length);
-            List<vertex> tmpverts = new List<vertex>();
+            List<skinnedVertex> tmpverts = new List<skinnedVertex>();
             List<Vector2> tmptexcoords = new List<Vector2>();
             List<vertexskin> tmpvertskins = new List<vertexskin>();
             List<int> inbufferindexes = new List<int>();
             int[] vertindexes = new int[3];
             int[] tcoordindexes = new int[3];
-            faces = new face[BufferIndex.Length / 3];
+            faces = new skinnedFace[BufferIndex.Length / 3];
             for (int i = 0; i < BufferIndex.Length; i += 3)
             {
                 vertindexes[0] = -1;
@@ -256,9 +256,9 @@ namespace ResourceCollector
                 CSkinnedMeshVertex v1 = BufferVertex[BufferIndex[i + 1]];
                 CSkinnedMeshVertex v2 = BufferVertex[BufferIndex[i + 2]];
 
-                vertex tmpvert0 = new vertex();
-                vertex tmpvert1 = new vertex();
-                vertex tmpvert2 = new vertex();
+                skinnedVertex tmpvert0 = new skinnedVertex();
+                skinnedVertex tmpvert1 = new skinnedVertex();
+                skinnedVertex tmpvert2 = new skinnedVertex();
 
                 tmpvert0.coordinates = new Vector3(v0.pos.X, v0.pos.Y, v0.pos.Z);
                 tmpvert1.coordinates = new Vector3(v1.pos.X, v1.pos.Y, v1.pos.Z);
@@ -365,7 +365,7 @@ namespace ResourceCollector
                     tcoordindexes[2] = tmptexcoords.Count;
                 }
 
-                faces[i / 3] = new face();
+                faces[i / 3] = new skinnedFace();
                 faces[i / 3].cv0 = vertindexes[0];
                 faces[i / 3].cv1 = vertindexes[1];
                 faces[i / 3].cv2 = vertindexes[2];
@@ -457,7 +457,7 @@ namespace ResourceCollector
                 tspb.Value = 100;
             BufferIndex = null;
             BufferVertex = null;
-            forsavingformat = ElementType.MeshOptimazedForStore;
+            forsavingformat = ElementType.MeshSkinnedOptimazedForStore;
         }
         public void GenerateOptForLoading(ToolStripProgressBar tspb)
         {
@@ -573,7 +573,7 @@ namespace ResourceCollector
             vertexes = null;
             vertskins = null;
             tvertexes = null;
-            forsavingformat = ElementType.MeshOptimazedForLoading;
+            forsavingformat = ElementType.MeshSkinnedOptimazedForLoading;
         }
         void removetridatafronmmeshtridata(tridata td)
         {
@@ -590,9 +590,9 @@ namespace ResourceCollector
             {
                 ToolStripProgressBar tspb = new ToolStripProgressBar();
                 GenerateOptForStore(tspb);
-                forsavingformat = ElementType.MeshOptimazedForStore;
+                forsavingformat = ElementType.MeshSkinnedOptimazedForStore;
             }
-            face[] Snewfaces = new face[num_faces];
+            skinnedFace[] Snewfaces = new skinnedFace[num_faces];
             int c = 0;
 
             int index = 0;
@@ -612,7 +612,7 @@ namespace ResourceCollector
                 }
             }
 
-            face[] newfaces = new face[c];
+            skinnedFace[] newfaces = new skinnedFace[c];
             num_faces = c;
 
             for (int i = 0; i < c; i++)
@@ -681,7 +681,7 @@ namespace ResourceCollector
                 }
             }
 
-            vertex tmpvertex = new vertex(vertexes[ind1], vertexes[ind2]);
+            skinnedVertex tmpvertex = new skinnedVertex(vertexes[ind1], vertexes[ind2]);
             vertexes[ind1] = tmpvertex;
             vertexes[ind2] = vertexes[num_verts - 1];
             num_verts--;
@@ -773,7 +773,7 @@ namespace ResourceCollector
 
 
 
-            vertex[] tmstoraje = new vertex[num_verts];
+            skinnedVertex[] tmstoraje = new skinnedVertex[num_verts];
             for (int i = 0; i < num_verts; i++)
             {
                 tmstoraje[i] = vertexes[i];
@@ -797,7 +797,7 @@ namespace ResourceCollector
             size = 0;
             switch (loadedformat)
             {
-                case ElementType.MeshOptimazedForStore:
+                case ElementType.MeshSkinnedOptimazedForStore:
                     {
                         long frst = br.BaseStream.Position;
 
@@ -807,11 +807,11 @@ namespace ResourceCollector
                         float step = Convert.ToSingle(toolStripProgressBar.Maximum) / Convert.ToSingle(num_verts * 2 + num_tverts + num_faces * 2);
                         float pos = 0;
                         size += 12;
-                        vertexes = new vertex[num_verts];
+                        vertexes = new skinnedVertex[num_verts];
 
                         for (int i = 0; i < num_verts; i++)
                         {
-                            vertexes[i] = new vertex();
+                            vertexes[i] = new skinnedVertex();
                             vertexes[i].coordinates.X = br.ReadSingle(); size += 4;
                             vertexes[i].coordinates.Y = br.ReadSingle(); size += 4;
                             vertexes[i].coordinates.Z = br.ReadSingle(); size += 4;
@@ -831,10 +831,10 @@ namespace ResourceCollector
                             pos += step;
                             toolStripProgressBar.Value = Convert.ToInt32(pos);
                         }
-                        faces = new face[num_faces];
+                        faces = new skinnedFace[num_faces];
                         for (int i = 0; i < num_faces; i++)
                         {
-                            faces[i] = new face();
+                            faces[i] = new skinnedFace();
                             faces[i].cv0 = br.ReadInt32();
                             faces[i].cv1 = br.ReadInt32();
                             faces[i].cv2 = br.ReadInt32();
@@ -882,7 +882,7 @@ namespace ResourceCollector
                         }
 
                     } break;
-                case ElementType.MeshOptimazedForLoading:
+                case ElementType.MeshSkinnedOptimazedForLoading:
                     {
                         long frst = br.BaseStream.Position;
                         //offset = (int)frst - headersize;
@@ -950,7 +950,7 @@ namespace ResourceCollector
 
             switch (forsavingformat)
             {
-                case ElementType.MeshOptimazedForStore:
+                case ElementType.MeshSkinnedOptimazedForStore:
                     {
                         bw.Write(ismaxdetalized);
                         bw.Write(skinsize);
@@ -961,7 +961,7 @@ namespace ResourceCollector
                            // bw.Write3DMaxString(lods[j].TrimEnd('\0'));
                         }
                     } break;
-                case ElementType.MeshOptimazedForLoading:
+                case ElementType.MeshSkinnedOptimazedForLoading:
                     {
                         bw.Write(ismaxdetalized);
                         bw.Write(isstatic);
@@ -986,7 +986,7 @@ namespace ResourceCollector
 
             switch (forsavingformat)
             {
-                case ElementType.MeshOptimazedForStore:
+                case ElementType.MeshSkinnedOptimazedForStore:
                     {
                         float posit1 = 0.0f;
                         float lalala2 = Convert.ToSingle(toolStripProgressBar.Maximum) / Convert.ToSingle(num_verts + num_faces + num_tverts + vertskins.Length);
@@ -1041,7 +1041,7 @@ namespace ResourceCollector
                         toolStripProgressBar.Value = toolStripProgressBar.Maximum;
 
                     } break;
-                case ElementType.MeshOptimazedForLoading:
+                case ElementType.MeshSkinnedOptimazedForLoading:
                     {
                         if (BufferIndex == null)
                             GenerateOptForLoading(null);
@@ -1122,7 +1122,7 @@ namespace ResourceCollector
             headersize = 16 + name.Length;
             switch (forsavingformat)
             {
-                case ElementType.MeshOptimazedForStore:
+                case ElementType.MeshSkinnedOptimazedForStore:
                     {
                         headersize += 8;
                         for (int j = 0; j < lods.Length; j++)
@@ -1131,7 +1131,7 @@ namespace ResourceCollector
                             //headersize += lods[j].Get3DMaxLength();
                         }
                     } break;
-                case ElementType.MeshOptimazedForLoading:
+                case ElementType.MeshSkinnedOptimazedForLoading:
                     {
                         headersize += 8;
                         for (int j = 0; j < lods.Length; j++)
@@ -1152,11 +1152,11 @@ namespace ResourceCollector
                 //вывести нужную структуру данных
                 switch (forsavingformat)
                 {
-                    case ElementType.MeshOptimazedForStore:
+                    case ElementType.MeshSkinnedOptimazedForStore:
                         {
                             GenerateOptForStore(targetbar);
                         } break;
-                    case ElementType.MeshOptimazedForLoading:
+                    case ElementType.MeshSkinnedOptimazedForLoading:
                         {
                             GenerateOptForLoading(targetbar);
                         } break;
@@ -1168,7 +1168,7 @@ namespace ResourceCollector
 
                 switch (forsavingformat)
                 {
-                    case ElementType.MeshOptimazedForStore:
+                    case ElementType.MeshSkinnedOptimazedForStore:
                         {
                             size = 0;
                             size += 12;
@@ -1186,7 +1186,7 @@ namespace ResourceCollector
                                 }
                             }
                         } break;
-                    case ElementType.MeshOptimazedForLoading:
+                    case ElementType.MeshSkinnedOptimazedForLoading:
                         {
                             size = 0;
                             size += 4;
@@ -1227,7 +1227,7 @@ namespace ResourceCollector
 
             switch (hi.loadedformat)
             {
-                case ElementType.MeshOptimazedForStore:
+                case ElementType.MeshSkinnedOptimazedForStore:
                     {
                         ismaxdetalized = br.ReadInt32();
                         skinsize = br.ReadInt32();
@@ -1239,7 +1239,7 @@ namespace ResourceCollector
                             lods[j] = new string(br.ReadChars(length + 1));
                         }
                     } break;
-                case ElementType.MeshOptimazedForLoading:
+                case ElementType.MeshSkinnedOptimazedForLoading:
                     {
                         ismaxdetalized = br.ReadInt32();
                         isstatic = br.ReadInt32();
@@ -1263,7 +1263,7 @@ namespace ResourceCollector
         {
             switch (loadedformat)
             {
-                case ElementType.MeshOptimazedForStore:
+                case ElementType.MeshSkinnedOptimazedForStore:
                     {
                         button1.Enabled = true;
                         comboBox1.Items.Clear();
@@ -1277,12 +1277,12 @@ namespace ResourceCollector
                         label3.Text = headersize.ToString();
                         label4.Text = size.ToString();
                         groupBox1.Text = tb.Text = name;
-                        comboBox1.Text = ElementType.ReturnString(ElementType.MeshOptimazedForStore);
-                        comboBox2.Items.Add(ElementType.ReturnString(ElementType.MeshOptimazedForStore));
-                        comboBox2.Items.Add(ElementType.ReturnString(ElementType.MeshOptimazedForLoading));
-                        comboBox2.SelectedIndex = forsavingformat == ElementType.MeshOptimazedForLoading ? 1 : 0;
+                        comboBox1.Text = ElementType.ReturnString(ElementType.MeshSkinnedOptimazedForStore);
+                        comboBox2.Items.Add(ElementType.ReturnString(ElementType.MeshSkinnedOptimazedForStore));
+                        comboBox2.Items.Add(ElementType.ReturnString(ElementType.MeshSkinnedOptimazedForLoading));
+                        comboBox2.SelectedIndex = forsavingformat == ElementType.MeshSkinnedOptimazedForLoading ? 1 : 0;
                     } break;
-                case ElementType.MeshOptimazedForLoading:
+                case ElementType.MeshSkinnedOptimazedForLoading:
                     {
                         button1.Enabled = true;
                         comboBox1.Items.Clear();
@@ -1296,10 +1296,10 @@ namespace ResourceCollector
                         label3.Text = headersize.ToString();
                         label4.Text = size.ToString();
                         groupBox1.Text = tb.Text = name;
-                        comboBox1.Text = ElementType.ReturnString(ElementType.MeshOptimazedForLoading);
-                        comboBox2.Items.Add(ElementType.ReturnString(ElementType.MeshOptimazedForStore));
-                        comboBox2.Items.Add(ElementType.ReturnString(ElementType.MeshOptimazedForLoading));
-                        comboBox2.SelectedIndex = forsavingformat == ElementType.MeshOptimazedForLoading ? 1 : 0;
+                        comboBox1.Text = ElementType.ReturnString(ElementType.MeshSkinnedOptimazedForLoading);
+                        comboBox2.Items.Add(ElementType.ReturnString(ElementType.MeshSkinnedOptimazedForStore));
+                        comboBox2.Items.Add(ElementType.ReturnString(ElementType.MeshSkinnedOptimazedForLoading));
+                        comboBox2.SelectedIndex = forsavingformat == ElementType.MeshSkinnedOptimazedForLoading ? 1 : 0;
                     } break;
                 default:
                     {
@@ -1320,9 +1320,9 @@ namespace ResourceCollector
             }
         }
 
-        public static Mesh FromBuffers(Mesh[] meshes)
+        public static MeshSkinned FromBuffers(MeshSkinned[] meshes)
         {
-            Mesh newmesh = new Mesh();
+            MeshSkinned newmesh = new MeshSkinned();
             CSkinnedMeshVertex[] vertices;
             int[] indices;
             int indicescount = 0, verticescount = 0;
@@ -1337,7 +1337,7 @@ namespace ResourceCollector
             int indexoffset = 0;
             for (int i = 0; i < meshes.Length; i++)
             {
-                Mesh cm = meshes[i];
+                MeshSkinned cm = meshes[i];
                 int currentvert = cm.BufferVertex.Length;
                 int currentindx = cm.BufferIndex.Length;
 

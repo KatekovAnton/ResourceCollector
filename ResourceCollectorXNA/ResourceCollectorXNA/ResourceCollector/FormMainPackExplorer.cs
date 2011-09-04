@@ -126,11 +126,11 @@ namespace ResourceCollector
         {
             switch (CurrentContent.loadedformat)
             {
-                case ElementType.MeshOptimazedForLoading:
+                case ElementType.MeshSkinnedOptimazedForLoading:
                     {
                         CurrentContent.forsavingformat = ElementType.ReturnFormat(comboBox2.Text);
                     } break;
-                case ElementType.MeshOptimazedForStore:
+                case ElementType.MeshSkinnedOptimazedForStore:
                     {
                         CurrentContent.forsavingformat = ElementType.ReturnFormat(comboBox2.Text);
                     } break;
@@ -332,8 +332,8 @@ namespace ResourceCollector
                         if (m.treeView1.Nodes[i].Checked)
                         {
                             packs.packs[0].Attach(m.p.Objects[i], treeView1);
-                            if (m.p.Objects[i].forsavingformat == ElementType.MeshOptimazedForStore)
-                                m.p.Objects[i].forsavingformat = ElementType.MeshOptimazedForLoading;
+                            if (m.p.Objects[i].forsavingformat == ElementType.MeshSkinnedOptimazedForStore)
+                                m.p.Objects[i].forsavingformat = ElementType.MeshSkinnedOptimazedForLoading;
                         }
                     }
                 }

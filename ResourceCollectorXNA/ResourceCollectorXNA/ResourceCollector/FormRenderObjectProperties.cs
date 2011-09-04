@@ -171,7 +171,7 @@ namespace ResourceCollector.Content
         {
             if (CurrentSubSet != null)
             {
-                FormObjectPicker fop = new FormObjectPicker(thisobject.pack, ElementType.MeshOptimazedForLoading, true);
+                FormObjectPicker fop = new FormObjectPicker(thisobject.pack, ElementType.MeshSkinnedOptimazedForLoading, true);
                 if (fop.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
                     CurrentSubSet.MeshNames = fop.PickedContent.ToArray();

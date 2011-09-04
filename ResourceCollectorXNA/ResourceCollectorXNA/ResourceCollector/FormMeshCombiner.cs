@@ -11,12 +11,12 @@ namespace ResourceCollector
 {
     public partial class FormMeshCombiner : Form
     {
-        Mesh createdMesh;
+        MeshSkinned createdMesh;
         public bool removemeshes;
         public FormMeshCombiner()
         {
             InitializeComponent();
-            createdMesh = new Mesh();
+            createdMesh = new MeshSkinned();
             textBox1.Text = "Newmesh" + DateTime.Now.Millisecond.ToString();
         }
 

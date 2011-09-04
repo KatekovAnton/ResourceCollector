@@ -3,23 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
+
 using Microsoft.Xna.Framework;
+
 namespace ResourceCollector
 {
-
-    public class vertex
+    public class skinnedVertex
     {
         public Vector3 coordinates, normal;
         public Vector2 textureccordinates;
         public vertexskin skin;
-        public vertex()
+        public skinnedVertex()
         {
             coordinates = new Vector3();
             normal = new Vector3();
             textureccordinates = new Vector2();
             skin = new vertexskin();
         }
-        public vertex(vertex v1, vertex v2)
+        public skinnedVertex(skinnedVertex v1, skinnedVertex v2)
         {
 
             coordinates = new Vector3((v1.coordinates.X + v2.coordinates.X) / 2, (v1.coordinates.Y + v2.coordinates.Y) / 2, (v1.coordinates.Z + v2.coordinates.Z) / 2);
@@ -303,16 +304,17 @@ namespace ResourceCollector
             }
         }
     }
-    public class face
+
+    public class skinnedFace
     {
-        public vertex v0, v1, v2;
+        public skinnedVertex v0, v1, v2;
         public int cv0, cv1, cv2;
         public int tv0, tv1, tv2;
         Vector2 t0, t1, t2;
-        public face()
+        public skinnedFace()
         {
         }
-        public face(vertex v1, vertex v2, vertex v3, Vector2 t0, Vector2 t1, Vector2 t2)
+        public skinnedFace(skinnedVertex v1, skinnedVertex v2, skinnedVertex v3, Vector2 t0, Vector2 t1, Vector2 t2)
         {
             this.v0 = v1;
             this.v1 = v2;
@@ -321,7 +323,7 @@ namespace ResourceCollector
             this.t1 = t1;
             this.t2 = t2;
         }
-        public face(face f)
+        public skinnedFace(skinnedFace f)
         {
             this.v0 = f.v0;
             this.v1 = f.v1;
@@ -342,7 +344,6 @@ namespace ResourceCollector
             return string.Format("V0:({0});\t\tV1:({1});\t\tV2:({2});", v0, v1, v2);
         }
     }
-
 
     public class vertexskin
     {
@@ -394,6 +395,7 @@ namespace ResourceCollector
             }
         }
     }
+
     public class skinelement
     {
         public string bonename;
@@ -409,6 +411,7 @@ namespace ResourceCollector
         {
         }
     }
+
     public class CSkinnedMeshVertex
     {
         public Vector3 pos;
@@ -472,13 +475,48 @@ namespace ResourceCollector
             return (comp.pos == pos) && (normal == comp.normal) && (tcoord == comp.tcoord) && (BoneIDs == comp.BoneIDs);
         }
     }
+
+    public class CMeshVertex
+    {
+        public Vector3 pos;
+        public Vector3 normal;
+        public Vector2 tcoord;
+        public string[] BoneIDs;
+        public float[] BoneWeights;
+
+        public CMeshVertex()
+        { }
+
+        public CMeshVertex(Vector3 _pos, Vector3 _normal, Vector3 _tangent, Vector3 _binormal, Vector2 _tcoord)
+        {
+            pos = new Vector3(_pos.X, _pos.Y, _pos.Z);
+            normal = new Vector3(_normal.X, _normal.Y, _normal.Z);
+            tcoord = new Vector2(_tcoord.X, _tcoord.Y);
+        }
+
+        public CMeshVertex(CMeshVertex _vert)
+        {
+            pos = new Vector3(_vert.pos.X, _vert.pos.Y, _vert.pos.Z);
+           
+            normal = new Vector3(_vert.normal.X, _vert.normal.Y, _vert.normal.Z);
+            tcoord = new Vector2(_vert.tcoord.X, _vert.tcoord.Y);
+        }
+
+        public bool comareto(CMeshVertex comp)
+        {
+            return (comp.pos == pos) && (normal == comp.normal) && (tcoord == comp.tcoord);
+        }
+    }
+
     public class tridata
     {
         public int[] v;
+
         public tridata()
         {
             v = new int[3];
         }
+
         public override string ToString()
         {
             return v[0].ToString() + " " + v[1].ToString() + " " + v[2].ToString();

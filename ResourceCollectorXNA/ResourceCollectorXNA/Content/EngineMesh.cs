@@ -142,7 +142,7 @@ namespace ResourceCollectorXNA.Content
             indexBuffer.SetData<ushort>(indices);
         }
    
-        public static EngineMesh FromContentMeshes(ResourceCollector.Mesh[] meshes)
+        public static EngineMesh FromContentMeshes(ResourceCollector.MeshSkinned[] meshes)
         {
             EngineVertex[] vertices;
 
@@ -162,7 +162,7 @@ namespace ResourceCollectorXNA.Content
             ushort[] indices = new ushort[indicescount];
             for (int i = 0; i < meshes.Length; i++)
             {
-                ResourceCollector.Mesh cm = meshes[i];
+                ResourceCollector.MeshSkinned cm = meshes[i];
                 int currentvert = cm.BufferVertex.Length;
                 int currentindx = cm.BufferIndex.Length;
 

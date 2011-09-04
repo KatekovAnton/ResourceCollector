@@ -384,7 +384,7 @@
     <Compile Include="ResourceCollector\Logic\SQliteShell\SQliteConnector.cs" />
     <Compile Include="ResourceCollector\Logic\SQliteShell\SQliteResultSet.cs" />
     <Compile Include="ResourceCollector\Material.cs" />
-    <Compile Include="ResourceCollector\Mesh.cs" />
+    <Compile Include="ResourceCollector\MeshSkinned.cs" />
     <Compile Include="ResourceCollector\MeshImportList.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -393,7 +393,8 @@
     </Compile>
     <Compile Include="ResourceCollector\MeshListContent.cs" />
     <Compile Include="ResourceCollector\MeshOther.cs" />
-    <Compile Include="ResourceCollector\MeshStructures.cs" />
+    <Compile Include="ResourceCollector\MeshSkinnedStructures.cs" />
+    <Compile Include="ResourceCollector\MeshUnskinned.cs" />
     <Compile Include="ResourceCollector\meshviewer.cs" />
     <Compile Include="ResourceCollector\meshviewer.designer.cs">
       <DependentUpon>meshviewer.cs</DependentUpon>

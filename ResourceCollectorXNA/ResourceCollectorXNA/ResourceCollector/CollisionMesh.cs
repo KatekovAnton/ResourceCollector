@@ -84,7 +84,7 @@ namespace ResourceCollector.Content
         {
             loadedformat = forsavingformat = ElementType.CollisionMesh;
         }
-        public CollisionMesh(Mesh m)
+        public CollisionMesh(MeshSkinned m)
         {
             if (m.BufferVertex == null || m.BufferIndex == null)
                 m.GenerateOptForLoading(null);

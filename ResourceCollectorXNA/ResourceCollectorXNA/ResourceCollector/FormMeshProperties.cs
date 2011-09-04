@@ -12,9 +12,9 @@ namespace ResourceCollector
 {
     partial class MeshProperties : Form
     {
-        Mesh mesh;
-        public Mesh[] lods;
-        public MeshProperties(Mesh msh)
+        MeshSkinned mesh;
+        public MeshSkinned[] lods;
+        public MeshProperties(MeshSkinned msh)
         {
             InitializeComponent();
            /* System.IO.StreamWriter sw = new System.IO.StreamWriter(msh.name.Substring(0,msh.name.Length-1) + ".txt");
@@ -47,8 +47,8 @@ namespace ResourceCollector
             comboBox2.Enabled = true;
            
             comboBox1.Text = ElementType.ReturnString(mesh.loadedformat);
-            comboBox2.Items.Add(ElementType.ReturnString(ElementType.MeshOptimazedForStore));
-            comboBox2.Items.Add(ElementType.ReturnString(ElementType.MeshOptimazedForLoading));
+            comboBox2.Items.Add(ElementType.ReturnString(ElementType.MeshSkinnedOptimazedForStore));
+            comboBox2.Items.Add(ElementType.ReturnString(ElementType.MeshSkinnedOptimazedForLoading));
             comboBox2.Text = ElementType.ReturnString(mesh.forsavingformat);
             label2.Text = mesh.ismaxdetalized.ToString();
             if (mesh.faces != null && mesh.tvertexes!= null)

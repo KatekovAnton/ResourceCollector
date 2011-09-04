@@ -18,8 +18,8 @@ namespace ResourceCollector
     public class ElementType
     {
         public const int MissingObject = -1;
-        public const int MeshOptimazedForStore = 0;
-        public const int MeshOptimazedForLoading = 1;
+        public const int MeshSkinnedOptimazedForStore = 0;
+        public const int MeshSkinnedOptimazedForLoading = 1;
         public const int PNGTexture = 2;
         
         
@@ -48,10 +48,10 @@ namespace ResourceCollector
         {
             switch (format)
             {
-                case ElementType.MeshOptimazedForLoading:
-                    return "New format (recomendated)";
-                case ElementType.MeshOptimazedForStore:
-                    return "Old format (not recomendated)";
+                case ElementType.MeshSkinnedOptimazedForLoading:
+                    return "Mesh Skinned New format (recomendated)";
+                case ElementType.MeshSkinnedOptimazedForStore:
+                    return "Mesh Skinned Old format (not recomendated)";
                 case ElementType.PNGTexture:
                     return "Texture (PNG)";
                 case ElementType.Skeleton:
@@ -91,10 +91,10 @@ namespace ResourceCollector
         {
             switch (format)
             {
-                case "New format (recomendated)":
-                    return ElementType.MeshOptimazedForLoading;
-                case "Old format (not recomendated)":
-                    return ElementType.MeshOptimazedForStore;
+                case "Mesh Skinned New format (recomendated)":
+                    return ElementType.MeshSkinnedOptimazedForLoading;
+                case "Mesh Skinned Old format (not recomendated))":
+                    return ElementType.MeshSkinnedOptimazedForStore;
                 case "Texture (PNG)":
                     return ElementType.PNGTexture;
                 case "Skeleton":

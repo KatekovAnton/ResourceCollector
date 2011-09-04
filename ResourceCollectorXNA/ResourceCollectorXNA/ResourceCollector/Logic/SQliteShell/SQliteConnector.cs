@@ -10,7 +10,6 @@ namespace ResourceCollector.Logic.SQliteShell
     public delegate void ActionForError(string errorName);
     class SQliteConnector
     {
-        //private static List<string[]> data;
         Sqlite3.sqlite3 dbconnector;
         public SQliteConnector(string dbname)
         {
@@ -21,7 +20,7 @@ namespace ResourceCollector.Logic.SQliteShell
         /// </summary>
         /// <param name="query"></param>
         /// <param name="errorAct"></param>
-        public void executeNonQuery(string query,ActionForError errorAct)
+        public void executeNonQuery(string query, ActionForError errorAct)
         {
             string errorName = "";
             Sqlite3.sqlite3_exec(dbconnector, query, null, null, ref errorName);

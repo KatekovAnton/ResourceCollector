@@ -20,18 +20,18 @@ namespace ResourceCollector.Content
 
         //    for (int i = 0; i < p.packs.Count;i++ )
                 listBox1.Items.AddRange(p.Objects.FindAll(o =>
-                   o.loadedformat == ElementType.MeshOptimazedForStore || o.loadedformat == ElementType.MeshOptimazedForLoading).ConvertAll(o => o.name).ToArray());
+                   o.loadedformat == ElementType.MeshSkinnedOptimazedForStore || o.loadedformat == ElementType.MeshSkinnedOptimazedForLoading).ConvertAll(o => o.name).ToArray());
         }
 
         private void listBox1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
           
             PackContent pa = p.getobject(listBox1.SelectedItem.ToString());
-            Mesh m = null;
+            MeshSkinned m = null;
             try
             {
                 if (pa != null)
-                    m = pa as Mesh;
+                    m = pa as MeshSkinned;
             }
             catch (Exception ex)
             { }

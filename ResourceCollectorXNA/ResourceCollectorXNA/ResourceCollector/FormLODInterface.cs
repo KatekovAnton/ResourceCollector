@@ -10,10 +10,10 @@ namespace ResourceCollector
 {
     public partial class LODInterface : Form
     {
-        public List<Mesh> meshes = new List<Mesh>();
+        public List<MeshSkinned> meshes = new List<MeshSkinned>();
         string texname;
-        Mesh bvasemesh;
-        public LODInterface(Mesh msh, string texnm)
+        MeshSkinned bvasemesh;
+        public LODInterface(MeshSkinned msh, string texnm)
         {
             texname = texnm;
             bvasemesh = msh;
@@ -80,7 +80,7 @@ namespace ResourceCollector
         private void button3_Click(object sender, EventArgs e)
         {
             listBox1.Items.Clear();
-            meshes = new List<Mesh>();
+            meshes = new List<MeshSkinned>();
 
         }
 

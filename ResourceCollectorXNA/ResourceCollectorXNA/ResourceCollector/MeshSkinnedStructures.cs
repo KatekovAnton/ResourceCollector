@@ -5,48 +5,46 @@ using System.Text;
 using Microsoft.Xna.Framework;
 namespace ResourceCollector
 {
-    class MyVertexList : List<LODSkinnedVertex>
+    class MyVertexList : List<SkinnedVertex>
     {
         public MyVertexList(int count)
             : base(count)
         {
 
         }
-        public int IndexByValue(LODSkinnedVertex value)
+        public int IndexByValue(SkinnedVertex value)
         {
             int i = 0;
-            foreach (LODSkinnedVertex v in this)
+            foreach (SkinnedVertex v in this)
             {
                 if (v == value)
-                {
                     return i;
-                }
+                
                 i++;
             }
             return -1;
         }
 
-        public int AddUnique(LODSkinnedVertex value)
+        public int AddUnique(SkinnedVertex value)
         {
             int i = 0;
-            foreach (LODSkinnedVertex v in this)
+            foreach (SkinnedVertex v in this)
             {
                 if (v == value)
-                {
                     return i;
-                }
+                
                 i++;
             }
             Add(value);
             return Count - 1;
         }
-        new public bool Contains(LODSkinnedVertex value)
+        new public bool Contains(SkinnedVertex value)
         {
             return IndexOf(value) != -1;
         }
         public bool Contains(int id)
         {
-            foreach (LODSkinnedVertex v in this)
+            foreach (SkinnedVertex v in this)
             {
                 if (v.id == id)
                     return true;
@@ -55,42 +53,38 @@ namespace ResourceCollector
         }
     }
 
-    class MyFaceList : List<LODSkinnedFace>
+    class MyFaceList : List<SkinnedFace>
     {
-        public int Index(LODSkinnedFace value)
+        public int Index(SkinnedFace value)
         {
             int i = 0;
-            foreach (LODSkinnedFace v in this)
+            foreach (SkinnedFace v in this)
             {
                 if (v == value)
-                {
                     return i;
-                }
+                
                 i++;
             }
             return -1;
         }
 
-        public int AddUnique(LODSkinnedFace value)
+        public int AddUnique(SkinnedFace value)
         {
             int i = 0;
-            foreach (LODSkinnedFace v in this)
+            foreach (SkinnedFace v in this)
             {
                 if (v == value)
-                {
                     return i;
-                }
+                
                 i++;
             }
             Add(value);
             return Count - 1;
         }
-        new public bool Contains(LODSkinnedFace value)
+        new public bool Contains(SkinnedFace value)
         {
-
             return IndexOf(value) != -1;
         }
-
     }
 
     struct BoneRelation
@@ -103,7 +97,7 @@ namespace ResourceCollector
         }
     }
 
-    class LODSkinnedVertex
+    class SkinnedVertex
     {
 
         public Vector3 pos;					//SV
@@ -126,11 +120,11 @@ namespace ResourceCollector
         {
             return neighbor.Contains(id);
         }
-        public void RemoveIfNonNeighbor(ref LODSkinnedVertex n)
+        public void RemoveIfNonNeighbor(ref SkinnedVertex n)
         {
             if (neighbor.IndexByValue(n) < 0)
                 return;
-            foreach (LODSkinnedFace f in face)
+            foreach (SkinnedFace f in face)
             {
                 if (f.HasVertex(n))
                     return;
@@ -141,7 +135,7 @@ namespace ResourceCollector
         {
             int res = -1;
             bool correct = false;
-            foreach (LODSkinnedVertex n in neighbor)
+            foreach (SkinnedVertex n in neighbor)
             {
                 if (n.id == centerid)
                 {
@@ -151,7 +145,7 @@ namespace ResourceCollector
             }
             if (correct)
             {
-                foreach (LODSkinnedVertex n in neighbor)
+                foreach (SkinnedVertex n in neighbor)
                 {
                     if (n.id != centerid && n.id != lastid && n.neighborcontains(centerid))
                     {
@@ -230,11 +224,11 @@ namespace ResourceCollector
                 tc = new Vector2(ftc.X, ftc.Y);
             simpletexcoordinates = succesfiirst;
         }
-        public LODSkinnedVertex()
+        public SkinnedVertex()
         {
             normal = new Vector3(1.0f, 0.0f, 0.0f);
         }
-        public LODSkinnedVertex(vertex v, int _id)
+        public SkinnedVertex(skinnedVertex v, int _id)
         {
             pos = v.coordinates;
             id = _id;
@@ -249,7 +243,7 @@ namespace ResourceCollector
 
             //copy data
         }
-        public LODSkinnedVertex(ref LODSkinnedVertex v1, ref LODSkinnedVertex v2)
+        public SkinnedVertex(ref SkinnedVertex v1, ref SkinnedVertex v2)
         {
             //  bone1 = bone2 = bone3 = "";
             pos = new Vector3((v1.pos.X + v2.pos.X) / 2, (v1.pos.Y + v2.pos.Y) / 2, (v1.pos.Z + v2.pos.Z) / 2);
@@ -391,22 +385,22 @@ namespace ResourceCollector
             k2 /= (relationbonescount > 1 ? sum : 1);
             k3 /= (relationbonescount > 2 ? sum : 1);
 
-            foreach (LODSkinnedVertex i in v1.neighbor)
+            foreach (SkinnedVertex i in v1.neighbor)
             {
                 if (neighbor.IndexOf(i) == -1)
                     neighbor.Add(i);
             }
-            foreach (LODSkinnedVertex i in v2.neighbor)
+            foreach (SkinnedVertex i in v2.neighbor)
             {
                 if (neighbor.IndexOf(i) == -1)
                     neighbor.Add(i);
             }
-            foreach (LODSkinnedFace i in v2.face)
+            foreach (SkinnedFace i in v2.face)
             {
                 if (face.IndexOf(i) == -1)
                     face.Add(i);
             }
-            foreach (LODSkinnedFace i in v1.face)
+            foreach (SkinnedFace i in v1.face)
             {
                 if (face.IndexOf(i) == -1)
                     face.Add(i);
@@ -439,16 +433,16 @@ namespace ResourceCollector
                 }
             }
         }
-        public void CollapseWith(ref LODSkinnedVertex v)
+        public void CollapseWith(ref SkinnedVertex v)
         {
             // bone1 = bone2 = bone3 = -1;
 
             pos = new Vector3((pos.X + v.pos.X) / 2, (pos.Y + v.pos.Y) / 2, (pos.Z + v.pos.Z) / 2);
             normal = new Vector3((normal.X + v.normal.X) / 2, (normal.Y + v.normal.Y) / 2, (normal.Z + v.normal.Z) / 2);
-            LODSkinnedVertex addr = v;
+            SkinnedVertex addr = v;
             neighbor.Remove(addr);
 
-            foreach (LODSkinnedVertex i in v.neighbor)
+            foreach (SkinnedVertex i in v.neighbor)
             {
                 if (i != this && neighbor.IndexOf(i) == -1)
                     neighbor.Add(i);
@@ -588,14 +582,12 @@ namespace ResourceCollector
             k1 /= sum;
             k2 /= (relationbonescount > 1 ? sum : 1);
             k3 /= (relationbonescount > 2 ? sum : 1);
-            //	normal.normalize();
-
         }
     }
 
-    class LODSkinnedFace
+    class SkinnedFace
     {
-        public LODSkinnedVertex[] vertex = new LODSkinnedVertex[3];		//SV
+        public SkinnedVertex[] vertex = new SkinnedVertex[3];		//SV
         public Vector2 t0, t1, t2;					//SV
         public int it0, it1, it2;
 
@@ -603,7 +595,7 @@ namespace ResourceCollector
 
         //########################################################################
         public Vector3 normal;
-        public bool HasVertex(LODSkinnedVertex v)
+        public bool HasVertex(SkinnedVertex v)
         {
             return (v == vertex[0] || v == vertex[1] || v == vertex[2]);
         }
@@ -612,9 +604,9 @@ namespace ResourceCollector
 
         }
 
-        public LODSkinnedFace()
+        public SkinnedFace()
         { }
-        public LODSkinnedFace(LODSkinnedVertex v0, LODSkinnedVertex v1, LODSkinnedVertex v2, Vector2 _t0, Vector2 _t1, Vector2 _t2)
+        public SkinnedFace(SkinnedVertex v0, SkinnedVertex v1, SkinnedVertex v2, Vector2 _t0, Vector2 _t1, Vector2 _t2)
         {
             vertex[0] = v0;
             vertex[1] = v1;
@@ -640,7 +632,7 @@ namespace ResourceCollector
         //########################################################################
 
         //########################################################################
-        public void ReplaceVertex(ref LODSkinnedVertex vold, ref LODSkinnedVertex vnew)
+        public void ReplaceVertex(ref SkinnedVertex vold, ref SkinnedVertex vnew)
         {
             if (vold == vertex[0])
             {

@@ -53,10 +53,10 @@ namespace ResourceCollector
                 {
                     switch (hi.loadedformat)
                     {
-                        case ElementType.MeshOptimazedForStore:
-                        case ElementType.MeshOptimazedForLoading:
+                        case ElementType.MeshSkinnedOptimazedForStore:
+                        case ElementType.MeshSkinnedOptimazedForLoading:
                             {
-                                Mesh msh = new Mesh();
+                                MeshSkinned msh = new MeshSkinned();
                                 Objects.Add(msh);
                                 msh.loadobjectheader(hi, br);
 
@@ -296,8 +296,8 @@ namespace ResourceCollector
                     return 1;
                 case ElementType.PNGTexture:
                     return 3;
-                case ElementType.MeshOptimazedForLoading:
-                case ElementType.MeshOptimazedForStore:
+                case ElementType.MeshSkinnedOptimazedForLoading:
+                case ElementType.MeshSkinnedOptimazedForStore:
                     return 4;
                 case ElementType.CollisionMesh:
                     return 14;

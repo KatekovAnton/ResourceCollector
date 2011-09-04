@@ -115,9 +115,9 @@ namespace ResourceCollectorXNA.Engine.ContentLoader
                     for (int j = 0; j < modelsubsets.Length; j++)
                     {
                         ResourceCollector.PackContent[] objects = packs.GetObjects(rod.LODs[i].subsets[j].MeshNames);
-                        ResourceCollector.Mesh[] subsetmeshes = new ResourceCollector.Mesh[objects.Length];
+                        ResourceCollector.MeshSkinned[] subsetmeshes = new ResourceCollector.MeshSkinned[objects.Length];
                         for (int t = 0; t < subsetmeshes.Length; t++)
-                            subsetmeshes[t] = objects[t] as ResourceCollector.Mesh;
+                            subsetmeshes[t] = objects[t] as ResourceCollector.MeshSkinned;
                         //меши могут быть по-разному сгруппированы поэтому будем их каждый раз по новой загружать
                         EngineMesh subsetmesh = EngineMesh.FromContentMeshes(subsetmeshes);
                         modelsubsets[j] = new UnAnimRenderObject.SubSet(subsetmesh);
