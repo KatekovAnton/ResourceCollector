@@ -8,30 +8,31 @@ using Microsoft.Xna.Framework;
 
 namespace ResourceCollector
 {
-    public class skinnedVertex
+    public class SkinnedVertex
     {
         public Vector3 coordinates, normal;
         public Vector2 textureccordinates;
-        public vertexskin skin;
-        public skinnedVertex()
+        public VertexSkin skin;
+
+        public SkinnedVertex()
         {
             coordinates = new Vector3();
             normal = new Vector3();
             textureccordinates = new Vector2();
-            skin = new vertexskin();
+            skin = new VertexSkin();
         }
-        public skinnedVertex(skinnedVertex v1, skinnedVertex v2)
-        {
 
+        public SkinnedVertex(SkinnedVertex v1, SkinnedVertex v2)
+        {
             coordinates = new Vector3((v1.coordinates.X + v2.coordinates.X) / 2, (v1.coordinates.Y + v2.coordinates.Y) / 2, (v1.coordinates.Z + v2.coordinates.Z) / 2);
             normal = new Vector3((v1.normal.X + v2.normal.X) / 2, (v1.normal.Y + v2.normal.Y) / 2, (v1.normal.Z + v2.normal.Z) / 2);
 
 
-            skin = new vertexskin();
+            skin = new VertexSkin();
             if (v1.skin.elementscount != 0)
             {
-                List<BoneRelation> ourbones = new List<BoneRelation>();
-                BoneRelation tmp = new BoneRelation();
+                List<LODBoneRelation> ourbones = new List<LODBoneRelation>();
+                LODBoneRelation tmp = new LODBoneRelation();
 
                 tmp.bonename = v1.bone1;
                 tmp.koefficient = v1.k1;
@@ -64,7 +65,7 @@ namespace ResourceCollector
                     }
                     if (t != -1)
                     {
-                        BoneRelation b = ourbones[t];
+                        LODBoneRelation b = ourbones[t];
                         b.koefficient += v2.k1;
                         ourbones[t] = b;
                     }
@@ -91,7 +92,7 @@ namespace ResourceCollector
                     }
                     if (t != -1)
                     {
-                        BoneRelation b = ourbones[t];
+                        LODBoneRelation b = ourbones[t];
                         b.koefficient += v2.k2;
                         ourbones[t] = b;
                     }
@@ -118,7 +119,7 @@ namespace ResourceCollector
                     }
                     if (t != -1)
                     {
-                        BoneRelation b = ourbones[t];
+                        LODBoneRelation b = ourbones[t];
                         b.koefficient += v2.k3;
                         ourbones[t] = b;
                     }
@@ -141,7 +142,7 @@ namespace ResourceCollector
                         if (ourbones[max].koefficient < ourbones[j].koefficient)
                             max = j;
                     }
-                    BoneRelation tmp1 = ourbones[max];
+                    LODBoneRelation tmp1 = ourbones[max];
                     ourbones[max] = ourbones[i];
                     ourbones[i] = tmp1;
                 }
@@ -170,13 +171,15 @@ namespace ResourceCollector
             else
             {
                 skin.elementscount = 0;
-                skin.skins = new skinelement[0];
+                skin.skins = new SkinElement[0];
             }
         }
+
         public override string ToString()
         {
             return string.Format("crd:{0}; norm:{1}; tcrd:{2};", coordinates, normal, textureccordinates);
         }
+
         public string bone1
         {
             get
@@ -188,12 +191,13 @@ namespace ResourceCollector
                 if (skin.elementscount < 1)
                 {
                     skin.elementscount = 1;
-                    skin.skins = new skinelement[1];
-                    skin.skins[0] = new skinelement();
+                    skin.skins = new SkinElement[1];
+                    skin.skins[0] = new SkinElement();
                 }
                 skin.skins[0].bonename = value;
             }
         }
+
         public string bone2
         {
             get
@@ -207,15 +211,16 @@ namespace ResourceCollector
             {
                 if (skin.skins.Length < 2)
                 {
-                    skinelement[] ttt = skin.skins;
+                    SkinElement[] ttt = skin.skins;
                     skin.elementscount = 2;
-                    skin.skins = new skinelement[2];
+                    skin.skins = new SkinElement[2];
                     skin.skins[0] = ttt[0];
-                    skin.skins[1] = new skinelement();
+                    skin.skins[1] = new SkinElement();
                 }
                 skin.skins[1].bonename = value;
             }
         }
+
         public string bone3
         {
             get
@@ -229,16 +234,17 @@ namespace ResourceCollector
             {
                 if (skin.skins.Length < 3)
                 {
-                    skinelement[] ttt = skin.skins;
+                    SkinElement[] ttt = skin.skins;
                     skin.elementscount = 3;
-                    skin.skins = new skinelement[3];
+                    skin.skins = new SkinElement[3];
                     skin.skins[0] = ttt[0];
                     skin.skins[1] = ttt[1];
-                    skin.skins[2] = new skinelement();
+                    skin.skins[2] = new SkinElement();
                 }
                 skin.skins[2].bonename = value;
             }
         }
+
         public float k3
         {
             get
@@ -253,16 +259,17 @@ namespace ResourceCollector
             {
                 if (skin.skins.Length < 3)
                 {
-                    skinelement[] ttt = skin.skins;
+                    SkinElement[] ttt = skin.skins;
                     skin.elementscount = 3;
-                    skin.skins = new skinelement[3];
+                    skin.skins = new SkinElement[3];
                     skin.skins[0] = ttt[0];
                     skin.skins[1] = ttt[1];
-                    skin.skins[2] = new skinelement();
+                    skin.skins[2] = new SkinElement();
                 }
                 skin.skins[2].coefficient = value;
             }
         }
+
         public float k2
         {
             get
@@ -276,16 +283,17 @@ namespace ResourceCollector
             {
                 if (skin.skins.Length < 2)
                 {
-                    skinelement[] ttt = skin.skins;
+                    SkinElement[] ttt = skin.skins;
                     skin.elementscount = 2;
-                    skin.skins = new skinelement[2];
+                    skin.skins = new SkinElement[2];
                     skin.skins[0] = ttt[0];
 
-                    skin.skins[1] = new skinelement();
+                    skin.skins[1] = new SkinElement();
                 }
                 skin.skins[1].coefficient = value;
             }
         }
+
         public float k1
         {
             get
@@ -297,24 +305,24 @@ namespace ResourceCollector
                 if (skin.skins.Length < 1)
                 {
                     skin.elementscount = 1;
-                    skin.skins = new skinelement[1];
-                    skin.skins[0] = new skinelement();
+                    skin.skins = new SkinElement[1];
+                    skin.skins[0] = new SkinElement();
                 }
                 skin.skins[0].coefficient = value;
             }
         }
     }
 
-    public class skinnedFace
+    public class SkinnedFace
     {
-        public skinnedVertex v0, v1, v2;
+        public SkinnedVertex v0, v1, v2;
         public int cv0, cv1, cv2;
         public int tv0, tv1, tv2;
         Vector2 t0, t1, t2;
-        public skinnedFace()
+        public SkinnedFace()
         {
         }
-        public skinnedFace(skinnedVertex v1, skinnedVertex v2, skinnedVertex v3, Vector2 t0, Vector2 t1, Vector2 t2)
+        public SkinnedFace(SkinnedVertex v1, SkinnedVertex v2, SkinnedVertex v3, Vector2 t0, Vector2 t1, Vector2 t2)
         {
             this.v0 = v1;
             this.v1 = v2;
@@ -323,7 +331,7 @@ namespace ResourceCollector
             this.t1 = t1;
             this.t2 = t2;
         }
-        public skinnedFace(skinnedFace f)
+        public SkinnedFace(SkinnedFace f)
         {
             this.v0 = f.v0;
             this.v1 = f.v1;
@@ -345,69 +353,69 @@ namespace ResourceCollector
         }
     }
 
-    public class vertexskin
+    public class VertexSkin
     {
         public int elementscount;
-        public skinelement[] skins;
-        public vertexskin()
+        public SkinElement[] skins;
+        public VertexSkin()
         {
             elementscount = 0;
-            skins = new skinelement[0];
+            skins = new SkinElement[0];
         }
-        public vertexskin(string bn1, string bn2, string bn3, float k1, float k2, float k3)
+        public VertexSkin(string bn1, string bn2, string bn3, float k1, float k2, float k3)
         {
             elementscount = bn3 == null || bn3 == "" ? bn2 == null || bn2 == "" ? 1 : 2 : 3;
-            skins = new skinelement[elementscount];
-            skins[0] = new skinelement();
+            skins = new SkinElement[elementscount];
+            skins[0] = new SkinElement();
             skins[0].bonename = bn1; skins[0].coefficient = k1;
             if (elementscount > 1)
             {
-                skins[1] = new skinelement();
+                skins[1] = new SkinElement();
                 skins[1].bonename = bn2; skins[1].coefficient = k2;
                 if (elementscount > 2)
                 {
-                    skins[2] = new skinelement();
+                    skins[2] = new SkinElement();
                     skins[2].bonename = bn2; skins[2].coefficient = k2;
                 }
             }
 
         }
-        public vertexskin(System.IO.BinaryReader br)
+        public VertexSkin(System.IO.BinaryReader br)
         {
 
             elementscount = br.ReadInt32();
-            skins = new skinelement[elementscount];
+            skins = new SkinElement[elementscount];
             for (int i = 0; i < elementscount; i++)
-                skins[i] = new skinelement(br);
+                skins[i] = new SkinElement(br);
 
 
 
         }
-        public vertexskin(int elcount, string[] bonenames, float[] koeffs)
+        public VertexSkin(int elcount, string[] bonenames, float[] koeffs)
         {
             elementscount = elcount;
-            skins = new skinelement[elcount];
+            skins = new SkinElement[elcount];
             for (int i = 0; i < elcount; i++)
             {
-                skins[i] = new skinelement();
+                skins[i] = new SkinElement();
                 skins[i].bonename = bonenames[i];
                 skins[i].coefficient = koeffs[i];
             }
         }
     }
 
-    public class skinelement
+    public class SkinElement
     {
         public string bonename;
         public float coefficient;
         public int boneindex;
-        public skinelement(System.IO.BinaryReader br)
+        public SkinElement(System.IO.BinaryReader br)
         {
            // int count = br.ReadInt32();
             bonename = br.ReadPackString(); ;
             coefficient = br.ReadSingle();
         }
-        public skinelement()
+        public SkinElement()
         {
         }
     }

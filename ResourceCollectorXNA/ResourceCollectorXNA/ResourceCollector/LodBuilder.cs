@@ -7,8 +7,8 @@ namespace ResourceCollector
     class LODBuilder
     {
         public tridata[] tri;
-        public MyVertexList lodvertices;
-        public MyFaceList lodtriangles;
+        public LODMyVertexList lodvertices;
+        public LODMyFaceList lodtriangles;
         public MeshSkinned BaseMesh;
         public MeshSkinned ProcessedMesh;
         public LODBuilder(MeshSkinned basemesh)
@@ -30,23 +30,23 @@ namespace ResourceCollector
                 tri[i].v[2] = BaseMesh.faces[i].cv2 - 1;
             }
 
-            lodvertices = new MyVertexList(BaseMesh.num_verts);
+            lodvertices = new LODMyVertexList(BaseMesh.num_verts);
 
             for (int i = 0; i < BaseMesh.num_verts; i++)
             {
-                lodvertices.Add(new SkinnedVertex());
+                lodvertices.Add(new LODSkinnedVertex());
             }
             for (int i = 0; i < BaseMesh.num_verts; i++)
             {
-                lodvertices[i] = new SkinnedVertex(BaseMesh.vertexes[i], i);
+                lodvertices[i] = new LODSkinnedVertex(BaseMesh.vertexes[i], i);
             }
 
-            lodtriangles = new MyFaceList();
+            lodtriangles = new LODMyFaceList();
             for (int i = 0; i < BaseMesh.num_faces; i++)
             {
                 if (lodvertices[tri[i].v[0]] != lodvertices[tri[i].v[1]] && lodvertices[tri[i].v[2]] != lodvertices[tri[i].v[1]] && lodvertices[tri[i].v[2]] != lodvertices[tri[i].v[0]])
                 {
-                    SkinnedFace tmp = new SkinnedFace(
+                    LODSkinnedFace tmp = new LODSkinnedFace(
                                       lodvertices[tri[i].v[0]],
                                       lodvertices[tri[i].v[1]],
                                       lodvertices[tri[i].v[2]],
@@ -79,8 +79,8 @@ namespace ResourceCollector
                 lodvertices[t].pos.Z - lodvertices[t].neighbor[0].pos.Z);
 
             float minLength = f.length_squared();
-            SkinnedVertex v1 = lodvertices[t];
-            SkinnedVertex v2 = lodvertices[t].neighbor[0];
+            LODSkinnedVertex v1 = lodvertices[t];
+            LODSkinnedVertex v2 = lodvertices[t].neighbor[0];
             for (int i = 0; i < lodvertices.Count; i++)
             {
                 for (int j = 0; j < lodvertices[i].neighbor.Count; j++)
@@ -104,7 +104,7 @@ namespace ResourceCollector
                 ntc = new Vector2((v1.tc.X + v2.tc.X) / 2, (v1.tc.Y + v2.tc.Y) / 2);
                 for (int i = 0; i < lodtriangles.Count; i++)
                 {
-                    SkinnedFace face = lodtriangles[i];
+                    LODSkinnedFace face = lodtriangles[i];
                     int angleId = face.vertex[0] == v1 ? 0 : face.vertex[1] == v1 ? 1 : face.vertex[2] == v1 ? 2 : -1;
 
                     if (angleId == 0)
@@ -140,7 +140,7 @@ namespace ResourceCollector
             {
                 if (v2.onthecliff)
                 {
-                    SkinnedVertex tmp = v1;
+                    LODSkinnedVertex tmp = v1;
                     v1 = v2;
                     v2 = tmp;
                 }
@@ -153,7 +153,7 @@ namespace ResourceCollector
             // change triangles having erased vertex
             for (int i = 0; i < lodtriangles.Count; i++)
             {
-                SkinnedFace face = lodtriangles[i];
+                LODSkinnedFace face = lodtriangles[i];
                 int angleId = face.vertex[0] == v2 ? 0 : face.vertex[1] == v2 ? 1 : face.vertex[2] == v2 ? 2 : -1;
 
                 if (angleId != -1)
@@ -171,7 +171,7 @@ namespace ResourceCollector
             // change v2 neighbors neighbors from v2 to v1
             for (int i = 0; i < v2.neighbor.Count; i++)
             {
-                SkinnedVertex neighbor = v2.neighbor[i];
+                LODSkinnedVertex neighbor = v2.neighbor[i];
 
                 if (!neighbor.neighbor.Contains(v1))
                 {
@@ -211,17 +211,17 @@ namespace ResourceCollector
             }
             ProcessedMesh = new MeshSkinned();
             ProcessedMesh.num_verts = lodvertices.Count;
-            ProcessedMesh.vertexes = new skinnedVertex[ProcessedMesh.num_verts];
+            ProcessedMesh.vertexes = new SkinnedVertex[ProcessedMesh.num_verts];
             for (int i = 0; i < ProcessedMesh.num_verts; i++)
             {
-                ProcessedMesh.vertexes[i] = new skinnedVertex();
+                ProcessedMesh.vertexes[i] = new SkinnedVertex();
                 ProcessedMesh.vertexes[i].coordinates = new Vector3(lodvertices[i].pos.X, lodvertices[i].pos.Y, lodvertices[i].pos.Z);
                 ProcessedMesh.vertexes[i].normal = new Vector3(lodvertices[i].normal.X, lodvertices[i].normal.Y, lodvertices[i].normal.Z);
-                ProcessedMesh.vertexes[i].skin = new vertexskin(lodvertices[i].bone1, lodvertices[i].bone2, lodvertices[i].bone3, lodvertices[i].k1, lodvertices[i].k2, lodvertices[i].k3);
+                ProcessedMesh.vertexes[i].skin = new VertexSkin(lodvertices[i].bone1, lodvertices[i].bone2, lodvertices[i].bone3, lodvertices[i].k1, lodvertices[i].k2, lodvertices[i].k3);
 
                 lodvertices[i].id = i;
             }
-            ProcessedMesh.vertskins = new vertexskin[ProcessedMesh.num_verts];
+            ProcessedMesh.vertskins = new VertexSkin[ProcessedMesh.num_verts];
             for (int i = 0; i < ProcessedMesh.num_verts; i++)
             {
                 ProcessedMesh.vertskins[i] = ProcessedMesh.vertexes[i].skin;
@@ -290,10 +290,10 @@ namespace ResourceCollector
                 ProcessedMesh.tvertexes[i] = new Vector2(tmptcoords[i].X,tmptcoords[i].Y);
 
             ProcessedMesh.num_faces = lodtriangles.Count;
-            ProcessedMesh.faces = new skinnedFace[ProcessedMesh.num_faces];
+            ProcessedMesh.faces = new SkinnedFace[ProcessedMesh.num_faces];
             for (int i = 0; i < ProcessedMesh.num_faces; i++)
             {
-                ProcessedMesh.faces[i] = new skinnedFace(
+                ProcessedMesh.faces[i] = new SkinnedFace(
                     ProcessedMesh.vertexes[lodtriangles[i].vertex[0].id],
                     ProcessedMesh.vertexes[lodtriangles[i].vertex[1].id],
                     ProcessedMesh.vertexes[lodtriangles[i].vertex[2].id],

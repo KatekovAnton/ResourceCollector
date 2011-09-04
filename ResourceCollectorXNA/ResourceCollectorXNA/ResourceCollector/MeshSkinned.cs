@@ -14,10 +14,10 @@ namespace ResourceCollector
         public int bonenumber;
         public int skinvertexnumber;
         public int skinsize;
-        public skinnedVertex[] vertexes;
-        public vertexskin[] vertskins;
+        public SkinnedVertex[] vertexes;
+        public VertexSkin[] vertskins;
         public Vector2[] tvertexes;
-        public skinnedFace[] faces;
+        public SkinnedFace[] faces;
         public string filename;
         public int isstatic;
         public int ismaxdetalized = 1;
@@ -116,10 +116,10 @@ namespace ResourceCollector
 
             if (oldmesh.faces != null)
             {
-                vertexes = new skinnedVertex[oldmesh.vertexes.Length];
+                vertexes = new SkinnedVertex[oldmesh.vertexes.Length];
                 for (int i = 0; i < oldmesh.vertexes.Length; i++)
                 {
-                    vertexes[i] = new skinnedVertex();
+                    vertexes[i] = new SkinnedVertex();
                     vertexes[i].coordinates = new Vector3(oldmesh.vertexes[i].coordinates.X, oldmesh.vertexes[i].coordinates.Y, oldmesh.vertexes[i].coordinates.Z);
                     vertexes[i].normal = new Vector3(oldmesh.vertexes[i].normal.X, oldmesh.vertexes[i].normal.Y, oldmesh.vertexes[i].normal.Z);
                     if (oldmesh.isstatic == 0)
@@ -131,12 +131,12 @@ namespace ResourceCollector
                         vertexes[i].bone2 = oldmesh.vertexes[i].bone2;
                         vertexes[i].bone3 = oldmesh.vertexes[i].bone3;
 
-                        vertexes[i].skin = new vertexskin();
+                        vertexes[i].skin = new VertexSkin();
                         vertexes[i].skin.elementscount = oldmesh.vertexes[i].skin.elementscount;
-                        vertexes[i].skin.skins = new skinelement[vertexes[i].skin.elementscount];
+                        vertexes[i].skin.skins = new SkinElement[vertexes[i].skin.elementscount];
                         for (int h = 0; h < vertexes[i].skin.elementscount; h++)
                         {
-                            vertexes[i].skin.skins[h] = new skinelement();
+                            vertexes[i].skin.skins[h] = new SkinElement();
                             vertexes[i].skin.skins[h].bonename = oldmesh.vertexes[i].skin.skins[h].bonename;
                             vertexes[i].skin.skins[h].coefficient = oldmesh.vertexes[i].skin.skins[h].coefficient;
                         }
@@ -148,10 +148,10 @@ namespace ResourceCollector
                 {
                     tvertexes[i] = new Vector2(oldmesh.tvertexes[i].X,oldmesh.tvertexes[i].Y);
                 }
-                faces = new skinnedFace[oldmesh.faces.Length];
+                faces = new SkinnedFace[oldmesh.faces.Length];
                 for (int i = 0; i < oldmesh.faces.Length; i++)
                 {
-                    faces[i] = new skinnedFace(oldmesh.faces[i]);
+                    faces[i] = new SkinnedFace(oldmesh.faces[i]);
                 }
             }
 
@@ -188,7 +188,7 @@ namespace ResourceCollector
                     return i;
             return -1;
         }
-        bool compareskins(vertexskin v1, vertexskin v2)
+        bool compareskins(VertexSkin v1, VertexSkin v2)
         {
             if (v1.elementscount == v2.elementscount)
             {
@@ -202,7 +202,7 @@ namespace ResourceCollector
                 return false;
             return true;
         }
-        bool compareverts(skinnedVertex v1, skinnedVertex v2, bool comskins)
+        bool compareverts(SkinnedVertex v1, SkinnedVertex v2, bool comskins)
         {
             if (v1.coordinates.Near(v2.coordinates))
             {
@@ -220,7 +220,7 @@ namespace ResourceCollector
                 return false;
 
         }
-        int insertvertex(ref List<skinnedVertex> destverts, skinnedVertex source)
+        int insertvertex(ref List<SkinnedVertex> destverts, SkinnedVertex source)
         {
             for (int i = 0; i < destverts.Count; i++)
             {
@@ -235,13 +235,13 @@ namespace ResourceCollector
             if (BufferIndex == null)
                 return;
             float pos = 0.0f; float step1 = 70.0f / Convert.ToSingle(BufferIndex.Length);
-            List<skinnedVertex> tmpverts = new List<skinnedVertex>();
+            List<SkinnedVertex> tmpverts = new List<SkinnedVertex>();
             List<Vector2> tmptexcoords = new List<Vector2>();
-            List<vertexskin> tmpvertskins = new List<vertexskin>();
+            List<VertexSkin> tmpvertskins = new List<VertexSkin>();
             List<int> inbufferindexes = new List<int>();
             int[] vertindexes = new int[3];
             int[] tcoordindexes = new int[3];
-            faces = new skinnedFace[BufferIndex.Length / 3];
+            faces = new SkinnedFace[BufferIndex.Length / 3];
             for (int i = 0; i < BufferIndex.Length; i += 3)
             {
                 vertindexes[0] = -1;
@@ -256,9 +256,9 @@ namespace ResourceCollector
                 CSkinnedMeshVertex v1 = BufferVertex[BufferIndex[i + 1]];
                 CSkinnedMeshVertex v2 = BufferVertex[BufferIndex[i + 2]];
 
-                skinnedVertex tmpvert0 = new skinnedVertex();
-                skinnedVertex tmpvert1 = new skinnedVertex();
-                skinnedVertex tmpvert2 = new skinnedVertex();
+                SkinnedVertex tmpvert0 = new SkinnedVertex();
+                SkinnedVertex tmpvert1 = new SkinnedVertex();
+                SkinnedVertex tmpvert2 = new SkinnedVertex();
 
                 tmpvert0.coordinates = new Vector3(v0.pos.X, v0.pos.Y, v0.pos.Z);
                 tmpvert1.coordinates = new Vector3(v1.pos.X, v1.pos.Y, v1.pos.Z);
@@ -268,9 +268,9 @@ namespace ResourceCollector
                 tmpvert2.normal = new Vector3(v2.normal.X, v2.normal.Y, v2.normal.Z);
                 if (isstatic == 0)
                 {
-                    tmpvert0.skin = new vertexskin(v0.BoneIDs.Length, v0.BoneIDs, v0.BoneWeights);
-                    tmpvert1.skin = new vertexskin(v1.BoneIDs.Length, v1.BoneIDs, v1.BoneWeights);
-                    tmpvert2.skin = new vertexskin(v2.BoneIDs.Length, v2.BoneIDs, v2.BoneWeights);
+                    tmpvert0.skin = new VertexSkin(v0.BoneIDs.Length, v0.BoneIDs, v0.BoneWeights);
+                    tmpvert1.skin = new VertexSkin(v1.BoneIDs.Length, v1.BoneIDs, v1.BoneWeights);
+                    tmpvert2.skin = new VertexSkin(v2.BoneIDs.Length, v2.BoneIDs, v2.BoneWeights);
                 }
                 //##################################################################
                 for (int v = 0; v < tmpverts.Count; v++)
@@ -365,7 +365,7 @@ namespace ResourceCollector
                     tcoordindexes[2] = tmptexcoords.Count;
                 }
 
-                faces[i / 3] = new skinnedFace();
+                faces[i / 3] = new SkinnedFace();
                 faces[i / 3].cv0 = vertindexes[0];
                 faces[i / 3].cv1 = vertindexes[1];
                 faces[i / 3].cv2 = vertindexes[2];
@@ -391,7 +391,7 @@ namespace ResourceCollector
             if (isstatic == 1)
             {
 
-                vertskins = new vertexskin[0];
+                vertskins = new VertexSkin[0];
                 bonenumber = 0;
                 skinvertexnumber = 0;
                 skinsize = 8;
@@ -417,7 +417,7 @@ namespace ResourceCollector
                 }
                 bonenumber = tmlist.Count;
                 skinvertexnumber = vertexes.Length;
-                vertskins = new vertexskin[vertexes.Length];
+                vertskins = new VertexSkin[vertexes.Length];
                 for (int i = 0; i < vertskins.Length; i++)
                 {
                     vertskins[i] = vertexes[i].skin;
@@ -592,7 +592,7 @@ namespace ResourceCollector
                 GenerateOptForStore(tspb);
                 forsavingformat = ElementType.MeshSkinnedOptimazedForStore;
             }
-            skinnedFace[] Snewfaces = new skinnedFace[num_faces];
+            SkinnedFace[] Snewfaces = new SkinnedFace[num_faces];
             int c = 0;
 
             int index = 0;
@@ -612,7 +612,7 @@ namespace ResourceCollector
                 }
             }
 
-            skinnedFace[] newfaces = new skinnedFace[c];
+            SkinnedFace[] newfaces = new SkinnedFace[c];
             num_faces = c;
 
             for (int i = 0; i < c; i++)
@@ -681,7 +681,7 @@ namespace ResourceCollector
                 }
             }
 
-            skinnedVertex tmpvertex = new skinnedVertex(vertexes[ind1], vertexes[ind2]);
+            SkinnedVertex tmpvertex = new SkinnedVertex(vertexes[ind1], vertexes[ind2]);
             vertexes[ind1] = tmpvertex;
             vertexes[ind2] = vertexes[num_verts - 1];
             num_verts--;
@@ -773,7 +773,7 @@ namespace ResourceCollector
 
 
 
-            skinnedVertex[] tmstoraje = new skinnedVertex[num_verts];
+            SkinnedVertex[] tmstoraje = new SkinnedVertex[num_verts];
             for (int i = 0; i < num_verts; i++)
             {
                 tmstoraje[i] = vertexes[i];
@@ -807,11 +807,11 @@ namespace ResourceCollector
                         float step = Convert.ToSingle(toolStripProgressBar.Maximum) / Convert.ToSingle(num_verts * 2 + num_tverts + num_faces * 2);
                         float pos = 0;
                         size += 12;
-                        vertexes = new skinnedVertex[num_verts];
+                        vertexes = new SkinnedVertex[num_verts];
 
                         for (int i = 0; i < num_verts; i++)
                         {
-                            vertexes[i] = new skinnedVertex();
+                            vertexes[i] = new SkinnedVertex();
                             vertexes[i].coordinates.X = br.ReadSingle(); size += 4;
                             vertexes[i].coordinates.Y = br.ReadSingle(); size += 4;
                             vertexes[i].coordinates.Z = br.ReadSingle(); size += 4;
@@ -831,10 +831,10 @@ namespace ResourceCollector
                             pos += step;
                             toolStripProgressBar.Value = Convert.ToInt32(pos);
                         }
-                        faces = new skinnedFace[num_faces];
+                        faces = new SkinnedFace[num_faces];
                         for (int i = 0; i < num_faces; i++)
                         {
-                            faces[i] = new skinnedFace();
+                            faces[i] = new SkinnedFace();
                             faces[i].cv0 = br.ReadInt32();
                             faces[i].cv1 = br.ReadInt32();
                             faces[i].cv2 = br.ReadInt32();
@@ -855,12 +855,12 @@ namespace ResourceCollector
                         }
 
                         skinvertexnumber = br.ReadInt32(); size += 4;
-                        vertskins = new vertexskin[skinvertexnumber];
+                        vertskins = new VertexSkin[skinvertexnumber];
                         bonenumber = br.ReadInt32(); size += 4;
 
                         for (int i = 0; i < skinvertexnumber; i++)
                         {
-                            vertskins[i] = new vertexskin(br);
+                            vertskins[i] = new VertexSkin(br);
                             vertexes[i].skin = vertskins[i];
                             /*pos += step;
                             toolStripProgressBar.Value = Convert.ToInt32(pos);*/

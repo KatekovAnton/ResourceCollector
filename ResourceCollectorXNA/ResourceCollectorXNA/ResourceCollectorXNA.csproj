@@ -393,7 +393,7 @@
     </Compile>
     <Compile Include="ResourceCollector\MeshListContent.cs" />
     <Compile Include="ResourceCollector\MeshOther.cs" />
-    <Compile Include="ResourceCollector\MeshSkinnedStructures.cs" />
+    <Compile Include="ResourceCollector\LodBuilderMeshStructures.cs" />
     <Compile Include="ResourceCollector\MeshUnskinned.cs" />
     <Compile Include="ResourceCollector\meshviewer.cs" />
     <Compile Include="ResourceCollector\meshviewer.designer.cs">
