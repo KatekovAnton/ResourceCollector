@@ -30,15 +30,14 @@ namespace ResourceCollector
 
         private void button4_Click(object sender, EventArgs e)
         {
-            FullAnim curanim;// = new Content.FullAnim();
+            FullAnimation curanim;// = new Content.FullAnim();
             AnimationNode curnode;// = new Content.FullAnim();
            AddAnim dlg = new AddAnim();
             if (dlg.ShowDialog() == DialogResult.OK)
             {
-                curanim = FullAnim.FromStream(dlg.dlg.OpenFile(), skeleton);
-                curanim.name = dlg.textBox2.Text;
-                curnode = new AnimationNode(curanim);
-                curnode.Tag = listBox1.Items.Count;
+                curanim = FullAnimation.From3DMAXStream(dlg.dlg.OpenFile(), skeleton);
+
+                curnode = new AnimationNode(dlg.textBox2.Text);
                 listBox1.Items.Add(curnode);
                 addNodesAnim(curanim);             
             }
@@ -56,7 +55,7 @@ namespace ResourceCollector
             Bitmap btm = (Bitmap)imageList1.Images[0].Clone();
             Graphics gr = Graphics.FromImage(btm);
             pic.SizeMode = PictureBoxSizeMode.AutoSize;
-            gr.DrawString(curanim.name, new System.Drawing.Font("Times New Roman", 8), Brushes.Black, 5, btm.Height / 2 - 4);
+          //  gr.DrawString(curanim.name, new System.Drawing.Font("Times New Roman", 8), Brushes.Black, 5, btm.Height / 2 - 4);
             gr.Dispose();
             pic.Image = btm;
             pic.Tag = nodesAnim.Count;
@@ -79,7 +78,7 @@ namespace ResourceCollector
         }
         private void RemoveNodeEventsByAnimationNode(AnimationNode an )
         {
-            if (an.NodeEvents != null)
+           /* if (an.NodeEvents != null)
             {
                 foreach (NodeEvent ne in an.NodeEvents)
                 {
@@ -99,24 +98,24 @@ namespace ResourceCollector
             foreach (NodeEvent ss in toremove)
             {
                 listBox2.Items.Remove(ss);
-            }
+            }*/
           
         }
 
         private void TagRefresh()
         {
-            for (int i = 0; i < nodesAnim.Count; i++)
+           /* for (int i = 0; i < nodesAnim.Count; i++)
             {
                 nodesAnim[i].Tag = i;
                 AnimationNode an = (AnimationNode)listBox1.Items[i];
                 an.Tag = i;
                 nodesAnim[i].Tag = i;
-            }
+            }*/
         }
 
         private void drawnode(int select)
         {
-            for (int i = 0; i < nodesAnim.Count; i++)
+            /*for (int i = 0; i < nodesAnim.Count; i++)
             {
                 Bitmap btm;
                 PictureBox pic = nodesAnim[i];
@@ -130,10 +129,10 @@ namespace ResourceCollector
                      btm = (Bitmap)imageList1.Images[0].Clone();
                 }
                 Graphics gr = Graphics.FromImage(btm);
-                gr.DrawString(curanim.animation.name, new System.Drawing.Font("Times New Roman", 8), Brushes.Black, 5, btm.Height / 2 - 4);
+                gr.DrawString(curanim.name, new System.Drawing.Font("Times New Roman", 8), Brushes.Black, 5, btm.Height / 2 - 4);
                 gr.Dispose();
                 pic.Image = btm;
-            }
+            }*/
 
         }
 
@@ -188,7 +187,7 @@ namespace ResourceCollector
             {
                 
                 NodeEvent nodeev = new NodeEvent(needlg.textBox1.Text, (AnimationNode)listBox1.Items[needlg.comboBox1.SelectedIndex], 
-                    (AnimationNode)listBox1.Items[needlg.comboBox2.SelectedIndex],(CharacterEvent)chev.listBox1.Items[needlg.CharEventIndex]);
+                    (AnimationNode)listBox1.Items[needlg.comboBox2.SelectedIndex],chev.listBox1.Items[needlg.CharEventIndex].ToString());
 
                 listBox2.Items.Add(nodeev);
             }
@@ -199,12 +198,12 @@ namespace ResourceCollector
 
         public void DrawNodeEvent()
         {
-            Bitmap btm = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            /*Bitmap btm = new Bitmap(pictureBox1.Width, pictureBox1.Height);
             Graphics gr = Graphics.FromImage(btm);
             for (int i = 0; i < listBox2.Items.Count; i++)
             {
                 NodeEvent ne=(NodeEvent)listBox2.Items[i];
-                PictureBox n1=nodesAnim[(int) ne.parent.Tag];
+                PictureBox n1=nodesAnim[(int) ne.parentNode.Tag];
                 PictureBox n2=nodesAnim[(int) ne.associatedNode.Tag];
 
                 int x1 = n1.Location.X + (n1.Width / 2);
@@ -228,7 +227,7 @@ namespace ResourceCollector
                 gr.DrawLine(new Pen(Brushes.Black, 6), new Point(x3, y3), new Point(x2, y2));
             }
             gr.Dispose();
-            pictureBox1.Image = btm;
+            pictureBox1.Image = btm;*/
         }
 
         private void listBox2_SelectedIndexChanged(object sender, EventArgs e)
@@ -247,7 +246,7 @@ namespace ResourceCollector
             {
 
                 NodeEvent nodeev = new NodeEvent(needlg.textBox1.Text, (AnimationNode)listBox1.Items[needlg.comboBox1.SelectedIndex],
-                    (AnimationNode)listBox1.Items[needlg.comboBox2.SelectedIndex], (CharacterEvent)chev.listBox1.Items[needlg.CharEventIndex]);
+                    (AnimationNode)listBox1.Items[needlg.comboBox2.SelectedIndex], chev.listBox1.Items[needlg.CharEventIndex].ToString());
 
                 listBox2.Items.Add(nodeev);
             }
@@ -266,7 +265,7 @@ namespace ResourceCollector
                 {
                     NodeEvent ne = (NodeEvent)listBox2.Items[j];
                     
-                    if (((int)ne.parent.Tag) == ((int)an.Tag) /*|| ((int)ne.associatedNode.Tag) == ((int)an.Tag)*/)
+                    /*if (((int)ne.parentNode.Tag) == ((int)an.Tag) )
                     {
                         NodeEvent[] ss = new NodeEvent[count + 1];
                         if (an.NodeEvents != null)
@@ -276,7 +275,7 @@ namespace ResourceCollector
                         ss[count] = ne;
                         count++;
                         an.NodeEvents = ss;
-                    }
+                    }*/
                 }
                 res[i] = an;
             }
@@ -291,7 +290,7 @@ namespace ResourceCollector
             if (sfd.ShowDialog() == DialogResult.OK)
             {
                 System.IO.BinaryWriter bw = new System.IO.BinaryWriter(sfd.OpenFile());
-                AnimationGraph.AnimationGraffToStream(AnimGraf,bw);
+                AnimationGraph.AnimationGraphToStream(AnimGraf,bw);
                 bw.Close();
 
             }
@@ -323,13 +322,12 @@ namespace ResourceCollector
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 System.IO.BinaryReader bw = new System.IO.BinaryReader(ofd.OpenFile());
-                int count =bw.ReadInt32();
-                if(count<=nodesAnim.Count);
+                int count = bw.ReadInt32();
                 for (int i = 0; i < count; i++)
                 {
-                  int x=  bw.ReadInt32();
-                  int y= bw.ReadInt32();
-                    nodesAnim[i].Location=new Point(x,y);
+                    int x = bw.ReadInt32();
+                    int y = bw.ReadInt32();
+                    nodesAnim[i].Location = new Point(x, y);
                 }
                 bw.Close();
                 DrawNodeEvent();
@@ -340,13 +338,12 @@ namespace ResourceCollector
 
         private void button8_Click(object sender, EventArgs e)
         {
-            int lenth = 0;
             OpenFileDialog sfd = new OpenFileDialog();
             sfd.Filter = "AnimGraf |*.agr|All files|*.*";
             if (sfd.ShowDialog() == DialogResult.OK)
             {                
                 System.IO.BinaryReader br = new System.IO.BinaryReader(sfd.OpenFile());             
-                AnimGraf = AnimationGraph.AnimationGraffFromStream(br);
+                AnimGraf = AnimationGraph.AnimationGraphFromStream(br);
                 loadFormByAnimationGraph(AnimGraf);
             }
 
@@ -358,14 +355,14 @@ namespace ResourceCollector
         {
             listBox1.Items.Clear();
             listBox2.Items.Clear();
-            listBox1.Items.AddRange(AGrf.nodes);
+            listBox1.Items.AddRange(AGrf.nodes.ToArray());
             chev.listBox1.Items.Clear();
             for (int i = 0; i < nodesAnim.Count; i++)
             {
                 nodesAnim[i].Dispose();
             }
             nodesAnim.Clear();
-            for (int i = 0; i < AGrf.nodes.Length; i++)
+            for (int i = 0; i < AGrf.nodes.Count; i++)
             {
                 addNodesAnim(AGrf.nodes[i].animation);
                 if (AGrf.nodes[i].NodeEvents != null)
@@ -376,9 +373,9 @@ namespace ResourceCollector
                 {
                     for (int j = 0; j < AGrf.nodes[i].NodeEvents.Length; j++)
                     {
-                        if (!FindCharacterEvent(AGrf.nodes[i].NodeEvents[j].neededevent))
+                        if (!FindCharacterEvent(AGrf.nodes[i].NodeEvents[j].neededEvent))
                         {
-                            chev.listBox1.Items.Add(AGrf.nodes[i].NodeEvents[j].neededevent);
+                            chev.listBox1.Items.Add(AGrf.nodes[i].NodeEvents[j].neededEvent);
                         }
                     }
                 }
@@ -389,7 +386,7 @@ namespace ResourceCollector
             drawnode(0);
             DrawNodeEvent();
         }
-        private bool FindCharacterEvent(CharacterEvent charev)
+        private bool FindCharacterEvent(string charev)
         {
             bool res = false;
             if (chev.listBox1.Items.Count > 0)
@@ -397,7 +394,7 @@ namespace ResourceCollector
                 for (int i = 0; i < chev.listBox1.Items.Count; i++)
                 {
                     CharacterEvent ce = (CharacterEvent)chev.listBox1.Items[i];
-                    if (ce.eventName.Equals(charev.eventName))
+                    if (ce.eventName.CompareTo(charev) == 0)
                     {
                         res = true;
                     }

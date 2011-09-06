@@ -5,21 +5,26 @@ using System.Text;
 
 namespace ResourceCollector
 {
-    public class NodeEvent //событие которое возможно из конретного узла фрафа анимаций
+    public class NodeEvent                                  //событие которое возможно для конкретного узла графа анимаций- ребро графа анимаций
     {
-        public CharacterEvent neededevent; // необходимое событие
-        public AnimationNode parent;// ссылка на владельца 
-        public AnimationNode associatedNode; //узел к которому ведет событие 
-        public String description;// описание 
-        public Object tag;// 
+        public string neededEvent;                          // необходимое событие
+        public AnimationNode parentNode;                        // ссылка на владельца 
+        public AnimationNode associatedNode;                // узел к которому ведет событие 
+        public string description;                          // описание 
 
-        public NodeEvent(String _description, AnimationNode _parent, AnimationNode _associatedNode, CharacterEvent _neededevent)
+        public string parentName;
+        public string associatedNodeName; 
+
+        public NodeEvent(string _description, AnimationNode _parent, AnimationNode _associatedNode, string _neededevent)
         {
             description = _description;
             associatedNode = _associatedNode;
-            neededevent = _neededevent;
-            parent = _parent;
+            neededEvent = _neededevent;
+            parentNode = _parent;
 
+
+            parentName = parentNode.name;
+            associatedNodeName = associatedNode.name;
         }
 
         public NodeEvent()
@@ -30,161 +35,185 @@ namespace ResourceCollector
         {
             return description;
         }
-    }
-    public class AnimationNode //узел графа анимаций
-    {
-        public NodeEvent[] NodeEvents;
-        public Animation animation;
-        public Object Tag;
 
-        public AnimationNode(Animation _animation)
+        public static void NodeEventToStream(NodeEvent node, System.IO.BinaryWriter bw)
         {
+            bw.WritePackString(node.neededEvent);
+            bw.WritePackString(node.description);
+
+            bw.WritePackString(node.parentNode.name);
+            bw.WritePackString(node.associatedNode.name);
+        }
+
+        public static NodeEvent NodeEventFromStream(System.IO.BinaryReader br)
+        {
+            NodeEvent @event = new NodeEvent();
+            @event.neededEvent = br.ReadPackString();
+            @event.description = br.ReadPackString();
+
+            @event.parentName = br.ReadPackString();
+            @event.associatedNodeName = br.ReadPackString();
+            return @event;
+        }
+    }
+
+    public class AnimationNode                              // узел графа анимаций
+    {
+        public string name
+        {
+            get;
+            private set;
+        }
+
+        public NodeEvent[] NodeEvents;                      // исходящие рёбра
+        public Animation animation;                         // соответствующая узлу анимация
+
+        public AnimationNode(string _name, Animation _animation)
+        {
+            SetName(_name);
             animation = _animation;
         }
 
-        public AnimationNode()
+        public AnimationNode(string _name)
         {
+            SetName(_name);
+        }
+
+        public void SetName(string _name)
+        {
+            name = _name;
+            if (!(name[name.Length - 1] == '\0'))
+                name += "\0";
+        }
+
+        public AnimationNode Advance(CharacterEvent _event) // обработка перехода к слет узлу графа анмаций по событию
+        {
+            for (int i = 0; i < NodeEvents.Length; i++)
+                if (NodeEvents[i].neededEvent.CompareTo(_event.eventName) == 0)
+                    return NodeEvents[i].associatedNode;
+                
+            return this;
+        }
+
+        public static void AnimationNodeToStream(AnimationNode node, System.IO.BinaryWriter bw)
+        {
+            bw.WritePackString(node.name);
+            bw.Write(node.animation.type);
+            switch (node.animation.type)
+            {
+                case 0:
+                    FullAnimation.FullAnimationToStream(bw, node.animation as FullAnimation);
+                    break;
+                default:
+                    break;
+            }
+            bw.Write(node.NodeEvents.Length);
+            for (int i = 0; i < node.NodeEvents.Length; i++)
+            {
+                NodeEvent.NodeEventToStream(node.NodeEvents[i], bw);
+            }
+        }
+
+        public static AnimationNode AnimationNodeFromStream(System.IO.BinaryReader br)
+        {
+            AnimationNode node = new AnimationNode(br.ReadPackString());
+            int animType = br.ReadInt32();
+
+            switch (animType)
+            {
+                case 0:
+                    node.animation= FullAnimation.FullAnimationFromStream(br);
+                    break;
+                default:
+                    break;
+            }
+            node.NodeEvents = new NodeEvent[br.ReadInt32()];
+            for (int i = 0; i < node.NodeEvents.Length; i++)
+            {
+                NodeEvent.NodeEventFromStream(br);
+            }
+            return node;
         }
 
         public override string ToString()
         {
-            return animation.name;
+            return name;
         }
     }
-    public class AnimationGraph // граф анимаций
+    public class AnimationGraph                             // граф анимаций
     {
-        public String description;
-        public AnimationNode[] nodes; // массив узлов
-        public AnimationNode currentNode; // текущий узел
+        public string description
+        {
+            get;
+            private set;
+        }
+
+        public void SetDescription(string _description)
+        {
+            description = _description;
+            if (!(description[description.Length - 1] == '\0'))
+                description += "\0";
+        }
+
+        public List<AnimationNode> nodes;                       // массив узлов
 
         public AnimationGraph(AnimationNode[] _nodes)
         {
-            nodes = _nodes;
-            description = "";
-            if (nodes != null)
-            {
-                currentNode = nodes[0];
-            }
+            nodes = new List<AnimationNode>(_nodes);
+            description = "new_graph\0";
         }
 
         public AnimationGraph()
         {
-
+            nodes = new List<AnimationNode>();
         }
 
-        public void Advance(CharacterEvent _event) // обработка перехода к слет узлу графа анмаций по событию
+        public AnimationNode FindNodeWithName(string nodeName)
         {
-            for (int i = 0; i < currentNode.NodeEvents.Length; i++)
+            for (int i = 0; i < nodes.Count; i++)
             {
-                if (currentNode.NodeEvents[i].neededevent.eventName.CompareTo(_event.eventName) == 0)
-                {
-                    currentNode = currentNode.NodeEvents[i].associatedNode;
+                AnimationNode currentNode = nodes[i];
+                if (currentNode != null && currentNode.name == nodeName)
+                    return currentNode;
+            }
+            return null;
+        }
+
+        public void AttachNode(AnimationNode newNode)
+        {
+            for (int i = 0; i < nodes.Count; i++)
+                if (newNode.name.CompareTo(nodes[i].name) == 0)
                     return;
-                }
-            }
+
+            nodes.Add(newNode);
         }
 
-        public static void AnimationGraffToStream(AnimationGraph AnimGraf, System.IO.BinaryWriter bw)
+        public static void AnimationGraphToStream(AnimationGraph AnimGraph, System.IO.BinaryWriter bw)
         {
-            bw.Write(AnimGraf.description);
-            bw.Write(AnimGraf.nodes.Length);
-            for (int i = 0; i < AnimGraf.nodes.Length; i++)
-            {
-                bw.Write(AnimGraf.nodes[i].animation.type);
-                if (AnimGraf.nodes[i].animation.type == 0)
-                {
-                    FullAnim fa = (FullAnim)AnimGraf.nodes[i].animation;
-                    bw.Write(fa.name);
-                    bw.Write(fa.BonesCount);
-                    bw.Write(fa.isTransition);
-                    bw.Write((double)fa.length);
-                    FullAnim.MtrxToStream(bw, fa.matrices);
-                }
-                if (AnimGraf.nodes[i].NodeEvents != null)
-                {
-                    bw.Write(AnimGraf.nodes[i].NodeEvents.Length);
-                    for (int j = 0; j < AnimGraf.nodes[i].NodeEvents.Length; j++)
-                    {
-                        bw.Write(AnimGraf.nodes[i].NodeEvents[j].description);
-                        bw.Write((int)AnimGraf.nodes[i].NodeEvents[j].parent.Tag);
-                        bw.Write((int)AnimGraf.nodes[i].NodeEvents[j].associatedNode.Tag);
-                        bw.Write(AnimGraf.nodes[i].NodeEvents[j].neededevent.eventName);
-
-                    }
-                }
-                else
-                {
-                    bw.Write(0);
-                }
-            }
+            bw.WritePackString(AnimGraph.description);
+            bw.Write(AnimGraph.nodes.Count);
+            for (int i = 0; i < AnimGraph.nodes.Count; i++)
+                AnimationNode.AnimationNodeToStream(AnimGraph.nodes[i], bw);
         }
 
-        public static AnimationGraph AnimationGraffFromStream(System.IO.BinaryReader br)
+        public static AnimationGraph AnimationGraphFromStream(System.IO.BinaryReader br)
         {
-            int lenth = 0;
             AnimationGraph AGrf = new AnimationGraph();
-            AGrf.description = br.ReadString();
-            lenth = br.ReadInt32();
-            AGrf.nodes = new AnimationNode[lenth];
+            AGrf.description = br.ReadPackString();
+            int lenth = br.ReadInt32();
+            AGrf.nodes = new List<AnimationNode>();
             for (int i = 0; i < lenth; i++)
             {
-                int type = br.ReadInt32();
-                if (type == 0)
-                {
-                    FullAnim fa = new FullAnim();
-                    fa.type = type;
-                    fa.name = br.ReadString();
-                    //br.Write(fa.name);
-                    fa.BonesCount = br.ReadInt32();
-                    //br.Write(fa.BonesCount);
-                    fa.isTransition = br.ReadBoolean();
-                    //br.Write(fa.isTransition);
-                    fa.length = (float)br.ReadDouble();
-                    //br.Write(fa.length);
-                    fa.matrices = FullAnim.MtrxFromStream(br);
-                    //MtrxToStream(br, fa.matrices);
-                    AGrf.nodes[i] = new AnimationNode(fa);
-                    //AGrf.nodes[i].animation = fa;
-                }
-                int NodeEventsLength = br.ReadInt32();
-                //bw.Write(AnimGraf.nodes[i].NodeEvents.Length);
-                if (NodeEventsLength > 0)
-                {
-                    AGrf.nodes[i].NodeEvents = new NodeEvent[NodeEventsLength];
-                    for (int j = 0; j < NodeEventsLength; j++)
-                    {
-                        AGrf.nodes[i].NodeEvents[j] = new NodeEvent();
-                        //bw.Write(AnimGraf.nodes[i].NodeEvents[j].description);
-                        AGrf.nodes[i].NodeEvents[j].description = br.ReadString();
-                        //bw.Write((int)AnimGraf.nodes[i].NodeEvents[j].parent.Tag);
-                        AGrf.nodes[i].NodeEvents[j].parent = new AnimationNode();
-                        AGrf.nodes[i].NodeEvents[j].parent.Tag = br.ReadInt32();
-                        //bw.Write((int)AnimGraf.nodes[i].NodeEvents[j].associatedNode.Tag);
-                        AGrf.nodes[i].NodeEvents[j].associatedNode = new AnimationNode();
-                        AGrf.nodes[i].NodeEvents[j].associatedNode.Tag = br.ReadInt32();
-                        //bw.Write(AnimGraf.nodes[i].NodeEvents[j].neededevent.eventName);
-                        AGrf.nodes[i].NodeEvents[j].neededevent = new CharacterEvent(br.ReadString());
-                    }
-                }
+                AnimationNode node = AnimationNode.AnimationNodeFromStream(br);
+                AGrf.nodes.Add(node);
             }
-            loadNodeEventsByTag(AGrf);
+            for (int i = 0; i < AGrf.nodes.Count; i++)
+                for (int j = 0; j < AGrf.nodes[i].NodeEvents.Length; j++)
+                {
+                    AGrf.nodes[i].NodeEvents[j].associatedNode = AGrf.FindNodeWithName(AGrf.nodes[i].NodeEvents[j].associatedNodeName);
+                    AGrf.nodes[i].NodeEvents[j].parentNode = AGrf.FindNodeWithName(AGrf.nodes[i].NodeEvents[j].parentName);
+                }
             return AGrf;
-        }
-
-        public static void loadNodeEventsByTag(AnimationGraph AGrf)
-        {
-            for (int i = 0; i < AGrf.nodes.Length; i++)
-            {
-                if (AGrf.nodes[i].NodeEvents != null)
-                {
-                    for (int j = 0; j < AGrf.nodes[i].NodeEvents.Length; j++)
-                    {
-                        AGrf.nodes[i].NodeEvents[j].parent = AGrf.nodes[(int)AGrf.nodes[i].NodeEvents[j].parent.Tag];
-                        AGrf.nodes[i].NodeEvents[j].associatedNode = AGrf.nodes[(int)AGrf.nodes[i].NodeEvents[j].associatedNode.Tag];
-
-                    }
-                }
-            }
         }
     }
 }
