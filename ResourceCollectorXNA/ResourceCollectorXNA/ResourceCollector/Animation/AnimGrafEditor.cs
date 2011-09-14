@@ -30,7 +30,6 @@ namespace ResourceCollector
             nodesAnim = new List<PictureBox>();
             selected = false;
             chev = new CharEvents();
-
         }
 
         private void button4_Click(object sender, EventArgs e)
