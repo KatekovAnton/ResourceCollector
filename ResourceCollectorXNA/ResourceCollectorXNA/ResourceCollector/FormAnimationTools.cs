@@ -431,7 +431,7 @@ namespace ResourceCollector
         /// <param name="e">Thats it</param>
         private void button2_Click(object sender, EventArgs e)
         {
-            AnimGrafEditor dlg = new AnimGrafEditor(skelet.baseskelet);
+            AnimGrafEditor dlg = new AnimGrafEditor(skelet);
             //dlg.ShowDialog();
 
             if (skelet != null && skelet.BottomIndexes != null && skelet.TopIndexes != null && finalstepredy)

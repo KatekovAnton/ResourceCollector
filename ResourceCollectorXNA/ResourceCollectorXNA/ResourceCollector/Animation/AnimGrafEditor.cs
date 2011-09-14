@@ -13,14 +13,18 @@ namespace ResourceCollector
     public partial class AnimGrafEditor : Form
     {
         public AnimationGraph AnimGraf;
+
+        public AnimGraphViewIfo viewInfo;
         public List<PictureBox> nodesAnim;
-        public ResourceCollector.Skeleton skeleton;
+        public ResourceCollector.SkeletonWithAddInfo skeleton;
         public Point cur, curnew;
         bool selected;
         CharEvents chev;
         public int[] boneIndexes;
-        public AnimGrafEditor(ResourceCollector.Skeleton _skeleton)
+        public AnimGrafEditor(ResourceCollector.SkeletonWithAddInfo _skeleton)
         {
+            AnimGraf = new AnimationGraph();
+
             InitializeComponent();
             this.skeleton = _skeleton;
             nodesAnim = new List<PictureBox>();
@@ -407,5 +411,47 @@ namespace ResourceCollector
                 DrawNodeEvent();
             }
         }
+    }
+
+    public class AnimGraphViewIfo
+    {
+        public List<NodeView> nodes;
+        public List<EdgeView> edges;
+
+        public AnimGraphViewIfo(AnimationGraph _graph)
+        {
+            nodes = new List<NodeView>();
+            //create nodes
+            edges = new List<EdgeView>();
+            //create edges
+        }
+
+        public void Save(System.IO.BinaryWriter bw)
+        { }
+
+        public void Load(System.IO.BinaryReader br)
+        { }
+    }
+
+    public class NodeView
+    {
+        public PictureBox pictureBox;
+        public AnimationNode baseNode;
+        public bool selected;
+        public NodeView()
+        { }
+        public void Draw()
+        { }
+    }
+
+    public class EdgeView
+    {
+        public NodeView startView;
+        public NodeView endView;
+        public bool selected;
+        public EdgeView()
+        { }
+        public void Draw(Graphics g)
+        { }
     }
 }
