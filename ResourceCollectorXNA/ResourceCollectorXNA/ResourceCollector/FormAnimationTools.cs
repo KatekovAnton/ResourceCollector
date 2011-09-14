@@ -399,8 +399,8 @@ namespace ResourceCollector
             finalstepredy = true;
 
             listBox1.Items.Clear();
-            listBox1.Items.Add(new AnimationGraph("Top",skelet.TopIndexes));
-            listBox1.Items.Add(new AnimationGraph("Bottom", skelet.BottomIndexes));
+            listBox1.Items.Add(new AnimationGraph("Top"));
+            listBox1.Items.Add(new AnimationGraph("Bottom"));
 
         }
 
@@ -431,7 +431,7 @@ namespace ResourceCollector
         /// <param name="e">Thats it</param>
         private void button2_Click(object sender, EventArgs e)
         {
-            AnimGrafEditor dlg = new AnimGrafEditor(skelet);
+            AnimGrafEditor dlg = new AnimGrafEditor(skelet, 0);
             //dlg.ShowDialog();
 
             if (skelet != null && skelet.BottomIndexes != null && skelet.TopIndexes != null && finalstepredy)
