@@ -98,6 +98,7 @@ namespace ResourceCollector
 
         public static void AnimationNodeToStream(AnimationNode node, System.IO.BinaryWriter bw)
         {
+            bw.Write(node.index);
             bw.WritePackString(node.name);
             bw.Write(node.animation.type);
             switch (node.animation.type)
@@ -118,6 +119,7 @@ namespace ResourceCollector
         public static AnimationNode AnimationNodeFromStream(System.IO.BinaryReader br)
         {
             AnimationNode node = new AnimationNode(br.ReadPackString());
+            node.index = br.ReadInt32();
             int animType = br.ReadInt32();
 
             switch (animType)
