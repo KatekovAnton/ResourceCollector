@@ -23,7 +23,7 @@ namespace ResourceCollector
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (chev.ShowDialog() == DialogResult.OK && chev.selectedIndex>=0)
+            if (chev.ShowDialog() == DialogResult.OK && chev.selectedIndex >= 0 && chev.listBox1.Items.Count>0)
             {
                 CharEventIndex = chev.selectedIndex;
                 textBox2.Text = chev.listBox1.Items[chev.selectedIndex].ToString();

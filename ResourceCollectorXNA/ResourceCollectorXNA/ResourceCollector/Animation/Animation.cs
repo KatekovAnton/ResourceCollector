@@ -10,7 +10,6 @@ namespace ResourceCollector
     public abstract class Animation // абстракный общий класс анимации
     {
         public abstract Matrix[] GetMatrices(float frame);
-
         public bool isTransition;
         public int type;
 

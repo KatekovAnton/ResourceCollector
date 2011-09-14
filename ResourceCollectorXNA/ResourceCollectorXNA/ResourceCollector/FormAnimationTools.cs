@@ -397,6 +397,11 @@ namespace ResourceCollector
                 skelet.WeaponIndex, skelet.HeadIndex, skelet.TopRootIndex, skelet.BottomRootIndex, skelet.RootIndex);
             button8.Enabled = false;
             finalstepredy = true;
+
+            listBox1.Items.Clear();
+            listBox1.Items.Add(new AnimationGraph("Top",skelet.TopIndexes));
+            listBox1.Items.Add(new AnimationGraph("Bottom", skelet.BottomIndexes));
+
         }
 
         private void button9_Click(object sender, EventArgs e)
