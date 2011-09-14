@@ -13,13 +13,8 @@ namespace ResourceCollector
     public partial class AnimGrafEditor : Form
     {
         public AnimationGraph AnimGraf;
-
         public AnimGraphViewIfo viewInfo;
-        public List<PictureBox> nodesAnim;
         public ResourceCollector.SkeletonWithAddInfo skeleton;
-        public Point cur, curnew;
-        bool selected;
-        public BaseView selectedView;
         CharEvents chev;
         public int[] boneIndexes;
 
@@ -32,7 +27,7 @@ namespace ResourceCollector
             skeleton = _skeleton;
             chev = new CharEvents();
 
-            viewInfo = new AnimGraphViewIfo(AnimGraf, this.pictureBox1);
+            viewInfo = new AnimGraphViewIfo(AnimGraf, this.pictureBox1, imageList1, new MouseEventHandler(pictureBox1_MouseDoubleClick), new EventHandler(pictureBox1_Click));
             switch (skeletonPart)
             {
                 case 0:
@@ -50,7 +45,7 @@ namespace ResourceCollector
             InitializeComponent();
             AnimGraf = _animGraph;
             skeleton = _skeleton;
-            viewInfo = new AnimGraphViewIfo(AnimGraf, this.pictureBox1);
+            viewInfo = new AnimGraphViewIfo(AnimGraf, this.pictureBox1,imageList1, new MouseEventHandler(pictureBox1_MouseDoubleClick), new EventHandler(pictureBox1_Click));
             switch (skeletonPart)
             {
                 case 0:
@@ -75,43 +70,22 @@ namespace ResourceCollector
                 curnode = new AnimationNode(dlg.textBox2.Text);
                 curnode.index = listBox1.Items.Count;
                 listBox1.Items.Add(curnode);
-                addNodesAnim(curnode);
+                viewInfo.addNodeView(curnode,new MouseEventHandler(pictureBox1_MouseDoubleClick),new EventHandler(pictureBox1_Click));
             }
         }
-
-        private void addNodesAnim(AnimationNode curnode)
-        {
-            PictureBox pic = new PictureBox();
-            pic.Parent = pictureBox1;
-            pic.MouseDown += new MouseEventHandler(pictureBox2_MouseDown);
-            pic.MouseMove += new MouseEventHandler(pictureBox2_MouseMove);
-            pic.MouseUp += new MouseEventHandler(pictureBox1_MouseUp);
-            pic.MouseDoubleClick += new MouseEventHandler(pictureBox1_MouseDoubleClick);
-            pic.Click += new EventHandler(pictureBox1_Click);
-            pic.BorderStyle = BorderStyle.FixedSingle;
-            Bitmap btm = (Bitmap)imageList1.Images[0].Clone();
-            Graphics gr = Graphics.FromImage(btm);
-            pic.SizeMode = PictureBoxSizeMode.AutoSize;
-            gr.DrawString(curnode.name, new System.Drawing.Font("Times New Roman", 8), Brushes.Black, 5, btm.Height / 2 - 4);
-            gr.Dispose();
-            pic.Image = btm;
-            pic.Tag = nodesAnim.Count;
-
-            pic.Location = new Point(nodesAnim.Count * (imageList1.Images[0].Width + 5), nodesAnim.Count * (imageList1.Images[0].Height + 3));
-            nodesAnim.Add(pic);
-        }
-
+        
         private void button3_Click(object sender, EventArgs e)
         {
             if (listBox1.SelectedIndex != -1)
             {
-                nodesAnim[listBox1.SelectedIndex].Dispose();
-                nodesAnim.RemoveAt(listBox1.SelectedIndex);
+                viewInfo.RemoveNodesViewAt(listBox1.SelectedIndex);
                 AnimationNode an = (AnimationNode)listBox1.Items[listBox1.SelectedIndex];
                 RemoveNodeEventsByAnimationNode(an);
                 listBox1.Items.RemoveAt(listBox1.SelectedIndex);
                 TagRefresh();
-                DrawNodeEvent();
+                viewInfo.selectedNode = listBox1.SelectedIndex;
+                viewInfo.selectedEdge = listBox2.SelectedIndex;
+                viewInfo.Refresh();    
             }
         }
 
@@ -136,70 +110,21 @@ namespace ResourceCollector
             foreach (NodeEvent ss in toremove)
             {
                 listBox2.Items.Remove(ss);
-            }  
+            }
+            Object[] obj=new Object[ listBox2.Items.Count];
+            listBox2.Items.CopyTo(obj,0);
+            viewInfo.loadEdgeView((NodeEvent[]) obj);
         }
 
         private void TagRefresh()
         {
-            for (int i = 0; i < nodesAnim.Count; i++)
+            for (int i = 0; i <viewInfo.nodes.Count; i++)
             {
-                nodesAnim[i].Tag = i;
                 AnimationNode an = (AnimationNode)listBox1.Items[i];
                 an.index = i;
-                nodesAnim[i].Tag = i;
+                viewInfo.nodes[i].pictureBox.Tag = i;
             }
-        }
-
-        private void drawnode(int select)
-        {
-            for (int i = 0; i < nodesAnim.Count; i++)
-            {
-                Bitmap btm;
-                PictureBox pic = nodesAnim[i];
-                AnimationNode curanim = (AnimationNode)listBox1.Items[i];
-                if (select == i)
-                {
-                    btm = (Bitmap)imageList1.Images[1].Clone();                    
-                }
-                else
-                {
-                     btm = (Bitmap)imageList1.Images[0].Clone();
-                }
-                Graphics gr = Graphics.FromImage(btm);
-                gr.DrawString(curanim.name, new System.Drawing.Font("Times New Roman", 8), Brushes.Black, 5, btm.Height / 2 - 4);
-                gr.Dispose();
-                pic.Image = btm;
-            }
-
-        }
-
-        private void pictureBox2_MouseDown(object sender, MouseEventArgs e)
-        {
-            selected = true;
-            cur = Cursor.Position;
-            PictureBox ss = (PictureBox)sender;
-            curnew = ss.Location;
-        }
-
-        private void pictureBox2_MouseMove(object sender, MouseEventArgs e)
-        {           
-            if (selected)
-            { 
-                PictureBox ss = (PictureBox)sender;
-                ss.Location = new Point(Cursor.Position.X - cur.X + curnew.X, Cursor.Position.Y - cur.Y + curnew.Y);
-                pictureBox1.Invalidate();
-                DrawNodeEvent();
-            }
-        }
-
-        private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
-        {
-            selected = false;
-            PictureBox ss = (PictureBox)sender;  
-            curnew = ss.Location;
-            DrawNodeEvent();
-
-        }
+        }    
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
@@ -210,7 +135,9 @@ namespace ResourceCollector
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            drawnode(listBox1.SelectedIndex);            
+            viewInfo.selectedNode = listBox1.SelectedIndex;
+            viewInfo.selectedEdge = listBox2.SelectedIndex;
+            viewInfo.Refresh();        
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -225,46 +152,19 @@ namespace ResourceCollector
                     (AnimationNode)listBox1.Items[needlg.comboBox2.SelectedIndex],chev.listBox1.Items[needlg.CharEventIndex].ToString());
 
                 listBox2.Items.Add(nodeev);
+                viewInfo.addEdgeView(nodeev);
             }
-            DrawNodeEvent();            
+            viewInfo.selectedNode = listBox1.SelectedIndex;
+            viewInfo.selectedEdge = listBox2.SelectedIndex;
+            viewInfo.Refresh();         
         }
-
-        public void DrawNodeEvent()
-        {
-            Bitmap btm = new Bitmap(pictureBox1.Width, pictureBox1.Height);
-            Graphics gr = Graphics.FromImage(btm);
-            for (int i = 0; i < listBox2.Items.Count; i++)
-            {
-                NodeEvent ne=(NodeEvent)listBox2.Items[i];
-                PictureBox n1=nodesAnim[ne.parentNode.index];
-                PictureBox n2=nodesAnim[ne.associatedNode.index];
-
-                int x1 = n1.Location.X + (n1.Width / 2);
-                int y1 = n1.Location.Y + (n1.Height / 2);
-                int x2 = n2.Location.X + (n2.Width / 2);
-                int y2 = n2.Location.Y + (n2.Height / 2);
-
-                int x3 = x2-((x2-x1)/5);
-                int y3 = y2 - ((y2 - y1) / 5);
-
-                if (i == listBox2.SelectedIndex)
-                {
-                    gr.DrawLine(new Pen(Brushes.Red, 3), new Point(x1, y1), new Point(x2, y2));                    
-                }
-                else
-                {
-                    gr.DrawLine(new Pen(Brushes.Green,3),new Point( x1,y1),new Point(x2,y2));
-                }
-                gr.DrawLine(new Pen(Brushes.Black, 6), new Point(x3, y3), new Point(x2, y2));
-            }
-            gr.Dispose();
-            pictureBox1.Image = btm;
-            pictureBox1.Invalidate();
-        }
+           
 
         private void listBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            DrawNodeEvent();
+            viewInfo.selectedNode = listBox1.SelectedIndex;
+            viewInfo.selectedEdge = listBox2.SelectedIndex;
+            viewInfo.Refresh();
         }
 
         private void pictureBox1_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -281,8 +181,11 @@ namespace ResourceCollector
                     (AnimationNode)listBox1.Items[needlg.comboBox2.SelectedIndex], chev.listBox1.Items[needlg.CharEventIndex].ToString());
 
                 listBox2.Items.Add(nodeev);
+                viewInfo.addEdgeView(nodeev);
             }
-            DrawNodeEvent();
+            viewInfo.selectedNode = listBox1.SelectedIndex;
+            viewInfo.selectedEdge = listBox2.SelectedIndex;
+            viewInfo.Refresh();
         }
 
         public void BildAGraf()
@@ -333,12 +236,12 @@ namespace ResourceCollector
             SaveFileDialog sfd = new SaveFileDialog();
             if (sfd.ShowDialog() == DialogResult.OK)
             {
-                System.IO.BinaryWriter bw = new System.IO.BinaryWriter(sfd.OpenFile());                
-                bw.Write(nodesAnim.Count);
-                for (int i = 0; i < nodesAnim.Count;i++ )
+                System.IO.BinaryWriter bw = new System.IO.BinaryWriter(sfd.OpenFile());
+                bw.Write(viewInfo.nodes.Count);
+                for (int i = 0; i < viewInfo.nodes.Count; i++)
                 {
-                    bw.Write(nodesAnim[i].Location.X);
-                    bw.Write(nodesAnim[i].Location.Y);
+                    bw.Write(viewInfo.nodes[i].pictureBox.Location.X);
+                    bw.Write(viewInfo.nodes[i].pictureBox.Location.Y);
                 }
                 bw.Close();
 
@@ -357,11 +260,12 @@ namespace ResourceCollector
                 {
                     int x = bw.ReadInt32();
                     int y = bw.ReadInt32();
-                    nodesAnim[i].Location = new Point(x, y);
+                    viewInfo.nodes[i].pictureBox.Location = new Point(x, y);
                 }
                 bw.Close();
-                DrawNodeEvent();
-                drawnode(listBox1.SelectedIndex);
+                viewInfo.selectedNode = listBox1.SelectedIndex;
+                viewInfo.selectedEdge = listBox2.SelectedIndex;
+                viewInfo.Refresh();
 
             }
         }
@@ -380,18 +284,14 @@ namespace ResourceCollector
 
         public void loadFormByAnimationGraph(AnimationGraph AGrf)
         {
+            viewInfo.Clear();
+            viewInfo = new AnimGraphViewIfo(AGrf, pictureBox1, imageList1, new MouseEventHandler(pictureBox1_MouseDoubleClick), new EventHandler(pictureBox1_Click));
             listBox1.Items.Clear();
             listBox2.Items.Clear();
             listBox1.Items.AddRange(AGrf.nodes.ToArray());
             chev.listBox1.Items.Clear();
-            for (int i = 0; i < nodesAnim.Count; i++)
-            {
-                nodesAnim[i].Dispose();
-            }
-            nodesAnim.Clear();
             for (int i = 0; i < AGrf.nodes.Count; i++)
-            {
-                addNodesAnim(AGrf.nodes[i]);
+            {  
                 if (AGrf.nodes[i].NodeEvents != null)
                 {
                     listBox2.Items.AddRange(AGrf.nodes[i].NodeEvents);
@@ -406,12 +306,12 @@ namespace ResourceCollector
                         }
                     }
                 }
-
             }
             TagRefresh();
             listBox1.SelectedIndex = 0;
-            drawnode(0);
-            DrawNodeEvent();
+            viewInfo.selectedNode = listBox1.SelectedIndex;
+            viewInfo.selectedEdge = listBox2.SelectedIndex;
+            viewInfo.Refresh();
         }
         private bool FindCharacterEvent(string charev)
         {
@@ -435,8 +335,13 @@ namespace ResourceCollector
             if (listBox2.SelectedIndex != -1)
             {
                 listBox2.Items.RemoveAt(listBox2.SelectedIndex);
-                DrawNodeEvent();
+                viewInfo.Refresh();
             }
+        }
+
+        private void pictureBox1_Click_1(object sender, EventArgs e)
+        {
+
         }
     }
 
@@ -444,15 +349,27 @@ namespace ResourceCollector
     {
         public List<NodeView> nodes;
         public List<EdgeView> edges;
-
+        ImageList imageList1;
+        public bool selected;
         public Control baseControl;
-
-        public AnimGraphViewIfo(AnimationGraph _graph, Control baseControl)
+        public int selectedNode;
+        public int selectedEdge;
+        Point cur, curnew;
+        public AnimGraphViewIfo(AnimationGraph _graph, Control _baseControl, ImageList _imageList1, MouseEventHandler doubleClick, EventHandler click)
         {
             nodes = new List<NodeView>();
-            //create nodes
             edges = new List<EdgeView>();
-            //create edges
+            baseControl = _baseControl;
+            for (int i = 0; i < _graph.nodes.Count; i++)
+            {
+                addNodeView(_graph.nodes[i], doubleClick, click); //create nodes   
+                for (int j = 0; j < _graph.nodes[i].NodeEvents.Length; j++) //create edges
+                {
+                     addEdgeView(_graph.nodes[i].NodeEvents[j]);
+                }       
+            }        
+        
+            imageList1=_imageList1;
         }
 
         public void Save(System.IO.BinaryWriter bw)
@@ -460,27 +377,145 @@ namespace ResourceCollector
 
         public void Load(System.IO.BinaryReader br)
         { }
+
+        public void RemoveNodesViewAt(int index)
+        {
+            nodes[index].pictureBox.Dispose();
+            nodes.RemoveAt(index);
+        }
+        public void Refresh()
+        {
+            drawnodes();
+            DrawNodeEvent();
+        }
+        public void Clear()
+        {
+            for (int i = 0; i < nodes.Count; i++)
+            {
+                nodes[i].pictureBox.Dispose();
+            }
+            nodes.Clear();
+            edges.Clear();
+        }
+        public void addNodeView(AnimationNode curnode, MouseEventHandler doubleClick, EventHandler click)
+        {
+            PictureBox pic = new PictureBox();
+            pic.Parent = baseControl;
+            pic.MouseDown += new MouseEventHandler(pictureBox2_MouseDown);
+            pic.MouseMove += new MouseEventHandler(pictureBox2_MouseMove);
+            pic.MouseUp += new MouseEventHandler(pictureBox1_MouseUp);
+            pic.MouseDoubleClick += doubleClick;
+            pic.Click += click;
+            pic.BorderStyle = BorderStyle.FixedSingle;
+            Bitmap btm = (Bitmap)imageList1.Images[0].Clone();
+            Graphics gr = Graphics.FromImage(btm);
+            pic.SizeMode = PictureBoxSizeMode.AutoSize;
+            gr.DrawString(curnode.name, new System.Drawing.Font("Times New Roman", 8), Brushes.Black, 5, btm.Height / 2 - 4);
+            gr.Dispose();
+            pic.Image = btm;
+            pic.Tag = nodes.Count;
+            pic.Location = new Point(nodes.Count * (imageList1.Images[0].Width + 5), nodes.Count * (imageList1.Images[0].Height + 3));
+            nodes.Add(new NodeView(curnode,pic));
+            baseControl.Invalidate();
+        }
+        
+        public void addEdgeView(NodeEvent curnodev)
+        {
+            EdgeView curent=new EdgeView(nodes[curnodev.parentNode.index],nodes[curnodev.associatedNode.index]);
+            edges.Add(curent);
+        }
+        public void loadEdgeView(NodeEvent[] nodeEvents)
+        {
+            edges.Clear();
+            for (int i = 0; i < nodeEvents.Length; i++)
+            {
+                addEdgeView((NodeEvent)nodeEvents[i]);
+            } 
+        }
+        private void pictureBox2_MouseDown(object sender, MouseEventArgs e)
+        {
+            selected = true;
+            cur = Cursor.Position;
+            PictureBox ss = (PictureBox)sender;
+            curnew = ss.Location;
+        }
+
+        private void pictureBox2_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (selected)
+            {
+                PictureBox ss = (PictureBox)sender;
+                ss.Location = new Point(Cursor.Position.X - cur.X + curnew.X, Cursor.Position.Y - cur.Y + curnew.Y);
+                baseControl.Invalidate();
+                DrawNodeEvent();
+            }
+        }
+
+        private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
+        {
+            selected = false;
+            PictureBox ss = (PictureBox)sender;
+            curnew = ss.Location;
+            DrawNodeEvent();
+
+        }
+
+        private void drawnodes()
+        {
+            for (int i = 0; i < nodes.Count; i++)
+            {
+                nodes[i].Draw(selectedNode == i,imageList1);                
+            }
+
+        }
+
+        private void DrawNodeEvent()
+        {
+            Bitmap btm = new Bitmap(baseControl.Width, baseControl.Height);
+            Graphics gr = Graphics.FromImage(btm);
+            for (int i = 0; i < edges.Count; i++)
+            {
+                edges[i].Draw(gr, i == selectedEdge);            
+            }
+            gr.Dispose();
+            PictureBox pictureBox1 = (PictureBox)baseControl;
+            //baseControl.BackgroundImage = btm;
+            pictureBox1.Image = btm;
+           // baseControl.Invalidate();
+        }
+
     }
 
-    public abstract class BaseView
-    {
-        public bool selected;
-    }
 
-    public class NodeView : BaseView
+
+    public class NodeView 
     {
         public PictureBox pictureBox;
         public AnimationNode baseNode;
-        public NodeView(AnimationNode _node, PictureBox parentBox)
+        public NodeView(AnimationNode _node, PictureBox _pictureBox)
         {
             baseNode = _node;
-            pictureBox = new PictureBox();
+            pictureBox = _pictureBox;
         }
-        public void Draw()
-        { }
+        public void Draw(bool selected, ImageList imglst)
+        {
+            Bitmap btm;     
+            if (selected)
+            {
+                btm = (Bitmap)imglst.Images[1].Clone();
+            }
+            else
+            {
+                btm = (Bitmap)imglst.Images[0].Clone();
+            }
+            Graphics gr = Graphics.FromImage(btm);
+            gr.DrawString(baseNode.ToString(), new System.Drawing.Font("Times New Roman", 8), Brushes.Black, 5, btm.Height / 2 - 4);
+            gr.Dispose();
+            pictureBox.Image = btm;
+        }
     }
 
-    public class EdgeView : BaseView
+    public class EdgeView
     {
         public NodeView startView;
         public NodeView endView;
@@ -489,7 +524,30 @@ namespace ResourceCollector
             startView = _start;
             endView = _end;
         }
-        public void Draw(Graphics g)
-        { }
+        public void Draw(Graphics gr, bool selected)
+        {
+            PictureBox n1 = startView.pictureBox;//nodesAnim[ne.parentNode.index];
+            PictureBox n2 = endView.pictureBox;// nodesAnim[ne.associatedNode.index];
+
+            int x1 = n1.Location.X + (n1.Width / 2);
+            int y1 = n1.Location.Y + (n1.Height / 2);
+            int x2 = n2.Location.X + (n2.Width / 2);
+            int y2 = n2.Location.Y + (n2.Height / 2);
+
+            int x3 = x2 - ((x2 - x1) / 5);
+            int y3 = y2 - ((y2 - y1) / 5);
+
+
+            if (selected)
+            {
+                gr.DrawLine(new Pen(Brushes.Red, 4), new Point(x1, y1), new Point(x2, y2));
+            }
+            else
+            {
+                gr.DrawLine(new Pen(Brushes.Green, 3), new Point(x1, y1), new Point(x2, y2));
+            }
+            gr.DrawLine(new Pen(Brushes.Black, 6), new Point(x3, y3), new Point(x2, y2));
+
+        }
     }
 }
