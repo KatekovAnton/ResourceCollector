@@ -19,18 +19,47 @@ namespace ResourceCollector
         public ResourceCollector.SkeletonWithAddInfo skeleton;
         public Point cur, curnew;
         bool selected;
+        public BaseView selectedView;
         CharEvents chev;
         public int[] boneIndexes;
-        public AnimGrafEditor(ResourceCollector.SkeletonWithAddInfo _skeleton)
+
+        public AnimGrafEditor(ResourceCollector.SkeletonWithAddInfo _skeleton, int skeletonPart)
         {
+            
             AnimGraf = new AnimationGraph();
 
             InitializeComponent();
-            this.skeleton = _skeleton;
-            nodesAnim = new List<PictureBox>();
-            selected = false;
+            skeleton = _skeleton;
             chev = new CharEvents();
+            viewInfo = new AnimGraphViewIfo(AnimGraf, this.pictureBox1);
+            switch (skeletonPart)
+            {
+                case 0:
+                    boneIndexes = _skeleton.BottomIndexes;
+                    break;
+                case 1:
+                    boneIndexes = _skeleton.TopIndexes;
+                    break;
+                default: break;
+            }
+        }
 
+        public AnimGrafEditor(ResourceCollector.AnimationGraph _animGraph, ResourceCollector.SkeletonWithAddInfo _skeleton, int skeletonPart)
+        {
+            InitializeComponent();
+            AnimGraf = _animGraph;
+            skeleton = _skeleton;
+            viewInfo = new AnimGraphViewIfo(AnimGraf, this.pictureBox1);
+            switch (skeletonPart)
+            {
+                case 0:
+                    boneIndexes = _skeleton.BottomIndexes;
+                    break;
+                case 1:
+                    boneIndexes = _skeleton.TopIndexes;
+                    break;
+                default: break;
+            }
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -47,6 +76,7 @@ namespace ResourceCollector
                 addNodesAnim(curnode);
             }
         }
+
         private void addNodesAnim(AnimationNode curnode)
         {
             PictureBox pic = new PictureBox();
@@ -68,6 +98,7 @@ namespace ResourceCollector
             pic.Location = new Point(nodesAnim.Count * (imageList1.Images[0].Width + 5), nodesAnim.Count * (imageList1.Images[0].Height + 3));
             nodesAnim.Add(pic);
         }
+
         private void button3_Click(object sender, EventArgs e)
         {
             if (listBox1.SelectedIndex != -1)
@@ -81,6 +112,7 @@ namespace ResourceCollector
                 DrawNodeEvent();
             }
         }
+
         private void RemoveNodeEventsByAnimationNode(AnimationNode an )
         {
             if (an.NodeEvents != null)
@@ -102,8 +134,7 @@ namespace ResourceCollector
             foreach (NodeEvent ss in toremove)
             {
                 listBox2.Items.Remove(ss);
-            }
-          
+            }  
         }
 
         private void TagRefresh()
@@ -158,8 +189,6 @@ namespace ResourceCollector
                 DrawNodeEvent();
             }
         }
-
-
 
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
@@ -294,7 +323,6 @@ namespace ResourceCollector
                 AnimationGraph.AnimationGraphToStream(AnimGraf,bw);
                 bw.Close();
             }
-
         }
       
 
@@ -346,10 +374,7 @@ namespace ResourceCollector
                 AnimGraf = AnimationGraph.AnimationGraphFromStream(br);
                 loadFormByAnimationGraph(AnimGraf);
             }
-
         }
-  
-       
 
         public void loadFormByAnimationGraph(AnimationGraph AGrf)
         {
@@ -418,7 +443,9 @@ namespace ResourceCollector
         public List<NodeView> nodes;
         public List<EdgeView> edges;
 
-        public AnimGraphViewIfo(AnimationGraph _graph)
+        public Control baseControl;
+
+        public AnimGraphViewIfo(AnimationGraph _graph, Control baseControl)
         {
             nodes = new List<NodeView>();
             //create nodes
@@ -433,24 +460,33 @@ namespace ResourceCollector
         { }
     }
 
-    public class NodeView
+    public abstract class BaseView
+    {
+        public bool selected;
+    }
+
+    public class NodeView : BaseView
     {
         public PictureBox pictureBox;
         public AnimationNode baseNode;
-        public bool selected;
-        public NodeView()
-        { }
+        public NodeView(AnimationNode _node, PictureBox parentBox)
+        {
+            baseNode = _node;
+            pictureBox = new PictureBox();
+        }
         public void Draw()
         { }
     }
 
-    public class EdgeView
+    public class EdgeView : BaseView
     {
         public NodeView startView;
         public NodeView endView;
-        public bool selected;
-        public EdgeView()
-        { }
+        public EdgeView(NodeView _start, NodeView _end)
+        {
+            startView = _start;
+            endView = _end;
+        }
         public void Draw(Graphics g)
         { }
     }

@@ -150,21 +150,14 @@ namespace ResourceCollector
             get;
             private set;
         }
-        public int[] boneIndexes
-        {
-            get;
-            private set;
-        }
+
         public void SetDescription(string _description)
         {
             description = _description;
             if (!(description[description.Length - 1] == '\0'))
                 description += "\0";
         }
-        public void SetBoneIndexes(int[] _boneIndexes)
-        {
-            boneIndexes = _boneIndexes;
-        }
+
         public List<AnimationNode> nodes;                       // массив узлов
 
         public AnimationGraph(AnimationNode[] _nodes)
@@ -172,17 +165,12 @@ namespace ResourceCollector
             nodes = new List<AnimationNode>(_nodes);
             description = "new_graph\0";
         }
-        public AnimationGraph(AnimationNode[] _nodes, int[] _boneIndexes)
-        {
-            nodes = new List<AnimationNode>(_nodes);
-            description = "new_graph\0";
-            SetBoneIndexes(_boneIndexes);
-        }
-        public AnimationGraph(string _description, int[] _boneIndexes)
+
+        public AnimationGraph(string _description)
         {
             description = _description + "\0";
-            SetBoneIndexes(_boneIndexes);
         }
+
         public AnimationGraph()
         {
             nodes = new List<AnimationNode>();
