@@ -13,20 +13,19 @@ namespace ResourceCollector
 {
     public partial class FormAnimationTools : Form
     {
+        public SkeletonWithAddInfo skelet;
 
-        public SkeletonWithAddInfo skelet
-        {
-            get;
-            private set;
-        }
+        private bool finalstepredy;
         private SkeletonViewer skeletonviever;
         private SkeletonInformation skinfo;
+
         public FormAnimationTools()
         {
             InitializeComponent();
             groupBox2.Enabled = false;
             this.WindowState = FormWindowState.Maximized;
         }
+
         public FormAnimationTools(Skeleton s)
         {
             InitializeComponent();
@@ -56,6 +55,7 @@ namespace ResourceCollector
             button1.Enabled = button4.Enabled = button9.Enabled = false;
             this.WindowState = FormWindowState.Maximized;
         }
+
         public FormAnimationTools(SkeletonWithAddInfo s, Pack p, System.Windows.Forms.TreeView outputtreeview)
         {
             InitializeComponent();
@@ -76,7 +76,7 @@ namespace ResourceCollector
             treeView1.ExpandAll();
             finalstepredy = ((s.TopIndexes.Length + s.BottomIndexes.Length) == s.baseskelet.bones.Length);
             button6.Enabled = !finalstepredy;
-            button8.Enabled = true;
+            button8.Enabled = !finalstepredy;
             OutInfo();
             button5.Enabled = true;
             skeletonviever = new SkeletonViewer(skelet.baseskelet);
@@ -85,6 +85,11 @@ namespace ResourceCollector
             checkBox1.Enabled = false;
             checkBox1.Checked = false;
             button1.Enabled = button4.Enabled = button9.Enabled = false;
+
+            listBox1.Items.Clear();
+            listBox1.Items.Add(new AnimationGraph("Bottom"));
+            listBox1.Items.Add(new AnimationGraph("Top"));
+
             this.WindowState = FormWindowState.Maximized;
         }
 
@@ -98,6 +103,7 @@ namespace ResourceCollector
                 _tn.Nodes.Add(tn);
             }
         }
+
         private void button1_Click(object sender, EventArgs e)
         {
             FormSelectSkeletonType fst = new FormSelectSkeletonType();
@@ -171,16 +177,19 @@ namespace ResourceCollector
             checkBox1.Enabled = true;
             checkBox1.Checked = true;
         }
+
         private void button5_Click(object sender, EventArgs e)
         {
             skeletonviever.ShowDialog();
         }
+
         private void OutInfo()
         {
             textBox2.Text = "Top indexes:\r\n" + arraytostring(skelet.TopIndexes) + "\r\n--------------\r\nBottom indexes:\r\n" + arraytostring(skelet.BottomIndexes) +
                         string.Format("\r\n--------------\r\nWeapon index = {0}\r\nHead index = {1}\r\nTop root index = {2}\r\nBottom root index = {3}\r\nRoot index = {4}",
                 skelet.WeaponIndex, skelet.HeadIndex, skelet.TopRootIndex, skelet.BottomRootIndex, skelet.RootIndex);
         }
+
         private void button6_Click(object sender, EventArgs e)
         {
             ListView lv = new ListView(skelet.baseskelet);
@@ -211,9 +220,9 @@ namespace ResourceCollector
             }
 
         }
+
         private void button7_Click(object sender, EventArgs e)
         {
-            // botom
             ListView lv = new ListView(skelet.baseskelet);
             if(lv.ShowDialog() == System.Windows.Forms.DialogResult.OK && lv.indexes != null)
             {
@@ -242,6 +251,7 @@ namespace ResourceCollector
                 button8.Enabled = true;
             }
         }
+
         private string arraytostring<T>(T array) where T : IEnumerable
         {
             string s = "";
@@ -252,6 +262,7 @@ namespace ResourceCollector
                 }
             return s;
         }
+
         private class ListView:Form
         {
             Skeleton skelet;
@@ -349,11 +360,12 @@ namespace ResourceCollector
             private System.Windows.Forms.Button button1;
 
         }
+
         private void treeView1_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
          //   treeView1.ExpandAll();
         }
-        bool finalstepredy;
+        
         private void button8_Click(object sender, EventArgs e)
         {
 
@@ -399,8 +411,8 @@ namespace ResourceCollector
             finalstepredy = true;
 
             listBox1.Items.Clear();
-            listBox1.Items.Add(new AnimationGraph("Top"));
             listBox1.Items.Add(new AnimationGraph("Bottom"));
+            listBox1.Items.Add(new AnimationGraph("Top"));
 
         }
 
@@ -431,16 +443,13 @@ namespace ResourceCollector
         /// <param name="e">Thats it</param>
         private void button2_Click(object sender, EventArgs e)
         {
-            AnimGrafEditor dlg = new AnimGrafEditor(skelet, 0);
-            //dlg.ShowDialog();
-
-            if (skelet != null && skelet.BottomIndexes != null && skelet.TopIndexes != null && finalstepredy)
+            if (listBox1.SelectedItem !=null && skelet != null && skelet.BottomIndexes != null && skelet.TopIndexes != null && finalstepredy)
             {
-                //load animation
-
+                AnimGrafEditor dlg = new AnimGrafEditor(listBox1.SelectedItem as AnimationGraph, skelet, listBox1.SelectedIndex);
+     
                 if (dlg.ShowDialog() == DialogResult.OK)
                 {
-                    MessageBox.Show("READY FOR LOAD ANIMATIONS!!!!!!");
+                    //
                 }
             }
         }

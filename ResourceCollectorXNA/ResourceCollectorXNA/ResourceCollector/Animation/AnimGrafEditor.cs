@@ -45,6 +45,7 @@ namespace ResourceCollector
             InitializeComponent();
             AnimGraf = _animGraph;
             skeleton = _skeleton;
+            chev = new CharEvents();
             viewInfo = new AnimGraphViewIfo(AnimGraf, this.pictureBox1,imageList1, new MouseEventHandler(pictureBox1_MouseDoubleClick), new EventHandler(pictureBox1_Click));
             switch (skeletonPart)
             {
