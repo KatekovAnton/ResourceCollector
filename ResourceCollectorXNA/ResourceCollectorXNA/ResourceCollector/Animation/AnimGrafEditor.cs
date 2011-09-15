@@ -92,13 +92,12 @@ namespace ResourceCollector
 
         private void RemoveNodeEventsByAnimationNode(AnimationNode an )
         {
-            if (an.NodeEvents != null)
-            {
-                foreach (NodeEvent ne in an.NodeEvents)
+
+            foreach (NodeEvent ne in an.nodeEvents)
                 {
                     listBox2.Items.Remove(ne);
                 }
-            }
+            
             List<NodeEvent> toremove = new List<NodeEvent>();
             foreach(Object ss in listBox2.Items)
             {
@@ -196,7 +195,7 @@ namespace ResourceCollector
             {
                 int count = 0;
                 AnimationNode an = (AnimationNode)listBox1.Items[i];
-                an.NodeEvents = null;
+               // an.nodeEvents = null;
                 for (int j = 0; j < listBox2.Items.Count; j++)
                 {
                     NodeEvent ne = (NodeEvent)listBox2.Items[j];
@@ -204,18 +203,18 @@ namespace ResourceCollector
                     if (((int)ne.parentNode.index) == ((int)an.index) )
                     {
                         NodeEvent[] ss = new NodeEvent[count + 1];
-                        if (an.NodeEvents != null)
-                        {
-                            an.NodeEvents.CopyTo(ss, 0);
-                        }
+                        
+                            an.nodeEvents.CopyTo(ss, 0);
+                        
                         ss[count] = ne;
                         count++;
-                        an.NodeEvents = ss;
+                        an.nodeEvents = new List<NodeEvent>( ss);
                     }
                 }
                 res[i] = an;
             }
-            AnimGraf = new AnimationGraph(res);
+            AnimGraf.nodes = new List<AnimationNode>(res);
+           // AnimGraf = new AnimationGraph();
 
         }
         private void button5_Click(object sender, EventArgs e)
@@ -292,21 +291,19 @@ namespace ResourceCollector
             listBox1.Items.AddRange(AGrf.nodes.ToArray());
             chev.listBox1.Items.Clear();
             for (int i = 0; i < AGrf.nodes.Count; i++)
-            {  
-                if (AGrf.nodes[i].NodeEvents != null)
+            {
+
+                listBox2.Items.AddRange(AGrf.nodes[i].nodeEvents.ToArray());
+
+
+                for (int j = 0; j < AGrf.nodes[i].nodeEvents.Count; j++)
                 {
-                    listBox2.Items.AddRange(AGrf.nodes[i].NodeEvents);
-                }
-                if (AGrf.nodes[i].NodeEvents != null)
-                {
-                    for (int j = 0; j < AGrf.nodes[i].NodeEvents.Length; j++)
+                    if (!FindCharacterEvent(AGrf.nodes[i].nodeEvents[j].neededEvent))
                     {
-                        if (!FindCharacterEvent(AGrf.nodes[i].NodeEvents[j].neededEvent))
-                        {
-                            chev.listBox1.Items.Add(AGrf.nodes[i].NodeEvents[j].neededEvent);
-                        }
+                        chev.listBox1.Items.Add(AGrf.nodes[i].nodeEvents[j].neededEvent);
                     }
                 }
+
             }
             TagRefresh();
             listBox1.SelectedIndex = 0;
@@ -361,16 +358,15 @@ namespace ResourceCollector
             nodes = new List<NodeView>();
             edges = new List<EdgeView>();
             baseControl = _baseControl;
+            imageList1 = _imageList1;
             for (int i = 0; i < _graph.nodes.Count; i++)
             {
                 addNodeView(_graph.nodes[i], doubleClick, click); //create nodes   
-                for (int j = 0; j < _graph.nodes[i].NodeEvents.Length; j++) //create edges
+                for (int j = 0; j < _graph.nodes[i].nodeEvents.Count; j++) //create edges
                 {
-                     addEdgeView(_graph.nodes[i].NodeEvents[j]);
+                    addEdgeView(_graph.nodes[i].nodeEvents[j]);
                 }       
-            }        
-        
-            imageList1=_imageList1;
+            } 
         }
 
         public void Save(System.IO.BinaryWriter bw)

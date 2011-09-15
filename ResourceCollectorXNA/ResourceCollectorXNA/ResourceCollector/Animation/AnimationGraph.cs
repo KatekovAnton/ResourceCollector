@@ -66,18 +66,20 @@ namespace ResourceCollector
         }
 
         public int index;
-        public NodeEvent[] NodeEvents;                      // исходящие рёбра
+        public List<NodeEvent> nodeEvents;                      // исходящие рёбра
         public Animation animation;                         // соответствующая узлу анимация
 
         public AnimationNode(string _name, Animation _animation)
         {
             SetName(_name);
+            nodeEvents = new List<NodeEvent>();
             animation = _animation;
         }
 
         public AnimationNode(string _name)
         {
             SetName(_name);
+            nodeEvents = new List<NodeEvent>();
         }
 
         public void SetName(string _name)
@@ -89,9 +91,9 @@ namespace ResourceCollector
 
         public AnimationNode Advance(CharacterEvent _event) // обработка перехода к слет узлу графа анмаций по событию
         {
-            for (int i = 0; i < NodeEvents.Length; i++)
-                if (NodeEvents[i].neededEvent.CompareTo(_event.eventName) == 0)
-                    return NodeEvents[i].associatedNode;
+            for (int i = 0; i < nodeEvents.Count; i++)
+                if (nodeEvents[i].neededEvent.CompareTo(_event.eventName) == 0)
+                    return nodeEvents[i].associatedNode;
                 
             return this;
         }
@@ -109,10 +111,10 @@ namespace ResourceCollector
                 default:
                     break;
             }
-            bw.Write(node.NodeEvents.Length);
-            for (int i = 0; i < node.NodeEvents.Length; i++)
+            bw.Write(node.nodeEvents.Count);
+            for (int i = 0; i < node.nodeEvents.Count; i++)
             {
-                NodeEvent.NodeEventToStream(node.NodeEvents[i], bw);
+                NodeEvent.NodeEventToStream(node.nodeEvents[i], bw);
             }
         }
 
@@ -130,10 +132,11 @@ namespace ResourceCollector
                 default:
                     break;
             }
-            node.NodeEvents = new NodeEvent[br.ReadInt32()];
-            for (int i = 0; i < node.NodeEvents.Length; i++)
+            int count = br.ReadInt32();
+            node.nodeEvents = new List<NodeEvent>();
+            for (int i = 0; i < count; i++)
             {
-                NodeEvent.NodeEventFromStream(br);
+                node.nodeEvents.Add( NodeEvent.NodeEventFromStream(br));
             }
             return node;
         }
@@ -218,10 +221,10 @@ namespace ResourceCollector
                 AGrf.nodes.Add(node);
             }
             for (int i = 0; i < AGrf.nodes.Count; i++)
-                for (int j = 0; j < AGrf.nodes[i].NodeEvents.Length; j++)
+                for (int j = 0; j < AGrf.nodes[i].nodeEvents.Count; j++)
                 {
-                    AGrf.nodes[i].NodeEvents[j].associatedNode = AGrf.FindNodeWithName(AGrf.nodes[i].NodeEvents[j].associatedNodeName);
-                    AGrf.nodes[i].NodeEvents[j].parentNode = AGrf.FindNodeWithName(AGrf.nodes[i].NodeEvents[j].parentName);
+                    AGrf.nodes[i].nodeEvents[j].associatedNode = AGrf.FindNodeWithName(AGrf.nodes[i].nodeEvents[j].associatedNodeName);
+                    AGrf.nodes[i].nodeEvents[j].parentNode = AGrf.FindNodeWithName(AGrf.nodes[i].nodeEvents[j].parentName);
                 }
             return AGrf;
         }
