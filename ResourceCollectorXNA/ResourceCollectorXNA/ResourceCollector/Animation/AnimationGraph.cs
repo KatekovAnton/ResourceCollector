@@ -169,11 +169,13 @@ namespace ResourceCollector
         public AnimationGraph(string _description)
         {
             description = _description + "\0";
+            nodes = new List<AnimationNode>();
         }
 
         public AnimationGraph()
         {
             nodes = new List<AnimationNode>();
+            description = "new_graph\0";
         }
 
         public AnimationNode FindNodeWithName(string nodeName)
