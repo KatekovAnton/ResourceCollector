@@ -111,9 +111,12 @@ namespace ResourceCollector
             {
                 listBox2.Items.Remove(ss);
             }
-            Object[] obj=new Object[ listBox2.Items.Count];
-            listBox2.Items.CopyTo(obj,0);
-            viewInfo.loadEdgeView((NodeEvent[]) obj);
+            if (listBox2.Items.Count > 0)
+            {
+                Object[] obj = new Object[listBox2.Items.Count];
+                listBox2.Items.CopyTo(obj, 0);
+                viewInfo.loadEdgeView((NodeEvent[])obj);
+            }
         }
 
         private void TagRefresh()
