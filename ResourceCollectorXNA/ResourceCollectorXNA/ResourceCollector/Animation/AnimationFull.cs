@@ -65,28 +65,19 @@ namespace ResourceCollector
         public static FullAnimation From3DMAXStream(System.IO.Stream stream, SkeletonWithAddInfo skeleton)
         {
             Matrix[][] Frames;
-
             var clip = new FullAnimation();
             var reader = new System.IO.BinaryReader(stream);
-
             var start = reader.ReadInt32();
             var end = reader.ReadInt32();
             var length = end - start + 1;
-
             clip.BonesCount = reader.ReadInt32();
             var counter = reader.ReadInt32();
-
-
             Frames = new Matrix[length][];
             for (int i = 0; i < length; i++)
                 Frames[i] = new Matrix[clip.BonesCount];
-
-
             for (int i = 0; i < clip.BonesCount; i++)
                 for (int j = 0; j < length; j++)
                     Frames[j][i] = reader.ReadMatrix();
-
-
             //теперь надо вычислить дельты 
             //(идёт загрузка экспортированного из макса)
             for (int i = 0; i < clip.BonesCount; i++)
@@ -99,6 +90,52 @@ namespace ResourceCollector
 
             clip.matrices = decomposedMatrices;
             return clip;
+        }
+        public static FullAnimation From3DMAXStream(System.IO.Stream stream, SkeletonWithAddInfo skeleton, int[] partIndexes)
+        {
+            Matrix[][] Frames;
+            var clip = new FullAnimation();
+            var reader = new System.IO.BinaryReader(stream);
+            var start = reader.ReadInt32();
+            var end = reader.ReadInt32();
+            var length = end - start + 1;
+            clip.BonesCount = reader.ReadInt32();
+            var counter = reader.ReadInt32();
+            Frames = new Matrix[length][];
+            for (int i = 0; i < length; i++)
+                Frames[i] = new Matrix[clip.BonesCount];
+            for (int i = 0; i < clip.BonesCount; i++)
+                for (int j = 0; j < length; j++)
+                    Frames[j][i] = reader.ReadMatrix();
+            //теперь надо вычислить дельты 
+            //(идёт загрузка экспортированного из макса)
+            for (int i = 0; i < clip.BonesCount; i++)
+                for (int @in = 0; @in < length; @in++)
+                    Frames[@in][i] = skeleton.baseskelet.bones[i].BaseMatrix * Frames[@in][i];
+
+
+            Matrix[][] relatedMatrices = Animation.GetRelatedMatrices(Frames, skeleton.baseskelet);
+            DecomposedMatrix[][] decomposedMatrices = GetDecomposedMatrices(skeleton.baseskelet, relatedMatrices);
+            DecomposedMatrix[][] decomposedMatrices2 = GetDecomposedMatricesByPart(decomposedMatrices, partIndexes);
+            clip.matrices = decomposedMatrices2;
+            return clip;
+        }
+        public static DecomposedMatrix[][] GetDecomposedMatricesByPart(DecomposedMatrix[][] fullmarx, int[] partIndexes)
+        {
+            DecomposedMatrix[][] res;
+            res =new DecomposedMatrix[fullmarx.Length][];
+            for (int i = 0; i < fullmarx.Length; i++)
+            {
+                res[i] = new DecomposedMatrix[partIndexes.Length];
+            }
+            for (int i = 0; i < partIndexes.Length; i++)
+            {
+                for (int j = 0; j < fullmarx.Length; j++)
+                {
+                    res[j][i] = fullmarx[j][partIndexes[i]];
+                }
+            }
+            return res;
         }
 
         public static void FullAnimationToStream(System.IO.BinaryWriter stream, FullAnimation animation)
