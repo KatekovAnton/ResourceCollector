@@ -261,24 +261,22 @@
             this.groupBox4.Controls.Add(this.button2);
             this.groupBox4.Location = new System.Drawing.Point(6, 19);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(290, 661);
+            this.groupBox4.Size = new System.Drawing.Size(290, 158);
             this.groupBox4.TabIndex = 1;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Skeleton parts";
             // 
             // listBox1
             // 
-            this.listBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listBox1.FormattingEnabled = true;
             this.listBox1.Location = new System.Drawing.Point(3, 16);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(284, 619);
+            this.listBox1.Size = new System.Drawing.Size(284, 108);
             this.listBox1.TabIndex = 3;
             // 
             // button2
             // 
-            this.button2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.button2.Location = new System.Drawing.Point(3, 635);
+            this.button2.Location = new System.Drawing.Point(3, 130);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(284, 23);
             this.button2.TabIndex = 2;

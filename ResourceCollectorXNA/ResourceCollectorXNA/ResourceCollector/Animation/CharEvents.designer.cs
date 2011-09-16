@@ -46,14 +46,14 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(0, 179);
+            this.textBox1.Location = new System.Drawing.Point(4, 179);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(149, 20);
             this.textBox1.TabIndex = 1;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(155, 179);
+            this.button1.Location = new System.Drawing.Point(161, 179);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(60, 20);
             this.button1.TabIndex = 2;
@@ -92,6 +92,7 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.listBox1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "CharEvents";
