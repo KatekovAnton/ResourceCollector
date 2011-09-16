@@ -45,8 +45,9 @@ namespace ResourceCollector
             InitializeComponent();
             AnimGraf = _animGraph;
             skeleton = _skeleton;
-            chev = new CharEvents();
+            chev = new CharEvents();            
             viewInfo = new AnimGraphViewIfo(AnimGraf, this.pictureBox1,imageList1, new MouseEventHandler(pictureBox1_MouseDoubleClick), new EventHandler(pictureBox1_Click));
+            loadFormByAnimationGraph(_animGraph);
             switch (skeletonPart)
             {
                 case 0:
@@ -57,6 +58,25 @@ namespace ResourceCollector
                     break;
                 default: break;
             }
+            //if (AnimGraf.nodes.Count > 0)
+            //{
+            //    listBox1.Items.Clear();
+            //    listBox2.Items.Clear();
+            //    AnimationNode[] tmp=new AnimationNode[AnimGraf.nodes.Count];
+            //    AnimGraf.nodes.ToArray().CopyTo(tmp, 0);
+            //    listBox1.Items.AddRange(tmp);
+            //    foreach (AnimationNode an in AnimGraf.nodes.ToArray())
+            //    {
+            //        if (an.nodeEvents.Count > 0)
+            //        {
+            //            NodeEvent[] tmp2 = new NodeEvent[an.nodeEvents.Count];
+            //            an.nodeEvents.ToArray().CopyTo(tmp2, 0);
+            //            listBox2.Items.AddRange(tmp2);
+            //        }
+            //    }
+            //}
+
+            
 
         }
 
@@ -199,19 +219,19 @@ namespace ResourceCollector
                 int count = 0;
                 AnimationNode an = (AnimationNode)listBox1.Items[i];
                // an.nodeEvents = null;
+                an.nodeEvents.Clear();
                 for (int j = 0; j < listBox2.Items.Count; j++)
                 {
                     NodeEvent ne = (NodeEvent)listBox2.Items[j];
                     
                     if (((int)ne.parentNode.index) == ((int)an.index) )
                     {
-                        NodeEvent[] ss = new NodeEvent[count + 1];
-                        
-                            an.nodeEvents.CopyTo(ss, 0);
-                        
-                        ss[count] = ne;
-                        count++;
-                        an.nodeEvents = new List<NodeEvent>( ss);
+                        //NodeEvent[] ss = new NodeEvent[count + 1];
+                        //an.nodeEvents.CopyTo(ss, 0);                        
+                        //ss[count] = ne;
+                        //count++;
+                        //an.nodeEvents = new List<NodeEvent>( ss);
+                        an.nodeEvents.Add(ne);
                     }
                 }
                 res[i] = an;
@@ -287,8 +307,9 @@ namespace ResourceCollector
 
         public void loadFormByAnimationGraph(AnimationGraph AGrf)
         {
-            viewInfo.Clear();
-            viewInfo = new AnimGraphViewIfo(AGrf, pictureBox1, imageList1, new MouseEventHandler(pictureBox1_MouseDoubleClick), new EventHandler(pictureBox1_Click));
+           
+            //viewInfo = new AnimGraphViewIfo(AGrf, pictureBox1, imageList1, new MouseEventHandler(pictureBox1_MouseDoubleClick), new EventHandler(pictureBox1_Click));
+            //viewInfo.Clear();
             listBox1.Items.Clear();
             listBox2.Items.Clear();
             listBox1.Items.AddRange(AGrf.nodes.ToArray());
@@ -309,10 +330,10 @@ namespace ResourceCollector
 
             }
             TagRefresh();
-            listBox1.SelectedIndex = 0;
-            viewInfo.selectedNode = listBox1.SelectedIndex;
-            viewInfo.selectedEdge = listBox2.SelectedIndex;
-            viewInfo.Refresh();
+            listBox1.SelectedIndex = -1;
+            //viewInfo.selectedNode = listBox1.SelectedIndex;
+            //viewInfo.selectedEdge = listBox2.SelectedIndex;
+            //viewInfo.Refresh();
         }
         private bool FindCharacterEvent(string charev)
         {
@@ -364,12 +385,16 @@ namespace ResourceCollector
             imageList1 = _imageList1;
             for (int i = 0; i < _graph.nodes.Count; i++)
             {
-                addNodeView(_graph.nodes[i], doubleClick, click); //create nodes   
+                addNodeView(_graph.nodes[i], doubleClick, click); //create nodes  
+            }
+            for (int i = 0; i < _graph.nodes.Count; i++)
+            {
                 for (int j = 0; j < _graph.nodes[i].nodeEvents.Count; j++) //create edges
                 {
                     addEdgeView(_graph.nodes[i].nodeEvents[j]);
-                }       
-            } 
+                }
+            }
+            
         }
 
         public void Save(System.IO.BinaryWriter bw)
@@ -531,7 +556,7 @@ namespace ResourceCollector
 
             int x1 = n1.Location.X + (n1.Width / 2);
             int y1 = n1.Location.Y + (n1.Height / 2);
-            int x2 = n2.Location.X + (n2.Width / 2);
+            int x2 = n2.Location.X + (n2.Width / 4);
             int y2 = n2.Location.Y + (n2.Height / 2);
 
             int x3 = x2 - ((x2 - x1) / 5);
