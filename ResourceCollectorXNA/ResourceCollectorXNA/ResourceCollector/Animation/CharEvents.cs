@@ -23,10 +23,29 @@ namespace ResourceCollector
             if (textBox1.Text.Replace(" ", "").Length > 0)
             {
                 CharacterEvent che = new CharacterEvent(textBox1.Text);
-                listBox1.Items.Add(che);
+                if (!IsExist(che))
+                {
+                    listBox1.Items.Add(che);
+                }
+                else
+                {
+                    MessageBox.Show("Try Another Event");
+                }
                 listBox1.SelectedIndex = 0;
+
             }
             
+        }
+        private bool IsExist(CharacterEvent chev)
+        {
+            for (int i = 0; i < listBox1.Items.Count;i++ )
+            {
+                if (chev.CompareTo((CharacterEvent)listBox1.Items[i]))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         private void button3_Click(object sender, EventArgs e)

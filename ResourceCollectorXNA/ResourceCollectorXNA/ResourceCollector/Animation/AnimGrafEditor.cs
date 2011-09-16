@@ -333,7 +333,7 @@ namespace ResourceCollector
                 {
                     if (!FindCharacterEvent(AGrf.nodes[i].nodeEvents[j].neededEvent))
                     {
-                        chev.listBox1.Items.Add(AGrf.nodes[i].nodeEvents[j].neededEvent);
+                        chev.listBox1.Items.Add(new CharacterEvent(AGrf.nodes[i].nodeEvents[j].neededEvent));
                     }
                 }
 
@@ -351,8 +351,8 @@ namespace ResourceCollector
             {
                 for (int i = 0; i < chev.listBox1.Items.Count; i++)
                 {
-                    String ce = (String)chev.listBox1.Items[i];
-                    if (ce.CompareTo(charev) == 0)
+                    CharacterEvent ce = (CharacterEvent)chev.listBox1.Items[i];
+                    if (ce.eventName.CompareTo(charev) == 0)
                     {
                         res = true;
                     }

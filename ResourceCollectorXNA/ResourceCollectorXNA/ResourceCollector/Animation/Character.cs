@@ -18,6 +18,17 @@ namespace ResourceCollector
             createdTime = DateTime.Now;
         }
 
+        public bool CompareTo(CharacterEvent tmp)
+        {
+            if (this.eventName.CompareTo(tmp.eventName) == 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
         public static bool operator == (CharacterEvent _event1, CharacterEvent _event2)
         {
             return _event1.eventName.CompareTo(_event2.eventName) == 0;
