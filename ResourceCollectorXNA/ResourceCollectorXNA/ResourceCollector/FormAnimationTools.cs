@@ -87,8 +87,19 @@ namespace ResourceCollector
             button1.Enabled = button4.Enabled = button9.Enabled = false;
 
             listBox1.Items.Clear();
-            listBox1.Items.Add(new AnimationGraph("Bottom"));
-            listBox1.Items.Add(new AnimationGraph("Top"));
+            if (skelet.BottomIndexes.Length != 0 && skelet.TopIndexes.Length != 0)
+            {
+                listBox1.Items.Add(new AnimationGraph("Bottom", skelet.BottomIndexes));
+                listBox1.Items.Add(new AnimationGraph("Top", skelet.TopIndexes));
+            }
+            else if (skelet.BottomIndexes.Length == 0 && skelet.TopIndexes.Length != 0)
+            {
+                listBox1.Items.Add(new AnimationGraph("Top", skelet.TopIndexes));
+            }
+            else if (skelet.BottomIndexes.Length != 0 && skelet.TopIndexes.Length == 0)
+            {
+                listBox1.Items.Add(new AnimationGraph("Bottom", skelet.BottomIndexes));
+            }
 
             this.WindowState = FormWindowState.Maximized;
         }
@@ -411,9 +422,19 @@ namespace ResourceCollector
             finalstepredy = true;
 
             listBox1.Items.Clear();
-            listBox1.Items.Add(new AnimationGraph("Bottom"));
-            listBox1.Items.Add(new AnimationGraph("Top"));
-
+            if (skelet.BottomIndexes.Length != 0 && skelet.TopIndexes.Length != 0)
+            {
+                listBox1.Items.Add(new AnimationGraph("Bottom", skelet.BottomIndexes));
+                listBox1.Items.Add(new AnimationGraph("Top", skelet.TopIndexes));
+            }
+            else if (skelet.BottomIndexes.Length == 0 && skelet.TopIndexes.Length != 0)
+            {
+                listBox1.Items.Add(new AnimationGraph("Top", skelet.TopIndexes));
+            }
+            else if (skelet.BottomIndexes.Length != 0 && skelet.TopIndexes.Length == 0)
+            {
+                listBox1.Items.Add(new AnimationGraph("Bottom", skelet.BottomIndexes));
+            }
         }
 
         private void button9_Click(object sender, EventArgs e)

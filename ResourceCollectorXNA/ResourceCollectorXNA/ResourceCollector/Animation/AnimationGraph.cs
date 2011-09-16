@@ -206,24 +206,27 @@ namespace ResourceCollector
                 description += "\0";
         }
 
-        public List<AnimationNode> nodes;                       // массив узлов
+        // массив узлов (анимация + её имя(название == идентификатор))
+        public List<AnimationNode> nodes;         
 
-        public AnimationGraph(AnimationNode[] _nodes)
+        //индексы костей полного скелета, которые анимирует 
+        //этот граф. это не правильно но так проще =(
+        public int[] indexes;
+        public AnimationGraph(AnimationNode[] _nodes, int[] _indexes)
         {
             nodes = new List<AnimationNode>(_nodes);
             description = "new_graph\0";
+
+            indexes = new int[_indexes.Length];
+            _indexes.CopyTo(indexes, 0);
         }
 
-        public AnimationGraph(string _description)
+        public AnimationGraph(string _description, int []_indexes)
         {
-            description = _description + "\0";
+            SetDescription(_description);
             nodes = new List<AnimationNode>();
-        }
-
-        public AnimationGraph()
-        {
-            nodes = new List<AnimationNode>();
-            description = "new_graph\0";
+            indexes = new int[_indexes.Length];
+            _indexes.CopyTo(indexes, 0);
         }
 
         public AnimationNode FindNodeWithName(string nodeName)
@@ -248,6 +251,10 @@ namespace ResourceCollector
 
         public static void AnimationGraphToStream(AnimationGraph AnimGraph, System.IO.BinaryWriter bw)
         {
+            bw.Write(AnimGraph.indexes.Length);
+            for (int i = 0; i < AnimGraph.indexes.Length; i++)
+                bw.Write(AnimGraph.indexes[i]);
+
             bw.WritePackString(AnimGraph.description);
             bw.Write(AnimGraph.nodes.Count);
             for (int i = 0; i < AnimGraph.nodes.Count; i++)
@@ -256,8 +263,12 @@ namespace ResourceCollector
 
         public static AnimationGraph AnimationGraphFromStream(System.IO.BinaryReader br)
         {
-            AnimationGraph AGrf = new AnimationGraph();
-            AGrf.description = br.ReadPackString();
+            int[] indexes = new int[br.ReadInt32()];
+            for (int i = 0; i < indexes.Length; i++)
+                indexes[i] = br.ReadInt32();
+            string description = br.ReadPackString();
+            AnimationGraph AGrf = new AnimationGraph(description, indexes);
+     
             int lenth = br.ReadInt32();
             AGrf.nodes = new List<AnimationNode>();
             for (int i = 0; i < lenth; i++)
@@ -273,6 +284,7 @@ namespace ResourceCollector
                 }
             return AGrf;
         }
+
         public override string ToString()
         {
             return this.description.Remove(this.description.Length - 1);

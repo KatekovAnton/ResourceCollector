@@ -20,14 +20,6 @@ namespace ResourceCollector
 
         public AnimGrafEditor(ResourceCollector.SkeletonWithAddInfo _skeleton, int skeletonPart)
         {
-            
-            AnimGraf = new AnimationGraph();
-
-            InitializeComponent();
-            skeleton = _skeleton;
-            chev = new CharEvents();
-
-            viewInfo = new AnimGraphViewIfo(AnimGraf, this.pictureBox1, imageList1, new MouseEventHandler(pictureBox1_MouseDoubleClick), new EventHandler(pictureBox1_Click));
             switch (skeletonPart)
             {
                 case 0:
@@ -38,6 +30,14 @@ namespace ResourceCollector
                     break;
                 default: break;
             }
+            AnimGraf = new AnimationGraph("new_graph", boneIndexes);
+
+            InitializeComponent();
+            skeleton = _skeleton;
+            chev = new CharEvents();
+
+            viewInfo = new AnimGraphViewIfo(AnimGraf, this.pictureBox1, imageList1, new MouseEventHandler(pictureBox1_MouseDoubleClick), new EventHandler(pictureBox1_Click));
+            
         }
 
         public AnimGrafEditor(ResourceCollector.AnimationGraph _animGraph, ResourceCollector.SkeletonWithAddInfo _skeleton, int skeletonPart)
