@@ -87,8 +87,19 @@ namespace ResourceCollector
             button1.Enabled = button4.Enabled = button9.Enabled = false;
 
             listBox1.Items.Clear();
-            listBox1.Items.Add(new AnimationGraph("Bottom", skelet.BottomIndexes));
-            listBox1.Items.Add(new AnimationGraph("Top", skelet.TopIndexes));
+            if (skelet.BottomIndexes.Length != 0 && skelet.TopIndexes.Length != 0)
+            {
+                listBox1.Items.Add(new AnimationGraph("Bottom", skelet.BottomIndexes));
+                listBox1.Items.Add(new AnimationGraph("Top", skelet.TopIndexes));
+            }
+            else if (skelet.BottomIndexes.Length == 0 && skelet.TopIndexes.Length != 0)
+            {
+                listBox1.Items.Add(new AnimationGraph("Top", skelet.TopIndexes));
+            }
+            else if (skelet.BottomIndexes.Length != 0 && skelet.TopIndexes.Length == 0)
+            {
+                listBox1.Items.Add(new AnimationGraph("Bottom", skelet.BottomIndexes));
+            }
 
             this.WindowState = FormWindowState.Maximized;
         }

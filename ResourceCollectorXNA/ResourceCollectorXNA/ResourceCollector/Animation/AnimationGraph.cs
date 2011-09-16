@@ -206,7 +206,11 @@ namespace ResourceCollector
                 description += "\0";
         }
 
-        public List<AnimationNode> nodes;                       // массив узлов
+        // массив узлов (анимация + её имя(название == идентификатор))
+        public List<AnimationNode> nodes;         
+
+        //индексы костей полного скелета, которые анимирует 
+        //этот граф. это не правильно но так проще =(
         public int[] indexes;
         public AnimationGraph(AnimationNode[] _nodes, int[] _indexes)
         {
@@ -280,6 +284,7 @@ namespace ResourceCollector
                 }
             return AGrf;
         }
+
         public override string ToString()
         {
             return this.description.Remove(this.description.Length - 1);
