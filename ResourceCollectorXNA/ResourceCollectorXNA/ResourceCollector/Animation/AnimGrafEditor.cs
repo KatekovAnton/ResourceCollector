@@ -87,7 +87,7 @@ namespace ResourceCollector
             AddAnim dlg = new AddAnim();
             if (dlg.ShowDialog() == DialogResult.OK)
             {
-                curanim = FullAnimation.From3DMAXStream(dlg.dlg.OpenFile(), skeleton);
+                curanim = FullAnimation.From3DMAXStream(dlg.dlg.OpenFile(), skeleton,boneIndexes);
                 curnode = new AnimationNode(dlg.textBox2.Text,curanim);
                 curnode.index = listBox1.Items.Count;
                 listBox1.Items.Add(curnode);
@@ -100,17 +100,17 @@ namespace ResourceCollector
             if (listBox1.SelectedIndex != -1)
             {
                 viewInfo.RemoveNodesViewAt(listBox1.SelectedIndex);
-                AnimationNode an = (AnimationNode)listBox1.Items[listBox1.SelectedIndex];
-                RemoveNodeEventsByAnimationNode(an);
-                listBox1.Items.RemoveAt(listBox1.SelectedIndex);
-                TagRefresh();
+                AnimationNode an = (AnimationNode)listBox1.Items[listBox1.SelectedIndex]; 
+                RemoveNodeByAnimationNode(an);                     
+                //listBox1.Items.RemoveAt(listBox1.SelectedIndex);             
+                      
                 viewInfo.selectedNode = listBox1.SelectedIndex;
                 viewInfo.selectedEdge = listBox2.SelectedIndex;
                 viewInfo.Refresh();    
             }
         }
 
-        private void RemoveNodeEventsByAnimationNode(AnimationNode an )
+        private void RemoveNodeByAnimationNode(AnimationNode an )
         {
 
             foreach (NodeEvent ne in an.nodeEvents)
@@ -131,11 +131,18 @@ namespace ResourceCollector
             {
                 listBox2.Items.Remove(ss);
             }
+            listBox1.Items.Remove(an);  
+            TagRefresh();      
             if (listBox2.Items.Count > 0)
             {
                 Object[] obj = new Object[listBox2.Items.Count];
                 listBox2.Items.CopyTo(obj, 0);
-                viewInfo.loadEdgeView((NodeEvent[])obj);
+                NodeEvent[] tmp = new NodeEvent[obj.Length];
+                for (int i = 0; i < listBox2.Items.Count; i++)
+                {
+                    tmp[i] = (NodeEvent)obj[i];
+                }
+                viewInfo.loadEdgeView(tmp);
             }
         }
 
@@ -302,6 +309,8 @@ namespace ResourceCollector
                 System.IO.BinaryReader br = new System.IO.BinaryReader(sfd.OpenFile());             
                 AnimGraf = AnimationGraph.AnimationGraphFromStream(br);
                 loadFormByAnimationGraph(AnimGraf);
+                viewInfo.Clear();
+                viewInfo = new AnimGraphViewIfo(AnimGraf, pictureBox1, imageList1, new MouseEventHandler(pictureBox1_MouseDoubleClick), new EventHandler(pictureBox1_Click));
             }
         }
 
@@ -342,8 +351,8 @@ namespace ResourceCollector
             {
                 for (int i = 0; i < chev.listBox1.Items.Count; i++)
                 {
-                    CharacterEvent ce = (CharacterEvent)chev.listBox1.Items[i];
-                    if (ce.eventName.CompareTo(charev) == 0)
+                    String ce = (String)chev.listBox1.Items[i];
+                    if (ce.CompareTo(charev) == 0)
                     {
                         res = true;
                     }
@@ -355,10 +364,12 @@ namespace ResourceCollector
         private void button2_Click(object sender, EventArgs e)
         {
             if (listBox2.SelectedIndex != -1)
-            {
-                listBox2.Items.RemoveAt(listBox2.SelectedIndex);
+            { 
+                viewInfo.edges.RemoveAt(listBox2.SelectedIndex);
+                listBox2.Items.RemoveAt(listBox2.SelectedIndex);               
                 viewInfo.Refresh();
             }
+
         }
 
         private void pictureBox1_Click_1(object sender, EventArgs e)
@@ -394,7 +405,8 @@ namespace ResourceCollector
                     addEdgeView(_graph.nodes[i].nodeEvents[j]);
                 }
             }
-            
+            drawnodes();
+            DrawNodeEvent();
         }
 
         public void Save(System.IO.BinaryWriter bw)
