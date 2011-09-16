@@ -88,7 +88,7 @@ namespace ResourceCollector
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 curanim = FullAnimation.From3DMAXStream(dlg.dlg.OpenFile(), skeleton);
-                curnode = new AnimationNode(dlg.textBox2.Text);
+                curnode = new AnimationNode(dlg.textBox2.Text,curanim);
                 curnode.index = listBox1.Items.Count;
                 listBox1.Items.Add(curnode);
                 viewInfo.addNodeView(curnode,new MouseEventHandler(pictureBox1_MouseDoubleClick),new EventHandler(pictureBox1_Click));

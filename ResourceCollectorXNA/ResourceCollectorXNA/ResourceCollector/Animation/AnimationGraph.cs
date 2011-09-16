@@ -7,24 +7,68 @@ namespace ResourceCollector
 {
     public class NodeEvent                                  //событие которое возможно для конкретного узла графа анимаций- ребро графа анимаций
     {
-        public string neededEvent;                          // необходимое событие
+        public string neededEvent
+        {
+            get;
+            private set;
+        }                          // необходимое событие
         public AnimationNode parentNode;                        // ссылка на владельца 
         public AnimationNode associatedNode;                // узел к которому ведет событие 
-        public string description;                          // описание 
+        public string description
+        {
+            get;
+            private set;
+        }// описание 
 
-        public string parentName;
-        public string associatedNodeName; 
+        public string parentName
+        {
+            get;
+            private set;
+        }
+        public string associatedNodeName
+        {
+            get;
+            private set;
+        } 
 
         public NodeEvent(string _description, AnimationNode _parent, AnimationNode _associatedNode, string _neededevent)
         {
-            description = _description;
+            SetDescription( _description);
             associatedNode = _associatedNode;
-            neededEvent = _neededevent;
             parentNode = _parent;
 
 
-            parentName = parentNode.name;
-            associatedNodeName = associatedNode.name;
+            SetNeededEvevntName(_neededevent);
+            SetParentNodeName(parentNode.name);
+            SetAssocNodeName(associatedNode.name);
+        }
+
+        public void SetNeededEvevntName(string _name)
+        {
+            neededEvent = _name;
+            if (!(neededEvent[neededEvent.Length - 1] == '\0'))
+                neededEvent += "\0";
+        }
+
+        public void SetDescription(string _description)
+        {
+            description = _description;
+            if (!(description[description.Length - 1] == '\0'))
+                description += "\0";
+        }
+
+        public void SetParentNodeName(string _name)
+        {
+            parentName = _name;
+            if (!(parentName[parentName.Length - 1] == '\0'))
+                parentName += "\0";
+        }
+
+        public void SetAssocNodeName(string _name)
+        {
+            associatedNodeName = _name;
+            if (!(associatedNodeName[associatedNodeName.Length - 1] == '\0'))
+                associatedNodeName += "\0";
         }
 
         public NodeEvent()
@@ -120,8 +164,9 @@ namespace ResourceCollector
 
         public static AnimationNode AnimationNodeFromStream(System.IO.BinaryReader br)
         {
+            int index = br.ReadInt32();
             AnimationNode node = new AnimationNode(br.ReadPackString());
-            node.index = br.ReadInt32();
+            node.index = index; // br.ReadInt32();
             int animType = br.ReadInt32();
 
             switch (animType)
