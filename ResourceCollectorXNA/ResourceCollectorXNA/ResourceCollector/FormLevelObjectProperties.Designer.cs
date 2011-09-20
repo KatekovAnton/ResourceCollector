@@ -1,6 +1,6 @@
 ﻿namespace ResourceCollector.Content
 {
-    partial class FormLevelObjectDescriptionProperties
+    partial class FormLevelObjectProperties
     {
         /// <summary>
         /// Required designer variable.
@@ -32,17 +32,7 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button9 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
-            this.groupBoxIsAnimated = new System.Windows.Forms.GroupBox();
-            this.buttonStartAnimationSelect = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.textBoxStartAnimationName = new System.Windows.Forms.TextBox();
             this.checkBoxIsAnimatedRCCM = new System.Windows.Forms.CheckBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.buttonCharacterNameSet = new System.Windows.Forms.Button();
-            this.textBoxCharacterName = new System.Windows.Forms.TextBox();
-            this.buttonCharacterCreate = new System.Windows.Forms.Button();
-            this.buttonCharacterSelect = new System.Windows.Forms.Button();
-            this.checkBoxIsAnimated = new System.Windows.Forms.CheckBox();
             this.groupBoxRCCM = new System.Windows.Forms.GroupBox();
             this.buttonRCCMNameSet = new System.Windows.Forms.Button();
             this.textBoxRCCMName = new System.Windows.Forms.TextBox();
@@ -102,17 +92,21 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.button11 = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.groupBoxRAnim = new System.Windows.Forms.GroupBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.button2 = new System.Windows.Forms.Button();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
-            this.groupBoxIsAnimated.SuspendLayout();
             this.groupBoxRCCM.SuspendLayout();
             this.groupBoxBehaviourModel.SuspendLayout();
             this.groupBoxPhysicParams.SuspendLayout();
@@ -128,10 +122,11 @@
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.tabPage4.SuspendLayout();
-            this.groupBox3.SuspendLayout();
+            this.groupBoxRAnim.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -173,113 +168,16 @@
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
-            // groupBoxIsAnimated
-            // 
-            this.groupBoxIsAnimated.Controls.Add(this.buttonStartAnimationSelect);
-            this.groupBoxIsAnimated.Controls.Add(this.label2);
-            this.groupBoxIsAnimated.Controls.Add(this.textBoxStartAnimationName);
-            this.groupBoxIsAnimated.Controls.Add(this.checkBoxIsAnimatedRCCM);
-            this.groupBoxIsAnimated.Controls.Add(this.label1);
-            this.groupBoxIsAnimated.Controls.Add(this.buttonCharacterNameSet);
-            this.groupBoxIsAnimated.Controls.Add(this.textBoxCharacterName);
-            this.groupBoxIsAnimated.Controls.Add(this.buttonCharacterCreate);
-            this.groupBoxIsAnimated.Controls.Add(this.buttonCharacterSelect);
-            this.groupBoxIsAnimated.Enabled = false;
-            this.groupBoxIsAnimated.Location = new System.Drawing.Point(6, 173);
-            this.groupBoxIsAnimated.Name = "groupBoxIsAnimated";
-            this.groupBoxIsAnimated.Size = new System.Drawing.Size(545, 58);
-            this.groupBoxIsAnimated.TabIndex = 21;
-            this.groupBoxIsAnimated.TabStop = false;
-            // 
-            // buttonStartAnimationSelect
-            // 
-            this.buttonStartAnimationSelect.Location = new System.Drawing.Point(378, 33);
-            this.buttonStartAnimationSelect.Name = "buttonStartAnimationSelect";
-            this.buttonStartAnimationSelect.Size = new System.Drawing.Size(47, 21);
-            this.buttonStartAnimationSelect.TabIndex = 17;
-            this.buttonStartAnimationSelect.Text = "Select";
-            this.buttonStartAnimationSelect.UseVisualStyleBackColor = true;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 37);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(66, 13);
-            this.label2.TabIndex = 20;
-            this.label2.Text = "Default anim";
-            // 
-            // textBoxStartAnimationName
-            // 
-            this.textBoxStartAnimationName.Location = new System.Drawing.Point(78, 34);
-            this.textBoxStartAnimationName.Name = "textBoxStartAnimationName";
-            this.textBoxStartAnimationName.Size = new System.Drawing.Size(294, 20);
-            this.textBoxStartAnimationName.TabIndex = 19;
-            // 
             // checkBoxIsAnimatedRCCM
             // 
             this.checkBoxIsAnimatedRCCM.AutoSize = true;
-            this.checkBoxIsAnimatedRCCM.Location = new System.Drawing.Point(433, 36);
+            this.checkBoxIsAnimatedRCCM.Location = new System.Drawing.Point(431, 15);
             this.checkBoxIsAnimatedRCCM.Name = "checkBoxIsAnimatedRCCM";
             this.checkBoxIsAnimatedRCCM.Size = new System.Drawing.Size(104, 17);
             this.checkBoxIsAnimatedRCCM.TabIndex = 18;
             this.checkBoxIsAnimatedRCCM.Text = "Animated RCCM";
             this.checkBoxIsAnimatedRCCM.UseVisualStyleBackColor = true;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 13);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(53, 13);
-            this.label1.TabIndex = 15;
-            this.label1.Text = "Character";
-            // 
-            // buttonCharacterNameSet
-            // 
-            this.buttonCharacterNameSet.Location = new System.Drawing.Point(352, 8);
-            this.buttonCharacterNameSet.Name = "buttonCharacterNameSet";
-            this.buttonCharacterNameSet.Size = new System.Drawing.Size(20, 23);
-            this.buttonCharacterNameSet.TabIndex = 14;
-            this.buttonCharacterNameSet.Text = "S";
-            this.buttonCharacterNameSet.UseVisualStyleBackColor = true;
-            // 
-            // textBoxCharacterName
-            // 
-            this.textBoxCharacterName.Location = new System.Drawing.Point(78, 10);
-            this.textBoxCharacterName.Name = "textBoxCharacterName";
-            this.textBoxCharacterName.Size = new System.Drawing.Size(268, 20);
-            this.textBoxCharacterName.TabIndex = 1;
-            // 
-            // buttonCharacterCreate
-            // 
-            this.buttonCharacterCreate.Location = new System.Drawing.Point(431, 8);
-            this.buttonCharacterCreate.Name = "buttonCharacterCreate";
-            this.buttonCharacterCreate.Size = new System.Drawing.Size(106, 23);
-            this.buttonCharacterCreate.TabIndex = 13;
-            this.buttonCharacterCreate.Text = "Create";
-            this.buttonCharacterCreate.UseVisualStyleBackColor = true;
-            // 
-            // buttonCharacterSelect
-            // 
-            this.buttonCharacterSelect.Location = new System.Drawing.Point(378, 8);
-            this.buttonCharacterSelect.Name = "buttonCharacterSelect";
-            this.buttonCharacterSelect.Size = new System.Drawing.Size(47, 23);
-            this.buttonCharacterSelect.TabIndex = 12;
-            this.buttonCharacterSelect.Text = "Select";
-            this.buttonCharacterSelect.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxIsAnimated
-            // 
-            this.checkBoxIsAnimated.AutoSize = true;
-            this.checkBoxIsAnimated.Enabled = false;
-            this.checkBoxIsAnimated.Location = new System.Drawing.Point(15, 158);
-            this.checkBoxIsAnimated.Name = "checkBoxIsAnimated";
-            this.checkBoxIsAnimated.Size = new System.Drawing.Size(113, 17);
-            this.checkBoxIsAnimated.TabIndex = 17;
-            this.checkBoxIsAnimated.Text = "Animation enabled";
-            this.checkBoxIsAnimated.UseVisualStyleBackColor = true;
-            this.checkBoxIsAnimated.CheckedChanged += new System.EventHandler(this.checkBoxIsAnimated_CheckedChanged);
+            this.checkBoxIsAnimatedRCCM.CheckedChanged += new System.EventHandler(this.checkBoxIsAnimatedRCCM_CheckedChanged);
             // 
             // groupBoxRCCM
             // 
@@ -715,7 +613,7 @@
             // 
             this.checkBoxIsGrass.AutoSize = true;
             this.checkBoxIsGrass.Enabled = false;
-            this.checkBoxIsGrass.Location = new System.Drawing.Point(12, 61);
+            this.checkBoxIsGrass.Location = new System.Drawing.Point(15, 61);
             this.checkBoxIsGrass.Name = "checkBoxIsGrass";
             this.checkBoxIsGrass.Size = new System.Drawing.Size(53, 17);
             this.checkBoxIsGrass.TabIndex = 21;
@@ -871,10 +769,10 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.groupBoxRAnim);
+            this.tabPage1.Controls.Add(this.checkBox1);
             this.tabPage1.Controls.Add(this.groupBox1);
             this.tabPage1.Controls.Add(this.checkBoxIsGrass);
-            this.tabPage1.Controls.Add(this.groupBoxIsAnimated);
-            this.tabPage1.Controls.Add(this.checkBoxIsAnimated);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -894,6 +792,34 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Render";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.textBox4);
+            this.groupBox3.Controls.Add(this.button1);
+            this.groupBox3.Location = new System.Drawing.Point(6, 57);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(549, 45);
+            this.groupBox3.TabIndex = 31;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Material";
+            // 
+            // textBox4
+            // 
+            this.textBox4.Location = new System.Drawing.Point(9, 17);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(467, 20);
+            this.textBox4.TabIndex = 13;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(482, 17);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(61, 23);
+            this.button1.TabIndex = 14;
+            this.button1.Text = "Select";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // groupBox2
             // 
@@ -956,35 +882,57 @@
             this.tabPage5.Text = "Logic";
             this.tabPage5.UseVisualStyleBackColor = true;
             // 
-            // groupBox3
+            // groupBoxRAnim
             // 
-            this.groupBox3.Controls.Add(this.textBox4);
-            this.groupBox3.Controls.Add(this.button1);
-            this.groupBox3.Location = new System.Drawing.Point(6, 57);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(549, 45);
-            this.groupBox3.TabIndex = 31;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Material";
+            this.groupBoxRAnim.Controls.Add(this.label16);
+            this.groupBoxRAnim.Controls.Add(this.textBox3);
+            this.groupBoxRAnim.Controls.Add(this.button2);
+            this.groupBoxRAnim.Controls.Add(this.checkBoxIsAnimatedRCCM);
+            this.groupBoxRAnim.Enabled = false;
+            this.groupBoxRAnim.Location = new System.Drawing.Point(6, 106);
+            this.groupBoxRAnim.Name = "groupBoxRAnim";
+            this.groupBoxRAnim.Size = new System.Drawing.Size(545, 41);
+            this.groupBoxRAnim.TabIndex = 35;
+            this.groupBoxRAnim.TabStop = false;
             // 
-            // textBox4
+            // label16
             // 
-            this.textBox4.Location = new System.Drawing.Point(9, 17);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(467, 20);
-            this.textBox4.TabIndex = 13;
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(6, 16);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(53, 13);
+            this.label16.TabIndex = 15;
+            this.label16.Text = "Character";
             // 
-            // button1
+            // textBox3
             // 
-            this.button1.Location = new System.Drawing.Point(482, 17);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(61, 23);
-            this.button1.TabIndex = 14;
-            this.button1.Text = "Select";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.textBox3.Location = new System.Drawing.Point(65, 13);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(295, 20);
+            this.textBox3.TabIndex = 1;
             // 
-            // FormLevelObjectDescriptionProperties
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(366, 11);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(57, 23);
+            this.button2.TabIndex = 12;
+            this.button2.Text = "Select";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(15, 91);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(113, 17);
+            this.checkBox1.TabIndex = 34;
+            this.checkBox1.Text = "Animation enabled";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
+            // FormLevelObjectProperties
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -995,12 +943,10 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "FormLevelObjectDescriptionProperties";
+            this.Name = "FormLevelObjectProperties";
             this.Text = "FormLevelObjectDescriptionProperties";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.groupBoxIsAnimated.ResumeLayout(false);
-            this.groupBoxIsAnimated.PerformLayout();
             this.groupBoxRCCM.ResumeLayout(false);
             this.groupBoxRCCM.PerformLayout();
             this.groupBoxBehaviourModel.ResumeLayout(false);
@@ -1026,12 +972,14 @@
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             this.tabPage4.ResumeLayout(false);
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
+            this.groupBoxRAnim.ResumeLayout(false);
+            this.groupBoxRAnim.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1042,18 +990,8 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Button button10;
-        private System.Windows.Forms.GroupBox groupBoxIsAnimated;
         private System.Windows.Forms.CheckBox checkBoxIsGrass;
-        private System.Windows.Forms.Button buttonStartAnimationSelect;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBoxStartAnimationName;
         private System.Windows.Forms.CheckBox checkBoxIsAnimatedRCCM;
-        private System.Windows.Forms.CheckBox checkBoxIsAnimated;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button buttonCharacterNameSet;
-        private System.Windows.Forms.TextBox textBoxCharacterName;
-        private System.Windows.Forms.Button buttonCharacterCreate;
-        private System.Windows.Forms.Button buttonCharacterSelect;
         private System.Windows.Forms.GroupBox groupBoxRCCM;
         private System.Windows.Forms.Button buttonRCCMNameSet;
         private System.Windows.Forms.TextBox textBoxRCCMName;
@@ -1121,5 +1059,10 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.GroupBox groupBoxRAnim;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }

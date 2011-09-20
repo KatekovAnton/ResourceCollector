@@ -30,7 +30,7 @@ namespace ResourceCollectorXNA.Engine.Interface{
 
         public static Color ActiveAxisColor = Color.White;
         public static Color TextColor = Color.Black;
-        protected InterfaceColors () {}
+        public InterfaceColors() { }
     }
 
 

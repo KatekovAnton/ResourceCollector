@@ -25,16 +25,13 @@ namespace ResourceCollector.Content
 
         private void listBox1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-          
+
             PackContent pa = p.getobject(listBox1.SelectedItem.ToString());
             MeshSkinned m = null;
-            try
-            {
-                if (pa != null)
-                    m = pa as MeshSkinned;
-            }
-            catch (Exception ex)
-            { }
+
+            if (pa != null)
+                m = pa as MeshSkinned;
+
 
             if (m != null)
             {

@@ -33,7 +33,7 @@ namespace ResourceCollector.Content
                         label1.Text = "sucessfull loaded";
                         button1.Enabled = button2.Enabled = false;
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
                         newimage = null;
                         MessageBox.Show("bad file. try again");

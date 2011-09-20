@@ -55,17 +55,17 @@ namespace ResourceCollectorXNA.Engine
         public void WriteMessage(string message)
         {
             sw.WriteLine(DateTime.Now.ToString() + "     " + message);
-            try
-            {
+           /* try
+            {*/
                 sw.Flush();
-            }
+            /*}
             catch (Exception ex)
             {
                 sw = new System.IO.StreamWriter("111.txt", true);
                 sw.WriteLine(DateTime.Now.ToString() + "     " + message);
                 sw.Flush();
 
-            }
+            }*/
 
         }
         ~Log()

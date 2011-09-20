@@ -364,11 +364,11 @@
     <Compile Include="ResourceCollector\FormTextureList.Designer.cs">
       <DependentUpon>FormTextureList.cs</DependentUpon>
     </Compile>
-    <Compile Include="ResourceCollector\FormLevelObjectDescriptionProperties.cs">
+    <Compile Include="ResourceCollector\FormLevelObjectProperties.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ResourceCollector\FormLevelObjectDescriptionProperties.Designer.cs">
-      <DependentUpon>FormLevelObjectDescriptionProperties.cs</DependentUpon>
+    <Compile Include="ResourceCollector\FormLevelObjectProperties.Designer.cs">
+      <DependentUpon>FormLevelObjectProperties.cs</DependentUpon>
     </Compile>
     <Compile Include="ResourceCollector\FormXNAMonitor.cs">
       <SubType>Form</SubType>
@@ -531,8 +531,8 @@
     <EmbeddedResource Include="ResourceCollector\FormTextureList.resx">
       <DependentUpon>FormTextureList.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ResourceCollector\FormLevelObjectDescriptionProperties.resx">
-      <DependentUpon>FormLevelObjectDescriptionProperties.cs</DependentUpon>
+    <EmbeddedResource Include="ResourceCollector\FormLevelObjectProperties.resx">
+      <DependentUpon>FormLevelObjectProperties.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ResourceCollector\FormXNAMonitor.resx">
       <DependentUpon>FormXNAMonitor.cs</DependentUpon>

@@ -12,20 +12,29 @@ namespace ResourceCollectorXNA.Engine.Interface
         public bool pressed;
         public long timePressed;
         public Keys key;
+
         public KeyScan(Keys _key)
         {
             timePressed = 0;
             pressed = false;
             key = _key;
         }
+
         public static bool operator ==(KeyScan _key1, KeyScan _key2)
         {
             return _key1.key == _key2.key;
         }
+
         public static bool operator !=(KeyScan _key1, KeyScan _key2)
         {
             return _key1.key != _key2.key;
         }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+
         public void Update()
         {
             if (KeyboardManager.currentState.IsKeyDown(key))
@@ -56,7 +65,6 @@ namespace ResourceCollectorXNA.Engine.Interface
         public static List<KeyScan> scaningKeys;
         public static KeyScan GetScanForKey(Keys key)
         {
-            KeyScan ks = null;
             for (int i = 0; i < scaningKeys.Count; i++)
                 if (scaningKeys[i].key == key)
                     return scaningKeys[i];

@@ -393,11 +393,6 @@ namespace ResourceCollectorXNA.Engine.Render
                    // debugRenderer.RenderAABR(wo.boundingShape);
                     debugRenderer.RenderAABB(wo.raycastaspect.boundingShape,wo.editorAspect.isActive);
                 }
-                if (a > 1)
-                {
-                    int fdsf = 0;
-                }
-            
             }
         }
         public bool Disposed

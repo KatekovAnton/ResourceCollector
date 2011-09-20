@@ -225,7 +225,6 @@ namespace ResourceCollector
     public class MissingObject : PackContent
     {
         byte[] data;
-        byte[] headerdata;
         public Pack pack;
         public MissingObject(int num)
         {
@@ -237,12 +236,17 @@ namespace ResourceCollector
         }
         public override int loadbody(System.IO.BinaryReader br, ToolStripProgressBar toolStripProgressBar)
         {
-            br.ReadBytes(this.size);
+            data =  br.ReadBytes(this.size);
             return this.size;
         }
-        public override void saveheader(System.IO.BinaryWriter br)
+        public override void saveheader(System.IO.BinaryWriter bw)
         {
-            br.Write(headerdata);
+            bw.WritePackString(name);
+            bw.Write(offset);
+            bw.Write(loadedformat);
+
+            bw.Write(headersize);
+            bw.Write(data.Length);
         }
         public override void savebody(System.IO.BinaryWriter br, ToolStripProgressBar toolStripProgressBar)
         {
@@ -250,7 +254,7 @@ namespace ResourceCollector
         }
         public override void calcheadersize()
         {
-            headersize= headerdata.Length;
+            headersize = 16 + OtherFunctions.GetPackStringLengthForWrite(name);
         }
         public override void calcbodysize(ToolStripProgressBar targetbar)
         {

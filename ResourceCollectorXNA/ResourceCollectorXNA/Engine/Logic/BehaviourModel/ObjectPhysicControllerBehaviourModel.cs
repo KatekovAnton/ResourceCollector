@@ -16,8 +16,8 @@ namespace ResourceCollectorXNA.Engine.Logic.BehaviourModel
     class ObjectPhysicControllerBehaviourModel:ObjectBehaviourModel
     {
       //  private Actor actor;
-        private Vector3 lastposition;
-        private Vector3 move;
+       // private Vector3 lastposition;
+      //  private Vector3 move;
 
         public ObjectPhysicControllerBehaviourModel(/*Actor _actor*/)
         {

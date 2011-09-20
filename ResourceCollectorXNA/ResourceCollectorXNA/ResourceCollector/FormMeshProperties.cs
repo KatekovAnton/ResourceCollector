@@ -87,7 +87,7 @@ namespace ResourceCollector
             mesh.GenerateOptForStore(null);
             LODInterface li = new LODInterface(mesh, "");
             li.ShowDialog();
-            if (li.meshes.Count != null)
+            if (li.meshes.Count != 0)
             {
                 lods = li.meshes.ToArray();
                 mesh.lods = new string[lods.Length];

@@ -10,7 +10,7 @@ namespace ResourceCollector.Content
     /// <summary>
     /// описание видимого объекта
     /// </summary>
-    public class GameObjectDescription : PackContent
+ /*   public class GameObjectDescription : PackContent
     {
         //эти параметры поведение объекта:
 
@@ -120,5 +120,5 @@ namespace ResourceCollector.Content
             label4.Text = this.size.ToString();
         }
 
-    }
+    }*/
 }

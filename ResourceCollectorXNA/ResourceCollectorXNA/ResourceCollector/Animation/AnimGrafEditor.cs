@@ -223,7 +223,6 @@ namespace ResourceCollector
             AnimationNode[] res = new AnimationNode[listBox1.Items.Count];
             for (int i = 0; i < listBox1.Items.Count; i++)
             {
-                int count = 0;
                 AnimationNode an = (AnimationNode)listBox1.Items[i];
                // an.nodeEvents = null;
                 an.nodeEvents.Clear();

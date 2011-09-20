@@ -18,7 +18,7 @@ using ResourceCollectorXNA.Engine.Actions;
 
 namespace ResourceCollectorXNA.Engine
 {
-    public class ActionManager
+   /* public class ActionManager
     {
         EditorAction currentaction;
         public ActionManager()
@@ -57,5 +57,5 @@ namespace ResourceCollectorXNA.Engine
                 return currentaction == null;
             }
         }
-    }
+    }*/
 }

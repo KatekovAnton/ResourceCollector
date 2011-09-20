@@ -154,8 +154,6 @@ namespace ResourceCollector.Content
             }
 
 
-
-
             startpos = br.BaseStream.Position - startpos;
             return Convert.ToInt32(startpos);
         }
@@ -248,7 +246,7 @@ namespace ResourceCollector.Content
         {
             if (Enginereadedobject.Count == 0)
             {
-                FormLevelObjectDescriptionProperties form = new FormLevelObjectDescriptionProperties(this, outputtreeview);
+                FormLevelObjectProperties form = new FormLevelObjectProperties(this, outputtreeview);
                 if (form.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
                     if (TreeNode != null)

@@ -9,11 +9,11 @@ using System.Windows.Forms;
 
 namespace ResourceCollector.Content
 {
-    public partial class FormLevelObjectDescriptionProperties : Form
+    public partial class FormLevelObjectProperties : Form
     {
         LevelObjectDescription thisobject;
         TreeView outputtreeview;
-        public FormLevelObjectDescriptionProperties(LevelObjectDescription rod, TreeView outputtreeview)
+        public FormLevelObjectProperties(LevelObjectDescription rod, TreeView outputtreeview)
         {
             
             createdContent = new List<PackContent>();
@@ -27,7 +27,7 @@ namespace ResourceCollector.Content
 
             bool IsRCCMEnabled = rod.IsRCCMEnabled;
 
-
+           
             if (thisobject.IsRCCMEnabled)
             {
                
@@ -49,8 +49,13 @@ namespace ResourceCollector.Content
                 textBoxProcedureShapeSizeZ.Text = thisobject.RCShapeSize.Z.ToString();
             }
            // checkBoxRCCMEnabled.Enabled = true;
-            checkBoxIsAnimated.Checked = thisobject.IsAnimated;
+            checkBox1.Checked = thisobject.IsAnimated;
             //   checkBoxIsAnimated.Enabled = true;
+            if (thisobject.IsAnimated)
+            {
+                textBox3.Text = thisobject.CharacterName;
+                checkBoxIsAnimatedRCCM.Checked = thisobject.IsRCCMAnimated;
+            }
             checkBoxIsAnimatedRCCM.Checked = thisobject.IsRCCMAnimated;
            
             comboBoxBehaviourType.Items.Add(LevelObjectDescription.GetName(0));
@@ -164,6 +169,15 @@ namespace ResourceCollector.Content
 
         private void button9_Click(object sender, EventArgs e)
         {
+            if (thisobject.IsAnimated)
+            {
+                if (thisobject.CharacterName.Length < 2)
+                {
+                    thisobject.IsAnimated = false;
+                    thisobject.IsRCCMAnimated = false;
+                }
+            }
+
             if (radioButtonRCShapeTypeProcedureShape.Checked)
             {
                 thisobject.IsRCCMEnabled = false;
@@ -175,7 +189,7 @@ namespace ResourceCollector.Content
                     x1 = Convert.ToSingle(str);
                     //  thisobject.CenterOfMass.X = x;
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     MessageBox.Show("Wrong X");
                     return;
@@ -187,7 +201,7 @@ namespace ResourceCollector.Content
                     y1 = Convert.ToSingle(str);
                     // thisobject.CenterOfMass.Y = y;
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     MessageBox.Show("Wrong Y");
                     return;
@@ -199,7 +213,7 @@ namespace ResourceCollector.Content
                     z1 = Convert.ToSingle(str);
                     // thisobject.CenterOfMass.Y = y;
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     MessageBox.Show("Wrong Z");
                     return;
@@ -213,7 +227,7 @@ namespace ResourceCollector.Content
                 thisobject.Mass = mas;
                 checkBoxPhysMassOK.Checked = true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 MessageBox.Show("Wrong  mass value");
                 textBoxPhysXMass.Text = thisobject.Mass.ToString();
@@ -249,7 +263,7 @@ namespace ResourceCollector.Content
                 x = Convert.ToSingle(str);
                 //  thisobject.CenterOfMass.X = x;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 MessageBox.Show("Wrong X");
                 return;
@@ -261,7 +275,7 @@ namespace ResourceCollector.Content
                 y = Convert.ToSingle(str);
                 // thisobject.CenterOfMass.Y = y;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 MessageBox.Show("Wrong Y");
                 return;
@@ -273,7 +287,7 @@ namespace ResourceCollector.Content
                 z = Convert.ToSingle(str);
                 // thisobject.CenterOfMass.Y = y;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 MessageBox.Show("Wrong Z");
                 return;
@@ -299,11 +313,6 @@ namespace ResourceCollector.Content
         {
             DialogResult = System.Windows.Forms.DialogResult.Cancel;
             Close();
-        }
-
-        private void checkBoxIsAnimated_CheckedChanged(object sender, EventArgs e)
-        {
-            groupBoxIsAnimated.Enabled = checkBoxIsAnimated.Checked;
         }
 
         private void radioButtonPhysActrTypeCM_CheckedChanged(object sender, EventArgs e)
@@ -353,7 +362,7 @@ namespace ResourceCollector.Content
                 thisobject.Mass = mas;
                 checkBoxPhysMassOK.Checked = true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 MessageBox.Show("Wrong value");
                 textBoxPhysXMass.Text = thisobject.Mass.ToString();
@@ -455,7 +464,7 @@ namespace ResourceCollector.Content
                 x = Convert.ToSingle(str);
               //  thisobject.CenterOfMass.X = x;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 MessageBox.Show("Wrong X");
                 return;
@@ -467,7 +476,7 @@ namespace ResourceCollector.Content
                 y = Convert.ToSingle(str);
                // thisobject.CenterOfMass.Y = y;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 MessageBox.Show("Wrong Y");
                 return;
@@ -479,7 +488,7 @@ namespace ResourceCollector.Content
                 z = Convert.ToSingle(str);
                 // thisobject.CenterOfMass.Y = y;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 MessageBox.Show("Wrong Z");
                 return;
@@ -543,6 +552,32 @@ namespace ResourceCollector.Content
                 //  RenderObject wod = thisobject.Pack.getobject(fop.PickedContent[0]) as RenderObject;
                 thisobject.matname = fop.PickedContent[0];
                 textBox4.Text = thisobject.matname;
+            }
+        }
+
+        private void checkBoxIsAnimatedRCCM_CheckedChanged(object sender, EventArgs e)
+        {
+            thisobject.IsRCCMAnimated = checkBoxIsAnimatedRCCM.Checked;
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            thisobject.IsAnimated = this.checkBox1.Checked;
+            groupBoxRAnim.Enabled = thisobject.IsAnimated;
+            if (!thisobject.IsAnimated)
+            {
+                thisobject.CharacterName = textBox3.Text = "\0";
+                checkBoxIsAnimatedRCCM.Checked = false;
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            FormObjectPicker fop = new FormObjectPicker(PackList.Instance.packs[0], ElementType.SkeletonWithAddInfo, false);
+            if (fop.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                textBox3.Text = fop.PickedContent[0];
+                thisobject.CharacterName = fop.PickedContent[0];
             }
         }
 

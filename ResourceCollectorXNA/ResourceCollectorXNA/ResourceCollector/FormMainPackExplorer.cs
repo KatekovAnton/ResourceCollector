@@ -59,16 +59,13 @@ namespace ResourceCollector
 
         private void Form1_SizeChanged(object sender, EventArgs e)
         {
-            try
-            {
+           
                 int a = this.Width - groupBox1.Width - 30;
                 a = a > splitContainer1.Panel1MinSize ? a : splitContainer1.Panel1MinSize;
                 splitContainer1.SplitterDistance = a;
                 groupBox1.Height = Height - groupBox1.Location.Y - 90;
 
-            }
-            catch (Exception ex)
-            { }
+            
         }
 
         void treeView1NodeMouseClick(TreeNode tn)

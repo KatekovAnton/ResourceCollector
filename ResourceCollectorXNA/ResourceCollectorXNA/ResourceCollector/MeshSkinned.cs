@@ -919,8 +919,6 @@ namespace ResourceCollector
                             toolStripProgressBar.Value = Convert.ToInt32(pos);
                         }
 
-                        int y = 0;
-
                         for (int bv = 0; bv < BufferIndex.Length; bv++)
                         {
                             BufferIndex[bv] = br.ReadInt32();

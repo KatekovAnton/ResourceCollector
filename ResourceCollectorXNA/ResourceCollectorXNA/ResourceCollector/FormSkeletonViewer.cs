@@ -276,7 +276,7 @@ namespace ResourceCollector
                     }
 
                 }
-                catch (System.Runtime.Serialization.SerializationException ex)
+                catch (System.Runtime.Serialization.SerializationException)
                 {
                     System.Windows.Forms.MessageBox.Show("Wrong file format");
                 }

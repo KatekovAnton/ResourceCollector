@@ -11,7 +11,6 @@ namespace ResourceCollector
 {
     public partial class FormObjectPicker : Form
     {
-        Pack pa;
 
         public List<string> PickedContent
         {

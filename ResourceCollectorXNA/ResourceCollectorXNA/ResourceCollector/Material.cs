@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using System.IO;
+
 namespace ResourceCollector.Content
 {
     public class Material : PackContent
@@ -16,6 +17,7 @@ namespace ResourceCollector.Content
                 return "DT: " + DiffuseTextureName;
             }
         }
+
         public class Lod
         {
             public List<SubsetMaterial> mats;
@@ -28,14 +30,18 @@ namespace ResourceCollector.Content
                 return "Subset count = " + mats.Count();
             }
         }
+
         public List<Lod> lodMats;
         public Pack pack;
+        public System.Windows.Forms.TreeNode TreeNode;
+
         public Material()
         {
             loadedformat = forsavingformat = ElementType.Material;
             name = "New Material " + DateTime.Now.Millisecond.ToString();
             lodMats = new List<Lod>();
         }
+
         public override void calcbodysize(System.Windows.Forms.ToolStripProgressBar targetbar)
         {
             MemoryStream m = new MemoryStream();
@@ -46,19 +52,17 @@ namespace ResourceCollector.Content
                 Lod texturenames = lodMats[i];
                 br.Write(texturenames.mats.Count);
                 for (int j = 0; j < texturenames.mats.Count; j++)
-                {
                     br.WritePackString(texturenames.mats[j].DiffuseTextureName);
-                }
-
             }
             size = Convert.ToInt32( br.BaseStream.Position);
             br.Close();
         }
-        System.Windows.Forms.TreeNode TreeNode;
+
         public override void calcheadersize()
         {
             headersize = 16 + OtherFunctions.GetPackStringLengthForWrite(name);
         }
+
         public override System.Windows.Forms.DialogResult createpropertieswindow(Pack p, System.Windows.Forms.TreeView outputtreeview)
         {
             if (Enginereadedobject.Count == 0)
@@ -73,7 +77,6 @@ namespace ResourceCollector.Content
                 }
                 return form.DialogResult;
             }
-            
             else
             {
                 System.Windows.Forms.MessageBox.Show("object are loaded to scene. cannot to edit");
@@ -83,7 +86,6 @@ namespace ResourceCollector.Content
 
         public override int loadbody(BinaryReader br, System.Windows.Forms.ToolStripProgressBar toolStripProgressBar)
         {
-
             long pos = br.BaseStream.Position;
             int count = br.ReadInt32();
             lodMats = new List<Lod>();// Lod[count];
@@ -99,10 +101,8 @@ namespace ResourceCollector.Content
                     sm.DiffuseTextureName = br.ReadPackString();
                     lodMats[i].mats.Add(sm);
                 }
-
             }
             return Convert.ToInt32(br.BaseStream.Position - pos);
-
         }
 
         public override void loadobjectheader(HeaderInfo hi, BinaryReader br)
@@ -115,6 +115,7 @@ namespace ResourceCollector.Content
             headersize = hi.headersize;
             size = br.ReadInt32();
         }
+
         public override void savebody(BinaryWriter br, System.Windows.Forms.ToolStripProgressBar toolStripProgressBar)
         {
             br.Write(lodMats.Count);
@@ -126,9 +127,9 @@ namespace ResourceCollector.Content
                 {
                     br.WritePackString(texturenames.mats[j].DiffuseTextureName);
                 }
-
             }
         }
+
         public override void saveheader(BinaryWriter br)
         {
             br.WritePackString(name);
@@ -140,7 +141,5 @@ namespace ResourceCollector.Content
             calcbodysize(null);
             br.Write(size);
         }
-        
-       
     }
 }

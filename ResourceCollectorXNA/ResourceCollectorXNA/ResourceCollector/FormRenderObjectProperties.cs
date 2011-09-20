@@ -22,6 +22,7 @@ namespace ResourceCollector.Content
             thisobject = _ro;
            // textBox4.Text = thisobject.matname;
             outlods();
+            outputtreeview = _outputtreeview;
             checkBoxROShadowCaster.Checked = thisobject.IsShadowCaster;
             checkBoxROShadowReceiver.Checked = thisobject.IsShadowReceiver;
             checkBoxRONeedRotate.Checked = thisobject.NeedRotate;

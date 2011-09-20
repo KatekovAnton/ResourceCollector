@@ -13,7 +13,6 @@ namespace ResourceCollectorXNA.Engine.Logic.BehaviourModel
         {
             CurrentPosition = globalpose =  Matrix.Identity;
         }
-        bool mov;
         
         public override void SetGlobalPose(Matrix GlobalPoseMatrix, object Additionaldata)
         {
