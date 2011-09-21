@@ -299,6 +299,7 @@
             this.Name = "FormAnimationTools";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Animation tools";
             this.Load += new System.EventHandler(this.FormAnimationTools_Load);
             this.groupBox1.ResumeLayout(false);
