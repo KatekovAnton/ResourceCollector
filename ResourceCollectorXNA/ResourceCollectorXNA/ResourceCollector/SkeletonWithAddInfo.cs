@@ -11,27 +11,32 @@ namespace ResourceCollector
         #region packcontent methods
         public override void calcbodysize(System.Windows.Forms.ToolStripProgressBar targetbar)
         {
-            size = 4;//bone count
+            BinaryWriter br = new BinaryWriter(new System.IO.MemoryStream());
+            baseskelet.ToStream(br);
+            br.Write(HeadIndex);
+            br.Write(WeaponIndex);
+            br.Write(RootIndex);
+            br.Write(TopRootIndex);
+            br.Write(BottomRootIndex);
+            br.Write(botomindexes.Length);
+            for (int i = 0; i < botomindexes.Length; i++)
+                br.Write(botomindexes[i]);
 
-            for(int i =0;i<baseskelet.bones.Length;i++)
-            {
-                size += OtherFunctions.GetPackStringLengthForWrite(baseskelet.bones[i].Name)+5;
-                if (baseskelet.bones[i].index != this.RootIndex)
-                    size += OtherFunctions.GetPackStringLengthForWrite(baseskelet.bones[i].Parent.Name)+5;
-                else
-                    size += OtherFunctions.GetPackStringLengthForWrite("-\0")+5;
-                
-            }
-            size += 0;
-            for (int i = 0; i < baseskelet.bones.Length; i++)
-            {
-                size += 48;
-            }
+            br.Write(topindexes.Length);
+            for (int i = 0; i < topindexes.Length; i++)
+                br.Write(topindexes[i]);
 
-            size += 20;//headindex, weaponindex, rootindex, toprootindes, bottomrootindex
-            size += 8;//length of botomindexes, topindexes
-            size += 4 * botomindexes.Length;
-            size += 4 * topindexes.Length;
+       /*     bool bottomExist = BottomGraph != null;
+            br.Write(bottomExist);
+            if (bottomExist)
+                AnimationGraph.AnimationGraphToStream(BottomGraph, br);
+
+            bool topExist = TopGraph != null;
+            br.Write(topExist);
+            if (topExist)
+                AnimationGraph.AnimationGraphToStream(TopGraph, br);
+            */
+            size = Convert.ToInt32(br.BaseStream.Position);
 
         }
         public override System.Windows.Forms.DialogResult createpropertieswindow(Pack p, System.Windows.Forms.TreeView outputtreeview)
@@ -47,11 +52,11 @@ namespace ResourceCollector
         {
             long a = br.BaseStream.Position;
             baseskelet = Skeleton.FromStream(br);
-            headindex = br.ReadInt32();
-            weaponindex = br.ReadInt32();
-            rootindex = br.ReadInt32();
-            toprootindex = br.ReadInt32();
-            bottomrootindex = br.ReadInt32();
+            HeadIndex = br.ReadInt32();
+            WeaponIndex = br.ReadInt32();
+            RootIndex = br.ReadInt32();
+            TopRootIndex = br.ReadInt32();
+            BottomRootIndex = br.ReadInt32();
             botomindexes = new int[br.ReadInt32()];
             for (int i = 0; i < botomindexes.Length; i++)
                 botomindexes[i] = br.ReadInt32();
@@ -75,11 +80,11 @@ namespace ResourceCollector
         public override void savebody(BinaryWriter br, System.Windows.Forms.ToolStripProgressBar toolStripProgressBar)
         {
             baseskelet.ToStream(br);
-            br.Write(headindex);
-            br.Write(weaponindex);
-            br.Write(rootindex);
-            br.Write(toprootindex);
-            br.Write(bottomrootindex);
+            br.Write(HeadIndex);
+            br.Write(WeaponIndex);
+            br.Write(RootIndex);
+            br.Write(TopRootIndex);
+            br.Write(BottomRootIndex);
             br.Write(botomindexes.Length);
             for (int i = 0; i < botomindexes.Length; i++)
                 br.Write(botomindexes[i]);
@@ -87,6 +92,16 @@ namespace ResourceCollector
             br.Write(topindexes.Length);
             for (int i = 0; i < topindexes.Length; i++)
                 br.Write(topindexes[i]);
+
+          /*  bool bottomExist = BottomGraph != null;
+            br.Write(bottomExist);
+            if (bottomExist)
+                AnimationGraph.AnimationGraphToStream(BottomGraph, br);
+
+            bool topExist = TopGraph != null;
+            br.Write(topExist);
+            if (topExist)
+                AnimationGraph.AnimationGraphToStream(TopGraph, br);*/
         }
         public override void saveheader(BinaryWriter br)
         {
@@ -118,7 +133,6 @@ namespace ResourceCollector
 
         #region data
         private int[] botomindexes;
-
         public int[] BottomIndexes
         {
             get
@@ -142,6 +156,7 @@ namespace ResourceCollector
                 botomindexes = value;
             }
         }
+
         private int[] topindexes;
         public int[] TopIndexes
         {
@@ -166,66 +181,13 @@ namespace ResourceCollector
                 topindexes = value;
             }
         }
-        private int headindex;
-        public int HeadIndex
-        {
-            get
-            {
-                return headindex;
-            }
-            set
-            {
-                headindex = value;
-            }
-        }
-        private int weaponindex;
-        public int WeaponIndex
-        {
-            get
-            {
-                return weaponindex;
-            }
-            set
-            {
-                weaponindex = value;
-            }
-        }
-        private int rootindex;
-        public int RootIndex
-        {
-            get
-            {
-                return rootindex;
-            }
-            set
-            {
-                rootindex = value;
-            }
-        }
-        private int toprootindex;
-        public int TopRootIndex
-        {
-            get
-            {
-                return toprootindex;
-            }
-            set
-            {
-                toprootindex = value;
-            }
-        }
-        private int bottomrootindex;
-        public int BottomRootIndex
-        {
-            get
-            {
-                return bottomrootindex;
-            }
-            set
-            {
-                bottomrootindex = value;
-            }
-        }
+
+        public int HeadIndex;
+        public int WeaponIndex;
+        public int RootIndex;
+        public int TopRootIndex;
+        public int BottomRootIndex;
+        
         public Skeleton baseskelet
         {
             get;
@@ -233,18 +195,18 @@ namespace ResourceCollector
         }
         #endregion
 
-
+        public AnimationGraph BottomGraph;
+        public AnimationGraph TopGraph;
 
         public SkeletonWithAddInfo(Skeleton s)
         {
             baseskelet = s;
             this.loadedformat = this.forsavingformat = ElementType.SkeletonWithAddInfo;
         }
+
         public SkeletonWithAddInfo()
         {
             this.loadedformat = this.forsavingformat = ElementType.SkeletonWithAddInfo;
         }
-       
-
     }
 }
