@@ -124,7 +124,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(109, 308);
+            this.button2.Location = new System.Drawing.Point(105, 308);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(81, 23);
             this.button2.TabIndex = 3;
@@ -217,14 +217,14 @@
             // saveToFileToolStripMenuItem
             // 
             this.saveToFileToolStripMenuItem.Name = "saveToFileToolStripMenuItem";
-            this.saveToFileToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveToFileToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.saveToFileToolStripMenuItem.Text = "Save to File";
             this.saveToFileToolStripMenuItem.Click += new System.EventHandler(this.button5_Click);
             // 
             // loadFromFileToolStripMenuItem
             // 
             this.loadFromFileToolStripMenuItem.Name = "loadFromFileToolStripMenuItem";
-            this.loadFromFileToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.loadFromFileToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.loadFromFileToolStripMenuItem.Text = "Load from File";
             this.loadFromFileToolStripMenuItem.Click += new System.EventHandler(this.button8_Click);
             // 

@@ -273,7 +273,6 @@ namespace ResourceCollector
                     bw.Write(viewInfo.nodes[i].pictureBox.Location.Y);
                 }
                 bw.Close();
-
             }
 
         }
