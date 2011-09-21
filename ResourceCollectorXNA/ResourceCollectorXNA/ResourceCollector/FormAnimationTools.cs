@@ -53,7 +53,7 @@ namespace ResourceCollector
             checkBox1.Enabled = false;
             checkBox1.Checked = false;
             button1.Enabled = button4.Enabled = button9.Enabled = false;
-            this.WindowState = FormWindowState.Maximized;
+           // this.WindowState = FormWindowState.Maximized;
         }
 
         public FormAnimationTools(SkeletonWithAddInfo s, Pack p, System.Windows.Forms.TreeView outputtreeview)
@@ -100,7 +100,7 @@ namespace ResourceCollector
                 if (skelet.TopGraph != null)
                     listBox1.Items.Add(skelet.TopGraph);
             }
-            this.WindowState = FormWindowState.Maximized;
+            //this.WindowState = FormWindowState.Maximized;
         }
 
         private void addchildrens(Bone b,TreeNode _tn,int level)
@@ -486,6 +486,11 @@ namespace ResourceCollector
             {
                 button2.Enabled = true;
             }
+        }
+
+        private void FormAnimationTools_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -293,11 +293,14 @@
             this.ClientSize = new System.Drawing.Size(639, 710);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormAnimationTools";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.Text = "Animation tools";
+            this.Load += new System.EventHandler(this.FormAnimationTools_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox3.ResumeLayout(false);
