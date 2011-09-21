@@ -13,6 +13,9 @@ namespace ResourceCollector
     {
         MeshSkinned createdMesh;
         public bool removemeshes;
+
+        List<MeshSkinned> MeshesForCombine;
+
         public FormMeshCombiner()
         {
             InitializeComponent();
@@ -39,6 +42,21 @@ namespace ResourceCollector
         {
             DialogResult = System.Windows.Forms.DialogResult.Cancel;
             Close();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+
         }
 
     }

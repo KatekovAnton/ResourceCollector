@@ -53,7 +53,7 @@ namespace ResourceCollector
             checkBox1.Enabled = false;
             checkBox1.Checked = false;
             button1.Enabled = button4.Enabled = button9.Enabled = false;
-            this.WindowState = FormWindowState.Maximized;
+           // this.WindowState = FormWindowState.Maximized;
         }
 
         public FormAnimationTools(SkeletonWithAddInfo s, Pack p, System.Windows.Forms.TreeView outputtreeview)
@@ -64,7 +64,7 @@ namespace ResourceCollector
             skelet = null;
 
             skelet = s;
-           
+
             if (s.name != null)
                 textBox1.Text = s.name;
             label3.Text = "Count of bones: " + skelet.baseskelet.bones.Length.ToString();
@@ -86,22 +86,21 @@ namespace ResourceCollector
             checkBox1.Checked = false;
             button1.Enabled = button4.Enabled = button9.Enabled = false;
 
-            listBox1.Items.Clear();
-            if (skelet.BottomIndexes.Length != 0 && skelet.TopIndexes.Length != 0)
-            {
-                listBox1.Items.Add(new AnimationGraph("Bottom", skelet.BottomIndexes));
-                listBox1.Items.Add(new AnimationGraph("Top", skelet.TopIndexes));
-            }
-            else if (skelet.BottomIndexes.Length == 0 && skelet.TopIndexes.Length != 0)
-            {
-                listBox1.Items.Add(new AnimationGraph("Top", skelet.TopIndexes));
-            }
-            else if (skelet.BottomIndexes.Length != 0 && skelet.TopIndexes.Length == 0)
-            {
-                listBox1.Items.Add(new AnimationGraph("Bottom", skelet.BottomIndexes));
-            }
 
-            this.WindowState = FormWindowState.Maximized;
+            if (finalstepredy)
+            {
+                listBox1.Items.Clear();
+                if (skelet.BottomGraph == null && skelet.BottomIndexes.Length > 0)
+                    skelet.BottomGraph = new AnimationGraph("Bottom", skelet.BottomIndexes);
+                if (skelet.BottomGraph != null)
+                    listBox1.Items.Add(skelet.BottomGraph);
+
+                if (skelet.TopGraph == null && skelet.TopIndexes.Length > 0)
+                    skelet.TopGraph = new AnimationGraph("Top", skelet.TopIndexes);
+                if (skelet.TopGraph != null)
+                    listBox1.Items.Add(skelet.TopGraph);
+            }
+            //this.WindowState = FormWindowState.Maximized;
         }
 
         private void addchildrens(Bone b,TreeNode _tn,int level)
@@ -179,6 +178,16 @@ namespace ResourceCollector
                     button6.Enabled = false;
                     OutInfo();
                     finalstepredy = true;
+                    listBox1.Items.Clear();
+                    if (skelet.BottomGraph == null && skelet.BottomIndexes.Length > 0)
+                        skelet.BottomGraph = new AnimationGraph("Bottom", skelet.BottomIndexes);
+                    if (skelet.BottomGraph != null)
+                        listBox1.Items.Add(skelet.BottomGraph);
+
+                    if (skelet.TopGraph == null && skelet.TopIndexes.Length > 0)
+                        skelet.TopGraph = new AnimationGraph("Top", skelet.TopIndexes);
+                    if (skelet.TopGraph != null)
+                        listBox1.Items.Add(skelet.TopGraph);
                 }
             }
             button5.Enabled = true;
@@ -376,7 +385,7 @@ namespace ResourceCollector
         {
          //   treeView1.ExpandAll();
         }
-        
+
         private void button8_Click(object sender, EventArgs e)
         {
 
@@ -398,7 +407,7 @@ namespace ResourceCollector
 
             skelet.RootIndex = skelet.baseskelet.RootIndex;
 
-            foreach(var bb in skelet.baseskelet.bones)
+            foreach (var bb in skelet.baseskelet.bones)
             {
                 if (bb.Name.Contains("WEAPON"))
                 {
@@ -406,8 +415,8 @@ namespace ResourceCollector
                     break;
                 }
             }
-            
-            foreach(var bb in skelet.baseskelet.bones)
+
+            foreach (var bb in skelet.baseskelet.bones)
             {
                 if (bb.Name.Contains("HEAD"))
                 {
@@ -416,25 +425,21 @@ namespace ResourceCollector
                 }
             }
 
-            textBox2.Text = string.Format("Weapon index = {0}\r\nHead index = {1}\r\nTop root index = {2}\r\nBottom root index = {3}\r\nRoot index = {4}", 
+            textBox2.Text = string.Format("Weapon index = {0}\r\nHead index = {1}\r\nTop root index = {2}\r\nBottom root index = {3}\r\nRoot index = {4}",
                 skelet.WeaponIndex, skelet.HeadIndex, skelet.TopRootIndex, skelet.BottomRootIndex, skelet.RootIndex);
             button8.Enabled = false;
             finalstepredy = true;
 
             listBox1.Items.Clear();
-            if (skelet.BottomIndexes.Length != 0 && skelet.TopIndexes.Length != 0)
-            {
-                listBox1.Items.Add(new AnimationGraph("Bottom", skelet.BottomIndexes));
-                listBox1.Items.Add(new AnimationGraph("Top", skelet.TopIndexes));
-            }
-            else if (skelet.BottomIndexes.Length == 0 && skelet.TopIndexes.Length != 0)
-            {
-                listBox1.Items.Add(new AnimationGraph("Top", skelet.TopIndexes));
-            }
-            else if (skelet.BottomIndexes.Length != 0 && skelet.TopIndexes.Length == 0)
-            {
-                listBox1.Items.Add(new AnimationGraph("Bottom", skelet.BottomIndexes));
-            }
+            if (skelet.BottomGraph == null && skelet.BottomIndexes.Length > 0)
+                skelet.BottomGraph = new AnimationGraph("Bottom", skelet.BottomIndexes);
+            if (skelet.BottomGraph != null)
+                listBox1.Items.Add(skelet.BottomGraph);
+
+            if (skelet.TopGraph == null && skelet.TopIndexes.Length > 0)
+                skelet.TopGraph = new AnimationGraph("Top", skelet.TopIndexes);
+            if (skelet.TopGraph != null)
+                listBox1.Items.Add(skelet.TopGraph);
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -490,6 +495,11 @@ namespace ResourceCollector
             {
                 button2.Enabled = true;
             }
+        }
+
+        private void FormAnimationTools_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
