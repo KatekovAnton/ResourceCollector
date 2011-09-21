@@ -28,6 +28,17 @@ namespace ResourceCollector
             if (p.fullsucces)
                 packs.Add(p);
         }
+
+        public PackContent GetObject(string name)
+        {
+            for (int j = 0; j < packs.Count; j++)
+                if (packs[j].Objects != null)
+                    for (int i = 0; i < packs[j].Objects.Count; i++)
+                        if (packs[j].Objects[i].name == name)
+                            return packs[j].Objects[i];
+
+            return null;
+        }
         public PackContent findobject(string name, ref System.Drawing.Point cc)
         {
             for (int j = 0; j < packs.Count; j++)
