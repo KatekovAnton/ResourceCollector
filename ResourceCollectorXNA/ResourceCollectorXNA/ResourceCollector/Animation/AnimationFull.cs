@@ -62,7 +62,7 @@ namespace ResourceCollector
             return clip;
         }
 
-        public static FullAnimation From3DMAXStream(System.IO.Stream stream, SkeletonWithAddInfo skeleton)
+        public static FullAnimation From3DMAXStream(System.IO.Stream stream, SkeletonWithAddInfo skeleton, bool forward)
         {
             Matrix[][] Frames;
             var clip = new FullAnimation();
@@ -91,7 +91,7 @@ namespace ResourceCollector
             clip.matrices = decomposedMatrices;
             return clip;
         }
-        public static FullAnimation From3DMAXStream(System.IO.Stream stream, SkeletonWithAddInfo skeleton, int[] partIndexes)
+        public static FullAnimation From3DMAXStream(System.IO.Stream stream, SkeletonWithAddInfo skeleton,bool forward, int[] partIndexes)
         {
             Matrix[][] Frames;
             var clip = new FullAnimation();
