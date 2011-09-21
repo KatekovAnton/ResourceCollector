@@ -285,11 +285,18 @@ namespace ResourceCollector
             {
                 System.IO.BinaryReader bw = new System.IO.BinaryReader(ofd.OpenFile());
                 int count = bw.ReadInt32();
-                for (int i = 0; i < count; i++)
+                if (count == listBox1.Items.Count)
                 {
-                    int x = bw.ReadInt32();
-                    int y = bw.ReadInt32();
-                    viewInfo.nodes[i].pictureBox.Location = new Point(x, y);
+                    for (int i = 0; i < count; i++)
+                    {
+                        int x = bw.ReadInt32();
+                        int y = bw.ReadInt32();
+                        viewInfo.nodes[i].pictureBox.Location = new Point(x, y);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Eror!counts is not equals.");
                 }
                 bw.Close();
                 viewInfo.selectedNode = listBox1.SelectedIndex;
