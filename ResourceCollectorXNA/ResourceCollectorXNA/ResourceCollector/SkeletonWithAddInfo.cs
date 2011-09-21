@@ -26,7 +26,7 @@ namespace ResourceCollector
             for (int i = 0; i < topindexes.Length; i++)
                 br.Write(topindexes[i]);
 
-       /*     bool bottomExist = BottomGraph != null;
+            bool bottomExist = BottomGraph != null;
             br.Write(bottomExist);
             if (bottomExist)
                 AnimationGraph.AnimationGraphToStream(BottomGraph, br);
@@ -35,7 +35,7 @@ namespace ResourceCollector
             br.Write(topExist);
             if (topExist)
                 AnimationGraph.AnimationGraphToStream(TopGraph, br);
-            */
+            
             size = Convert.ToInt32(br.BaseStream.Position);
 
         }
@@ -64,6 +64,16 @@ namespace ResourceCollector
             topindexes = new int[br.ReadInt32()];
             for (int i = 0; i < topindexes.Length; i++)
                 topindexes[i] = br.ReadInt32();
+
+
+            bool bottomExist = br.ReadBoolean();
+            if (bottomExist)
+                BottomGraph = AnimationGraph.AnimationGraphFromStream(br);
+
+            bool topExist = br.ReadBoolean();
+            if (topExist)
+                TopGraph = AnimationGraph.AnimationGraphFromStream(br);
+
             return Convert.ToInt32(br.BaseStream.Position - a);
         }
         public override void loadobjectheader(HeaderInfo hi, BinaryReader br)
@@ -93,7 +103,7 @@ namespace ResourceCollector
             for (int i = 0; i < topindexes.Length; i++)
                 br.Write(topindexes[i]);
 
-          /*  bool bottomExist = BottomGraph != null;
+            bool bottomExist = BottomGraph != null;
             br.Write(bottomExist);
             if (bottomExist)
                 AnimationGraph.AnimationGraphToStream(BottomGraph, br);
@@ -101,7 +111,7 @@ namespace ResourceCollector
             bool topExist = TopGraph != null;
             br.Write(topExist);
             if (topExist)
-                AnimationGraph.AnimationGraphToStream(TopGraph, br);*/
+                AnimationGraph.AnimationGraphToStream(TopGraph, br);
         }
         public override void saveheader(BinaryWriter br)
         {
