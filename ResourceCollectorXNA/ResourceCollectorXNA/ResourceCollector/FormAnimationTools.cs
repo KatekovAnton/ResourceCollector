@@ -469,8 +469,17 @@ namespace ResourceCollector
                 AnimGrafEditor dlg = new AnimGrafEditor(listBox1.SelectedItem as AnimationGraph, skelet, listBox1.SelectedIndex);
      
                 if (dlg.ShowDialog() == DialogResult.OK)
-                {
+                {                   
                     listBox1.Items[listBox1.SelectedIndex] = dlg.AnimGraf;
+                    if (dlg.AnimGraf.description.CompareTo(skelet.TopGraph.description) == 0)
+                    {
+                        skelet.TopGraph = dlg.AnimGraf;
+                    }
+                    else if(dlg.AnimGraf.description.CompareTo(skelet.BottomGraph.description) == 0)
+                    {
+                        skelet.BottomGraph = dlg.AnimGraf;
+                    }
+                   
                 }
             }
         }
