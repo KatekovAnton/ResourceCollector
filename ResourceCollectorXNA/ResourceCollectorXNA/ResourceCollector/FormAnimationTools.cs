@@ -470,8 +470,16 @@ namespace ResourceCollector
      
                 if (dlg.ShowDialog() == DialogResult.OK)
                 {
-                    //
+                    listBox1.Items[listBox1.SelectedIndex] = dlg.AnimGraf;
                 }
+            }
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (listBox1.SelectedIndex >= 0)
+            {
+                button2.Enabled = true;
             }
         }
     }

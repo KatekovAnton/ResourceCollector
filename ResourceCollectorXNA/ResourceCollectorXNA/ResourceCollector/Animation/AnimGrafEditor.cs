@@ -87,7 +87,7 @@ namespace ResourceCollector
             AddAnim dlg = new AddAnim();
             if (dlg.ShowDialog() == DialogResult.OK)
             {
-                curanim = FullAnimation.From3DMAXStream(dlg.dlg.OpenFile(), skeleton,true,boneIndexes);
+                curanim = FullAnimation.From3DMAXStream(dlg.dlg.OpenFile(), skeleton,dlg.checkBox1.Checked,boneIndexes);
                 curnode = new AnimationNode(dlg.textBox2.Text,curanim);
                 curnode.index = listBox1.Items.Count;
                 listBox1.Items.Add(curnode);
@@ -178,8 +178,8 @@ namespace ResourceCollector
             if (needlg.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 
-                NodeEvent nodeev = new NodeEvent(needlg.textBox1.Text, (AnimationNode)listBox1.Items[needlg.comboBox1.SelectedIndex], 
-                    (AnimationNode)listBox1.Items[needlg.comboBox2.SelectedIndex],chev.listBox1.Items[needlg.CharEventIndex].ToString());
+                NodeEvent nodeev = new NodeEvent(needlg.textBox1.Text, (AnimationNode)listBox1.Items[needlg.comboBox1.SelectedIndex],
+                    (AnimationNode)listBox1.Items[needlg.comboBox2.SelectedIndex], needlg.textBox2.Text);//chev.listBox1.Items[needlg.CharEventIndex].ToString());
 
                 listBox2.Items.Add(nodeev);
                 viewInfo.addEdgeView(nodeev);
@@ -374,6 +374,36 @@ namespace ResourceCollector
         private void pictureBox1_Click_1(object sender, EventArgs e)
         {
 
+        }
+
+        private void listBox2_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (listBox2.SelectedIndex >= 0)
+            {
+
+                Object[] obj = new Object[listBox1.Items.Count];
+                listBox1.Items.CopyTo(obj, 0);
+                NodeEvent currentevent = (NodeEvent)listBox2.SelectedItem;
+                NodeEventEditor needlg = new NodeEventEditor(chev, obj, currentevent);
+                if (needlg.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+
+                    listBox2.Items[listBox2.SelectedIndex] = new NodeEvent(needlg.textBox1.Text, (AnimationNode)listBox1.Items[needlg.comboBox1.SelectedIndex],
+                        (AnimationNode)listBox1.Items[needlg.comboBox2.SelectedIndex], needlg.textBox2.Text);//chev.listBox1.Items[needlg.CharEventIndex].ToString());
+                    currentevent = (NodeEvent)listBox2.SelectedItem;
+                    viewInfo.edges[listBox2.SelectedIndex] = new EdgeView(viewInfo.nodes[currentevent.parentNode.index], viewInfo.nodes[currentevent.associatedNode.index]);
+
+                }
+                viewInfo.selectedNode = listBox1.SelectedIndex;
+                viewInfo.selectedEdge = listBox2.SelectedIndex;
+                viewInfo.Refresh();   
+
+            }
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            BildAGraf();
         }
     }
 

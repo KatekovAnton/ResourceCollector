@@ -62,7 +62,7 @@ namespace ResourceCollector
             return clip;
         }
 
-        public static FullAnimation From3DMAXStream(System.IO.Stream stream, SkeletonWithAddInfo skeleton, bool forward)
+        public static FullAnimation From3DMAXStream(System.IO.Stream stream, SkeletonWithAddInfo skeleton, bool reverse)
         {
             Matrix[][] Frames;
             var clip = new FullAnimation();
@@ -84,14 +84,18 @@ namespace ResourceCollector
                 for (int @in = 0; @in < length; @in++)
                     Frames[@in][i] = skeleton.baseskelet.bones[i].BaseMatrix * Frames[@in][i];
 
-
+            if (reverse)
+            {
+                //Matrix[][] FramesTmp = new Matrix[length][];
+                Frames = Frames.Reverse().ToArray();
+            }
             Matrix[][] relatedMatrices = Animation.GetRelatedMatrices(Frames, skeleton.baseskelet);
             DecomposedMatrix[][] decomposedMatrices = GetDecomposedMatrices(skeleton.baseskelet, relatedMatrices);
 
             clip.matrices = decomposedMatrices;
             return clip;
         }
-        public static FullAnimation From3DMAXStream(System.IO.Stream stream, SkeletonWithAddInfo skeleton,bool forward, int[] partIndexes)
+        public static FullAnimation From3DMAXStream(System.IO.Stream stream, SkeletonWithAddInfo skeleton, bool reverse, int[] partIndexes)
         {
             Matrix[][] Frames;
             var clip = new FullAnimation();
@@ -113,7 +117,10 @@ namespace ResourceCollector
                 for (int @in = 0; @in < length; @in++)
                     Frames[@in][i] = skeleton.baseskelet.bones[i].BaseMatrix * Frames[@in][i];
 
-
+            if (reverse)
+            {
+              Frames=Frames.Reverse().ToArray();
+            }
             Matrix[][] relatedMatrices = Animation.GetRelatedMatrices(Frames, skeleton.baseskelet);
             DecomposedMatrix[][] decomposedMatrices = GetDecomposedMatrices(skeleton.baseskelet, relatedMatrices);
             DecomposedMatrix[][] decomposedMatrices2 = GetDecomposedMatricesByPart(decomposedMatrices, partIndexes);

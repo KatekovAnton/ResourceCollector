@@ -20,6 +20,18 @@ namespace ResourceCollector
             comboBox1.Items.AddRange(obj);
             comboBox2.Items.AddRange(obj);
         }
+        public NodeEventEditor(CharEvents _chev, Object[] obj, NodeEvent ne)
+        {
+            InitializeComponent();
+            chev = _chev;
+            comboBox1.Items.AddRange(obj);
+            comboBox2.Items.AddRange(obj);
+            comboBox1.SelectedIndex =ne.parentNode.index;
+            comboBox2.SelectedIndex = ne.associatedNode.index;
+            textBox2.Text =ne.neededEvent;
+            textBox1.Text = ne.description;
+
+        }
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -29,6 +41,11 @@ namespace ResourceCollector
                 textBox2.Text = chev.listBox1.Items[chev.selectedIndex].ToString();
                 textBox2.Tag = chev.listBox1.Items[chev.selectedIndex];                
             }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+   
         }
     }
 }
