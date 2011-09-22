@@ -43,6 +43,7 @@ namespace ResourceCollector
         public AnimGrafEditor(ResourceCollector.AnimationGraph _animGraph, ResourceCollector.SkeletonWithAddInfo _skeleton, int skeletonPart)
         {
             InitializeComponent();
+            this.Text = "Editing graff: "+_animGraph.description;
             AnimGraf = _animGraph;
             skeleton = _skeleton;
             chev = new CharEvents();            
@@ -58,25 +59,7 @@ namespace ResourceCollector
                     break;
                 default: break;
             }
-            //if (AnimGraf.nodes.Count > 0)
-            //{
-            //    listBox1.Items.Clear();
-            //    listBox2.Items.Clear();
-            //    AnimationNode[] tmp=new AnimationNode[AnimGraf.nodes.Count];
-            //    AnimGraf.nodes.ToArray().CopyTo(tmp, 0);
-            //    listBox1.Items.AddRange(tmp);
-            //    foreach (AnimationNode an in AnimGraf.nodes.ToArray())
-            //    {
-            //        if (an.nodeEvents.Count > 0)
-            //        {
-            //            NodeEvent[] tmp2 = new NodeEvent[an.nodeEvents.Count];
-            //            an.nodeEvents.ToArray().CopyTo(tmp2, 0);
-            //            listBox2.Items.AddRange(tmp2);
-            //        }
-            //    }
-            //}
-
-            
+           
 
         }
 
