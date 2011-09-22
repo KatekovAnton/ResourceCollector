@@ -567,7 +567,7 @@ namespace ResourceCollector
     }
 
 
-
+    //серёга привет
     public class NodeView 
     {
         public PictureBox pictureBox;
