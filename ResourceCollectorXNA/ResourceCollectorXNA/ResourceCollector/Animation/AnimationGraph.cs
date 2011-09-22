@@ -108,20 +108,28 @@ namespace ResourceCollector
             get;
             private set;
         }
-
+        public NodeProperties Properties;
         public int index;
         public List<NodeEvent> nodeEvents;                      // исходящие рёбра
         public Animation animation;                         // соответствующая узлу анимация
 
         public AnimationNode(string _name, Animation _animation)
         {
+            Properties = new NodeProperties();
             SetName(_name);
             nodeEvents = new List<NodeEvent>();
             animation = _animation;
         }
-
+        public AnimationNode(string _name, Animation _animation, NodeProperties _Properties)
+        {
+            SetName(_name);
+            nodeEvents = new List<NodeEvent>();
+            animation = _animation;
+            Properties = _Properties;
+        }
         public AnimationNode(string _name)
         {
+            Properties = new NodeProperties();
             SetName(_name);
             nodeEvents = new List<NodeEvent>();
         }
@@ -302,6 +310,22 @@ namespace ResourceCollector
         public override string ToString()
         {
             return this.description.Remove(this.description.Length - 1);
+        }
+    }
+
+    public class NodeProperties
+    {
+        public bool OneTimeAnimation;
+
+        public void NodePropertiesToStream(System.IO.BinaryWriter bw)
+        {
+            /////
+        }
+        public NodeProperties NodePropertiesFromStream(System.IO.BinaryReader br)
+        {
+            NodeProperties result = new NodeProperties();
+            /////
+            return result;
         }
     }
 }

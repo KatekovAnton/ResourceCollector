@@ -38,9 +38,11 @@ namespace ResourceCollector
             {
                 curanim = FullAnimation.From3DMAXStream(dlg.dlg.OpenFile(), skeleton,dlg.checkBox1.Checked,AnimGraf.boneIndexes);
                 curnode = new AnimationNode(dlg.textBox2.Text,curanim);
+                curnode.Properties.OneTimeAnimation = dlg.checkBox2.Checked;
                 curnode.index = listBox1.Items.Count;
                 listBox1.Items.Add(curnode);
                 viewInfo.addNodeView(curnode,new MouseEventHandler(pictureBox1_MouseDoubleClick),new EventHandler(pictureBox1_Click));
+
             }
         }
         
@@ -116,7 +118,18 @@ namespace ResourceCollector
         {
             viewInfo.selectedNode = listBox1.SelectedIndex;
             viewInfo.selectedEdge = listBox2.SelectedIndex;
-            viewInfo.Refresh();        
+            viewInfo.Refresh();
+            if (listBox1.SelectedIndex >= 0)
+            {
+                groupBox3.Enabled = true;
+                AnimationNode an = (AnimationNode)listBox1.SelectedItem;
+                textBox1.Text = an.ToString();
+                checkBox1.Checked = an.Properties.OneTimeAnimation;
+            }
+            else
+            {
+                groupBox3.Enabled = false;
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -364,6 +377,14 @@ namespace ResourceCollector
         private void button10_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button5_Click_1(object sender, EventArgs e)
+        {
+            AnimationNode an = (AnimationNode)listBox1.SelectedItem;
+            an.SetName(textBox1.Text);
+            an.Properties.OneTimeAnimation = checkBox1.Checked;
+            listBox1.Items[listBox1.SelectedIndex] = an;
         }
     }
 
