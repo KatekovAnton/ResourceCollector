@@ -534,7 +534,6 @@ namespace ResourceCollector
             PictureBox ss = (PictureBox)sender;
             curnew = ss.Location;
             DrawNodeEvent();
-
         }
 
         private void drawnodes()
@@ -543,21 +542,20 @@ namespace ResourceCollector
             {
                 nodes[i].Draw(selectedNode == i,imageList1);                
             }
-
         }
 
         private void DrawNodeEvent()
         {
-            Bitmap btm = new Bitmap(baseControl.Width, baseControl.Height);
-            Graphics gr = Graphics.FromImage(btm);
+          //  Bitmap btm = new Bitmap(baseControl.Width, baseControl.Height);
+            Graphics gr = baseControl.CreateGraphics();
             for (int i = 0; i < edges.Count; i++)
             {
                 edges[i].Draw(gr, i == selectedEdge);            
             }
             gr.Dispose();
-            PictureBox pictureBox1 = (PictureBox)baseControl;
+         //   PictureBox pictureBox1 = (PictureBox)baseControl;
             //baseControl.BackgroundImage = btm;
-            pictureBox1.Image = btm;
+         //   pictureBox1.Image = btm;
            // baseControl.Invalidate();
         }
 
