@@ -50,11 +50,13 @@
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.panel2 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.panel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -76,14 +78,15 @@
             this.groupBox1.Controls.Add(this.listBox1);
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(195, 299);
+            this.groupBox1.Size = new System.Drawing.Size(195, 309);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Animations";
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(111, 270);
+            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button3.Location = new System.Drawing.Point(108, 276);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(81, 23);
             this.button3.TabIndex = 5;
@@ -93,7 +96,8 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(8, 270);
+            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button4.Location = new System.Drawing.Point(6, 276);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(81, 23);
             this.button4.TabIndex = 4;
@@ -106,7 +110,7 @@
             this.listBox1.FormattingEnabled = true;
             this.listBox1.Location = new System.Drawing.Point(6, 19);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(183, 238);
+            this.listBox1.Size = new System.Drawing.Size(183, 251);
             this.listBox1.TabIndex = 0;
             this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
@@ -115,16 +119,17 @@
             this.groupBox2.Controls.Add(this.button2);
             this.groupBox2.Controls.Add(this.button1);
             this.groupBox2.Controls.Add(this.listBox2);
-            this.groupBox2.Location = new System.Drawing.Point(3, 305);
+            this.groupBox2.Location = new System.Drawing.Point(3, 315);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(195, 336);
+            this.groupBox2.Size = new System.Drawing.Size(195, 345);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Event List";
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(105, 308);
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Location = new System.Drawing.Point(105, 313);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(81, 23);
             this.button2.TabIndex = 3;
@@ -134,7 +139,8 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(6, 308);
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Location = new System.Drawing.Point(3, 313);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(81, 23);
             this.button1.TabIndex = 2;
@@ -145,9 +151,9 @@
             // listBox2
             // 
             this.listBox2.FormattingEnabled = true;
-            this.listBox2.Location = new System.Drawing.Point(7, 19);
+            this.listBox2.Location = new System.Drawing.Point(3, 17);
             this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(183, 277);
+            this.listBox2.Size = new System.Drawing.Size(183, 290);
             this.listBox2.TabIndex = 1;
             this.listBox2.SelectedIndexChanged += new System.EventHandler(this.listBox2_SelectedIndexChanged);
             this.listBox2.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listBox2_MouseDoubleClick);
@@ -162,10 +168,10 @@
             // button9
             // 
             this.button9.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.button9.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.button9.Location = new System.Drawing.Point(0, 672);
+            this.button9.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.button9.Location = new System.Drawing.Point(6, 3);
             this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(204, 23);
+            this.button9.Size = new System.Drawing.Size(81, 23);
             this.button9.TabIndex = 4;
             this.button9.Text = "OK";
             this.button9.UseVisualStyleBackColor = true;
@@ -173,8 +179,7 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.button10);
-            this.panel1.Controls.Add(this.button9);
+            this.panel1.Controls.Add(this.panel2);
             this.panel1.Controls.Add(this.groupBox1);
             this.panel1.Controls.Add(this.groupBox2);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
@@ -186,13 +191,14 @@
             // button10
             // 
             this.button10.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.button10.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.button10.Location = new System.Drawing.Point(0, 647);
+            this.button10.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.button10.Location = new System.Drawing.Point(108, 3);
             this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(204, 25);
+            this.button10.Size = new System.Drawing.Size(81, 23);
             this.button10.TabIndex = 5;
             this.button10.Text = "Cancel";
             this.button10.UseVisualStyleBackColor = true;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
             // menuStrip1
             // 
@@ -240,16 +246,26 @@
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.button6_Click);
             // 
             // loadToolStripMenuItem
             // 
             this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-            this.loadToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.loadToolStripMenuItem.Text = "Load";
             this.loadToolStripMenuItem.Click += new System.EventHandler(this.button7_Click);
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.button10);
+            this.panel2.Controls.Add(this.button9);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel2.Location = new System.Drawing.Point(0, 666);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(204, 29);
+            this.panel2.TabIndex = 9;
             // 
             // AnimGrafEditor
             // 
@@ -269,6 +285,7 @@
             this.panel1.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -296,5 +313,6 @@
         private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem loadToolStripMenuItem;
+        private System.Windows.Forms.Panel panel2;
     }
 }
