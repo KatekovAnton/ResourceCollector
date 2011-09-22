@@ -469,10 +469,26 @@ namespace ResourceCollector
         /// <param name="e">Thats it</param>
         private void button2_Click(object sender, EventArgs e)
         {
+            List<string> actionKeys = new List<string>();
+            
             if (listBox1.SelectedItem !=null && skelet != null && skelet.BottomIndexes != null && skelet.TopIndexes != null && finalstepredy)
             {
-                AnimGrafEditor dlg = new AnimGrafEditor(listBox1.SelectedItem as AnimationGraph, skelet, listBox1.SelectedIndex);
-     
+
+                AnimationGraph editedGraph = listBox1.SelectedItem as AnimationGraph;
+                
+                List<string> addKeys = new List<string>();
+                foreach (object g in listBox1.Items)
+                {
+                    AnimationGraph graph = g as AnimationGraph;
+                    if (g != listBox1.SelectedItem)
+                    {
+                        string[] graphkeys = graph.getAllEvents();
+                        foreach (string key in graphkeys)
+                            if (!addKeys.Contains(key))
+                                addKeys.Add(key);
+                    }
+                }
+                AnimGrafEditor dlg = new AnimGrafEditor(editedGraph, skelet, addKeys.ToArray());
                 if (dlg.ShowDialog() == DialogResult.OK)
                 {                   
                     listBox1.Items[listBox1.SelectedIndex] = dlg.AnimGraf;

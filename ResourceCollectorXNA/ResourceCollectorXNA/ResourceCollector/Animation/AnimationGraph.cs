@@ -211,22 +211,36 @@ namespace ResourceCollector
 
         //индексы костей полного скелета, которые анимирует 
         //этот граф. это не правильно но так проще =(
-        public int[] indexes;
+        public int[] boneIndexes;
         public AnimationGraph(AnimationNode[] _nodes, int[] _indexes)
         {
             nodes = new List<AnimationNode>(_nodes);
             description = "new_graph\0";
 
-            indexes = new int[_indexes.Length];
-            _indexes.CopyTo(indexes, 0);
+            boneIndexes = new int[_indexes.Length];
+            _indexes.CopyTo(boneIndexes, 0);
         }
 
         public AnimationGraph(string _description, int []_indexes)
         {
             SetDescription(_description);
             nodes = new List<AnimationNode>();
-            indexes = new int[_indexes.Length];
-            _indexes.CopyTo(indexes, 0);
+            boneIndexes = new int[_indexes.Length];
+            _indexes.CopyTo(boneIndexes, 0);
+        }
+
+        public string[] getAllEvents()
+        {
+            List<string> keys = new List<string>();
+            for (int i = 0; i < nodes.Count; i++)
+            {
+                for (int j = 0; j < nodes[i].nodeEvents.Count; j++)
+                {
+                    if (!keys.Contains(nodes[i].nodeEvents[j].neededEvent))
+                        keys.Add(nodes[i].nodeEvents[j].neededEvent);
+                }
+            }
+            return keys.ToArray();
         }
 
         public AnimationNode FindNodeWithName(string nodeName)
@@ -251,9 +265,9 @@ namespace ResourceCollector
 
         public static void AnimationGraphToStream(AnimationGraph AnimGraph, System.IO.BinaryWriter bw)
         {
-            bw.Write(AnimGraph.indexes.Length);
-            for (int i = 0; i < AnimGraph.indexes.Length; i++)
-                bw.Write(AnimGraph.indexes[i]);
+            bw.Write(AnimGraph.boneIndexes.Length);
+            for (int i = 0; i < AnimGraph.boneIndexes.Length; i++)
+                bw.Write(AnimGraph.boneIndexes[i]);
 
             bw.WritePackString(AnimGraph.description);
             bw.Write(AnimGraph.nodes.Count);

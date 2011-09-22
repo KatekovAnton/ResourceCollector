@@ -16,51 +16,17 @@ namespace ResourceCollector
         public AnimGraphViewIfo viewInfo;
         public ResourceCollector.SkeletonWithAddInfo skeleton;
         CharEvents chev;
-        public int[] boneIndexes;
-
-        public AnimGrafEditor(ResourceCollector.SkeletonWithAddInfo _skeleton, int skeletonPart)
-        {
-            switch (skeletonPart)
-            {
-                case 0:
-                    boneIndexes = _skeleton.BottomIndexes;
-                    break;
-                case 1:
-                    boneIndexes = _skeleton.TopIndexes;
-                    break;
-                default: break;
-            }
-            AnimGraf = new AnimationGraph("new_graph", boneIndexes);
-
-            InitializeComponent();
-            skeleton = _skeleton;
-            chev = new CharEvents();
-
-            viewInfo = new AnimGraphViewIfo(AnimGraf, this.pictureBox1, imageList1, new MouseEventHandler(pictureBox1_MouseDoubleClick), new EventHandler(pictureBox1_Click));
-            
-        }
-
-        public AnimGrafEditor(ResourceCollector.AnimationGraph _animGraph, ResourceCollector.SkeletonWithAddInfo _skeleton, int skeletonPart)
+        string[] additionalEvents;
+        public AnimGrafEditor(ResourceCollector.AnimationGraph _animGraph, ResourceCollector.SkeletonWithAddInfo _skeleton, string[] existedEvents)
         {
             InitializeComponent();
-            this.Text = "Editing graff: "+_animGraph.description;
+            this.Text = "Editing graff: " + _animGraph.description;
             AnimGraf = _animGraph;
             skeleton = _skeleton;
-            chev = new CharEvents();            
-            viewInfo = new AnimGraphViewIfo(AnimGraf, this.pictureBox1,imageList1, new MouseEventHandler(pictureBox1_MouseDoubleClick), new EventHandler(pictureBox1_Click));
-            loadFormByAnimationGraph(_animGraph);
-            switch (skeletonPart)
-            {
-                case 0:
-                    boneIndexes = _skeleton.BottomIndexes;
-                    break;
-                case 1:
-                    boneIndexes = _skeleton.TopIndexes;
-                    break;
-                default: break;
-            }
-           
-
+            chev = new CharEvents();
+            additionalEvents = existedEvents;
+            viewInfo = new AnimGraphViewIfo(AnimGraf, this.pictureBox1, imageList1, new MouseEventHandler(pictureBox1_MouseDoubleClick), new EventHandler(pictureBox1_Click));
+            loadFormByAnimationGraph(_animGraph,existedEvents);
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -70,7 +36,7 @@ namespace ResourceCollector
             AddAnim dlg = new AddAnim();
             if (dlg.ShowDialog() == DialogResult.OK)
             {
-                curanim = FullAnimation.From3DMAXStream(dlg.dlg.OpenFile(), skeleton,dlg.checkBox1.Checked,boneIndexes);
+                curanim = FullAnimation.From3DMAXStream(dlg.dlg.OpenFile(), skeleton,dlg.checkBox1.Checked,AnimGraf.boneIndexes);
                 curnode = new AnimationNode(dlg.textBox2.Text,curanim);
                 curnode.index = listBox1.Items.Count;
                 listBox1.Items.Add(curnode);
@@ -296,13 +262,13 @@ namespace ResourceCollector
             {                
                 System.IO.BinaryReader br = new System.IO.BinaryReader(sfd.OpenFile());             
                 AnimGraf = AnimationGraph.AnimationGraphFromStream(br);
-                loadFormByAnimationGraph(AnimGraf);
+                loadFormByAnimationGraph(AnimGraf,additionalEvents);
                 viewInfo.Clear();
                 viewInfo = new AnimGraphViewIfo(AnimGraf, pictureBox1, imageList1, new MouseEventHandler(pictureBox1_MouseDoubleClick), new EventHandler(pictureBox1_Click));
             }
         }
 
-        public void loadFormByAnimationGraph(AnimationGraph AGrf)
+        public void loadFormByAnimationGraph(AnimationGraph AGrf, string[] existedEvents)
         {
            
             //viewInfo = new AnimGraphViewIfo(AGrf, pictureBox1, imageList1, new MouseEventHandler(pictureBox1_MouseDoubleClick), new EventHandler(pictureBox1_Click));
@@ -318,12 +284,12 @@ namespace ResourceCollector
 
 
                 for (int j = 0; j < AGrf.nodes[i].nodeEvents.Count; j++)
-                {
                     if (!FindCharacterEvent(AGrf.nodes[i].nodeEvents[j].neededEvent))
-                    {
                         chev.listBox1.Items.Add(new CharacterEvent(AGrf.nodes[i].nodeEvents[j].neededEvent));
-                    }
-                }
+                   
+                for (int j = 0; j < existedEvents.Length;j++)
+                    if (!FindCharacterEvent(existedEvents[j]))
+                        chev.listBox1.Items.Add(new CharacterEvent(existedEvents[j]));
 
             }
             TagRefresh();
