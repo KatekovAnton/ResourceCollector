@@ -546,17 +546,22 @@ namespace ResourceCollector
 
         private void DrawNodeEvent()
         {
-          //  Bitmap btm = new Bitmap(baseControl.Width, baseControl.Height);
-            Graphics gr = baseControl.CreateGraphics();
+            PictureBox pictureBox = (PictureBox)baseControl; 
+            if (pictureBox.Image == null)
+            {
+                pictureBox.Image= new Bitmap(baseControl.Width, baseControl.Height);
+            }
+            Graphics gr =Graphics.FromImage( pictureBox.Image);
+            gr.Clear(Color.White);
             for (int i = 0; i < edges.Count; i++)
             {
                 edges[i].Draw(gr, i == selectedEdge);            
             }
             gr.Dispose();
-         //   PictureBox pictureBox1 = (PictureBox)baseControl;
+         //   
             //baseControl.BackgroundImage = btm;
-         //   pictureBox1.Image = btm;
-           // baseControl.Invalidate();
+            //pictureBox1.Image = btm;
+            pictureBox.Invalidate();
         }
 
     }
