@@ -317,15 +317,20 @@ namespace ResourceCollector
     {
         public bool OneTimeAnimation;
 
-        public void NodePropertiesToStream(System.IO.BinaryWriter bw)
+        public  void NodePropertiesToStream(System.IO.BinaryWriter bw)
         {
             /////
+            bw.Write(OneTimeAnimation);
         }
-        public NodeProperties NodePropertiesFromStream(System.IO.BinaryReader br)
+        public static NodeProperties NodePropertiesFromStream(System.IO.BinaryReader br)
         {
             NodeProperties result = new NodeProperties();
-            /////
+            result.OneTimeAnimation = br.ReadBoolean();
             return result;
+        }
+        public  void LoadFromStream(System.IO.BinaryReader br)
+        {
+            OneTimeAnimation= br.ReadBoolean();
         }
     }
 }
