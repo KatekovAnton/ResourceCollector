@@ -339,11 +339,6 @@ namespace ResourceCollector
 
         }
 
-        private void pictureBox1_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
         private void listBox2_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             if (listBox2.SelectedIndex >= 0)
