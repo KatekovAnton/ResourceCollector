@@ -26,6 +26,8 @@ namespace ResourceCollector
                 textBox1.Text = dlg.FileName;
                 textBox2.Text = dlg.SafeFileName;
             }
+            else
+                dlg = null;
 
 
         }

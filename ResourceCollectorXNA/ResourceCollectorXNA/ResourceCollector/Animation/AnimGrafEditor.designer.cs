@@ -42,10 +42,6 @@
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.button9 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.button5 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.button10 = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -59,7 +55,6 @@
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.panel1.SuspendLayout();
-            this.groupBox3.SuspendLayout();
             this.panel2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -117,6 +112,7 @@
             this.listBox1.Size = new System.Drawing.Size(183, 251);
             this.listBox1.TabIndex = 0;
             this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
+            this.listBox1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseDoubleClick);
             // 
             // groupBox2
             // 
@@ -183,7 +179,6 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.groupBox3);
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Controls.Add(this.groupBox1);
             this.panel1.Controls.Add(this.groupBox2);
@@ -192,47 +187,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(204, 794);
             this.panel1.TabIndex = 7;
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.button5);
-            this.groupBox3.Controls.Add(this.textBox1);
-            this.groupBox3.Controls.Add(this.checkBox1);
-            this.groupBox3.Enabled = false;
-            this.groupBox3.Location = new System.Drawing.Point(3, 315);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(192, 98);
-            this.groupBox3.TabIndex = 10;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Node Properties";
-            // 
-            // button5
-            // 
-            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button5.Location = new System.Drawing.Point(84, 68);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(102, 23);
-            this.button5.TabIndex = 6;
-            this.button5.Text = "Save Changes";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click_1);
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(6, 19);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(180, 20);
-            this.textBox1.TabIndex = 1;
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(6, 45);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(114, 17);
-            this.checkBox1.TabIndex = 0;
-            this.checkBox1.Text = "one-time animation";
-            this.checkBox1.UseVisualStyleBackColor = true;
             // 
             // panel2
             // 
@@ -254,7 +208,6 @@
             this.button10.TabIndex = 5;
             this.button10.Text = "Cancel";
             this.button10.UseVisualStyleBackColor = true;
-            this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
             // menuStrip1
             // 
@@ -329,8 +282,6 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -362,9 +313,5 @@
         private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem loadToolStripMenuItem;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.CheckBox checkBox1;
     }
 }

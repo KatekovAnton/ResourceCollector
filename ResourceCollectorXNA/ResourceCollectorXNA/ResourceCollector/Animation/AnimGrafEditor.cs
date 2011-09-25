@@ -119,17 +119,6 @@ namespace ResourceCollector
             viewInfo.selectedNode = listBox1.SelectedIndex;
             viewInfo.selectedEdge = listBox2.SelectedIndex;
             viewInfo.Refresh();
-            if (listBox1.SelectedIndex >= 0)
-            {
-                groupBox3.Enabled = true;
-                AnimationNode an = (AnimationNode)listBox1.SelectedItem;
-                textBox1.Text = an.ToString();
-                checkBox1.Checked = an.Properties.OneTimeAnimation;
-            }
-            else
-            {
-                groupBox3.Enabled = false;
-            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -369,17 +358,49 @@ namespace ResourceCollector
             BildAGraf();
         }
 
-        private void button10_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button5_Click_1(object sender, EventArgs e)
+        private void button6_Click_1(object sender, EventArgs e)
         {
             AnimationNode an = (AnimationNode)listBox1.SelectedItem;
-            an.SetName(textBox1.Text);
-            an.Properties.OneTimeAnimation = checkBox1.Checked;
-            listBox1.Items[listBox1.SelectedIndex] = an;
+            AddAnim dlg = new AddAnim();
+            dlg.textBox2.Text = an.name;
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                if (dlg.dlg != null)
+                    an.animation = FullAnimation.From3DMAXStream(dlg.dlg.OpenFile(), skeleton, dlg.checkBox1.Checked, AnimGraf.boneIndexes);
+
+
+                an.SetName(dlg.textBox2.Text);
+                an.Properties.OneTimeAnimation = dlg.checkBox2.Checked;
+                listBox1.Items.Remove(an);
+                an.index = listBox1.Items.Count;
+                listBox1.Items.Add(an);
+               // viewInfo.addNodeView(curnode, new MouseEventHandler(pictureBox1_MouseDoubleClick), new EventHandler(pictureBox1_Click));
+
+            }
+        }
+
+        private void listBox1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (listBox1.SelectedItem != null)
+            {
+                AnimationNode an = (AnimationNode)listBox1.SelectedItem;
+                AddAnim dlg = new AddAnim();
+                dlg.textBox2.Text = an.name;
+                if (dlg.ShowDialog() == DialogResult.OK)
+                {
+                    if (dlg.dlg != null)
+                        an.animation = FullAnimation.From3DMAXStream(dlg.dlg.OpenFile(), skeleton, dlg.checkBox1.Checked, AnimGraf.boneIndexes);
+
+
+                    an.SetName(dlg.textBox2.Text);
+                    an.Properties.OneTimeAnimation = dlg.checkBox2.Checked;
+                    listBox1.Items.Remove(an);
+                    an.index = listBox1.Items.Count;
+                    listBox1.Items.Add(an);
+                    // viewInfo.addNodeView(curnode, new MouseEventHandler(pictureBox1_MouseDoubleClick), new EventHandler(pictureBox1_Click));
+
+                }
+            }
         }
     }
 

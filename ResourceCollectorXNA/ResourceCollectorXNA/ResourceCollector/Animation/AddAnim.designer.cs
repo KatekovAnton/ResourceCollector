@@ -30,6 +30,7 @@
         {
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -37,7 +38,6 @@
             this.button2 = new System.Windows.Forms.Button();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -65,6 +65,16 @@
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Animation";
+            // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Location = new System.Drawing.Point(7, 105);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(114, 17);
+            this.checkBox2.TabIndex = 8;
+            this.checkBox2.Text = "one-time animation";
+            this.checkBox2.UseVisualStyleBackColor = true;
             // 
             // checkBox1
             // 
@@ -131,16 +141,6 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // checkBox2
-            // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(7, 105);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(114, 17);
-            this.checkBox2.TabIndex = 8;
-            this.checkBox2.Text = "one-time animation";
-            this.checkBox2.UseVisualStyleBackColor = true;
-            // 
             // AddAnim
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -161,7 +161,6 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button3;
@@ -171,5 +170,6 @@
         private System.Windows.Forms.Label label1;
         public System.Windows.Forms.CheckBox checkBox1;
         public System.Windows.Forms.CheckBox checkBox2;
+        public System.Windows.Forms.TextBox textBox1;
     }
 }
