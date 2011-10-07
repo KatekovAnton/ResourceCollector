@@ -73,12 +73,12 @@ namespace ResourceCollector
                                 Objects.Add(content);
                                 content.loadobjectheader(hi, br);
                             } break;
-                        case ElementType.BaseAnimation:
+                       /* case ElementType.BaseAnimation:
                             {
                                 var content = new AnimationBase();
                                 Objects.Add(content);
                                 content.loadobjectheader(hi, br);
-                            } break;
+                            } break;*/
                         case ElementType.SkeletonWithAddInfo:
                             {
                                 var content = new CharacterStaticInfo();

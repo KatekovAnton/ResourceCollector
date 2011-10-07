@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework;
 
 namespace ResourceCollector
 {
-    public class AnimationBase : PackContent//int BaseAnimation = 40;
+   /* public class AnimationBase : PackContent//int BaseAnimation = 40;
     {
         public bool needtosave;
 
@@ -104,5 +104,5 @@ namespace ResourceCollector
             return clip;
         }
 
-    }
+    }*/
 }
