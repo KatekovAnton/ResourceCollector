@@ -81,7 +81,7 @@ namespace ResourceCollector
                             } break;
                         case ElementType.SkeletonWithAddInfo:
                             {
-                                var content = new SkeletonWithAddInfo();
+                                var content = new CharacterStaticInfo();
                                 Objects.Add(content);
                                 content.loadobjectheader(hi, br);
                             }break;

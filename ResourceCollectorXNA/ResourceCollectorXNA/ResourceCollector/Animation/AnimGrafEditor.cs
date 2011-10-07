@@ -14,10 +14,10 @@ namespace ResourceCollector
     {
         public AnimationGraph AnimGraf;
         public AnimGraphViewIfo viewInfo;
-        public ResourceCollector.SkeletonWithAddInfo skeleton;
+        public ResourceCollector.CharacterStaticInfo skeleton;
         CharEvents chev;
         string[] additionalEvents;
-        public AnimGrafEditor(ResourceCollector.AnimationGraph _animGraph, ResourceCollector.SkeletonWithAddInfo _skeleton, string[] existedEvents)
+        public AnimGrafEditor(ResourceCollector.AnimationGraph _animGraph, ResourceCollector.CharacterStaticInfo _skeleton, string[] existedEvents)
         {
             InitializeComponent();
             this.Text = "Editing graff: " + _animGraph.description;

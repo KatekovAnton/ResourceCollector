@@ -67,7 +67,7 @@ namespace ResourceCollector
     {
         public CharacterPart[] parts;                   // список частей
 
-        public SkeletonWithAddInfo skeleton;
+        public CharacterStaticInfo skeleton;
 
         public Character()
         { }

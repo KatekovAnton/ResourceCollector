@@ -13,7 +13,7 @@ namespace ResourceCollector
 {
     public partial class FormAnimationTools : Form
     {
-        public SkeletonWithAddInfo skelet;
+        public CharacterStaticInfo skelet;
 
         private bool finalstepredy;
         private SkeletonViewer skeletonviever;
@@ -34,7 +34,7 @@ namespace ResourceCollector
             treeView1.Nodes.Clear();
             skelet = null;
             textBox1.Text = label3.Text = string.Empty;
-            skelet = new SkeletonWithAddInfo(s);
+            skelet = new CharacterStaticInfo(s);
             if (s.name != null)
                 textBox1.Text = s.name;
             label3.Text = "Count of bones: " + skelet.baseskelet.bones.Length.ToString();
@@ -56,7 +56,7 @@ namespace ResourceCollector
            // this.WindowState = FormWindowState.Maximized;
         }
 
-        public FormAnimationTools(SkeletonWithAddInfo s, Pack p, System.Windows.Forms.TreeView outputtreeview)
+        public FormAnimationTools(CharacterStaticInfo s, Pack p, System.Windows.Forms.TreeView outputtreeview)
         {
             InitializeComponent();
 
@@ -129,7 +129,7 @@ namespace ResourceCollector
                         textBox1.Text = label3.Text = string.Empty;
                         try
                         {
-                            skelet = new SkeletonWithAddInfo(Skeleton.FromStream(new System.IO.BinaryReader(new System.IO.FileStream(ofd.FileName, System.IO.FileMode.Open))));
+                            skelet = new CharacterStaticInfo(Skeleton.FromStream(new System.IO.BinaryReader(new System.IO.FileStream(ofd.FileName, System.IO.FileMode.Open))));
                             textBox1.Text = ofd.FileName;
                             label3.Text = "Count of bones: " + skelet.baseskelet.bones.Length.ToString();
                         }
@@ -156,7 +156,7 @@ namespace ResourceCollector
                         treeView1.Nodes.Clear();
                         skelet = null;
 
-                        skelet = new SkeletonWithAddInfo();
+                        skelet = new CharacterStaticInfo();
                         try
                         {
                             skelet.loadbody(new System.IO.BinaryReader(new System.IO.FileStream(ofd.FileName, System.IO.FileMode.Open)), null);

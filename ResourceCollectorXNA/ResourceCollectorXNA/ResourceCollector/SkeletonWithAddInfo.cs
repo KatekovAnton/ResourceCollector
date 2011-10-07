@@ -6,7 +6,7 @@ using System.Text;
 
 namespace ResourceCollector
 {
-    public class SkeletonWithAddInfo : PackContent//int SkeletonWithAddInfo = 31;
+    public class CharacterStaticInfo : PackContent//int SkeletonWithAddInfo = 31;
     {
         #region packcontent methods
         public override void calcbodysize(System.Windows.Forms.ToolStripProgressBar targetbar)
@@ -208,13 +208,13 @@ namespace ResourceCollector
         public AnimationGraph BottomGraph;
         public AnimationGraph TopGraph;
 
-        public SkeletonWithAddInfo(Skeleton s)
+        public CharacterStaticInfo(Skeleton s)
         {
             baseskelet = s;
             this.loadedformat = this.forsavingformat = ElementType.SkeletonWithAddInfo;
         }
 
-        public SkeletonWithAddInfo()
+        public CharacterStaticInfo()
         {
             this.loadedformat = this.forsavingformat = ElementType.SkeletonWithAddInfo;
         }
