@@ -75,7 +75,7 @@ namespace ResourceCollectorXNA.Engine.Interface{
         /// </summary>
         public Matrix transform;
 
-        public float visibleArrowsSize = 2.0f;
+        public float visibleArrowsSize = 1.0f;
 
         //  public float _MOVEMULTIPLYER;
 

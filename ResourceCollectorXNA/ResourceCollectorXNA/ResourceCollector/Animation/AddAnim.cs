@@ -24,6 +24,7 @@ namespace ResourceCollector
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 textBox1.Text = dlg.FileName;
+                if(textBox1.Text == "")
                 textBox2.Text = dlg.SafeFileName;
             }
             else
