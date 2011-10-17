@@ -150,6 +150,10 @@ namespace ResourceCollector.Content
                     } break;
                 case objectstaticbehaviourmodel:
                     { } break;
+                case objectBonerelatedbehaviourmodel:
+                    { } break;
+                case objectrelatedbehaviourmodel:
+                    { } break;
                 default: break;
             }
 
@@ -161,82 +165,7 @@ namespace ResourceCollector.Content
         public override void calcbodysize(System.Windows.Forms.ToolStripProgressBar targetbar)
         {
             BinaryWriter br = new BinaryWriter(new MemoryStream());
-            br.WritePackString(matname);
-            br.WritePackString(RODName);
-            br.Write(IsRCCMEnabled);
-            if (IsRCCMEnabled)
-                br.WritePackString(RCCMName);
-            else
-            {
-                br.Write(RCShapeType);
-                br.Write(RCShapeSize.X);
-                br.Write(RCShapeSize.Y);
-                br.Write(RCShapeSize.Z);
-            }
-            br.Write(IsAnimated);
-            if (IsAnimated)
-            {
-                br.WritePackString(CharacterName);
-
-                br.Write(IsRCCMAnimated);
-            }
-
-            br.Write(BehaviourType);
-            switch (BehaviourType)
-            {
-                case objectmovingbehaviourmodel:
-                    { } break;
-                case objectphysicbehaviourmodel:
-                    {
-                        br.Write(ShapeType);
-                        if (ShapeType == 0)
-                        {
-                            br.Write(PhysXShapeType);
-                            br.Write(ShapeSize.X);
-                            br.Write(ShapeSize.Y);
-                            br.Write(ShapeSize.Z);
-                            //read shape type, size of shape, rotation axis and angle
-                        }
-                        if (ShapeType == 1)
-                        {
-                            br.WritePackString(PhysicCollisionName);
-                        }
-                        br.Write(IsStatic);
-                        if (!IsStatic)
-                        {
-                            br.Write(Mass);
-                            br.Write(CenterOfMass.X);
-                            br.Write(CenterOfMass.Y);
-                            br.Write(CenterOfMass.Z);
-                        }
-
-                    } break;
-                case objectphysiccharcontrollerbehaviourmodel:
-                    {
-                        br.Write(ShapeType);
-                        if (ShapeType == 0)
-                        {
-                            br.Write(PhysXShapeType);
-                            br.Write(ShapeSize.X);
-                            br.Write(ShapeSize.Y);
-                            br.Write(ShapeSize.Z);
-                            //read shape type, size of shape, rotation axis and angle
-                        }
-                        if (ShapeType == 1)
-                        {
-                            br.WritePackString(PhysicCollisionName);
-                        }
-                        br.Write(Mass);
-                        br.Write(CenterOfMass.X);
-                        br.Write(CenterOfMass.Y);
-                        br.Write(CenterOfMass.Z);
-                    } break;
-                case objectstaticbehaviourmodel:
-                    { } break;
-                default: break;
-            }
-
-
+            savebody(br, null);
 
             size = Convert.ToInt32(br.BaseStream.Length);
 
@@ -353,6 +282,10 @@ namespace ResourceCollector.Content
                     } break;
                 case objectstaticbehaviourmodel:
                     { } break;
+                case objectBonerelatedbehaviourmodel:
+                    { } break;
+                case objectrelatedbehaviourmodel:
+                    { } break;
                 default: break;
             }
 
@@ -406,6 +339,12 @@ namespace ResourceCollector.Content
         //физические чарактерконтроллеры
         public const int objectphysiccharcontrollerbehaviourmodel = 3;
         const string ObjectPhysicCharacterControllerBehaviourModel = "Physic character controller behaviour model";
+        //зависимые от парента объекты
+        public const int objectrelatedbehaviourmodel = 4;
+        const string ObjectRelatedBehaviourModel = "Related behaviour model";
+        //зависимые от кости парента объекты
+        public const int objectBonerelatedbehaviourmodel = 5;
+        const string ObjectBoneRelatedBehaviourModel = "Bone related behaviour model";
 
         public static string GetName(int hash)
         {
@@ -419,6 +358,10 @@ namespace ResourceCollector.Content
                     return ObjectPhysicBehaviourModel;
                 case objectphysiccharcontrollerbehaviourmodel:
                     return ObjectPhysicCharacterControllerBehaviourModel;
+                case objectrelatedbehaviourmodel:
+                    return ObjectRelatedBehaviourModel;
+                case objectBonerelatedbehaviourmodel:
+                    return ObjectBoneRelatedBehaviourModel;
                 default :
                     return "What are hell....";
             }
@@ -436,6 +379,10 @@ namespace ResourceCollector.Content
                     return objectphysicbehaviourmodel;
                 case ObjectPhysicCharacterControllerBehaviourModel:
                     return objectphysiccharcontrollerbehaviourmodel;
+                case ObjectRelatedBehaviourModel:
+                    return objectrelatedbehaviourmodel;
+                case ObjectBoneRelatedBehaviourModel:
+                    return objectBonerelatedbehaviourmodel;
                 default:
                     return -1;
             }

@@ -121,6 +121,14 @@
       <DependentUpon>ConsoleWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="ContactCallback.cs" />
+    <Compile Include="Engine\Logic\BehaviourModel\ObjectBoneRelatedBehaviourModel.cs" />
+    <Compile Include="Engine\Logic\BehaviourModel\ObjectRelatedBehaviourModel.cs" />
+    <Compile Include="ResourceCollector\Addition\MatrixCalculator.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ResourceCollector\Addition\MatrixCalculator.Designer.cs">
+      <DependentUpon>MatrixCalculator.cs</DependentUpon>
+    </Compile>
     <Compile Include="ResourceCollector\Animation\AnimationBase.cs" />
     <Compile Include="ResourceCollector\Animation\AnimationFull.cs" />
     <Compile Include="ResourceCollector\Animation\AnimationGraph.cs" />
@@ -470,6 +478,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ResourceCollector\Addition\ChangeNames.resx">
       <DependentUpon>ChangeNames.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ResourceCollector\Addition\MatrixCalculator.resx">
+      <DependentUpon>MatrixCalculator.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ResourceCollector\Animation\AddAnim.resx">
       <DependentUpon>AddAnim.cs</DependentUpon>
