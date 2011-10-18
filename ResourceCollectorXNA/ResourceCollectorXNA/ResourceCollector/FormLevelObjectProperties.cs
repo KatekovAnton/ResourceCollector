@@ -62,6 +62,8 @@ namespace ResourceCollector.Content
             comboBoxBehaviourType.Items.Add(LevelObjectDescription.GetName(1));
             comboBoxBehaviourType.Items.Add(LevelObjectDescription.GetName(2));
             comboBoxBehaviourType.Items.Add(LevelObjectDescription.GetName(3));
+            comboBoxBehaviourType.Items.Add(LevelObjectDescription.GetName(4));
+            comboBoxBehaviourType.Items.Add(LevelObjectDescription.GetName(5));
 
             comboBoxBehaviourType.SelectedIndex = thisobject.BehaviourType;
 
@@ -449,6 +451,16 @@ namespace ResourceCollector.Content
                             groupBoxPhysicParams.Enabled = false;
                             thisobject.BehaviourType = type;
                             radioButtonPhysActrTypeCM.Enabled = true;
+                        }break;
+                    case LevelObjectDescription.objectrelatedbehaviourmodel:
+                        {
+                            groupBoxPhysicParams.Enabled = false;
+                            thisobject.BehaviourType = type;
+                        }break;
+                    case LevelObjectDescription.objectBonerelatedbehaviourmodel:
+                        {
+                            groupBoxPhysicParams.Enabled = false;
+                            thisobject.BehaviourType = type;
                         }break;
                     default: break;
                 }

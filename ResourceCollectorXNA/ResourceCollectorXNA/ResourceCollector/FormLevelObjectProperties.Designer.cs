@@ -91,6 +91,11 @@
             this.comboBoxProcedureShapeType = new System.Windows.Forms.ComboBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.groupBoxRAnim = new System.Windows.Forms.GroupBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.button2 = new System.Windows.Forms.Button();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.textBox4 = new System.Windows.Forms.TextBox();
@@ -101,11 +106,6 @@
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.groupBoxRAnim = new System.Windows.Forms.GroupBox();
-            this.label16 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBoxRCCM.SuspendLayout();
             this.groupBoxBehaviourModel.SuspendLayout();
@@ -121,12 +121,12 @@
             this.groupBoxProcedureShapeProperties.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.groupBoxRAnim.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.tabPage4.SuspendLayout();
-            this.groupBoxRAnim.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -236,7 +236,7 @@
             this.groupBoxBehaviourModel.Controls.Add(this.groupBoxBehaviourType);
             this.groupBoxBehaviourModel.Location = new System.Drawing.Point(6, 6);
             this.groupBoxBehaviourModel.Name = "groupBoxBehaviourModel";
-            this.groupBoxBehaviourModel.Size = new System.Drawing.Size(549, 290);
+            this.groupBoxBehaviourModel.Size = new System.Drawing.Size(549, 355);
             this.groupBoxBehaviourModel.TabIndex = 23;
             this.groupBoxBehaviourModel.TabStop = false;
             this.groupBoxBehaviourModel.Text = "Behaviour model";
@@ -781,6 +781,56 @@
             this.tabPage1.Text = "Main";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // groupBoxRAnim
+            // 
+            this.groupBoxRAnim.Controls.Add(this.label16);
+            this.groupBoxRAnim.Controls.Add(this.textBox3);
+            this.groupBoxRAnim.Controls.Add(this.button2);
+            this.groupBoxRAnim.Controls.Add(this.checkBoxIsAnimatedRCCM);
+            this.groupBoxRAnim.Enabled = false;
+            this.groupBoxRAnim.Location = new System.Drawing.Point(6, 106);
+            this.groupBoxRAnim.Name = "groupBoxRAnim";
+            this.groupBoxRAnim.Size = new System.Drawing.Size(545, 41);
+            this.groupBoxRAnim.TabIndex = 35;
+            this.groupBoxRAnim.TabStop = false;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(6, 16);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(53, 13);
+            this.label16.TabIndex = 15;
+            this.label16.Text = "Character";
+            // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(65, 13);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(295, 20);
+            this.textBox3.TabIndex = 1;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(366, 11);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(57, 23);
+            this.button2.TabIndex = 12;
+            this.button2.Text = "Select";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(15, 91);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(113, 17);
+            this.checkBox1.TabIndex = 34;
+            this.checkBox1.Text = "Animation enabled";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.groupBox3);
@@ -882,56 +932,6 @@
             this.tabPage5.Text = "Logic";
             this.tabPage5.UseVisualStyleBackColor = true;
             // 
-            // groupBoxRAnim
-            // 
-            this.groupBoxRAnim.Controls.Add(this.label16);
-            this.groupBoxRAnim.Controls.Add(this.textBox3);
-            this.groupBoxRAnim.Controls.Add(this.button2);
-            this.groupBoxRAnim.Controls.Add(this.checkBoxIsAnimatedRCCM);
-            this.groupBoxRAnim.Enabled = false;
-            this.groupBoxRAnim.Location = new System.Drawing.Point(6, 106);
-            this.groupBoxRAnim.Name = "groupBoxRAnim";
-            this.groupBoxRAnim.Size = new System.Drawing.Size(545, 41);
-            this.groupBoxRAnim.TabIndex = 35;
-            this.groupBoxRAnim.TabStop = false;
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(6, 16);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(53, 13);
-            this.label16.TabIndex = 15;
-            this.label16.Text = "Character";
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(65, 13);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(295, 20);
-            this.textBox3.TabIndex = 1;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(366, 11);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(57, 23);
-            this.button2.TabIndex = 12;
-            this.button2.Text = "Select";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(15, 91);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(113, 17);
-            this.checkBox1.TabIndex = 34;
-            this.checkBox1.Text = "Animation enabled";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
-            // 
             // FormLevelObjectProperties
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -971,6 +971,8 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            this.groupBoxRAnim.ResumeLayout(false);
+            this.groupBoxRAnim.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
@@ -978,8 +980,6 @@
             this.groupBox2.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             this.tabPage4.ResumeLayout(false);
-            this.groupBoxRAnim.ResumeLayout(false);
-            this.groupBoxRAnim.PerformLayout();
             this.ResumeLayout(false);
 
         }

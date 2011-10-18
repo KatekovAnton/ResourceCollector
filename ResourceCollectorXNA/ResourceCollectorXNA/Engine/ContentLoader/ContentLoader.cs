@@ -353,6 +353,11 @@ namespace ResourceCollectorXNA.Engine.ContentLoader
                         {
                             behaviourmodel = new Logic.BehaviourModel.ObjectPhysicBehaviourModel(/*_actor*/);
                         } break;
+                    case ResourceCollector.Content.LevelObjectDescription.objectBonerelatedbehaviourmodel:
+                        {
+                            behaviourmodel = new Logic.BehaviourModel.ObjectBoneRelatedBehaviourModel(/*_actor*/);
+                        } break;
+                   
                     default:
                         {
                             throw new Exception("Unsupported behaviour model!");
