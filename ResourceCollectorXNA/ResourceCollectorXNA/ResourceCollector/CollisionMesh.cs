@@ -87,7 +87,7 @@ namespace ResourceCollector.Content
         public CollisionMesh(MeshSkinned m)
         {
             if (m.BufferVertex == null || m.BufferIndex == null)
-                m.GenerateOptForLoading(null);
+                m.GenerateOptForLoading();
             Vertices = new Vector3[m.BufferVertex.Length];
             for (int i = 0; i < Vertices.Length; i++)
             {
@@ -101,7 +101,7 @@ namespace ResourceCollector.Content
 
    
 
-        public override void calcbodysize(System.Windows.Forms.ToolStripProgressBar targetbar)
+        public override void calcbodysize()
         {
             size = Vertices.Length * 12 + Indices.Length * 4 + 8;
         }
@@ -115,7 +115,7 @@ namespace ResourceCollector.Content
         {
             headersize = 16 + OtherFunctions.GetPackStringLengthForWrite(name);
         }
-        public override int loadbody(BinaryReader br, System.Windows.Forms.ToolStripProgressBar toolStripProgressBar)
+        public override int loadbody(BinaryReader br)
         {
             long t = br.BaseStream.Position;
             Vertices = new Vector3[br.ReadInt32()];
@@ -137,7 +137,7 @@ namespace ResourceCollector.Content
             headersize = hi.headersize;
             size = br.ReadInt32();
         }
-        public override void savebody(BinaryWriter br, System.Windows.Forms.ToolStripProgressBar toolStripProgressBar)
+        public override void savebody(BinaryWriter br)
         {
             br.Write(Vertices.Length);
             for (int i = 0; i < Vertices.Length; i++)
@@ -159,7 +159,7 @@ namespace ResourceCollector.Content
 
             calcheadersize();
             bw.Write(headersize);
-            calcbodysize(null);
+            calcbodysize();
             bw.Write(size);
         }
         public override void ViewBasicInfo(System.Windows.Forms.ComboBox comboBox1, System.Windows.Forms.ComboBox comboBox2, System.Windows.Forms.Label label1, System.Windows.Forms.Label label2, System.Windows.Forms.Label label3, System.Windows.Forms.Label label4, System.Windows.Forms.GroupBox groupBox1, System.Windows.Forms.TextBox tb, System.Windows.Forms.Button button2, System.Windows.Forms.Button button1)

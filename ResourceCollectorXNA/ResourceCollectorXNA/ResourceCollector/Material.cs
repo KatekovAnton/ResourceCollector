@@ -42,7 +42,7 @@ namespace ResourceCollector.Content
             lodMats = new List<Lod>();
         }
 
-        public override void calcbodysize(System.Windows.Forms.ToolStripProgressBar targetbar)
+        public override void calcbodysize()
         {
             MemoryStream m = new MemoryStream();
             BinaryWriter br = new BinaryWriter(m);
@@ -84,7 +84,7 @@ namespace ResourceCollector.Content
             }
         }
 
-        public override int loadbody(BinaryReader br, System.Windows.Forms.ToolStripProgressBar toolStripProgressBar)
+        public override int loadbody(BinaryReader br)
         {
             long pos = br.BaseStream.Position;
             int count = br.ReadInt32();
@@ -116,7 +116,7 @@ namespace ResourceCollector.Content
             size = br.ReadInt32();
         }
 
-        public override void savebody(BinaryWriter br, System.Windows.Forms.ToolStripProgressBar toolStripProgressBar)
+        public override void savebody(BinaryWriter br)
         {
             br.Write(lodMats.Count);
             for (int i = 0; i < lodMats.Count; i++)
@@ -138,7 +138,7 @@ namespace ResourceCollector.Content
 
             calcheadersize();
             br.Write(headersize);
-            calcbodysize(null);
+            calcbodysize();
             br.Write(size);
         }
     }

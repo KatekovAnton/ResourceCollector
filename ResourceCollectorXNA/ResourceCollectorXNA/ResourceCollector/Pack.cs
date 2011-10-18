@@ -14,11 +14,9 @@ namespace ResourceCollector
         public bool fullsucces;
         public Pack()
         { }
-        public void AddObjectsToPack(string filename, System.IO.BinaryReader br, ToolStripProgressBar toolStripProgressBar1, ToolStripProgressBar toolStripProgressBar2, TreeView treeView1)
+        public void AddObjectsToPack(string filename, System.IO.BinaryReader br)
         {
             var loadedObjectCount = Objects.Count;
-            if(toolStripProgressBar1!=null)
-                toolStripProgressBar1.Value = 0;
             System.IO.FileStream str1 = new System.IO.FileStream(filename, System.IO.FileMode.Open);
             br = new System.IO.BinaryReader(str1);
             
@@ -32,9 +30,7 @@ namespace ResourceCollector
             int objectcount = br.ReadInt32();
             headersize += 4;
 
-            TreeNode root = null;
-            if(treeView1!=null)
-                root = treeView1.Nodes[0];
+        
 
             for (int i = 0; i < objectcount; i++)
             {
@@ -147,21 +143,13 @@ namespace ResourceCollector
 
                     headersize += hi.headersize;
                     lastObject.number = Objects.Count - 1;
-                    if (treeView1 != null)
-                    {
-                        TreeNode node = new TreeNode();
-                        node.Text = lastObject.name;
-                        node.ImageIndex = node.SelectedImageIndex = Pack.imgindex(lastObject.loadedformat);
-                        root.Nodes.Add(node);
-                    }
+                   
                 }
                 else
                 {
                     Objects = null;
                    // MessageBox.Show("cannot read file: wrong basic header data at element " + i.ToString());
                     br.Close();
-                    if (treeView1 != null)
-                        treeView1.Nodes.Clear();
                     fullsucces = false;
                    
                     return;
@@ -169,77 +157,41 @@ namespace ResourceCollector
             }
             //treeView1.Nodes.Add(root);
             headersize = (int)br.BaseStream.Position;
-            if(toolStripProgressBar2!=null)
-                toolStripProgressBar2.Value = 10;
-            float lalal =0;
-            if(toolStripProgressBar2!=null)
-                 lalal= Convert.ToSingle(toolStripProgressBar2.Maximum - 10) / Convert.ToSingle(objectcount);
-            float posit = 10.0f;//-----------
             for (int i = loadedObjectCount; i < loadedObjectCount+objectcount; i++)
             {
-                if (toolStripProgressBar1 != null)
-                    toolStripProgressBar1.Value = 0;
-                //try
-                //{
                     br.BaseStream.Seek(headersize + Objects[i].offset, System.IO.SeekOrigin.Begin);
-                    Objects[i].loadbody(br, toolStripProgressBar1);
+                    Objects[i].loadbody(br);
                     Objects[i].SuccessedReadBody = true;
-               // }
-              /*  catch (Exception ex)
-                {
-                    MissingObject mo = new MissingObject(i);
-                    Objects[i] = mo;
-                    br.Close();
-                    str1 = new System.IO.FileStream(filename, System.IO.FileMode.Open);
-                    br = new System.IO.BinaryReader(str1);
-                    if (i != Objects.Count - 1)
-                        br.BaseStream.Seek(headersize + Objects[i + 1].offset, System.IO.SeekOrigin.Begin);
-                }*/
-                if (toolStripProgressBar2 != null)
-                {
-                    posit += lalal;
-                    toolStripProgressBar2.Value = Convert.ToInt32(posit);
-                }
+              
             }
 
             br.Close();
 
             fullsucces = true;
         }
-        public void Init(string filename, System.IO.BinaryReader br, ToolStripProgressBar toolStripProgressBar1, ToolStripProgressBar toolStripProgressBar2, TreeView treeView1)
+        public string filename;
+        public void Init(string filename, System.IO.BinaryReader br)
         {
+            this.filename = filename;
             headersize = 0;
             Objects = new List<PackContent>();
-            if (treeView1 != null)
-            {
-                TreeNode root = new TreeNode(filename);
-                root.ImageIndex = root.SelectedImageIndex = 2;
-                root.Text = filename;
-                treeView1.Nodes.Add(root);
-            }
-            AddObjectsToPack(filename, br, toolStripProgressBar1, toolStripProgressBar2, treeView1);
+           
+            AddObjectsToPack(filename, br);
         }
-        public void Init(ToolStripProgressBar toolStripProgressBar1, ToolStripProgressBar toolStripProgressBar2, TreeView treeView1)
+        public void Init()
         {
-            toolStripProgressBar1.Value = 100;
-            toolStripProgressBar2.Value = 100;
 
             fullsucces = true;
             headersize = 0;
             Objects = new List<PackContent>();
-
-            TreeNode root = new TreeNode("<Untitled>");
-            root.ImageIndex = root.SelectedImageIndex = 2;
-            treeView1.Nodes.Add(root);
-
             fullsucces = true;
         }
-        public void recalculateparameters(ToolStripProgressBar toolStripProgressBar1)
+        public void recalculateparameters()
         {
             for (int i = 0; i < Objects.Count; i++)
             {
                 Objects[i].calcheadersize();
-                Objects[i].calcbodysize(toolStripProgressBar1);
+                Objects[i].calcbodysize();
             }
             if (Objects.Count > 0)
             {
@@ -256,7 +208,7 @@ namespace ResourceCollector
             for (int i = 0; i < Objects.Count; i++)
             {
                 Objects[i].calcheadersize();
-                Objects[i].calcbodysize(toolStripProgressBar1);
+                Objects[i].calcbodysize();
             }
             Objects[0].offset = firstoffset;
             if (Objects.Count > 1)
@@ -265,9 +217,9 @@ namespace ResourceCollector
                     Objects[i].offset = Objects[i - 1].offset + Objects[i - 1].size;
                 }
         }
-        public void Save(string fln, ToolStripProgressBar toolStripProgressBar1)
+        public void Save(string fln)
         {
-            recalculateparameters(toolStripProgressBar1);
+            recalculateparameters();
             if (System.IO.File.Exists(fln))
                 System.IO.File.Delete(fln);
             System.IO.FileStream str1;
@@ -282,7 +234,7 @@ namespace ResourceCollector
             }
             for (int i = 0; i < Objects.Count; i++)
             {
-                Objects[i].savebody(bw, toolStripProgressBar1);
+                Objects[i].savebody(bw);
             }
             bw.Close();
         }
@@ -324,24 +276,8 @@ namespace ResourceCollector
         public void DropElement(int number)
         {
             Objects.RemoveAt(number);
-
-            /*if (number >= Objects.Count)
-                return;
-            PackContent[] newcontents = new PackContent[Objects.Count - 1];
-            for (int i = 0; i < number; i++)
-            {
-                newcontents[i] = Objects[i];
-            }
-            if (number != Objects.Count - 1)
-            {
-                for (int i = number + 1; i < Objects.Count; i++)
-                {
-                    newcontents[i-1] = Objects[i];
-                    newcontents[i-1].number = i-1;
-                }
-            }
-            Objects = new List<PackContent>(newcontents);*/
         }
+
         public bool rename(int Elementnumver, string newname)
         {
             for (int i = 0; i < Objects.Count; i++)
@@ -352,6 +288,7 @@ namespace ResourceCollector
             Objects[Elementnumver].name = newname;
             return true;
         }
+
         public void Attach(PackContent obj, TreeView treeView)
         {
             Objects.Add(obj);
@@ -361,19 +298,10 @@ namespace ResourceCollector
             node.ImageIndex = node.SelectedImageIndex = Pack.imgindex(obj.loadedformat);
 
             treeView.Nodes[0].Nodes.Add(node);
-          /*  obj.calcheadersize();
-            obj.calcbodysize(null);*/
             obj.number = Objects.Count - 1;
 
-          /*  if (Objects.Count == 1)
-            {*/
-                obj.offset = 0;
-           /* }
-            else
-            {
-                PackContent prelast = Objects[Objects.Count - 2];
-                obj.offset = prelast.offset + prelast.size;
-            }*/
+            obj.offset = 0;
+
         }
 
         public PackContent getobject(string name)
@@ -385,6 +313,7 @@ namespace ResourceCollector
                 }
             return null;
         }
+
         public PackContent[] GetObjects(string[] names)
         {
             PackContent[] result = new PackContent[names.Length];

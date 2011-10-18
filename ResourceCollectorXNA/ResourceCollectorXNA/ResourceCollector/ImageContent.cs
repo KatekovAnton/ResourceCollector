@@ -25,7 +25,8 @@ namespace ResourceCollector
             name = _name;
             if (!name.EndsWith("\0"))
                 name += "\0";
-            calcbodysize(null); calcheadersize();
+            calcbodysize();
+            calcheadersize();
 
         }
 
@@ -34,7 +35,7 @@ namespace ResourceCollector
             this.loadedformat = this.forsavingformat = ElementType.PNGTexture;
         }
 
-        public override void calcbodysize(System.Windows.Forms.ToolStripProgressBar targetbar)
+        public override void calcbodysize()
         {
             size = data.Length;
         }
@@ -56,7 +57,7 @@ namespace ResourceCollector
             headersize = 16 + OtherFunctions.GetPackStringLengthForWrite(name);
         }
 
-        public override int loadbody(BinaryReader br, System.Windows.Forms.ToolStripProgressBar toolStripProgressBar)
+        public override int loadbody(BinaryReader br)
         {
             data = br.ReadBytes(size);
             return size;
@@ -73,7 +74,7 @@ namespace ResourceCollector
             size = br.ReadInt32();
         }
 
-        public override void savebody(BinaryWriter br, System.Windows.Forms.ToolStripProgressBar toolStripProgressBar)
+        public override void savebody(BinaryWriter br)
         {
             br.Write(data);
         }

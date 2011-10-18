@@ -119,7 +119,7 @@ namespace ResourceCollector
         }
 
         #region PackContent methods
-        public override int loadbody(System.IO.BinaryReader br, ToolStripProgressBar toolStripProgressBar)
+        public override int loadbody(System.IO.BinaryReader br)
         {
             long pos = br.BaseStream.Position;
             generator = br.ReadUInt32();
@@ -142,11 +142,11 @@ namespace ResourceCollector
 
             calcheadersize();
             br.Write(headersize);
-            calcbodysize(null);
+            calcbodysize();
             br.Write(size);
         }
 
-        public override void savebody(System.IO.BinaryWriter bw, ToolStripProgressBar toolStripProgressBar)
+        public override void savebody(System.IO.BinaryWriter bw)
         {
             bw.Write(generator);
             bw.Write(objectInformation.Count);
@@ -162,7 +162,7 @@ namespace ResourceCollector
             headersize = 16 + OtherFunctions.GetPackStringLengthForWrite(name);
         }
 
-        public override void calcbodysize(ToolStripProgressBar targetbar)
+        public override void calcbodysize()
         {
             System.IO.BinaryWriter bw = new System.IO.BinaryWriter(new System.IO.MemoryStream());
             bw.Write(generator);

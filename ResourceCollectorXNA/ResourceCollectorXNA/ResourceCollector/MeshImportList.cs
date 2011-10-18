@@ -23,8 +23,19 @@ namespace ResourceCollector.Content
         private void MeshImportList_Shown(object sender, EventArgs e)
         {
             p = new Pack();
+            
+            p.Init(s, null);
 
-            p.Init(s, null, toolStripProgressBar1, toolStripProgressBar2, treeView1);
+            TreeNode root = new TreeNode(s);
+            root.Text = s;
+            treeView1.Nodes.Add(root);
+            for (int o = 0; o < p.Objects.Count; o++)
+            {
+                TreeNode tn = new TreeNode(p.Objects[o].name);
+                tn.Text = p.Objects[o].name;
+                root.Nodes.Add(tn);
+            }
+
             TreeNodeCollection c = treeView1.Nodes[0].Nodes;
            TreeNode[] nodes = new TreeNode[c.Count];
 

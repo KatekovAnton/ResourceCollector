@@ -193,14 +193,14 @@ namespace ResourceCollector
         /// <param name="br">stream for loading</param>
         /// <param name="toolStripProgressBar">for progress output</param>
         /// <returns>returns size</returns>
-        public abstract int loadbody(System.IO.BinaryReader br, ToolStripProgressBar toolStripProgressBar);
+        public abstract int loadbody(System.IO.BinaryReader br);
         public abstract void saveheader(System.IO.BinaryWriter bw);
-        public abstract void savebody(System.IO.BinaryWriter bw, ToolStripProgressBar toolStripProgressBar);
+        public abstract void savebody(System.IO.BinaryWriter bw);
 
         public abstract void calcheadersize();
         public abstract System.Windows.Forms.DialogResult createpropertieswindow(Pack p, TreeView outputtreeview);
         public abstract void loadobjectheader(HeaderInfo hi, System.IO.BinaryReader br);
-        public abstract void calcbodysize(ToolStripProgressBar targetbar);
+        public abstract void calcbodysize();
         public virtual void ViewBasicInfo(
             ComboBox comboBox1, ComboBox comboBox2, Label label1, Label label2, Label label3,
             Label label4, GroupBox groupBox1, TextBox tb, Button button2, Button button1)
@@ -234,7 +234,7 @@ namespace ResourceCollector
             offset = headersize = size = 0;
             SuccessedReadBody = SuccessedReadHead = false;
         }
-        public override int loadbody(System.IO.BinaryReader br, ToolStripProgressBar toolStripProgressBar)
+        public override int loadbody(System.IO.BinaryReader br)
         {
             data =  br.ReadBytes(this.size);
             return this.size;
@@ -248,7 +248,7 @@ namespace ResourceCollector
             bw.Write(headersize);
             bw.Write(data.Length);
         }
-        public override void savebody(System.IO.BinaryWriter br, ToolStripProgressBar toolStripProgressBar)
+        public override void savebody(System.IO.BinaryWriter br)
         {
             br.Write(data);
         }
@@ -256,7 +256,7 @@ namespace ResourceCollector
         {
             headersize = 16 + OtherFunctions.GetPackStringLengthForWrite(name);
         }
-        public override void calcbodysize(ToolStripProgressBar targetbar)
+        public override void calcbodysize( )
         {
             size = data.Length;
         }

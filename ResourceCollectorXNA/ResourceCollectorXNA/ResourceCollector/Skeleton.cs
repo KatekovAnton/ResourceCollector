@@ -66,7 +66,7 @@ namespace ResourceCollector
 
     public class Skeleton : PackContent//int Skeleton = 30;
     {
-        public override void calcbodysize(System.Windows.Forms.ToolStripProgressBar targetbar)
+        public override void calcbodysize()
         {
             size = 4;//bone count
 
@@ -88,7 +88,7 @@ namespace ResourceCollector
         {
             throw new NotImplementedException();
         }
-        public override int loadbody(BinaryReader br, System.Windows.Forms.ToolStripProgressBar toolStripProgressBar)
+        public override int loadbody(BinaryReader br)
         {
             throw new NotImplementedException();
         }
@@ -96,7 +96,7 @@ namespace ResourceCollector
         {
             throw new NotImplementedException();
         }
-        public override void savebody(BinaryWriter br, System.Windows.Forms.ToolStripProgressBar toolStripProgressBar)
+        public override void savebody(BinaryWriter br)
         {
             throw new NotImplementedException();
         }

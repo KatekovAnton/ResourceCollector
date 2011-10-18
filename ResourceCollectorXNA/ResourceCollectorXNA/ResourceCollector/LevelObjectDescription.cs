@@ -73,7 +73,7 @@ namespace ResourceCollector.Content
             RCCMName = b.RCCMName;
         }
 
-        public override int loadbody(BinaryReader br, System.Windows.Forms.ToolStripProgressBar toolStripProgressBar)
+        public override int loadbody(BinaryReader br)
         {
             long startpos = br.BaseStream.Position;
             matname = br.ReadPackString();
@@ -162,10 +162,10 @@ namespace ResourceCollector.Content
             return Convert.ToInt32(startpos);
         }
 
-        public override void calcbodysize(System.Windows.Forms.ToolStripProgressBar targetbar)
+        public override void calcbodysize()
         {
             BinaryWriter br = new BinaryWriter(new MemoryStream());
-            savebody(br, null);
+            savebody(br);
 
             size = Convert.ToInt32(br.BaseStream.Length);
 
@@ -206,7 +206,7 @@ namespace ResourceCollector.Content
             size = br.ReadInt32();
         }
 
-        public override void savebody(BinaryWriter br, System.Windows.Forms.ToolStripProgressBar toolStripProgressBar)
+        public override void savebody(BinaryWriter br)
         {
             br.WritePackString(matname);
             br.WritePackString(RODName);
@@ -297,7 +297,7 @@ namespace ResourceCollector.Content
             bw.Write(offset);
             bw.Write(forsavingformat);
             bw.Write(headersize);
-            calcbodysize(null);
+            calcbodysize();
             bw.Write(size);
         }
 

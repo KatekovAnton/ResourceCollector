@@ -14,7 +14,7 @@ namespace ResourceCollector
         MeshSkinned _createdMesh;
         public bool _removemeshes;
 
-        List<MeshSkinned> _meshesForCombine;
+        public List<MeshSkinned> _meshesForCombine;
 
         public FormMeshCombiner()
         {

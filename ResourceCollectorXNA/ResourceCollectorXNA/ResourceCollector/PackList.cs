@@ -18,13 +18,10 @@ namespace ResourceCollector
         }
 
         public void AddPack(string filename,
-            System.IO.BinaryReader br,
-            ToolStripProgressBar toolStripProgressBar1,
-            ToolStripProgressBar toolStripProgressBar2,
-            TreeView treeView1)
+            System.IO.BinaryReader br)
         {
             Pack p = new Pack();
-            p.Init(filename, br, toolStripProgressBar1, toolStripProgressBar2, treeView1);
+            p.Init(filename, br);
             if (p.fullsucces)
                 packs.Add(p);
         }
@@ -53,11 +50,11 @@ namespace ResourceCollector
             cc.Y = cc.X = -1;
             return null;
         }
-        public void Save(int number, ToolStripProgressBar toolStripProgressBar, string filename)
+        public void Save(int number, string filename)
         {
             if (packs != null && packs.Count > number && packs[number] != null && packs[number].Objects != null)
             {
-                packs[number].Save(filename, toolStripProgressBar);
+                packs[number].Save(filename);
             }
         }
         public void Drop(int packnumber, int contentnumber)
@@ -65,7 +62,7 @@ namespace ResourceCollector
             if(packnumber<packs.Count)
                 packs[packnumber].DropElement(contentnumber);
         }
-        public void SaveAllInOne(int number, ToolStripProgressBar toolStripProgressBar)
+        public void SaveAllInOne(int number)
         {
             
         }
@@ -86,7 +83,7 @@ namespace ResourceCollector
             TreeView treeView1)
         {
             Pack p = new Pack();
-            p.Init(toolStripProgressBar1, toolStripProgressBar2, treeView1);
+            p.Init();
             packs.Add(p);
         }
     }

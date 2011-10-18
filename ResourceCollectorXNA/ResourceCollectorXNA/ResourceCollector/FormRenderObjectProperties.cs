@@ -35,6 +35,8 @@ namespace ResourceCollector.Content
             {
                 thisobject.pack.Attach(this.createdContent[i], outputtreeview);
             }
+            if (textBox1.Text != "")
+                thisobject.name = textBox1.Text.TrimEnd('\0') + "\0";
             DialogResult = System.Windows.Forms.DialogResult.OK;
             this.Close();
         }

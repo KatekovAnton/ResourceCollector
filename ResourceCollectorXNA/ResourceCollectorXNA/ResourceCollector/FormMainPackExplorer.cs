@@ -28,8 +28,7 @@ namespace ResourceCollector
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
-          //  try
-          //  {
+          
                 ofd.Filter = "Паки *.pack|*.pack";
                 if (ofd.ShowDialog() == DialogResult.OK)
                 {
@@ -38,23 +37,13 @@ namespace ResourceCollector
                     treeView1.Nodes.Clear();
                     ClearInterface();
                     packs.packs = new List<Pack>();
-                    packs.AddPack(ofd.FileName, br, toolStripProgressBar1, toolStripProgressBar2, treeView1);
+                    packs.AddPack(ofd.FileName, br);
                 }
                 if (!packs.SuccessLast)
                     ClearInterface();
                 ofd.Dispose();
-            /*}
-            catch (Exception ex)
-            {
-                if (br != null)
-                {
-                    br.Close();
-                }
-                MessageBox.Show(ex.ToString());
-                packs.packs = new List<Pack>();
-                treeView1.Nodes.Clear();
-                ClearInterface();
-            }*/
+                UpdateData();
+           
         }
 
         private void Form1_SizeChanged(object sender, EventArgs e)
@@ -115,7 +104,7 @@ namespace ResourceCollector
             {
                 SaveFileDialog sfd = new SaveFileDialog();
                 if (sfd.ShowDialog() == DialogResult.OK)
-                    packs.Save(0, toolStripProgressBar2, sfd.FileName);
+                    packs.Save(0, sfd.FileName);
             }
         }
 
@@ -155,7 +144,7 @@ namespace ResourceCollector
                 if (ofd.ShowDialog() == DialogResult.OK)
                 {
                     ClearInterface();
-                    packs.AddPack(ofd.FileName, br, toolStripProgressBar1, toolStripProgressBar2, treeView1);
+                    packs.AddPack(ofd.FileName, br);
                 }
                 ofd.Dispose();
             }
@@ -252,7 +241,7 @@ namespace ResourceCollector
                 OpenFileDialog ofd = new OpenFileDialog();
                 if (ofd.ShowDialog() == DialogResult.OK)
                 {
-                    packs.packs[0].AddObjectsToPack(ofd.FileName, br, toolStripProgressBar1, toolStripProgressBar2, treeView1);
+                    packs.packs[0].AddObjectsToPack(ofd.FileName, br);
                 }
                 ofd.Dispose();
             }
@@ -337,12 +326,45 @@ namespace ResourceCollector
             }
         }
 
+        public void UpdateData()
+        {
+            treeView1.Nodes.Clear();
+            for (int i = 0; i < packs.packs.Count; i++)
+            {
+                TreeNode root = new TreeNode(packs.packs[i].filename);
+                root.ImageIndex = root.SelectedImageIndex = 2;
+                root.Text = packs.packs[i].filename;
+                
+                for (int j = 0; j < packs.packs[i].Objects.Count; j++)
+                {
+                    PackContent pc = packs.packs[i].Objects[j];
+                    var node = new TreeNode(pc.name);
+                    node.Name = node.Text = pc.name;
+                    node.ImageIndex = node.SelectedImageIndex = Pack.imgindex(pc.loadedformat);
+                    root.Nodes.Add(node);
+                }
+                treeView1.Nodes.Add(root);
+            }
+        }
+
         private void combineMeshesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FormMeshCombiner fmc = new FormMeshCombiner();
+            Point contc = new Point();
             if (fmc.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
- 
+                if(fmc._removemeshes)
+                {
+                    for (int i = 0; i < fmc._meshesForCombine.Count;i++ )
+                        if (fmc._meshesForCombine[i].Enginereadedobject.Count == 0)
+                        {
+                            object o= packs.findobject(fmc._meshesForCombine[i].name, ref  contc);
+                            if (contc.X != -1 && contc.Y != -1)
+                                packs.Drop(contc.X, contc.Y);
+                        }
+                    ClearInterface();
+                    UpdateData();
+                }
             }
         }
 

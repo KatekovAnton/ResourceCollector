@@ -29,7 +29,7 @@ namespace ResourceCollector
             this.loadedformat = this.forsavingformat = ElementType.MeshList;
         }
 
-        public override void calcbodysize(System.Windows.Forms.ToolStripProgressBar targetbar)
+        public override void calcbodysize()
         {
             size = name.Length + 8;
             for (int i = 0; i < MeshNames.Count; i++)
@@ -57,7 +57,7 @@ namespace ResourceCollector
             headersize = 20 + name.Length;
         }
 
-        public override int loadbody(BinaryReader br, System.Windows.Forms.ToolStripProgressBar toolStripProgressBar)
+        public override int loadbody(BinaryReader br)
         {
             var name = br.ReadPackString();
             int meshCount = br.ReadInt32();
@@ -85,7 +85,7 @@ namespace ResourceCollector
             size = br.ReadInt32();
         }
 
-        public override void savebody(BinaryWriter bw, System.Windows.Forms.ToolStripProgressBar toolStripProgressBar)
+        public override void savebody(BinaryWriter bw)
         {
             bw.WritePackString(name);
             bw.Write(MeshNames.Count);
@@ -101,7 +101,7 @@ namespace ResourceCollector
             bw.Write(offset);
             bw.Write(forsavingformat);
             bw.Write(headersize);
-            calcbodysize(null);
+            calcbodysize();
             bw.Write(size);
         }
 

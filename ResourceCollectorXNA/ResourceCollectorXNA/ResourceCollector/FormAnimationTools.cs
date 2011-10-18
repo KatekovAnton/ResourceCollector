@@ -159,7 +159,7 @@ namespace ResourceCollector
                         skelet = new CharacterStaticInfo();
                         try
                         {
-                            skelet.loadbody(new System.IO.BinaryReader(new System.IO.FileStream(ofd.FileName, System.IO.FileMode.Open)), null);
+                            skelet.loadbody(new System.IO.BinaryReader(new System.IO.FileStream(ofd.FileName, System.IO.FileMode.Open)));
                             textBox1.Text = ofd.FileName;
                             label3.Text = "Count of bones: " + skelet.baseskelet.bones.Length.ToString();
                         }
@@ -459,7 +459,7 @@ namespace ResourceCollector
             if (sfd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 System.IO.BinaryWriter bw = new System.IO.BinaryWriter(new System.IO.FileStream(sfd.FileName, System.IO.FileMode.Create, System.IO.FileAccess.Write, System.IO.FileShare.None));
-                skelet.savebody(bw, null);
+                skelet.savebody(bw);
             }
         }
         /// <summary>

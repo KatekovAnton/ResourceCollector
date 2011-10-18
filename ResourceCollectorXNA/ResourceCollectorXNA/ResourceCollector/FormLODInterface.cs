@@ -47,7 +47,7 @@ namespace ResourceCollector
 
                    
                     mv.device.Dispose();*/
-                    lb.ProcessedMesh.GenerateOptForLoading(null);
+                    lb.ProcessedMesh.GenerateOptForLoading();
                     listBox1.Items.Add(meshes[meshes.Count - 1].name.TrimEnd('\0') + " (facecount =" + (meshes[meshes.Count - 1].BufferIndex.Length / 3).ToString() + ")");
                 }
                 else

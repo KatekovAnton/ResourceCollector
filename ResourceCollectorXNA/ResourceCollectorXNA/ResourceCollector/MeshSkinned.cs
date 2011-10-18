@@ -230,7 +230,7 @@ namespace ResourceCollector
             destverts.Add(source);
             return destverts.Count - 1;
         }
-        public void GenerateOptForStore(ToolStripProgressBar tspb)
+        public void GenerateOptForStore()
         {
             if (BufferIndex == null)
                 return;
@@ -378,8 +378,6 @@ namespace ResourceCollector
                 faces[i / 3].v1 = tmpverts[vertindexes[1] - 1];
                 faces[i / 3].v2 = tmpverts[vertindexes[2] - 1];
                 pos += step1;
-                if (tspb != null)
-                    tspb.Value = Convert.ToInt32(pos);
 
             }
 
@@ -395,8 +393,6 @@ namespace ResourceCollector
                 bonenumber = 0;
                 skinvertexnumber = 0;
                 skinsize = 8;
-                if (tspb != null)
-                    tspb.Value = 100;
             }
             else
             {
@@ -409,11 +405,6 @@ namespace ResourceCollector
                         if (tmlist.IndexOf(vertexes[i].skin.skins[j].bonename) == -1)
                             tmlist.Add(vertexes[i].skin.skins[j].bonename);
                     }
-                    if (tspb != null)
-                    {
-                        pos += step2;
-                        tspb.Value = Convert.ToInt32(pos);
-                    }
                 }
                 bonenumber = tmlist.Count;
                 skinvertexnumber = vertexes.Length;
@@ -421,11 +412,6 @@ namespace ResourceCollector
                 for (int i = 0; i < vertskins.Length; i++)
                 {
                     vertskins[i] = vertexes[i].skin;
-                    if (tspb != null)
-                    {
-                        pos += step2;
-                        tspb.Value = Convert.ToInt32(pos);
-                    }
                 }
                 skinsize = 8;
                 for (int i = 0; i < vertskins.Length; i++)
@@ -435,11 +421,6 @@ namespace ResourceCollector
                     {
                         skinsize += 8;
                         skinsize += vertskins[i].skins[j].bonename.Length;
-                    }
-                    if (tspb != null)
-                    {
-                        pos += step2;
-                        tspb.Value = Convert.ToInt32(pos);
                     }
                 }
             }
@@ -453,13 +434,11 @@ namespace ResourceCollector
                 tmp.v[2] = faces[i].cv2 - 1;
                 MeshTridata.Add(tmp);
             }
-            if (tspb != null)
-                tspb.Value = 100;
             BufferIndex = null;
             BufferVertex = null;
             forsavingformat = ElementType.MeshSkinnedOptimazedForStore;
         }
-        public void GenerateOptForLoading(ToolStripProgressBar tspb)
+        public void GenerateOptForLoading()
         {
             if (tvertexes == null)
             {
@@ -560,9 +539,6 @@ namespace ResourceCollector
                 }
                 else
                     tempIndexes.Add(toadd);
-                pos += step;
-                if(tspb!=null)
-                    tspb.Value = Convert.ToInt32(pos);
             }
             BufferVertex = new CSkinnedMeshVertex[Last];
             for (int i = 0; i < Last; i++)
@@ -589,7 +565,7 @@ namespace ResourceCollector
             if (faces == null)
             {
                 ToolStripProgressBar tspb = new ToolStripProgressBar();
-                GenerateOptForStore(tspb);
+                GenerateOptForStore();
                 forsavingformat = ElementType.MeshSkinnedOptimazedForStore;
             }
             SkinnedFace[] Snewfaces = new SkinnedFace[num_faces];
@@ -792,7 +768,7 @@ namespace ResourceCollector
             }
         }
         //##############################################################################
-        public override int loadbody(System.IO.BinaryReader br, ToolStripProgressBar toolStripProgressBar)
+        public override int loadbody(System.IO.BinaryReader br)
         {
             size = 0;
             switch (loadedformat)
@@ -804,8 +780,6 @@ namespace ResourceCollector
                         num_verts = br.ReadInt32();
                         num_faces = br.ReadInt32();
                         num_tverts = br.ReadInt32();
-                        float step = Convert.ToSingle(toolStripProgressBar.Maximum) / Convert.ToSingle(num_verts * 2 + num_tverts + num_faces * 2);
-                        float pos = 0;
                         size += 12;
                         vertexes = new SkinnedVertex[num_verts];
 
@@ -818,8 +792,6 @@ namespace ResourceCollector
                             vertexes[i].normal.X = br.ReadSingle(); size += 4;
                             vertexes[i].normal.Y = br.ReadSingle(); size += 4;
                             vertexes[i].normal.Z = br.ReadSingle(); size += 4;
-                            pos += step;
-                            toolStripProgressBar.Value = Convert.ToInt32(pos);
 
                         }
 
@@ -828,8 +800,6 @@ namespace ResourceCollector
                         {
                             size += 4; size += 4;
                             tvertexes[i] = new Vector2(br.ReadSingle(), br.ReadSingle());
-                            pos += step;
-                            toolStripProgressBar.Value = Convert.ToInt32(pos);
                         }
                         faces = new SkinnedFace[num_faces];
                         for (int i = 0; i < num_faces; i++)
@@ -850,8 +820,6 @@ namespace ResourceCollector
                             faces[i].v0.textureccordinates = tvertexes[faces[i].tv0 - 1]; size += 4;
                             faces[i].v1.textureccordinates = tvertexes[faces[i].tv1 - 1]; size += 4;
                             faces[i].v2.textureccordinates = tvertexes[faces[i].tv2 - 1]; size += 4;
-                            pos += step;
-                            toolStripProgressBar.Value = Convert.ToInt32(pos);
                         }
 
                         skinvertexnumber = br.ReadInt32(); size += 4;
@@ -877,8 +845,6 @@ namespace ResourceCollector
                             tmp.v[1] = faces[i].cv1 - 1;
                             tmp.v[2] = faces[i].cv2 - 1;
                             MeshTridata.Add(tmp);
-                            pos += step;
-                            toolStripProgressBar.Value = Convert.ToInt32(pos);
                         }
 
                     } break;
@@ -889,9 +855,6 @@ namespace ResourceCollector
                         int fffff = br.ReadInt32();
                         BufferVertex = new CSkinnedMeshVertex[fffff];
                         BufferIndex = new int[br.ReadInt32()];
-                        toolStripProgressBar.Value = 0;
-                        float step = Convert.ToSingle(toolStripProgressBar.Maximum) / Convert.ToSingle(BufferVertex.Length + BufferIndex.Length);
-                        float pos = 0;
                         size += 8;
                         for (int bv = 0; bv < BufferVertex.Length; bv++)
                         {
@@ -915,16 +878,12 @@ namespace ResourceCollector
                                 BufferVertex[bv].BoneWeights[i] = br.ReadSingle();
                                 size += 4;
                             }
-                            pos += step;
-                            toolStripProgressBar.Value = Convert.ToInt32(pos);
                         }
 
                         for (int bv = 0; bv < BufferIndex.Length; bv++)
                         {
                             BufferIndex[bv] = br.ReadInt32();
                             size += 4;
-                            pos += step;
-                            toolStripProgressBar.Value = Convert.ToInt32(pos);
                         }
 
                         long last = br.BaseStream.Position;
@@ -978,16 +937,13 @@ namespace ResourceCollector
 
 
         }
-        public override void savebody(System.IO.BinaryWriter bw, ToolStripProgressBar toolStripProgressBar)
+        public override void savebody(System.IO.BinaryWriter bw)
         {
-            toolStripProgressBar.Value = 0;
 
             switch (forsavingformat)
             {
                 case ElementType.MeshSkinnedOptimazedForStore:
                     {
-                        float posit1 = 0.0f;
-                        float lalala2 = Convert.ToSingle(toolStripProgressBar.Maximum) / Convert.ToSingle(num_verts + num_faces + num_tverts + vertskins.Length);
                         bw.Write(num_verts);
                         bw.Write(num_faces);
                         bw.Write(num_tverts);
@@ -1000,15 +956,11 @@ namespace ResourceCollector
                             bw.Write(vertexes[i].normal.X);
                             bw.Write(vertexes[i].normal.Y);
                             bw.Write(vertexes[i].normal.Z);
-                            posit1 += lalala2;
-                            toolStripProgressBar.Value = Convert.ToInt32(posit1);
                         }
                         for (int i = 0; i < num_tverts; i++)
                         {
                             bw.Write(tvertexes[i].X);
                             bw.Write(tvertexes[i].Y);
-                            posit1 += lalala2;
-                            toolStripProgressBar.Value = Convert.ToInt32(posit1);
                         }
                         for (int i = 0; i < num_faces; i++)
                         {
@@ -1019,8 +971,6 @@ namespace ResourceCollector
                             bw.Write(faces[i].tv0);
                             bw.Write(faces[i].tv1);
                             bw.Write(faces[i].tv2);
-                            posit1 += lalala2;
-                            toolStripProgressBar.Value = Convert.ToInt32(posit1);
                         }
                         bw.Write(skinvertexnumber);
                         bw.Write(bonenumber);
@@ -1033,18 +983,13 @@ namespace ResourceCollector
                                // bw.Write3DMaxString(vertskins[i].skins[j].bonename.Substring(0, vertskins[i].skins[j].bonename.Length - 1));
                                 bw.Write(vertskins[i].skins[j].coefficient);
                             }
-                            posit1 += lalala2;
-                            toolStripProgressBar.Value = Convert.ToInt32(posit1);
                         }
-                        toolStripProgressBar.Value = toolStripProgressBar.Maximum;
 
                     } break;
                 case ElementType.MeshSkinnedOptimazedForLoading:
                     {
                         if (BufferIndex == null)
-                            GenerateOptForLoading(null);
-                        float posit1 = 0.0f;
-                        float lalala2 = Convert.ToSingle(toolStripProgressBar.Maximum) / Convert.ToSingle(BufferVertex.Length + BufferIndex.Length);
+                            GenerateOptForLoading();
                         bw.Write(BufferVertex.Length);
                         bw.Write(BufferIndex.Length);
 
@@ -1080,17 +1025,11 @@ namespace ResourceCollector
                                 bw.Write(0);
                                 bw.Write(0);
                             }
-
-                            posit1 += lalala2;
-                            toolStripProgressBar.Value = Convert.ToInt32(posit1);
                         }
                         for (int bv = 0; bv < BufferIndex.Length; bv++)
                         {
                             bw.Write(BufferIndex[bv]);
-                            posit1 += lalala2;
-                            toolStripProgressBar.Value = Convert.ToInt32(posit1);
                         }
-                        toolStripProgressBar.Value = toolStripProgressBar.Maximum;
                     } break;
                 default:
                     {
@@ -1140,10 +1079,8 @@ namespace ResourceCollector
                     } break;
             }
         }
-        public override void calcbodysize(ToolStripProgressBar targetbar)
+        public override void calcbodysize()
         {
-            if(targetbar!=null)
-                targetbar.Value = 0;
             if (forsavingformat != loadedformat)
             {
 
@@ -1152,11 +1089,11 @@ namespace ResourceCollector
                 {
                     case ElementType.MeshSkinnedOptimazedForStore:
                         {
-                            GenerateOptForStore(targetbar);
+                            GenerateOptForStore();
                         } break;
                     case ElementType.MeshSkinnedOptimazedForLoading:
                         {
-                            GenerateOptForLoading(targetbar);
+                            GenerateOptForLoading();
                         } break;
                     default:
                         {
@@ -1210,9 +1147,6 @@ namespace ResourceCollector
                         }
                 }
             }
-
-            if(targetbar!=null)
-                targetbar.Value = targetbar.Maximum;
         }
         public override void loadobjectheader(HeaderInfo hi, System.IO.BinaryReader br)
         {

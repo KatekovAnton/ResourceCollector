@@ -83,8 +83,7 @@ namespace ResourceCollector
 
         private void button4gennew_Click(object sender, EventArgs e)
         {
-            mesh.GenerateOptForLoading(null);
-            mesh.GenerateOptForStore(null);
+            mesh.GenerateOptForLoading();
             LODInterface li = new LODInterface(mesh, "");
             li.ShowDialog();
             if (li.meshes.Count != 0)

@@ -9,7 +9,7 @@ namespace ResourceCollector
     public class CharacterStaticInfo : PackContent//int SkeletonWithAddInfo = 31;
     {
         #region packcontent methods
-        public override void calcbodysize(System.Windows.Forms.ToolStripProgressBar targetbar)
+        public override void calcbodysize()
         {
             BinaryWriter br = new BinaryWriter(new System.IO.MemoryStream());
             baseskelet.ToStream(br);
@@ -48,7 +48,7 @@ namespace ResourceCollector
         {
             headersize = 16 + name.Length;
         }
-        public override int loadbody(BinaryReader br, System.Windows.Forms.ToolStripProgressBar toolStripProgressBar)
+        public override int loadbody(BinaryReader br)
         {
             long a = br.BaseStream.Position;
             baseskelet = Skeleton.FromStream(br);
@@ -87,7 +87,7 @@ namespace ResourceCollector
 
             size = br.ReadInt32();
         }
-        public override void savebody(BinaryWriter br, System.Windows.Forms.ToolStripProgressBar toolStripProgressBar)
+        public override void savebody(BinaryWriter br)
         {
             baseskelet.ToStream(br);
             br.Write(HeadIndex);
