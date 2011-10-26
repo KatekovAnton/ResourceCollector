@@ -6,6 +6,42 @@ using Microsoft.Xna.Framework;
 using System.IO;
 namespace ResourceCollector
 {
+
+    public class DictionaryMethods
+    {
+        public static Dictionary<string, string> CreateCopy(Dictionary<string, string> parameter)
+        {
+            Dictionary<string, string> result = new Dictionary<string, string>();
+            foreach (string key in parameter.Keys)
+            {
+                result.Add(key, parameter[key]);
+            }
+            return result;
+        }
+
+        public static void ToStream(Dictionary<string, string> dict, System.IO.BinaryWriter bw)
+        {
+            bw.Write(dict.Count);
+            foreach(string key in dict.Keys)
+            {
+                bw.WritePackString(key);
+                bw.WritePackString(dict[key]);
+            }
+        }
+
+        public static Dictionary<string, string> FromStream( System.IO.BinaryReader bw)
+        {
+            int count = bw.ReadInt32();
+            Dictionary<string, string> result = new Dictionary<string, string>(count);
+            for (int i = 0; i < count;i++ )
+            {
+                result.Add(bw.ReadPackString(), bw.ReadPackString());
+            }
+            return result;
+        }
+    }
+
+
     public static class Extensions
     {
         

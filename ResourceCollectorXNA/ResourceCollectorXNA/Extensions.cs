@@ -13,12 +13,19 @@ using System.IO;
 
 namespace ResourceCollectorXNA
 {
+   
+
     public class StaticInterfaceParameters
     {
         public static float ViewportBorder = 200.0f;
     }
+
+    
+
     public static class Extensions
     {
+        
+
         public static string ReadPackString(this System.IO.BinaryReader self)//стринг с нулём
         {
             var length = self.ReadInt32();

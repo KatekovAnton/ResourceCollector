@@ -12,9 +12,19 @@ namespace ResourceCollector
     public partial class AddAnim : Form
     {
         public OpenFileDialog dlg;
+        public Dictionary<string, string> properties;
+        AnimationNode node;
         public AddAnim()
         {
             InitializeComponent();
+        }
+
+        public AddAnim(AnimationNode _node)
+        {
+            InitializeComponent();
+            node = _node;
+            properties = node.properties;
+            textBox2.Text = _node.name;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -31,6 +41,16 @@ namespace ResourceCollector
                 dlg = null;
 
 
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if (properties == null)
+                properties = new Dictionary<string, string>();
+            Addition.DictionaryEditor de = new Addition.DictionaryEditor(properties);
+            if (de.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                properties = de.editedDict;
+            
         }
     }
 }

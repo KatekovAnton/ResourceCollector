@@ -48,6 +48,16 @@
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.button2 = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.labelBRI = new System.Windows.Forms.Label();
+            this.labelTRI = new System.Windows.Forms.Label();
+            this.labelRI = new System.Windows.Forms.Label();
+            this.labelWI = new System.Windows.Forms.Label();
+            this.labelHI = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -245,6 +255,16 @@
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Controls.Add(this.labelBRI);
+            this.groupBox2.Controls.Add(this.labelTRI);
+            this.groupBox2.Controls.Add(this.labelRI);
+            this.groupBox2.Controls.Add(this.labelWI);
+            this.groupBox2.Controls.Add(this.labelHI);
+            this.groupBox2.Controls.Add(this.label7);
+            this.groupBox2.Controls.Add(this.label6);
+            this.groupBox2.Controls.Add(this.label5);
+            this.groupBox2.Controls.Add(this.label4);
+            this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Controls.Add(this.groupBox4);
             this.groupBox2.Location = new System.Drawing.Point(321, 12);
             this.groupBox2.Name = "groupBox2";
@@ -286,6 +306,96 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(6, 192);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(59, 13);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "HeadIndex";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 209);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(74, 13);
+            this.label4.TabIndex = 3;
+            this.label4.Text = "WeaponIndex";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(6, 226);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(56, 13);
+            this.label5.TabIndex = 4;
+            this.label5.Text = "RootIndex";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(6, 243);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(75, 13);
+            this.label6.TabIndex = 5;
+            this.label6.Text = "TopRootIndex";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(6, 260);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(89, 13);
+            this.label7.TabIndex = 6;
+            this.label7.Text = "BottomRootIndex";
+            // 
+            // labelBRI
+            // 
+            this.labelBRI.AutoSize = true;
+            this.labelBRI.Location = new System.Drawing.Point(108, 260);
+            this.labelBRI.Name = "labelBRI";
+            this.labelBRI.Size = new System.Drawing.Size(89, 13);
+            this.labelBRI.TabIndex = 11;
+            this.labelBRI.Text = "BottomRootIndex";
+            // 
+            // labelTRI
+            // 
+            this.labelTRI.AutoSize = true;
+            this.labelTRI.Location = new System.Drawing.Point(108, 243);
+            this.labelTRI.Name = "labelTRI";
+            this.labelTRI.Size = new System.Drawing.Size(75, 13);
+            this.labelTRI.TabIndex = 10;
+            this.labelTRI.Text = "TopRootIndex";
+            // 
+            // labelRI
+            // 
+            this.labelRI.AutoSize = true;
+            this.labelRI.Location = new System.Drawing.Point(108, 226);
+            this.labelRI.Name = "labelRI";
+            this.labelRI.Size = new System.Drawing.Size(56, 13);
+            this.labelRI.TabIndex = 9;
+            this.labelRI.Text = "RootIndex";
+            // 
+            // labelWI
+            // 
+            this.labelWI.AutoSize = true;
+            this.labelWI.Location = new System.Drawing.Point(108, 209);
+            this.labelWI.Name = "labelWI";
+            this.labelWI.Size = new System.Drawing.Size(74, 13);
+            this.labelWI.TabIndex = 8;
+            this.labelWI.Text = "WeaponIndex";
+            // 
+            // labelHI
+            // 
+            this.labelHI.AutoSize = true;
+            this.labelHI.Location = new System.Drawing.Point(108, 192);
+            this.labelHI.Name = "labelHI";
+            this.labelHI.Size = new System.Drawing.Size(59, 13);
+            this.labelHI.TabIndex = 7;
+            this.labelHI.Text = "HeadIndex";
+            // 
             // FormAnimationTools
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -307,6 +417,7 @@
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -334,6 +445,16 @@
         private System.Windows.Forms.Button button9;
         public System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label labelBRI;
+        private System.Windows.Forms.Label labelTRI;
+        private System.Windows.Forms.Label labelRI;
+        private System.Windows.Forms.Label labelWI;
+        private System.Windows.Forms.Label labelHI;
 
     }
 }

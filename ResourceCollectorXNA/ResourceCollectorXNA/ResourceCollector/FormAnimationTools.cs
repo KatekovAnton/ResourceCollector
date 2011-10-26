@@ -99,6 +99,14 @@ namespace ResourceCollector
                     skelet.TopGraph = new AnimationGraph("Top", skelet.TopIndexes);
                 if (skelet.TopGraph != null)
                     listBox1.Items.Add(skelet.TopGraph);
+
+
+                labelHI.Text = skelet.HeadIndex.ToString();
+                labelRI.Text = skelet.RootIndex.ToString();
+                labelTRI.Text = skelet.TopRootIndex.ToString();
+                labelWI.Text = skelet.WeaponIndex.ToString();
+                labelBRI.Text = skelet.BottomRootIndex.ToString();
+
             }
             //this.WindowState = FormWindowState.Maximized;
         }
@@ -440,6 +448,12 @@ namespace ResourceCollector
                 skelet.TopGraph = new AnimationGraph("Top", skelet.TopIndexes);
             if (skelet.TopGraph != null)
                 listBox1.Items.Add(skelet.TopGraph);
+
+            labelHI.Text = skelet.HeadIndex.ToString();
+            labelRI.Text = skelet.RootIndex.ToString();
+            labelTRI.Text = skelet.TopRootIndex.ToString();
+            labelWI.Text = skelet.WeaponIndex.ToString();
+            labelBRI.Text = skelet.BottomRootIndex.ToString();
         }
 
         private void button9_Click(object sender, EventArgs e)

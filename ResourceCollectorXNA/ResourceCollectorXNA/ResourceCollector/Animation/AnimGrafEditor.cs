@@ -37,8 +37,7 @@ namespace ResourceCollector
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 curanim = FullAnimation.From3DMAXStream(dlg.dlg.OpenFile(), skeleton,dlg.checkBox1.Checked,AnimGraf.boneIndexes);
-                curnode = new AnimationNode(dlg.textBox2.Text,curanim);
-                curnode.Properties.OneTimeAnimation = dlg.checkBox2.Checked;
+                curnode = new AnimationNode(dlg.textBox2.Text,curanim,dlg.properties);
                 curnode.index = listBox1.Items.Count;
                 listBox1.Items.Add(curnode);
                 viewInfo.addNodeView(curnode,new MouseEventHandler(pictureBox1_MouseDoubleClick),new EventHandler(pictureBox1_Click));
@@ -370,7 +369,6 @@ namespace ResourceCollector
 
 
                 an.SetName(dlg.textBox2.Text);
-                an.Properties.OneTimeAnimation = dlg.checkBox2.Checked;
                 listBox1.Items.Remove(an);
                 an.index = listBox1.Items.Count;
                 listBox1.Items.Add(an);
@@ -384,19 +382,14 @@ namespace ResourceCollector
             if (listBox1.SelectedItem != null)
             {
                 AnimationNode an = (AnimationNode)listBox1.SelectedItem;
-                AddAnim dlg = new AddAnim();
-                dlg.textBox2.Text = an.name;
+                AddAnim dlg = new AddAnim(an);
                 if (dlg.ShowDialog() == DialogResult.OK)
                 {
                     if (dlg.dlg != null)
                         an.animation = FullAnimation.From3DMAXStream(dlg.dlg.OpenFile(), skeleton, dlg.checkBox1.Checked, AnimGraf.boneIndexes);
 
-
+                    an.properties = dlg.properties;
                     an.SetName(dlg.textBox2.Text);
-                    an.Properties.OneTimeAnimation = dlg.checkBox2.Checked;
-                    listBox1.Items.Remove(an);
-                    an.index = listBox1.Items.Count;
-                    listBox1.Items.Add(an);
                     // viewInfo.addNodeView(curnode, new MouseEventHandler(pictureBox1_MouseDoubleClick), new EventHandler(pictureBox1_Click));
 
                 }

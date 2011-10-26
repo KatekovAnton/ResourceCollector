@@ -108,30 +108,22 @@ namespace ResourceCollector
             get;
             private set;
         }
-        public NodeProperties Properties;
         public int index;
         public List<NodeEvent> nodeEvents;                      // исходящие рёбра
         public Animation animation;                         // соответствующая узлу анимация
-
-        public AnimationNode(string _name, Animation _animation)
-        {
-            Properties = new NodeProperties();
-            SetName(_name);
-            nodeEvents = new List<NodeEvent>();
-            animation = _animation;
-        }
-        public AnimationNode(string _name, Animation _animation, NodeProperties _Properties)
+        public Dictionary<string, string> properties;
+        public AnimationNode(string _name, Animation _animation, Dictionary<string,string> _props)
         {
             SetName(_name);
             nodeEvents = new List<NodeEvent>();
             animation = _animation;
-            Properties = _Properties;
+            properties = _props;
         }
         public AnimationNode(string _name)
         {
-            Properties = new NodeProperties();
             SetName(_name);
             nodeEvents = new List<NodeEvent>();
+            properties = new Dictionary<string, string>();
         }
 
         public void SetName(string _name)
@@ -163,6 +155,7 @@ namespace ResourceCollector
                 default:
                     break;
             }
+            DictionaryMethods.ToStream(node.properties, bw);
             bw.Write(node.nodeEvents.Count);
             for (int i = 0; i < node.nodeEvents.Count; i++)
             {
@@ -185,6 +178,7 @@ namespace ResourceCollector
                 default:
                     break;
             }
+            node.properties = DictionaryMethods.FromStream(br);
             int count = br.ReadInt32();
             node.nodeEvents = new List<NodeEvent>();
             for (int i = 0; i < count; i++)
@@ -310,27 +304,6 @@ namespace ResourceCollector
         public override string ToString()
         {
             return this.description.Remove(this.description.Length - 1);
-        }
-    }
-
-    public class NodeProperties
-    {
-        public bool OneTimeAnimation;
-
-        public  void NodePropertiesToStream(System.IO.BinaryWriter bw)
-        {
-            /////
-            bw.Write(OneTimeAnimation);
-        }
-        public static NodeProperties NodePropertiesFromStream(System.IO.BinaryReader br)
-        {
-            NodeProperties result = new NodeProperties();
-            result.OneTimeAnimation = br.ReadBoolean();
-            return result;
-        }
-        public  void LoadFromStream(System.IO.BinaryReader br)
-        {
-            OneTimeAnimation= br.ReadBoolean();
         }
     }
 }

@@ -197,6 +197,9 @@ namespace ResourceCollector
         public int RootIndex;
         public int TopRootIndex;
         public int BottomRootIndex;
+
+        public Microsoft.Xna.Framework.Matrix HeadMatrix;
+        public Microsoft.Xna.Framework.Matrix WeaponMatrix;
         
         public Skeleton baseskelet
         {
