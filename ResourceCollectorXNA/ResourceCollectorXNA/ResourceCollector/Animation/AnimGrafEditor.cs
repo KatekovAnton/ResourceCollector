@@ -385,13 +385,18 @@ namespace ResourceCollector
                 AddAnim dlg = new AddAnim(an);
                 if (dlg.ShowDialog() == DialogResult.OK)
                 {
+                    bool animDownloaded = false;
                     if (dlg.dlg != null)
+                    {
+                        animDownloaded = true;
                         an.animation = FullAnimation.From3DMAXStream(dlg.dlg.OpenFile(), skeleton, dlg.checkBox1.Checked, AnimGraf.boneIndexes);
+                    }
 
                     an.properties = dlg.properties;
                     an.SetName(dlg.textBox2.Text);
                     // viewInfo.addNodeView(curnode, new MouseEventHandler(pictureBox1_MouseDoubleClick), new EventHandler(pictureBox1_Click));
-
+                    if (animDownloaded)
+                        MessageBox.Show("new animation has been dowloaded");
                 }
             }
         }

@@ -31,16 +31,16 @@ namespace ResourceCollector
         {
             dlg = new OpenFileDialog();
             dlg.Filter = "Animation|*.anim|All Files|*.*";
+            dlg.InitialDirectory = AppConfiguration.AddAnimFolder;
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 textBox1.Text = dlg.FileName;
                 if(textBox1.Text == "")
                 textBox2.Text = dlg.SafeFileName;
+                AppConfiguration.AddAnimFolder = System.IO.Path.GetDirectoryName(dlg.FileName);
             }
             else
                 dlg = null;
-
-
         }
 
         private void button4_Click(object sender, EventArgs e)

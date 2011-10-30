@@ -114,6 +114,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppConfiguration.cs" />
     <Compile Include="ConsoleWindow.cs">
       <SubType>Form</SubType>
     </Compile>

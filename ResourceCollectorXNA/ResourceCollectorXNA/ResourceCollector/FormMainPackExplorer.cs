@@ -23,6 +23,8 @@ namespace ResourceCollector
             InitializeComponent();
 
             groupBox1.Height = Height - groupBox1.Location.Y - 90;
+
+            AppConfiguration.ReadProperties();
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
@@ -30,6 +32,9 @@ namespace ResourceCollector
             OpenFileDialog ofd = new OpenFileDialog();
           
                 ofd.Filter = "Паки *.pack|*.pack";
+                string path = AppConfiguration.PackPlaceFolder;
+                if (path.Length > 2)
+                    ofd.InitialDirectory = path;
                 if (ofd.ShowDialog() == DialogResult.OK)
                 {
                     ResourceCollectorXNA.Engine.GameEngine.Instance.CreateNewLevel();
@@ -38,6 +43,7 @@ namespace ResourceCollector
                     ClearInterface();
                     packs.packs = new List<Pack>();
                     packs.AddPack(ofd.FileName, br);
+                    AppConfiguration.PackPlaceFolder = System.IO.Path.GetDirectoryName(ofd.FileName);
                 }
                 if (!packs.SuccessLast)
                     ClearInterface();
