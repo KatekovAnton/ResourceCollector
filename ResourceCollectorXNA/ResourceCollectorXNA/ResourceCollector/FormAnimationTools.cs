@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using Microsoft.Xna.Framework;
 
 namespace ResourceCollector
 {
@@ -530,6 +531,12 @@ namespace ResourceCollector
         private void FormAnimationTools_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            skelet.HeadMatrix = Matrix.CreateTranslation(new Vector3(-0.00f, -0.01f, 0.84f));
+            skelet.WeaponMatrix = Matrix.CreateRotationX(MathHelper.PiOver2 - 0.14f) * Matrix.CreateTranslation(new Vector3(-0.46f, -0.20f, -0.43f));
         }
     }
 }

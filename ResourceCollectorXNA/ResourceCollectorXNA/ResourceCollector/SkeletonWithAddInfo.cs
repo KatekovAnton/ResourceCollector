@@ -15,6 +15,10 @@ namespace ResourceCollector
             baseskelet.ToStream(br);
             br.Write(HeadIndex);
             br.Write(WeaponIndex);
+
+            br.WriteMatrix(HeadMatrix);
+            br.WriteMatrix(WeaponMatrix);
+
             br.Write(RootIndex);
             br.Write(TopRootIndex);
             br.Write(BottomRootIndex);
@@ -54,6 +58,10 @@ namespace ResourceCollector
             baseskelet = Skeleton.FromStream(br);
             HeadIndex = br.ReadInt32();
             WeaponIndex = br.ReadInt32();
+
+            HeadMatrix = br.ReadMatrix();
+            WeaponMatrix = br.ReadMatrix();
+
             RootIndex = br.ReadInt32();
             TopRootIndex = br.ReadInt32();
             BottomRootIndex = br.ReadInt32();
@@ -92,6 +100,10 @@ namespace ResourceCollector
             baseskelet.ToStream(br);
             br.Write(HeadIndex);
             br.Write(WeaponIndex);
+
+            br.WriteMatrix(HeadMatrix);
+            br.WriteMatrix(WeaponMatrix);
+
             br.Write(RootIndex);
             br.Write(TopRootIndex);
             br.Write(BottomRootIndex);
@@ -198,8 +210,8 @@ namespace ResourceCollector
         public int TopRootIndex;
         public int BottomRootIndex;
 
-        public Microsoft.Xna.Framework.Matrix HeadMatrix;
-        public Microsoft.Xna.Framework.Matrix WeaponMatrix;
+        public Microsoft.Xna.Framework.Matrix HeadMatrix = Microsoft.Xna.Framework.Matrix.Identity;
+        public Microsoft.Xna.Framework.Matrix WeaponMatrix = Microsoft.Xna.Framework.Matrix.Identity;
         
         public Skeleton baseskelet
         {

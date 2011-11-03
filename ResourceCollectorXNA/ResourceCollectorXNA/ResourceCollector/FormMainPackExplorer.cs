@@ -109,8 +109,14 @@ namespace ResourceCollector
             if (packs.packs.Count != 0)
             {
                 SaveFileDialog sfd = new SaveFileDialog();
+                string str = AppConfiguration.PackPlaceFolder;
+                if (str.Length > 2)
+                    sfd.InitialDirectory = str;
                 if (sfd.ShowDialog() == DialogResult.OK)
+                {
                     packs.Save(0, sfd.FileName);
+                    AppConfiguration.PackPlaceFolder = System.IO.Path.GetDirectoryName(sfd.FileName);
+                }
             }
         }
 
