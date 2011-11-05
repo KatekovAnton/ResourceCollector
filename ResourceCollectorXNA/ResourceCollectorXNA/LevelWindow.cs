@@ -185,6 +185,7 @@ namespace ResourceCollectorXNA
             if (MessageBox.Show("all not saved data will be lost! shure?", "attention", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.No)
                 return;
             GameEngine.Instance.CreateNewLevel();
+            RenderWindow.Instance.Activate();
         }
     }
 }

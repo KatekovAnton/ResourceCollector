@@ -89,8 +89,12 @@ namespace ResourceCollector
             }
             int vertcount = 0;
             for (int i = 0; i < _meshesForCombine.Count; i++)
+            {
+                if (_meshesForCombine[i].BufferVertex == null)
+                    _meshesForCombine[i].GenerateOptForLoading();
                 vertcount += _meshesForCombine[i].BufferVertex.Length;
-            label3.Text = vertcount.ToString();
+            }
+                label3.Text = vertcount.ToString();
 
 
             int facecount = 0;

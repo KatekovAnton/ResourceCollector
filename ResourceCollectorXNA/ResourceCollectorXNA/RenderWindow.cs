@@ -12,6 +12,8 @@ namespace ResourceCollectorXNA
 {
     public partial class RenderWindow : Form
     {
+        public static RenderWindow Instance;
+
         class mosecapturer : Engine.Interface.IMouseUserInterface
         {
             public bool havemose;
@@ -57,7 +59,7 @@ namespace ResourceCollectorXNA
             engine = ResourceCollectorXNA.Engine.GameEngine.Instance; ;
             Engine.GameEngine.renderController = new RCViewControllers.RenderWindowVC(this);
             capturer = new mosecapturer();
-            
+            Instance = this;
         }
 
         private void xnaPanel1_SizeChanged(object sender, EventArgs e)
