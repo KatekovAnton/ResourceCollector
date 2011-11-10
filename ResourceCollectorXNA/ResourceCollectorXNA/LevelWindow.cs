@@ -178,6 +178,7 @@ namespace ResourceCollectorXNA
             textBox1.Text = lc.name.Substring(0,lc.name.Length-1);
             GameEngine.Instance.LoadNewLevel(el);
             GameEngine.Instance.UpdateLevelPart();
+            RenderWindow.Instance.Activate();
         }
 
         private void button2_Click(object sender, EventArgs e)
