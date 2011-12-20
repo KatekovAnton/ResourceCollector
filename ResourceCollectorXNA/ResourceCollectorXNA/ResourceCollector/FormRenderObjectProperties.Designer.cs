@@ -51,6 +51,8 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button10 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
+            this.checkBoxROSelfIllumination = new System.Windows.Forms.CheckBox();
+            this.checkBoxROTransparent = new System.Windows.Forms.CheckBox();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -216,12 +218,14 @@
             // 
             // groupBox7
             // 
+            this.groupBox7.Controls.Add(this.checkBoxROSelfIllumination);
+            this.groupBox7.Controls.Add(this.checkBoxROTransparent);
             this.groupBox7.Controls.Add(this.checkBoxRONeedRotate);
             this.groupBox7.Controls.Add(this.checkBoxROShadowReceiver);
             this.groupBox7.Controls.Add(this.checkBoxROShadowCaster);
             this.groupBox7.Location = new System.Drawing.Point(12, 552);
             this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(549, 42);
+            this.groupBox7.Size = new System.Drawing.Size(549, 71);
             this.groupBox7.TabIndex = 26;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "Render options";
@@ -297,6 +301,28 @@
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
+            // checkBoxROSelfIllumination
+            // 
+            this.checkBoxROSelfIllumination.AutoSize = true;
+            this.checkBoxROSelfIllumination.Location = new System.Drawing.Point(112, 42);
+            this.checkBoxROSelfIllumination.Name = "checkBoxROSelfIllumination";
+            this.checkBoxROSelfIllumination.Size = new System.Drawing.Size(96, 17);
+            this.checkBoxROSelfIllumination.TabIndex = 22;
+            this.checkBoxROSelfIllumination.Text = "self-illumination";
+            this.checkBoxROSelfIllumination.UseVisualStyleBackColor = true;
+            this.checkBoxROSelfIllumination.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
+            // 
+            // checkBoxROTransparent
+            // 
+            this.checkBoxROTransparent.AutoSize = true;
+            this.checkBoxROTransparent.Location = new System.Drawing.Point(10, 42);
+            this.checkBoxROTransparent.Name = "checkBoxROTransparent";
+            this.checkBoxROTransparent.Size = new System.Drawing.Size(83, 17);
+            this.checkBoxROTransparent.TabIndex = 21;
+            this.checkBoxROTransparent.Text = "Transparent";
+            this.checkBoxROTransparent.UseVisualStyleBackColor = true;
+            this.checkBoxROTransparent.CheckedChanged += new System.EventHandler(this.checkBoxROTransparent_CheckedChanged);
+            // 
             // FormRenderObjectProperties
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -351,5 +377,7 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button10;
         private System.Windows.Forms.Button button9;
+        private System.Windows.Forms.CheckBox checkBoxROSelfIllumination;
+        private System.Windows.Forms.CheckBox checkBoxROTransparent;
     }
 }

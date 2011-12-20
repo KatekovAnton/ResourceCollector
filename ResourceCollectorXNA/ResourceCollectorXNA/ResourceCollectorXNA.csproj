@@ -418,7 +418,7 @@
     <Compile Include="ResourceCollector\Pack.cs" />
     <Compile Include="ResourceCollector\PackContent.cs" />
     <Compile Include="ResourceCollector\PackList.cs" />
-    <Compile Include="ResourceCollector\RenderObject.cs" />
+    <Compile Include="ResourceCollector\RenderObjectDescription.cs" />
     <Compile Include="ResourceCollector\Skeleton.cs" />
     <Compile Include="ResourceCollector\SkeletonWithAddInfo.cs" />
     <Compile Include="ResourceCollector\TextureListContent.cs" />
