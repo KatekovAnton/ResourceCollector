@@ -27,6 +27,8 @@ namespace ResourceCollector.Content
             checkBoxROShadowReceiver.Checked = thisobject.IsShadowReceiver;
             checkBoxRONeedRotate.Checked = thisobject.NeedRotate;
             textBox1.Text = thisobject.name.Length > 0 ? thisobject.name : "New world object";
+            checkBoxROSelfIllumination.Checked = thisobject.isSelfIllumination;
+            checkBoxROTransparent.Checked = thisobject.isTransparent;
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -206,7 +208,16 @@ namespace ResourceCollector.Content
             thisobject.NeedRotate = checkBoxRONeedRotate.Checked;
         }
 
-       
+        //self-ill
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            thisobject.isSelfIllumination = checkBoxROSelfIllumination.Checked;
+        }
+
+        private void checkBoxROTransparent_CheckedChanged(object sender, EventArgs e)
+        {
+            thisobject.isTransparent = checkBoxROTransparent.Checked;
+        }
        
         public List<PackContent> createdContent;
 
@@ -222,6 +233,8 @@ namespace ResourceCollector.Content
                 textBox4.Text = thisobject.matname;
             }*/
         }
+
+       
    
     }
 }

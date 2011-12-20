@@ -18,7 +18,8 @@ namespace ResourceCollector.Content
         public bool IsShadowReceiver = false;
 
         public bool NeedRotate;
-
+        public bool isTransparent;
+        public bool isSelfIllumination;
       //  public string matname;
 
         public void addlod()
@@ -134,7 +135,8 @@ namespace ResourceCollector.Content
             br.Write(IsShadowCaster);
             br.Write(IsShadowReceiver);
             br.Write(NeedRotate);
-
+            br.Write(isTransparent);
+            br.Write(isSelfIllumination);
             size = Convert.ToInt32(br.BaseStream.Length);
         }
 
@@ -185,7 +187,8 @@ namespace ResourceCollector.Content
             IsShadowCaster = br.ReadBoolean();
             IsShadowReceiver = br.ReadBoolean();
             NeedRotate = br.ReadBoolean();
-
+            isTransparent = br.ReadBoolean();
+            isSelfIllumination = br.ReadBoolean();
             startpos = br.BaseStream.Position - startpos;
             return Convert.ToInt32(startpos);
         }
@@ -223,7 +226,8 @@ namespace ResourceCollector.Content
                 br.Write(IsShadowCaster);
                 br.Write(IsShadowReceiver);
                 br.Write(NeedRotate);
-                
+                br.Write(isTransparent);
+                br.Write(isSelfIllumination);
         }
 
         public override void saveheader(System.IO.BinaryWriter bw)

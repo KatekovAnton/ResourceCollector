@@ -17,6 +17,9 @@ namespace ResourceCollectorXNA.Engine.Render
 
         public bool Disposed;
 
+        public bool isTransparent;
+        public bool isSelfIllumination;
+
        // public ResourceCollectorXNA.Engine.Render.Materials.Material mat;
 
         protected RenderObject() { }
