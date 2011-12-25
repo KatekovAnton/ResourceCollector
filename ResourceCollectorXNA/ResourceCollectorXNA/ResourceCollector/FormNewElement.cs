@@ -29,7 +29,8 @@ namespace ResourceCollector
                     var path = fileDialog.FileName.Split('\\', '/');
                     var image = new ImageContent(path[path.Length - 1], new Bitmap(fileDialog.FileName));
 
-                    packs.packs[0].Attach(image, tv);
+                    packs.packs[0].Attach(image);
+                    FormMainPackExplorer.Instance.UpdateData();
                 }
             }
             catch
@@ -44,7 +45,8 @@ namespace ResourceCollector
             tl.Pack = packs.packs[0];
             if (tl.createpropertieswindow(packs.packs[0], tv) == System.Windows.Forms.DialogResult.OK)
             { 
-                packs.packs[0].Attach(tl, tv);
+                packs.packs[0].Attach(tl);
+                FormMainPackExplorer.Instance.UpdateData();
             }
         }
 
@@ -53,7 +55,8 @@ namespace ResourceCollector
             FormCollisionMesh ccc = new FormCollisionMesh(tv, packs.packs[0]);
             if(ccc.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                packs.packs[0].Attach(ccc.cm, tv);
+                packs.packs[0].Attach(ccc.cm);
+                FormMainPackExplorer.Instance.UpdateData();
             }
         }
 
@@ -63,7 +66,8 @@ namespace ResourceCollector
             rod.Pack = packs.packs[0];
             if (rod.createpropertieswindow(rod.Pack, tv) == System.Windows.Forms.DialogResult.OK)
             {
-                rod.Pack.Attach(rod, tv);
+                rod.Pack.Attach(rod);
+                FormMainPackExplorer.Instance.UpdateData();
             }
         }
 
@@ -105,7 +109,8 @@ namespace ResourceCollector
          
             if (rod.createpropertieswindow(rod.pack, tv) == System.Windows.Forms.DialogResult.OK)
             {
-                rod.pack.Attach(rod, tv);
+                rod.pack.Attach(rod);
+                FormMainPackExplorer.Instance.UpdateData();
             }
         }
 
@@ -114,7 +119,7 @@ namespace ResourceCollector
             if (packs.packs.Count > 0)
             {
 
-                FormObjectPicker fop = new FormObjectPicker(packs.packs[0], ElementType.WorldObjectDescription);
+                FormObjectPicker fop = new FormObjectPicker(packs.packs[0], ElementType.LevelObjectDescription);
                 if (fop.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
                     string str = fop.PickedContent[0];
@@ -135,7 +140,8 @@ namespace ResourceCollector
             rod.pack = packs.packs[0];
             if (rod.createpropertieswindow(rod.pack, tv) == System.Windows.Forms.DialogResult.OK)
             {
-                rod.pack.Attach(rod, tv);
+                rod.pack.Attach(rod);
+                FormMainPackExplorer.Instance.UpdateData();
             }
         }
 

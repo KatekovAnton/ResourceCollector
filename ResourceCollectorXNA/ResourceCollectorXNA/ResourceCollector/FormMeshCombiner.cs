@@ -58,8 +58,8 @@ namespace ResourceCollector
                 currentPlaceIndex += currentMesh.BufferIndex.Length;
             }
 
-            PackList.Instance.packs[0].Attach(_createdMesh, FormMainPackExplorer.Instance.treeView1);
-
+            PackList.Instance.packs[0].Attach(_createdMesh);
+            FormMainPackExplorer.Instance.UpdateData();
             Close();
         }
 

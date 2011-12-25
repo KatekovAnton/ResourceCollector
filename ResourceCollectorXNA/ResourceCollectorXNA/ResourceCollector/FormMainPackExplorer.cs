@@ -17,14 +17,48 @@ namespace ResourceCollector
         System.IO.BinaryReader br;
         TreeNode lastselectednode;
         public static FormMainPackExplorer Instance;
+        List<int> visibleformats;
+
         public FormMainPackExplorer()
         {
             Instance = this;
             InitializeComponent();
 
-            groupBox1.Height = Height - groupBox1.Location.Y - 90;
-
+            groupBox2.Height = Height - groupBox2.Location.Y - 90;
+            visibleformats = new List<int>();
+            CheckVisibleFormats();
             AppConfiguration.ReadProperties();
+        }
+
+        public void CheckVisibleFormats()
+        {
+            visibleformats.Clear();
+            visibleformats.Add(ElementType.MissingObject);
+            if (checkBox1.Checked)
+            {
+                visibleformats.Add(ElementType.MeshSkinnedOptimazedForStore);
+                visibleformats.Add(ElementType.MeshSkinnedOptimazedForLoading);
+            }
+            if (checkBox2.Checked)
+            {
+                visibleformats.Add(ElementType.PNGTexture);
+                visibleformats.Add(ElementType.TextureList);
+            }
+            if (checkBox3.Checked)
+                visibleformats.Add(ElementType.LevelObjectDescription);
+            if (checkBox4.Checked)
+                visibleformats.Add(ElementType.RenderObjectDescription);
+            if (checkBox5.Checked)
+                visibleformats.Add(ElementType.CollisionMesh);
+            if (checkBox6.Checked)
+            {
+                visibleformats.Add(ElementType.Skeleton);
+                visibleformats.Add(ElementType.SkeletonWithAddInfo);
+            }
+            if (checkBox7.Checked)
+                visibleformats.Add(ElementType.Material);
+            if (checkBox8.Checked)
+                visibleformats.Add(ElementType.LevelContent);
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
@@ -58,7 +92,7 @@ namespace ResourceCollector
                 int a = this.Width - groupBox1.Width - 30;
                 a = a > splitContainer1.Panel1MinSize ? a : splitContainer1.Panel1MinSize;
                 splitContainer1.SplitterDistance = a;
-                groupBox1.Height = Height - groupBox1.Location.Y - 90;
+               // groupBox1.Height = Height - groupBox1.Location.Y - 90;
 
             
         }
@@ -275,7 +309,8 @@ namespace ResourceCollector
                 fff.ShowDialog();
                 if (fff.skelet != null && fff.checkBox1.Checked)
                 {
-                    packs.packs[0].Attach(fff.skelet, treeView1);
+                    packs.packs[0].Attach(fff.skelet);
+                    FormMainPackExplorer.Instance.UpdateData();
                 }
             }
             else
@@ -329,11 +364,12 @@ namespace ResourceCollector
                     {
                         if (m.treeView1.Nodes[i].Checked)
                         {
-                            packs.packs[0].Attach(m.p.Objects[i], treeView1);
+                            packs.packs[0].Attach(m.p.Objects[i]);
                             if (m.p.Objects[i].forsavingformat == ElementType.MeshSkinnedOptimazedForStore)
                                 m.p.Objects[i].forsavingformat = ElementType.MeshSkinnedOptimazedForLoading;
                         }
                     }
+                    FormMainPackExplorer.Instance.UpdateData();
                 }
             }
         }
@@ -343,12 +379,15 @@ namespace ResourceCollector
             treeView1.Nodes.Clear();
             for (int i = 0; i < packs.packs.Count; i++)
             {
+                
                 TreeNode root = new TreeNode(packs.packs[i].filename);
                 root.ImageIndex = root.SelectedImageIndex = 2;
                 root.Text = packs.packs[i].filename;
                 
                 for (int j = 0; j < packs.packs[i].Objects.Count; j++)
                 {
+                    if(!(visibleformats.Contains(packs.packs[i].Objects[j].loadedformat) ||(visibleformats.Contains(packs.packs[i].Objects[j].forsavingformat))))
+                        continue;
                     PackContent pc = packs.packs[i].Objects[j];
                     var node = new TreeNode(pc.name);
                     node.Name = node.Text = pc.name;
@@ -356,6 +395,7 @@ namespace ResourceCollector
                     root.Nodes.Add(node);
                 }
                 treeView1.Nodes.Add(root);
+                root.Expand();
             }
         }
 
@@ -384,6 +424,52 @@ namespace ResourceCollector
         {
             FormXNAMonitor fxm = new FormXNAMonitor();
             fxm.ShowDialog();
+        }
+
+        private void FormatUpdate()
+        {
+            CheckVisibleFormats();
+            UpdateData();
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            FormatUpdate();
+        }
+
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            FormatUpdate();
+        }
+
+        private void checkBox3_CheckedChanged(object sender, EventArgs e)
+        {
+            FormatUpdate();
+        }
+
+        private void checkBox4_CheckedChanged(object sender, EventArgs e)
+        {
+            FormatUpdate();
+        }
+
+        private void checkBox5_CheckedChanged(object sender, EventArgs e)
+        {
+            FormatUpdate();
+        }
+
+        private void checkBox6_CheckedChanged(object sender, EventArgs e)
+        {
+            FormatUpdate();
+        }
+
+        private void checkBox7_CheckedChanged(object sender, EventArgs e)
+        {
+            FormatUpdate();
+        }
+
+        private void checkBox8_CheckedChanged(object sender, EventArgs e)
+        {
+            FormatUpdate();
         }
     }
 }

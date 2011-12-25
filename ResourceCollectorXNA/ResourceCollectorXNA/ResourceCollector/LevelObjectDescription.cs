@@ -63,7 +63,7 @@ namespace ResourceCollector.Content
             name = "NewWorldObject" + DateTime.Now.Millisecond.ToString() ;
           //  LODs = new List<Model>();
             this.ShapeType = 1;
-            this.loadedformat = this.forsavingformat = ElementType.WorldObjectDescription;
+            this.loadedformat = this.forsavingformat = ElementType.LevelObjectDescription;
         }
 
         public void setdata(LevelObjectDescription b)

@@ -53,8 +53,9 @@ namespace ResourceCollector
                 {
                     for (int i = 0; i < form.generatedimages.Length; i++)
                     {
-                        Pack.Attach(form.generatedimages[i], outputtreeview);
+                        Pack.Attach(form.generatedimages[i]);
                     }
+                    FormMainPackExplorer.Instance.UpdateData();
                 }
             }
             return  form.DialogResult;

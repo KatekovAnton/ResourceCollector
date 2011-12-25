@@ -1047,8 +1047,9 @@ namespace ResourceCollector
             {
                 for (int i = 0; i < mp.lods.Length; i++)
                 {
-                    p.Attach(mp.lods[i], outputtreeview);
+                    p.Attach(mp.lods[i]);
                 }
+                FormMainPackExplorer.Instance.UpdateData();
             }
             return DialogResult.OK;
 

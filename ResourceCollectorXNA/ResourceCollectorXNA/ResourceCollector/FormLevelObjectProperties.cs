@@ -304,9 +304,9 @@ namespace ResourceCollector.Content
 
             for (int i = 0; i < createdContent.Count; i++)
             {
-                thisobject.Pack.Attach(this.createdContent[i], outputtreeview);
+                thisobject.Pack.Attach(this.createdContent[i]);
             }
-
+            FormMainPackExplorer.Instance.UpdateData();
             DialogResult = System.Windows.Forms.DialogResult.OK;
             Close();
         }

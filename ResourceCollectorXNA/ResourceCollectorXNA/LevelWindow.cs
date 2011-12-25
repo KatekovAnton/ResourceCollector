@@ -155,7 +155,7 @@ namespace ResourceCollectorXNA
             {
                 level.levelContent.name = textBox1.Text + "\0";
                 level.levelContent.pack = PackList.Instance.packs[0];
-                PackList.Instance.packs[0].Attach(level.levelContent, FormMainPackExplorer.Instance.treeView1);
+                PackList.Instance.packs[0].Attach(level.levelContent);
             }
             else
                 textBox1.Text = level.levelContent.name.Substring(0,level.levelContent.name.Length-1);

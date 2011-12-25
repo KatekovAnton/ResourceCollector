@@ -101,7 +101,7 @@ namespace ResourceCollector
                                 Objects.Add(content);
                                 content.loadobjectheader(hi, br);
                             } break;
-                        case ElementType.WorldObjectDescription:
+                        case ElementType.LevelObjectDescription:
                             {
                                 var content = new LevelObjectDescription();
                                 content.Pack = this;
@@ -268,7 +268,7 @@ namespace ResourceCollector
                     return 10;
                 case ElementType.Material:
                     return 11;
-                case ElementType.WorldObjectDescription:
+                case ElementType.LevelObjectDescription:
                     return 13;
                 default: return 6;
             }
@@ -289,19 +289,19 @@ namespace ResourceCollector
             return true;
         }
 
-        public void Attach(PackContent obj, TreeView treeView)
+        public void Attach(PackContent obj)
         {
             Objects.Add(obj);
 
-            var node = new TreeNode(obj.name);
+        /*    var node = new TreeNode(obj.name);
             node.Name = node.Text = obj.name;
             node.ImageIndex = node.SelectedImageIndex = Pack.imgindex(obj.loadedformat);
 
-            treeView.Nodes[0].Nodes.Add(node);
+            treeView.Nodes[0].Nodes.Add(node);*/
             obj.number = Objects.Count - 1;
 
             obj.offset = 0;
-
+           // FormMainPackExplorer.Instance.UpdateData();
         }
 
         public PackContent getobject(string name)

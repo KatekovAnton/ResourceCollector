@@ -35,10 +35,11 @@ namespace ResourceCollector.Content
         {
             for (int i = 0; i < createdContent.Count; i++)
             {
-                thisobject.pack.Attach(this.createdContent[i], outputtreeview);
+                thisobject.pack.Attach(this.createdContent[i]);
             }
             if (textBox1.Text != "")
                 thisobject.name = textBox1.Text.TrimEnd('\0') + "\0";
+            FormMainPackExplorer.Instance.UpdateData();
             DialogResult = System.Windows.Forms.DialogResult.OK;
             this.Close();
         }
