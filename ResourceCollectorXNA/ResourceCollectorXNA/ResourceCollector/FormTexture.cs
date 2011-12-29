@@ -16,9 +16,19 @@ namespace ResourceCollector
         Button save;
         Bitmap bt;
         Timer t;
+        Button replace;
         public static System.Drawing.Font font = new System.Drawing.Font("Consolas", 10.0f);
-        public TexturePropertyWindow(Image image)
+
+        ImageContent _thisobject;
+        public TexturePropertyWindow(ImageContent __image)
         {
+            _thisobject = __image;
+            Bitmap image = null;
+            using (var stream = new System.IO.MemoryStream(_thisobject.data))
+            {
+                image = new Bitmap(stream);
+            }
+
             InitializeComponent();
 
             if (image != null)
@@ -34,13 +44,19 @@ namespace ResourceCollector
                 save.Location = new Point(10, 40);
                 save.Parent = this;
                 save.Text = "Save image";
+
+                replace = new Button();
+                replace.Location = new Point(100, 10);
+                replace.Parent = this;
+                replace.Text = "Replace image";
+                replace.Click += new EventHandler(replace_Click);
+
                 pictureBox.Parent = this;
                 b.Click += new EventHandler(b_Click);
                 save.Click += new EventHandler(save_Click);
 
-                
 
-                b.Click += new EventHandler(b_Click);
+             
 
                 pictureBox.Dock = DockStyle.Fill;
                 pictureBox.Resize += new EventHandler(pictureBox_Resize);
@@ -51,6 +67,41 @@ namespace ResourceCollector
                 t.Tick += new EventHandler(t_Tick);
                 t.Start();
             }
+        }
+
+        void replace_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                string filename = ofd.FileName;
+                Bitmap bt1 = null;
+                try
+                {
+                    bt1 = new Bitmap(filename);
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("error loading file!");
+                    return;
+                }
+                if(bt == null)
+                {
+                    MessageBox.Show("error loading file!");
+                    return;
+                }
+
+                _thisobject.SetImage(bt1);
+
+                using (var stream = new System.IO.MemoryStream(_thisobject.data))
+                {
+                    bt = new Bitmap(stream);
+                }
+
+                draw();
+
+            }
+
         }
 
         void save_Click(object sender, EventArgs e)

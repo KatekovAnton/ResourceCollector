@@ -17,17 +17,22 @@ namespace ResourceCollector
         public ImageContent(string _name, Image image)
         {
             this.loadedformat = this.forsavingformat = ElementType.PNGTexture;
-            using (var stream = new MemoryStream())
-            {
-                image.Save(stream, System.Drawing.Imaging.ImageFormat.Png);
-                data = stream.ToArray();
-            }
+            SetImage(image);
             name = _name;
             if (!name.EndsWith("\0"))
                 name += "\0";
-            calcbodysize();
-            calcheadersize();
+           // calcbodysize();
+           // calcheadersize();
 
+        }
+
+        public void SetImage(Image img)
+        {
+            using (var stream = new MemoryStream())
+            {
+                img.Save(stream, System.Drawing.Imaging.ImageFormat.Png);
+                data = stream.ToArray();
+            }
         }
 
         public ImageContent()
@@ -42,12 +47,8 @@ namespace ResourceCollector
 
         public override System.Windows.Forms.DialogResult createpropertieswindow(Pack p, System.Windows.Forms.TreeView outputtreeview)
         {
-            Bitmap bitmap;
-            using (var stream = new MemoryStream(data))
-            {
-                bitmap = new Bitmap(stream);
-            }
-            var window = new ResourceCollector.TexturePropertyWindow(bitmap);
+            
+            var window = new ResourceCollector.TexturePropertyWindow(this);
             window.ShowDialog();
             return System.Windows.Forms.DialogResult.OK;
         }

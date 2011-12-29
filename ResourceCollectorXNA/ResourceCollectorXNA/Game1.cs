@@ -162,11 +162,11 @@ namespace ResourceCollectorXNA
 
         protected override void Draw(GameTime gameTime)
         {
-            base.Draw(gameTime);
+           /* base.Draw(gameTime);
             GameEngine.Instance.Draw();
 
             drawstring();
-            GraphicsDevice.Present(null, null, renderWindow.PanelHandle);
+            GraphicsDevice.Present(null, null, renderWindow.PanelHandle);*/
         }
 
         public void drawstring()
