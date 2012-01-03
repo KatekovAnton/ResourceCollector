@@ -17,14 +17,23 @@ namespace ResourceCollector
         public void AddObjectsToPack(string filename, System.IO.BinaryReader br)
         {
             var loadedObjectCount = Objects.Count;
-            System.IO.FileStream str1 = new System.IO.FileStream(filename, System.IO.FileMode.Open);
-            br = new System.IO.BinaryReader(str1);
-            
+            try
+            {
+                System.IO.FileStream str1 = new System.IO.FileStream(filename, System.IO.FileMode.Open);
+                br = new System.IO.BinaryReader(str1);
+            }
+            catch (Exception EX)
+            {
+                br.Close();
+                MessageBox.Show(EX.ToString());
+                return;
+            }
             int foratID = br.ReadInt32();
             headersize += 4;
             if (foratID != formayid)
             {
                 MessageBox.Show("Not a pack!!");
+                br.Close();
                 return;
             }
             int objectcount = br.ReadInt32();
