@@ -67,12 +67,25 @@ namespace ResourceCollectorXNA.Engine.Render
                 }
                 else
                 {
-                    shadowRenderTarget = new RenderTarget2D(Device,
-                                                           shadowMapWidthHeight,
-                                                           shadowMapWidthHeight,
-                                                           false,
-                                                           SurfaceFormat.Color,
-                                                           DepthFormat.Depth16);
+                    if (GraphicsAdapter.DefaultAdapter.IsProfileSupported(GraphicsProfile.HiDef))
+                    {
+                        shadowRenderTarget = new RenderTarget2D(Device,
+                                                               shadowMapWidthHeight,
+                                                               shadowMapWidthHeight,
+                                                               false,
+                                                               SurfaceFormat.Color,
+                                                               DepthFormat.None, 0, RenderTargetUsage.DiscardContents);
+                    }
+                    else
+                    {
+                        //TODO to cofig
+                        shadowRenderTarget = new RenderTarget2D(Device,
+                                                                                     dev.PresentationParameters.BackBufferWidth,
+                                                                                      dev.PresentationParameters.BackBufferHeight,
+                                                                                     false,
+                                                                                     SurfaceFormat.Color,
+                                                                                     DepthFormat.None);
+                    }
                     SmoothShadows = false;
                 }
             }
