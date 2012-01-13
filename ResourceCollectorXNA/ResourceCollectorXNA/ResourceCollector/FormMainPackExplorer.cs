@@ -278,6 +278,7 @@ namespace ResourceCollector
         {
             ClearInterface();
             packs.AddEmptyPack(toolStripProgressBar1, toolStripProgressBar2, treeView1);
+            UpdateData();
         }
 
         private void addPackToolStripMenuItem_Click(object sender, EventArgs e)

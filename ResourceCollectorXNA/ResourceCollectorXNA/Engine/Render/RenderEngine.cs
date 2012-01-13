@@ -257,7 +257,7 @@ namespace ResourceCollectorXNA.Engine.Render
         private void RenderToShadowMap(Matrix lightViewProjection, Vector3 lightDir)
         {
             Device.SetRenderTarget(shadowRenderTarget);
-            Device.Clear(ClearOptions.DepthBuffer, Color.White, 300, 0);
+            Device.Clear(Color.White);
 
            
             Render.Materials.Material.ObjectRenderEffect.Parameters["LightDirection"].SetValue(lightDir);
