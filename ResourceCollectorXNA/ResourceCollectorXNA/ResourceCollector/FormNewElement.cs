@@ -145,5 +145,16 @@ namespace ResourceCollector
             }
         }
 
+        private void button11_Click(object sender, EventArgs e)
+        {
+            ParticleRenderObjectDescription prod = new ParticleRenderObjectDescription();
+            prod.pack = packs.packs[0];
+            if (prod.createpropertieswindow(prod.pack, tv) == System.Windows.Forms.DialogResult.OK)
+            {
+                prod.pack.Attach(prod);
+                FormMainPackExplorer.Instance.UpdateData();
+            }
+        }
+
     }
 }

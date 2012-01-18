@@ -59,6 +59,8 @@ namespace ResourceCollector
                 visibleformats.Add(ElementType.Material);
             if (checkBox8.Checked)
                 visibleformats.Add(ElementType.LevelContent);
+            if (checkBox9.Checked)
+                visibleformats.Add(ElementType.ParticelRenderObjectDescription);
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
@@ -469,6 +471,11 @@ namespace ResourceCollector
         }
 
         private void checkBox8_CheckedChanged(object sender, EventArgs e)
+        {
+            FormatUpdate();
+        }
+
+        private void checkBox9_CheckedChanged(object sender, EventArgs e)
         {
             FormatUpdate();
         }

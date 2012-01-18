@@ -28,7 +28,7 @@ namespace ResourceCollector
         public const int LevelObjectDescription = 12;
         public const int GameObjectDescription = 13;
         public const int RenderObjectDescription = 14;
-
+        public const int ParticelRenderObjectDescription = 15;
 
 
         public const int CollisionMesh = 20;
@@ -82,6 +82,8 @@ namespace ResourceCollector
                     return "Material";
                 case ElementType.LevelContent:
                     return "Level";
+                case ElementType.ParticelRenderObjectDescription:
+                    return "Particle Object Description";
                 default:
                     return "wrong format";
             }
@@ -125,6 +127,8 @@ namespace ResourceCollector
                     return ElementType.Material;
                 case "Level":
                     return ElementType.LevelContent;
+                case "Particle Object Description":
+                    return ElementType.ParticelRenderObjectDescription;
                 default:
                     return -1;
             }

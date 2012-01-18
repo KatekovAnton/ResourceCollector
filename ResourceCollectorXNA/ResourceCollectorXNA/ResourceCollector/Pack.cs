@@ -138,6 +138,13 @@ namespace ResourceCollector
                                 Objects.Add(content);
                                 content.loadobjectheader(hi, br);
                             } break;
+                        case ElementType.ParticelRenderObjectDescription:
+                            {
+                                var content = new ParticleRenderObjectDescription();
+                                content.pack = this;
+                                Objects.Add(content);
+                                content.loadobjectheader(hi, br);
+                            } break;
                         default:
                             {
                                 MissingObject msh = new MissingObject(i);

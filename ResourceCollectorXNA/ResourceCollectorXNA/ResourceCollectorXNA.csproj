@@ -343,6 +343,12 @@
     <Compile Include="ResourceCollector\FormObjectPicker.Designer.cs">
       <DependentUpon>FormObjectPicker.cs</DependentUpon>
     </Compile>
+    <Compile Include="ResourceCollector\FormParticleRenderObjectDescription.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ResourceCollector\FormParticleRenderObjectDescription.Designer.cs">
+      <DependentUpon>FormParticleRenderObjectDescription.cs</DependentUpon>
+    </Compile>
     <Compile Include="ResourceCollector\FormRenderObjectProperties.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -418,6 +424,7 @@
     <Compile Include="ResourceCollector\Pack.cs" />
     <Compile Include="ResourceCollector\PackContent.cs" />
     <Compile Include="ResourceCollector\PackList.cs" />
+    <Compile Include="ResourceCollector\ParticleRenderObjectDescription.cs" />
     <Compile Include="ResourceCollector\RenderObjectDescription.cs" />
     <Compile Include="ResourceCollector\Skeleton.cs" />
     <Compile Include="ResourceCollector\SkeletonWithAddInfo.cs" />
@@ -533,6 +540,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ResourceCollector\FormObjectPicker.resx">
       <DependentUpon>FormObjectPicker.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ResourceCollector\FormParticleRenderObjectDescription.resx">
+      <DependentUpon>FormParticleRenderObjectDescription.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ResourceCollector\FormRenderObjectProperties.resx">
       <DependentUpon>FormRenderObjectProperties.cs</DependentUpon>
