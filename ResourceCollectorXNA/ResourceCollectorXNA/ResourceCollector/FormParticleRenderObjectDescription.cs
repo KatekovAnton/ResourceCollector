@@ -38,7 +38,7 @@ namespace ResourceCollector
 
         private void button2_Click(object sender, EventArgs e)
         {
-            FormObjectPicker fo = new FormObjectPicker(_obj.pack, ElementType.PNGTexture);
+            FormObjectPicker fo = new FormObjectPicker(_obj.pack, ElementType.Material);
             if (fo.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 _obj.TextureName = fo.PickedContent[0];
