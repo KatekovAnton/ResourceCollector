@@ -23,6 +23,13 @@ namespace ResourceCollector
                 textBox1.Text = __ooo.name;
             textBox2.Text = __ooo.MeshName;
             textBox3.Text = __ooo.TextureName;
+
+
+
+            checkBox1.Checked = _obj.ShadowCaster;
+            checkBox2.Checked = _obj.ShadowReceiver;
+            checkBox3.Checked = _obj.Transparent;
+            checkBox4.Checked = _obj.SelfIlmn;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -45,6 +52,26 @@ namespace ResourceCollector
                 textBox3.Text = _obj.TextureName;
 
             }
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            _obj.ShadowCaster = checkBox1.Checked;
+        }
+
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            _obj.ShadowReceiver = checkBox2.Checked;
+        }
+
+        private void checkBox3_CheckedChanged(object sender, EventArgs e)
+        {
+            _obj.Transparent = checkBox3.Checked;
+        }
+
+        private void checkBox4_CheckedChanged(object sender, EventArgs e)
+        {
+            _obj.SelfIlmn = checkBox4.Checked;
         }
 
 

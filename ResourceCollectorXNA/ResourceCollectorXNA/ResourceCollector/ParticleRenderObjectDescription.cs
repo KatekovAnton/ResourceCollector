@@ -10,6 +10,11 @@ namespace ResourceCollector
         public string MeshName;
         public string TextureName;
 
+        public bool ShadowCaster;
+        public bool ShadowReceiver;
+        public bool Transparent;
+        public bool SelfIlmn;
+
         public Pack pack;
 
         public ParticleRenderObjectDescription()
@@ -34,6 +39,11 @@ namespace ResourceCollector
         {
             bw.WritePackString(MeshName);
             bw.WritePackString(TextureName);
+
+            bw.Write(ShadowCaster);
+            bw.Write(ShadowReceiver);
+            bw.Write(Transparent);
+            bw.Write(SelfIlmn);
         }
 
         public override void calcheadersize()
