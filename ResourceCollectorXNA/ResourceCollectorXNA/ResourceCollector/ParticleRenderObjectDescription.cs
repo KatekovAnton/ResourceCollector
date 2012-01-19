@@ -66,6 +66,12 @@ namespace ResourceCollector
             long pos = br.BaseStream.Position;
             MeshName = br.ReadPackString();
             TextureName = br.ReadPackString();
+
+            ShadowCaster = br.ReadBoolean();;
+            ShadowReceiver = br.ReadBoolean();
+           Transparent = br.ReadBoolean();
+            SelfIlmn = br.ReadBoolean();
+
             return Convert.ToInt32(br.BaseStream.Position - pos);
         }
 
