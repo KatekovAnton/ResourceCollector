@@ -124,6 +124,9 @@
     <Compile Include="ContactCallback.cs" />
     <Compile Include="Engine\Logic\BehaviourModel\ObjectBoneRelatedBehaviourModel.cs" />
     <Compile Include="Engine\Logic\BehaviourModel\ObjectRelatedBehaviourModel.cs" />
+    <Compile Include="ResourceCollector\Addition\AutocompleteCombobox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="ResourceCollector\Addition\DictionaryEditor.cs">
       <SubType>Form</SubType>
     </Compile>

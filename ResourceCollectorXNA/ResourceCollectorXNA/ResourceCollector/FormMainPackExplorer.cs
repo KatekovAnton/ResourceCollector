@@ -387,6 +387,7 @@ namespace ResourceCollector
         public void UpdateData()
         {
             treeView1.Nodes.Clear();
+            autoCompleteComboBox1.Items.Clear();
             for (int i = 0; i < packs.packs.Count; i++)
             {
                 
@@ -403,6 +404,7 @@ namespace ResourceCollector
                     node.Name = node.Text = pc.name;
                     node.ImageIndex = node.SelectedImageIndex = Pack.imgindex(pc.loadedformat);
                     root.Nodes.Add(node);
+                    autoCompleteComboBox1.Items.Add(pc.name);
                 }
                 treeView1.Nodes.Add(root);
                 root.Expand();
