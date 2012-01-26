@@ -516,12 +516,5 @@ namespace ResourceCollector
         {
            
         }
-
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            timer1.Enabled = false;
-            openToolStripMenuItem_Click(null, null);
-            
-        }
     }
 }
