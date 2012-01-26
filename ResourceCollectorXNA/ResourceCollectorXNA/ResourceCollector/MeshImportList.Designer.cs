@@ -57,9 +57,9 @@
             this.treeView1.HotTracking = true;
             this.treeView1.Location = new System.Drawing.Point(0, 0);
             this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(680, 523);
+            this.treeView1.Size = new System.Drawing.Size(462, 523);
             this.treeView1.TabIndex = 0;
-            this.treeView1.NodeMouseHover += new System.Windows.Forms.TreeNodeMouseHoverEventHandler(this.treeView1_NodeMouseHover);
+            this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
             this.treeView1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.treeView1_MouseMove);
             // 
             // button1
@@ -89,7 +89,7 @@
             this.toolStripProgressBar2});
             this.toolStrip1.Location = new System.Drawing.Point(0, 684);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(680, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(462, 25);
             this.toolStrip1.TabIndex = 3;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -137,7 +137,7 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
-            this.splitContainer1.Size = new System.Drawing.Size(680, 684);
+            this.splitContainer1.Size = new System.Drawing.Size(462, 684);
             this.splitContainer1.SplitterDistance = 523;
             this.splitContainer1.TabIndex = 6;
             // 
@@ -159,8 +159,8 @@
             this.splitContainer2.Panel2.Controls.Add(this.button2);
             this.splitContainer2.Panel2.Controls.Add(this.button1);
             this.splitContainer2.Panel2.Controls.Add(this.button4);
-            this.splitContainer2.Size = new System.Drawing.Size(680, 157);
-            this.splitContainer2.SplitterDistance = 469;
+            this.splitContainer2.Size = new System.Drawing.Size(462, 157);
+            this.splitContainer2.SplitterDistance = 251;
             this.splitContainer2.TabIndex = 6;
             // 
             // richTextBox1
@@ -168,7 +168,7 @@
             this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.richTextBox1.Location = new System.Drawing.Point(0, 0);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(469, 157);
+            this.richTextBox1.Size = new System.Drawing.Size(251, 157);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "";
             // 
@@ -176,7 +176,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(680, 709);
+            this.ClientSize = new System.Drawing.Size(462, 709);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.toolStrip1);
             this.MaximizeBox = false;

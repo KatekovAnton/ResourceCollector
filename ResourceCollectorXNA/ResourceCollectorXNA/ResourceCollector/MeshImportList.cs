@@ -72,11 +72,7 @@ namespace ResourceCollector.Content
             ResourceCollectorXNA.ConsoleWindow.SetOUT(null);
         }
 
-        private void treeView1_NodeMouseHover(object sender, TreeNodeMouseHoverEventArgs e)
-        {
-            if (md) e.Node.Checked = true;
-            if (mr) e.Node.Checked = false;
-        }
+       
         bool md;
         bool mr;
 
@@ -85,6 +81,12 @@ namespace ResourceCollector.Content
             md = e.Button == System.Windows.Forms.MouseButtons.Left;
             mr = e.Button == System.Windows.Forms.MouseButtons.Right;
             richTextBox1.Text = md.ToString();
+        }
+
+        private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            if (md) e.Node.Checked = true;
+            if (mr) e.Node.Checked = false;
         }
     }
 }
