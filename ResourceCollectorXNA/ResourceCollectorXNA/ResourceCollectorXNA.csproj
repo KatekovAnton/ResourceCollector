@@ -472,6 +472,9 @@
     <Content Include="Microsoft.Dynamic.dll" />
     <Content Include="Microsoft.Scripting.dll" />
     <Content Include="Microsoft.Scripting.Metadata.dll" />
+    <None Include="Scripts\create_scene.py">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Scripts\_onload.py">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

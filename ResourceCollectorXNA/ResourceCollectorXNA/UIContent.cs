@@ -23,6 +23,7 @@ namespace ResourceCollectorXNA
         public AutoLoadingContent(string Path)
             : base()
         {
+            
             path = "";
             if (!Path.Contains(":")) path = ResourceCollector.AppConfiguration.AppPath+"\\";
             if (Path.LastIndexOf("\\")>0) path += Path.Substring(0, Path.LastIndexOf("\\")+1);

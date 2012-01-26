@@ -2,6 +2,7 @@ import clr
 import sys
 clr.AddReference("ResourceCollectorXNA")
 from ResourceCollectorXNA import *
+from ResourceCollector import *
 from System import *
 from System.Math import *
 

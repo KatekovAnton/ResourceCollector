@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Text.RegularExpressions;
 
 namespace ResourceCollector
 {
@@ -74,34 +75,13 @@ namespace ResourceCollector
                 if (path.Length > 2)
                     ofd.InitialDirectory = path;
                 if (ofd.ShowDialog() == DialogResult.OK)
-                {
-                    ResourceCollectorXNA.Engine.GameEngine.Instance.CreateNewLevel();
-                    ResourceCollectorXNA.Engine.GameEngine.Instance.UpdateLevelPart();
-                    treeView1.Nodes.Clear();
-                    ClearInterface();
-                    packs.packs = new List<Pack>();
-                    packs.AddPack(ofd.FileName, br);
-                    AppConfiguration.PackPlaceFolder = System.IO.Path.GetDirectoryName(ofd.FileName);
-                }
-                if (!packs.SuccessLast)
-                    ClearInterface();
+                  add_pack(ofd.FileName);
                 ofd.Dispose();
                 UpdateData();
             }
             else
             {
-                string FileName = @"D:\projects\ULJANIK493DEMO\PhysX test2\PhysX test2\Data\Ship.pack";
-                if (MessageBox.Show("Load last pack?\n\n" + FileName, "", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
-                {
-                    ResourceCollectorXNA.Engine.GameEngine.Instance.CreateNewLevel();
-                    ResourceCollectorXNA.Engine.GameEngine.Instance.UpdateLevelPart();
-                    treeView1.Nodes.Clear();
-                    ClearInterface();
-                    packs.packs = new List<Pack>();
-                    packs.AddPack(FileName, br);
-                    AppConfiguration.PackPlaceFolder = System.IO.Path.GetDirectoryName(FileName);
-                    UpdateData();
-                }
+               
             }
 
         }
@@ -417,6 +397,8 @@ namespace ResourceCollector
                 {
                     if(!(visibleformats.Contains(packs.packs[i].Objects[j].loadedformat) ||(visibleformats.Contains(packs.packs[i].Objects[j].forsavingformat))))
                         continue;
+                    string name = packs.packs[i].Objects[j].name;
+
                     PackContent pc = packs.packs[i].Objects[j];
                     var node = new TreeNode(pc.name);
                     node.Name = node.Text = pc.name;
@@ -516,12 +498,49 @@ namespace ResourceCollector
         {
            ResourceCollectorXNA.SE.Instance.ExScript("_onload");
            Eggs.Filter(ResourceCollectorXNA.SE.Instance, Addscr, "^_[a-z]", true);
+
+           List<string> resc = new List<string>();
+
+            //добавь свои паки и радуйся жизни!!! ))) или грузи из конфига...
+           resc.Add( @"D:\projects\ULJANIK493DEMO\PhysX test2\PhysX test2\Data\Ship.pack");
+
+           foreach (string s in resc)
+           rescentToolStripMenuItem.DropDownItems.Add(s, null , new EventHandler(rescent_click));
+           
+
+        }
+
+        private void rescent_click(object sender, EventArgs e)
+        {
+            add_pack(((ToolStripItem)sender).Text);
+        }
+
+        void add_pack(string FileName)
+        {
+                ResourceCollectorXNA.Engine.GameEngine.Instance.CreateNewLevel();
+                ResourceCollectorXNA.Engine.GameEngine.Instance.UpdateLevelPart();
+                treeView1.Nodes.Clear();
+                ClearInterface();
+                packs.packs = new List<Pack>();
+                packs.AddPack(FileName, br);
+                AppConfiguration.PackPlaceFolder = System.IO.Path.GetDirectoryName(FileName);
+                if (!packs.SuccessLast) ClearInterface();
+                UpdateData();
         }
 
 
         void Addscr(dynamic scs)
         {
             scriptsComboBox.Items.Add(scs);
+        }
+
+        private void rUNToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ResourceCollectorXNA.SE.Instance.ExScript(scriptsComboBox.SelectedItem.ToString());
+            }
+            catch { }
         }
     }
 }
