@@ -40,6 +40,7 @@
             this.newPackToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rescentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripDropDownButton4 = new System.Windows.Forms.ToolStripDropDownButton();
             this.animationToolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importPackToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -51,6 +52,10 @@
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripDropDownButton2 = new System.Windows.Forms.ToolStripDropDownButton();
             this.aboutProgrammToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.scripts_toolmenu = new System.Windows.Forms.ToolStripDropDownButton();
+            this.formToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rUNToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripTextBox1 = new System.Windows.Forms.ToolStripTextBox();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
@@ -82,12 +87,13 @@
             this.label15 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.scripts_toolmenu = new System.Windows.Forms.ToolStripDropDownButton();
-            this.rUNToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.rescentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.formToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
             this.autoCompleteComboBox1 = new ResourceCollector.AutoCompleteComboBox();
-            this.toolStripTextBox1 = new System.Windows.Forms.ToolStripTextBox();
+            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -97,6 +103,7 @@
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -142,7 +149,8 @@
             this.toolStripButton1,
             this.toolStripDropDownButton3,
             this.toolStripDropDownButton2,
-            this.scripts_toolmenu});
+            this.scripts_toolmenu,
+            this.toolStripButton2});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(871, 25);
@@ -184,6 +192,12 @@
             this.saveToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.saveToolStripMenuItem.Text = "Save full";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
+            // 
+            // rescentToolStripMenuItem
+            // 
+            this.rescentToolStripMenuItem.Name = "rescentToolStripMenuItem";
+            this.rescentToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.rescentToolStripMenuItem.Text = "Rescent";
             // 
             // toolStripDropDownButton4
             // 
@@ -281,6 +295,40 @@
             this.aboutProgrammToolStripMenuItem.Text = "About programm";
             this.aboutProgrammToolStripMenuItem.Click += new System.EventHandler(this.aboutProgrammToolStripMenuItem_Click);
             // 
+            // scripts_toolmenu
+            // 
+            this.scripts_toolmenu.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.scripts_toolmenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.formToolStripMenuItem,
+            this.rUNToolStripMenuItem});
+            this.scripts_toolmenu.Image = ((System.Drawing.Image)(resources.GetObject("scripts_toolmenu.Image")));
+            this.scripts_toolmenu.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.scripts_toolmenu.Name = "scripts_toolmenu";
+            this.scripts_toolmenu.Size = new System.Drawing.Size(55, 22);
+            this.scripts_toolmenu.Text = "Scripts";
+            this.scripts_toolmenu.ToolTipText = "scripts";
+            // 
+            // formToolStripMenuItem
+            // 
+            this.formToolStripMenuItem.Name = "formToolStripMenuItem";
+            this.formToolStripMenuItem.Size = new System.Drawing.Size(104, 22);
+            this.formToolStripMenuItem.Text = "All";
+            this.formToolStripMenuItem.Click += new System.EventHandler(this.formToolStripMenuItem_Click);
+            // 
+            // rUNToolStripMenuItem
+            // 
+            this.rUNToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripTextBox1});
+            this.rUNToolStripMenuItem.Name = "rUNToolStripMenuItem";
+            this.rUNToolStripMenuItem.Size = new System.Drawing.Size(104, 22);
+            this.rUNToolStripMenuItem.Text = "Other";
+            // 
+            // toolStripTextBox1
+            // 
+            this.toolStripTextBox1.Name = "toolStripTextBox1";
+            this.toolStripTextBox1.Size = new System.Drawing.Size(100, 23);
+            this.toolStripTextBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.toolStripTextBox1_KeyUp);
+            // 
             // imageList1
             // 
             this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
@@ -304,6 +352,7 @@
             // treeView1
             // 
             this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.treeView1.HideSelection = false;
             this.treeView1.HotTracking = true;
             this.treeView1.ImageIndex = 2;
             this.treeView1.ImageList = this.imageList1;
@@ -332,23 +381,31 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.groupBox2);
             this.splitContainer1.Panel2.Controls.Add(this.groupBox1);
+            this.splitContainer1.Panel2.Padding = new System.Windows.Forms.Padding(7);
             this.splitContainer1.Size = new System.Drawing.Size(871, 690);
             this.splitContainer1.SplitterDistance = 645;
             this.splitContainer1.TabIndex = 3;
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.autoCompleteComboBox1);
+            this.groupBox2.AutoSize = true;
+            this.groupBox2.Controls.Add(this.groupBox4);
             this.groupBox2.Controls.Add(this.groupBox3);
-            this.groupBox2.Location = new System.Drawing.Point(3, 249);
+            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox2.Location = new System.Drawing.Point(7, 247);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(7);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(206, 340);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(10);
+            this.groupBox2.Size = new System.Drawing.Size(208, 401);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Options";
             // 
             // groupBox3
             // 
+            this.groupBox3.AutoSize = true;
+            this.groupBox3.Controls.Add(this.textBox2);
+            this.groupBox3.Controls.Add(this.label7);
             this.groupBox3.Controls.Add(this.checkBox9);
             this.groupBox3.Controls.Add(this.checkBox8);
             this.groupBox3.Controls.Add(this.checkBox7);
@@ -358,9 +415,12 @@
             this.groupBox3.Controls.Add(this.checkBox3);
             this.groupBox3.Controls.Add(this.checkBox2);
             this.groupBox3.Controls.Add(this.checkBox1);
-            this.groupBox3.Location = new System.Drawing.Point(9, 19);
+            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox3.Location = new System.Drawing.Point(10, 23);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(10);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(191, 226);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(7);
+            this.groupBox3.Size = new System.Drawing.Size(188, 277);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Show objects";
@@ -370,9 +430,11 @@
             this.checkBox9.AutoSize = true;
             this.checkBox9.Checked = true;
             this.checkBox9.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox9.Location = new System.Drawing.Point(6, 202);
+            this.checkBox9.Dock = System.Windows.Forms.DockStyle.Top;
+            this.checkBox9.Location = new System.Drawing.Point(7, 204);
             this.checkBox9.Name = "checkBox9";
-            this.checkBox9.Size = new System.Drawing.Size(78, 17);
+            this.checkBox9.Padding = new System.Windows.Forms.Padding(3);
+            this.checkBox9.Size = new System.Drawing.Size(174, 23);
             this.checkBox9.TabIndex = 8;
             this.checkBox9.Text = "Particle ros";
             this.checkBox9.UseVisualStyleBackColor = true;
@@ -383,9 +445,11 @@
             this.checkBox8.AutoSize = true;
             this.checkBox8.Checked = true;
             this.checkBox8.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox8.Location = new System.Drawing.Point(6, 180);
+            this.checkBox8.Dock = System.Windows.Forms.DockStyle.Top;
+            this.checkBox8.Location = new System.Drawing.Point(7, 181);
             this.checkBox8.Name = "checkBox8";
-            this.checkBox8.Size = new System.Drawing.Size(57, 17);
+            this.checkBox8.Padding = new System.Windows.Forms.Padding(3);
+            this.checkBox8.Size = new System.Drawing.Size(174, 23);
             this.checkBox8.TabIndex = 7;
             this.checkBox8.Text = "Levels";
             this.checkBox8.UseVisualStyleBackColor = true;
@@ -396,9 +460,11 @@
             this.checkBox7.AutoSize = true;
             this.checkBox7.Checked = true;
             this.checkBox7.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox7.Location = new System.Drawing.Point(6, 157);
+            this.checkBox7.Dock = System.Windows.Forms.DockStyle.Top;
+            this.checkBox7.Location = new System.Drawing.Point(7, 158);
             this.checkBox7.Name = "checkBox7";
-            this.checkBox7.Size = new System.Drawing.Size(68, 17);
+            this.checkBox7.Padding = new System.Windows.Forms.Padding(3);
+            this.checkBox7.Size = new System.Drawing.Size(174, 23);
             this.checkBox7.TabIndex = 6;
             this.checkBox7.Text = "Materials";
             this.checkBox7.UseVisualStyleBackColor = true;
@@ -409,9 +475,11 @@
             this.checkBox6.AutoSize = true;
             this.checkBox6.Checked = true;
             this.checkBox6.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox6.Location = new System.Drawing.Point(6, 134);
+            this.checkBox6.Dock = System.Windows.Forms.DockStyle.Top;
+            this.checkBox6.Location = new System.Drawing.Point(7, 135);
             this.checkBox6.Name = "checkBox6";
-            this.checkBox6.Size = new System.Drawing.Size(77, 17);
+            this.checkBox6.Padding = new System.Windows.Forms.Padding(3);
+            this.checkBox6.Size = new System.Drawing.Size(174, 23);
             this.checkBox6.TabIndex = 5;
             this.checkBox6.Text = "Characters";
             this.checkBox6.UseVisualStyleBackColor = true;
@@ -422,9 +490,11 @@
             this.checkBox5.AutoSize = true;
             this.checkBox5.Checked = true;
             this.checkBox5.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox5.Location = new System.Drawing.Point(6, 111);
+            this.checkBox5.Dock = System.Windows.Forms.DockStyle.Top;
+            this.checkBox5.Location = new System.Drawing.Point(7, 112);
             this.checkBox5.Name = "checkBox5";
-            this.checkBox5.Size = new System.Drawing.Size(101, 17);
+            this.checkBox5.Padding = new System.Windows.Forms.Padding(3);
+            this.checkBox5.Size = new System.Drawing.Size(174, 23);
             this.checkBox5.TabIndex = 4;
             this.checkBox5.Text = "Collison meshes";
             this.checkBox5.UseVisualStyleBackColor = true;
@@ -435,9 +505,11 @@
             this.checkBox4.AutoSize = true;
             this.checkBox4.Checked = true;
             this.checkBox4.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox4.Location = new System.Drawing.Point(6, 88);
+            this.checkBox4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.checkBox4.Location = new System.Drawing.Point(7, 89);
             this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(98, 17);
+            this.checkBox4.Padding = new System.Windows.Forms.Padding(3);
+            this.checkBox4.Size = new System.Drawing.Size(174, 23);
             this.checkBox4.TabIndex = 3;
             this.checkBox4.Text = "Render objects";
             this.checkBox4.UseVisualStyleBackColor = true;
@@ -448,9 +520,11 @@
             this.checkBox3.AutoSize = true;
             this.checkBox3.Checked = true;
             this.checkBox3.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox3.Location = new System.Drawing.Point(6, 65);
+            this.checkBox3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.checkBox3.Location = new System.Drawing.Point(7, 66);
             this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(89, 17);
+            this.checkBox3.Padding = new System.Windows.Forms.Padding(3);
+            this.checkBox3.Size = new System.Drawing.Size(174, 23);
             this.checkBox3.TabIndex = 2;
             this.checkBox3.Text = "Level objects";
             this.checkBox3.UseVisualStyleBackColor = true;
@@ -461,9 +535,11 @@
             this.checkBox2.AutoSize = true;
             this.checkBox2.Checked = true;
             this.checkBox2.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox2.Location = new System.Drawing.Point(6, 42);
+            this.checkBox2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.checkBox2.Location = new System.Drawing.Point(7, 43);
             this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(67, 17);
+            this.checkBox2.Padding = new System.Windows.Forms.Padding(3);
+            this.checkBox2.Size = new System.Drawing.Size(174, 23);
             this.checkBox2.TabIndex = 1;
             this.checkBox2.Text = "Textures";
             this.checkBox2.UseVisualStyleBackColor = true;
@@ -474,9 +550,11 @@
             this.checkBox1.AutoSize = true;
             this.checkBox1.Checked = true;
             this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox1.Location = new System.Drawing.Point(6, 19);
+            this.checkBox1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.checkBox1.Location = new System.Drawing.Point(7, 20);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(63, 17);
+            this.checkBox1.Padding = new System.Windows.Forms.Padding(3);
+            this.checkBox1.Size = new System.Drawing.Size(174, 23);
             this.checkBox1.TabIndex = 0;
             this.checkBox1.Text = "Meshes";
             this.checkBox1.UseVisualStyleBackColor = true;
@@ -500,9 +578,10 @@
             this.groupBox1.Controls.Add(this.label15);
             this.groupBox1.Controls.Add(this.label11);
             this.groupBox1.Controls.Add(this.label8);
-            this.groupBox1.Location = new System.Drawing.Point(3, 3);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox1.Location = new System.Drawing.Point(7, 7);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(206, 240);
+            this.groupBox1.Size = new System.Drawing.Size(208, 240);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Information";
@@ -655,54 +734,84 @@
             this.label8.TabIndex = 19;
             this.label8.Text = "Index:";
             // 
-            // scripts_toolmenu
+            // textBox2
             // 
-            this.scripts_toolmenu.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.scripts_toolmenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.formToolStripMenuItem,
-            this.rUNToolStripMenuItem});
-            this.scripts_toolmenu.Image = ((System.Drawing.Image)(resources.GetObject("scripts_toolmenu.Image")));
-            this.scripts_toolmenu.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.scripts_toolmenu.Name = "scripts_toolmenu";
-            this.scripts_toolmenu.Size = new System.Drawing.Size(55, 22);
-            this.scripts_toolmenu.Text = "Scripts";
-            this.scripts_toolmenu.ToolTipText = "scripts";
+            this.textBox2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.textBox2.Location = new System.Drawing.Point(7, 250);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(174, 20);
+            this.textBox2.TabIndex = 4;
+            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+            this.textBox2.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textBox2_KeyUp);
             // 
-            // rUNToolStripMenuItem
+            // label7
             // 
-            this.rUNToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripTextBox1});
-            this.rUNToolStripMenuItem.Name = "rUNToolStripMenuItem";
-            this.rUNToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.rUNToolStripMenuItem.Text = "Other";
+            this.label7.AutoSize = true;
+            this.label7.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label7.Location = new System.Drawing.Point(7, 227);
+            this.label7.Name = "label7";
+            this.label7.Padding = new System.Windows.Forms.Padding(5);
+            this.label7.Size = new System.Drawing.Size(66, 23);
+            this.label7.TabIndex = 43;
+            this.label7.Text = "By Regex:";
             // 
-            // rescentToolStripMenuItem
+            // groupBox4
             // 
-            this.rescentToolStripMenuItem.Name = "rescentToolStripMenuItem";
-            this.rescentToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
-            this.rescentToolStripMenuItem.Text = "Rescent";
+            this.groupBox4.AutoSize = true;
+            this.groupBox4.Controls.Add(this.textBox4);
+            this.groupBox4.Controls.Add(this.label13);
+            this.groupBox4.Controls.Add(this.autoCompleteComboBox1);
+            this.groupBox4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox4.Location = new System.Drawing.Point(10, 300);
+            this.groupBox4.Margin = new System.Windows.Forms.Padding(10);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Padding = new System.Windows.Forms.Padding(7);
+            this.groupBox4.Size = new System.Drawing.Size(188, 91);
+            this.groupBox4.TabIndex = 44;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Select objects";
             // 
-            // formToolStripMenuItem
+            // textBox4
             // 
-            this.formToolStripMenuItem.Name = "formToolStripMenuItem";
-            this.formToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.formToolStripMenuItem.Text = "All";
-            this.formToolStripMenuItem.Click += new System.EventHandler(this.formToolStripMenuItem_Click);
+            this.textBox4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.textBox4.Location = new System.Drawing.Point(7, 64);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(174, 20);
+            this.textBox4.TabIndex = 4;
+            this.textBox4.TextChanged += new System.EventHandler(this.textBox4_TextChanged);
+            this.textBox4.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textBox4_KeyUp);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label13.Location = new System.Drawing.Point(7, 41);
+            this.label13.Name = "label13";
+            this.label13.Padding = new System.Windows.Forms.Padding(5);
+            this.label13.Size = new System.Drawing.Size(66, 23);
+            this.label13.TabIndex = 43;
+            this.label13.Text = "By Regex:";
             // 
             // autoCompleteComboBox1
             // 
+            this.autoCompleteComboBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.autoCompleteComboBox1.FormattingEnabled = true;
             this.autoCompleteComboBox1.LimitToList = true;
-            this.autoCompleteComboBox1.Location = new System.Drawing.Point(9, 251);
+            this.autoCompleteComboBox1.Location = new System.Drawing.Point(7, 20);
             this.autoCompleteComboBox1.Name = "autoCompleteComboBox1";
-            this.autoCompleteComboBox1.Size = new System.Drawing.Size(191, 21);
+            this.autoCompleteComboBox1.Size = new System.Drawing.Size(174, 21);
             this.autoCompleteComboBox1.TabIndex = 3;
+            this.autoCompleteComboBox1.SelectedIndexChanged += new System.EventHandler(this.autoCompleteComboBox1_SelectedIndexChanged);
             // 
-            // toolStripTextBox1
+            // toolStripButton2
             // 
-            this.toolStripTextBox1.Name = "toolStripTextBox1";
-            this.toolStripTextBox1.Size = new System.Drawing.Size(100, 23);
-            this.toolStripTextBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.toolStripTextBox1_KeyUp);
+            this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
+            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton2.Name = "toolStripButton2";
+            this.toolStripButton2.Size = new System.Drawing.Size(34, 22);
+            this.toolStripButton2.Text = "FAQ";
+            this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click);
             // 
             // FormMainPackExplorer
             // 
@@ -725,13 +834,17 @@
             this.toolStrip1.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
+            this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -797,6 +910,12 @@
         private System.Windows.Forms.ToolStripMenuItem rescentToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem formToolStripMenuItem;
         private System.Windows.Forms.ToolStripTextBox toolStripTextBox1;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.ToolStripButton toolStripButton2;
     }
 }
 

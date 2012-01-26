@@ -7,8 +7,20 @@ using System.Diagnostics;
 namespace ResourceCollectorXNA
 {
 #if WINDOWS || XBOX
-    static class Program
-    {[STAThread]
+   public  static class Program
+   {
+       public static string help
+       {
+           get
+           {
+               return "Please insert HELP here";
+           }
+       }
+
+        public static MyGame game;
+    
+       
+       [STAThread]
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -26,10 +38,8 @@ namespace ResourceCollectorXNA
                 }
             }
             catch { }
-            using (MyGame game = new MyGame())
-            {
-                game.Run();
-            }
+            game = new MyGame();
+            game.Run();
         }
     }
 #endif

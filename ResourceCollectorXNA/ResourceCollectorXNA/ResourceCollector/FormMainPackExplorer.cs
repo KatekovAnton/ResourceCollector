@@ -398,13 +398,15 @@ namespace ResourceCollector
                     if(!(visibleformats.Contains(packs.packs[i].Objects[j].loadedformat) ||(visibleformats.Contains(packs.packs[i].Objects[j].forsavingformat))))
                         continue;
                     string name = packs.packs[i].Objects[j].name;
-
-                    PackContent pc = packs.packs[i].Objects[j];
-                    var node = new TreeNode(pc.name);
-                    node.Name = node.Text = pc.name;
-                    node.ImageIndex = node.SelectedImageIndex = Pack.imgindex(pc.loadedformat);
-                    root.Nodes.Add(node);
-                    autoCompleteComboBox1.Items.Add(pc.name);
+                    if (Regex.Match(name, regex).Success)
+                    {
+                        PackContent pc = packs.packs[i].Objects[j];
+                        var node = new TreeNode(pc.name);
+                        node.Name = node.Text = pc.name;
+                        node.ImageIndex = node.SelectedImageIndex = Pack.imgindex(pc.loadedformat);
+                        root.Nodes.Add(node);
+                        autoCompleteComboBox1.Items.Add(pc.name);
+                    }
                 }
                 treeView1.Nodes.Add(root);
                 root.Expand();
@@ -544,6 +546,61 @@ namespace ResourceCollector
         {
             FormScripts fs = new FormScripts(Eggs.Filter(ResourceCollectorXNA.SE.Instance, str, invert));
             fs.ShowDialog();
+        }
+
+        string regex = "";
+        private void textBox2_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                regex = textBox2.Text;
+                FormatUpdate();
+            }
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void autoCompleteComboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                treeView1.SelectedNode = treeView1.Nodes[0].Nodes[autoCompleteComboBox1.Text];
+            }
+            catch { }
+        }
+        Regex selreg;
+        private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+            selreg = new Regex(textBox4.Text);
+        }
+
+        private void textBox4_KeyUp(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                if (e.KeyData == Keys.Enter)
+                {
+                    if (selreg != null)
+                    {
+                        bool succ = false;
+
+                        for (int i = treeView1.SelectedNode == null ? 0 : treeView1.SelectedNode.Index + 1; i < treeView1.Nodes[0].Nodes.Count; i++)
+                            if (selreg.Match(treeView1.Nodes[0].Nodes[i].Name).Success) { treeView1.SelectedNode = treeView1.Nodes[0].Nodes[i]; succ = true; break; }
+                        if (!succ) treeView1.SelectedNode = treeView1.Nodes[0].Nodes[0];
+                    }
+                }
+            }
+            catch { }
+        }
+
+        
+
+        private void toolStripButton2_Click(object sender, EventArgs e)
+        {
+            ResourceCollectorXNA.ConsoleWindow.TraceMessage(ResourceCollectorXNA.Program.help);
         }
     }
 }
