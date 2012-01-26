@@ -24,7 +24,7 @@ namespace ResourceCollectorXNA
             : base()
         {
             path = "";
-            if (!Path.Contains(":")) path = ResourceCollector.AppConfiguration.AppPath + "\\";
+            if (!Path.Contains(":")) path = ResourceCollector.AppConfiguration.AppPath+"\\";
             if (Path.LastIndexOf("\\")>0) path += Path.Substring(0, Path.LastIndexOf("\\")+1);
 
             if (!Directory.Exists(path)) Directory.CreateDirectory(path);

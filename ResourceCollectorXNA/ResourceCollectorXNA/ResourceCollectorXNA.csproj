@@ -471,6 +471,9 @@
     <Content Include="Microsoft.Dynamic.dll" />
     <Content Include="Microsoft.Scripting.dll" />
     <Content Include="Microsoft.Scripting.Metadata.dll" />
+    <None Include="Scripts\on_load.py">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ResourceCollectorXNAContent\ResourceCollectorXNAContent.contentproj">

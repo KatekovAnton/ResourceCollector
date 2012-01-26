@@ -75,10 +75,7 @@ namespace ResourceCollectorXNA
                     LastException = ee;
                    ConsoleWindow.TraceMessage(ee.Message);
                 }
-               /* try { return scriptscope.GetVariable<string>("result"); }       catch { }
-                try { return scriptscope.GetVariable<object>("result"); }       catch { }*/
             }
-           // return "";
         }
 
         public virtual void ExScript(string script_name)
@@ -87,7 +84,6 @@ namespace ResourceCollectorXNA
                Execute(scripts[script_name].data);
                if (LastException!=null)
                  ConsoleWindow.TraceMessage("Executing Script " + script_name + " : " + LastException.Message);
-            //return scripts[script_name].Execute();
         }
 
         public virtual void FillByVariables(string name_pattern)
@@ -102,6 +98,20 @@ namespace ResourceCollectorXNA
         }
 
 
+        public virtual void FillByFileNames(string name_pattern)
+        {
+            Regex regex = new Regex(name_pattern);
+           // Dictionary<string, dynamic> vars = Variables;
+            string[] files = Directory.GetFiles(scripts.path, "*.py");
+            foreach (string name in files)
+            {
+                if (regex.IsMatch(name))
+                {
+                    Add(name, scripts.GetDirectly(name));
+                }
+            }
+        }
+
     }
 
     public class SE : MyPythonEngine
@@ -111,13 +121,14 @@ namespace ResourceCollectorXNA
         public static SE Instance {
             get {
                 if (_instance == null)
-                    _instance = new SE("Scripts");
+                {
+                    _instance = new SE("Scripts\\");
+                    _instance.FillByFileNames("");
+                }
             return _instance;
             }
         }
     }
-
-
 
     public class SCRIPTS : AutoLoadingContent
     {

@@ -514,7 +514,7 @@ namespace ResourceCollector
 
         private void FormMainPackExplorer_Load(object sender, EventArgs e)
         {
-           
+            ResourceCollectorXNA.SE.Instance.ExScript("on_load");
         }
     }
 }
