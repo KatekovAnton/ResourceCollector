@@ -51,31 +51,27 @@
             this.groupBox1.Controls.Add(this.button4);
             this.groupBox1.Controls.Add(this.button3);
             this.groupBox1.Controls.Add(this.button2);
-            this.groupBox1.Location = new System.Drawing.Point(16, 15);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.groupBox1.Size = new System.Drawing.Size(241, 474);
+            this.groupBox1.Size = new System.Drawing.Size(181, 385);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "New element";
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(8, 130);
-            this.button5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button5.Location = new System.Drawing.Point(6, 106);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(225, 28);
+            this.button5.Size = new System.Drawing.Size(169, 23);
             this.button5.TabIndex = 4;
             this.button5.Text = "Convex mesh";
             this.button5.UseVisualStyleBackColor = true;
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(8, 95);
-            this.button4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button4.Location = new System.Drawing.Point(6, 77);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(225, 28);
+            this.button4.Size = new System.Drawing.Size(169, 23);
             this.button4.TabIndex = 3;
             this.button4.Text = "Collision mesh";
             this.button4.UseVisualStyleBackColor = true;
@@ -83,10 +79,9 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(8, 59);
-            this.button3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button3.Location = new System.Drawing.Point(6, 48);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(225, 28);
+            this.button3.Size = new System.Drawing.Size(169, 23);
             this.button3.TabIndex = 2;
             this.button3.Text = "Texture list";
             this.button3.UseVisualStyleBackColor = true;
@@ -94,10 +89,9 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(8, 23);
-            this.button2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button2.Location = new System.Drawing.Point(6, 19);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(225, 28);
+            this.button2.Size = new System.Drawing.Size(169, 23);
             this.button2.TabIndex = 1;
             this.button2.Text = "Texture";
             this.button2.UseVisualStyleBackColor = true;
@@ -105,10 +99,9 @@
             // 
             // button10
             // 
-            this.button10.Location = new System.Drawing.Point(8, 94);
-            this.button10.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button10.Location = new System.Drawing.Point(6, 76);
             this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(225, 28);
+            this.button10.Size = new System.Drawing.Size(169, 23);
             this.button10.TabIndex = 2;
             this.button10.Text = "Material description";
             this.button10.UseVisualStyleBackColor = true;
@@ -116,10 +109,9 @@
             // 
             // button9
             // 
-            this.button9.Location = new System.Drawing.Point(265, 436);
-            this.button9.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button9.Location = new System.Drawing.Point(199, 354);
             this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(241, 53);
+            this.button9.Size = new System.Drawing.Size(181, 43);
             this.button9.TabIndex = 9;
             this.button9.Text = "Load object";
             this.button9.UseVisualStyleBackColor = true;
@@ -127,10 +119,9 @@
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(8, 58);
-            this.button6.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button6.Location = new System.Drawing.Point(6, 47);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(225, 28);
+            this.button6.Size = new System.Drawing.Size(169, 23);
             this.button6.TabIndex = 8;
             this.button6.Text = "Render object description";
             this.button6.UseVisualStyleBackColor = true;
@@ -138,10 +129,9 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(265, 347);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button1.Location = new System.Drawing.Point(199, 282);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(241, 37);
+            this.button1.Size = new System.Drawing.Size(181, 30);
             this.button1.TabIndex = 7;
             this.button1.Text = "Generate Terrain";
             this.button1.UseVisualStyleBackColor = true;
@@ -149,10 +139,9 @@
             // 
             // button8
             // 
-            this.button8.Location = new System.Drawing.Point(265, 391);
-            this.button8.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button8.Location = new System.Drawing.Point(199, 318);
             this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(241, 37);
+            this.button8.Size = new System.Drawing.Size(181, 30);
             this.button8.TabIndex = 6;
             this.button8.Text = "Test side and Cube (sample)";
             this.button8.UseVisualStyleBackColor = true;
@@ -160,10 +149,9 @@
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(8, 130);
-            this.button7.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button7.Location = new System.Drawing.Point(6, 106);
             this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(225, 28);
+            this.button7.Size = new System.Drawing.Size(169, 23);
             this.button7.TabIndex = 5;
             this.button7.Text = "World object description";
             this.button7.UseVisualStyleBackColor = true;
@@ -175,21 +163,18 @@
             this.groupBox2.Controls.Add(this.button6);
             this.groupBox2.Controls.Add(this.button10);
             this.groupBox2.Controls.Add(this.button7);
-            this.groupBox2.Location = new System.Drawing.Point(265, 16);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox2.Location = new System.Drawing.Point(199, 13);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.groupBox2.Size = new System.Drawing.Size(241, 324);
+            this.groupBox2.Size = new System.Drawing.Size(181, 263);
             this.groupBox2.TabIndex = 9;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "New description";
             // 
             // button11
             // 
-            this.button11.Location = new System.Drawing.Point(8, 22);
-            this.button11.Margin = new System.Windows.Forms.Padding(4);
+            this.button11.Location = new System.Drawing.Point(6, 18);
             this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(225, 28);
+            this.button11.Size = new System.Drawing.Size(169, 23);
             this.button11.TabIndex = 9;
             this.button11.Text = "Particle render object description";
             this.button11.UseVisualStyleBackColor = true;
@@ -197,20 +182,20 @@
             // 
             // FormNewElement
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(528, 505);
+            this.ClientSize = new System.Drawing.Size(396, 410);
             this.Controls.Add(this.button9);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.button8);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormNewElement";
             this.Text = "New Elements";
+            this.Load += new System.EventHandler(this.FormNewElement_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);

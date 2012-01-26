@@ -514,7 +514,14 @@ namespace ResourceCollector
 
         private void FormMainPackExplorer_Load(object sender, EventArgs e)
         {
-            ResourceCollectorXNA.SE.Instance.ExScript("on_load");
+           ResourceCollectorXNA.SE.Instance.ExScript("_onload");
+           Eggs.Filter(ResourceCollectorXNA.SE.Instance, Addscr, "^_[a-z]", true);
+        }
+
+
+        void Addscr(dynamic scs)
+        {
+            scriptsComboBox.Items.Add(scs);
         }
     }
 }

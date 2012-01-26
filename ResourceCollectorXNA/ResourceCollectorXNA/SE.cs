@@ -105,9 +105,11 @@ namespace ResourceCollectorXNA
             string[] files = Directory.GetFiles(scripts.path, "*.py");
             foreach (string name in files)
             {
-                if (regex.IsMatch(name))
+                string nn = ResourceCollector.Eggs.ShortFileName(name);
+                if (regex.IsMatch(nn))
                 {
-                    Add(name, scripts.GetDirectly(name));
+                    SCRIPT s = scripts.GetDirectly(nn);
+                    Add(s.name, s);
                 }
             }
         }
@@ -154,6 +156,7 @@ namespace ResourceCollectorXNA
                 if (File.Exists(filename))
                 {
                     sr = new StreamReader(filename);
+                    script.name = new FileInfo(_name).Name;
                     script.name = _name;
                     script.data = sr.ReadToEnd();
                     sr.Close();
@@ -180,6 +183,10 @@ namespace ResourceCollectorXNA
         public int counter = 0;
         public SCRIPT() { }
         public void Dispose() { data = ""; name = ""; }
+        public override string ToString()
+        {
+            return name;
+        }
     }
 
 }

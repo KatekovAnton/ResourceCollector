@@ -143,6 +143,7 @@
       <DependentUpon>ConsoleWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="ContactCallback.cs" />
+    <Compile Include="Eggs.cs" />
     <Compile Include="Engine\Logic\BehaviourModel\ObjectBoneRelatedBehaviourModel.cs" />
     <Compile Include="Engine\Logic\BehaviourModel\ObjectRelatedBehaviourModel.cs" />
     <Compile Include="ResourceCollector\Addition\AutocompleteCombobox.cs">
@@ -471,7 +472,7 @@
     <Content Include="Microsoft.Dynamic.dll" />
     <Content Include="Microsoft.Scripting.dll" />
     <Content Include="Microsoft.Scripting.Metadata.dll" />
-    <None Include="Scripts\on_load.py">
+    <None Include="Scripts\_onload.py">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

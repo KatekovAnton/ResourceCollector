@@ -162,5 +162,10 @@ namespace ResourceCollector
             }
         }
 
+        private void FormNewElement_Load(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }
