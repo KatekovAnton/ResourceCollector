@@ -15,5 +15,8 @@ from System.Math import *
 # это похоже на враппер
 # желательно использовать функции, объ€вленные здесь, так как возможно их прототипы будут изменены
 
+def ofd() : return Eggs.ofd()
+def wr(obj): ConsoleWindow.TraceMessage(obj.ToString())
 def Ex(obj) : SE.Instance.Execute(obj)
 def ExScript(obj) : SE.Instance.ExScript(obj)
+def update() : FormMainPackExplorer.Instance.UpdateData()

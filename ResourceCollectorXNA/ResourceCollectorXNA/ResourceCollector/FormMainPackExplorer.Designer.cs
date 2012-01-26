@@ -83,10 +83,11 @@
             this.label11 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.scripts_toolmenu = new System.Windows.Forms.ToolStripDropDownButton();
-            this.scriptsComboBox = new System.Windows.Forms.ToolStripComboBox();
             this.rUNToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rescentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.formToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.autoCompleteComboBox1 = new ResourceCollector.AutoCompleteComboBox();
+            this.toolStripTextBox1 = new System.Windows.Forms.ToolStripTextBox();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -658,7 +659,7 @@
             // 
             this.scripts_toolmenu.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.scripts_toolmenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.scriptsComboBox,
+            this.formToolStripMenuItem,
             this.rUNToolStripMenuItem});
             this.scripts_toolmenu.Image = ((System.Drawing.Image)(resources.GetObject("scripts_toolmenu.Image")));
             this.scripts_toolmenu.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -667,24 +668,26 @@
             this.scripts_toolmenu.Text = "Scripts";
             this.scripts_toolmenu.ToolTipText = "scripts";
             // 
-            // scriptsComboBox
-            // 
-            this.scriptsComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.scriptsComboBox.Name = "scriptsComboBox";
-            this.scriptsComboBox.Size = new System.Drawing.Size(121, 23);
-            // 
             // rUNToolStripMenuItem
             // 
+            this.rUNToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripTextBox1});
             this.rUNToolStripMenuItem.Name = "rUNToolStripMenuItem";
-            this.rUNToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
-            this.rUNToolStripMenuItem.Text = "RUN";
-            this.rUNToolStripMenuItem.Click += new System.EventHandler(this.rUNToolStripMenuItem_Click);
+            this.rUNToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.rUNToolStripMenuItem.Text = "Other";
             // 
             // rescentToolStripMenuItem
             // 
             this.rescentToolStripMenuItem.Name = "rescentToolStripMenuItem";
             this.rescentToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.rescentToolStripMenuItem.Text = "Rescent";
+            // 
+            // formToolStripMenuItem
+            // 
+            this.formToolStripMenuItem.Name = "formToolStripMenuItem";
+            this.formToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.formToolStripMenuItem.Text = "All";
+            this.formToolStripMenuItem.Click += new System.EventHandler(this.formToolStripMenuItem_Click);
             // 
             // autoCompleteComboBox1
             // 
@@ -694,6 +697,12 @@
             this.autoCompleteComboBox1.Name = "autoCompleteComboBox1";
             this.autoCompleteComboBox1.Size = new System.Drawing.Size(191, 21);
             this.autoCompleteComboBox1.TabIndex = 3;
+            // 
+            // toolStripTextBox1
+            // 
+            this.toolStripTextBox1.Name = "toolStripTextBox1";
+            this.toolStripTextBox1.Size = new System.Drawing.Size(100, 23);
+            this.toolStripTextBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.toolStripTextBox1_KeyUp);
             // 
             // FormMainPackExplorer
             // 
@@ -784,9 +793,10 @@
         private System.Windows.Forms.CheckBox checkBox9;
         private AutoCompleteComboBox autoCompleteComboBox1;
         private System.Windows.Forms.ToolStripDropDownButton scripts_toolmenu;
-        private System.Windows.Forms.ToolStripComboBox scriptsComboBox;
         private System.Windows.Forms.ToolStripMenuItem rUNToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem rescentToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem formToolStripMenuItem;
+        private System.Windows.Forms.ToolStripTextBox toolStripTextBox1;
     }
 }
 

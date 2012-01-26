@@ -146,6 +146,12 @@
     <Compile Include="Eggs.cs" />
     <Compile Include="Engine\Logic\BehaviourModel\ObjectBoneRelatedBehaviourModel.cs" />
     <Compile Include="Engine\Logic\BehaviourModel\ObjectRelatedBehaviourModel.cs" />
+    <Compile Include="FormScripts.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormScripts.Designer.cs">
+      <DependentUpon>FormScripts.cs</DependentUpon>
+    </Compile>
     <Compile Include="ResourceCollector\Addition\AutocompleteCombobox.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -455,6 +461,9 @@
     <Compile Include="ResourceCollector\SkeletonWithAddInfo.cs" />
     <Compile Include="ResourceCollector\TextureListContent.cs" />
     <Compile Include="ResourceCollector\LevelObjectDescription.cs" />
+    <None Include="Scripts\clear_extentions.py">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <Compile Include="SE.cs" />
     <Compile Include="UIContent.cs" />
     <Compile Include="WindowsFormsElements.cs">
@@ -515,6 +524,9 @@
   <ItemGroup>
     <EmbeddedResource Include="ConsoleWindow.resx">
       <DependentUpon>ConsoleWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormScripts.resx">
+      <DependentUpon>FormScripts.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>

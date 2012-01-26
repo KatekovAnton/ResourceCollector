@@ -1,1 +1,1 @@
-﻿ConsoleWindow.TraceMessage(" asjkd  " )
+﻿wr(ofd())

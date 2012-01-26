@@ -497,7 +497,6 @@ namespace ResourceCollector
         private void FormMainPackExplorer_Load(object sender, EventArgs e)
         {
            ResourceCollectorXNA.SE.Instance.ExScript("_onload");
-           Eggs.Filter(ResourceCollectorXNA.SE.Instance, Addscr, "^_[a-z]", true);
 
            List<string> resc = new List<string>();
 
@@ -506,8 +505,6 @@ namespace ResourceCollector
 
            foreach (string s in resc)
            rescentToolStripMenuItem.DropDownItems.Add(s, null , new EventHandler(rescent_click));
-           
-
         }
 
         private void rescent_click(object sender, EventArgs e)
@@ -524,23 +521,29 @@ namespace ResourceCollector
                 packs.packs = new List<Pack>();
                 packs.AddPack(FileName, br);
                 AppConfiguration.PackPlaceFolder = System.IO.Path.GetDirectoryName(FileName);
+                ResourceCollectorXNA.SE.Instance.scriptscope.SetVariable("pack", packs.packs[0]);
+                ResourceCollectorXNA.SE.Instance.scriptscope.SetVariable("objects", packs.packs[0].Objects);
                 if (!packs.SuccessLast) ClearInterface();
                 UpdateData();
         }
-
-
-        void Addscr(dynamic scs)
+        
+        private void formToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            scriptsComboBox.Items.Add(scs);
+            OpenScriptsForm("^_[a-z]", true);// добавить все, которые не начинаются с одного подчеркивания
         }
 
-        private void rUNToolStripMenuItem_Click(object sender, EventArgs e)
+        private void toolStripTextBox1_KeyUp(object sender, KeyEventArgs e)
         {
-            try
+            if (e.KeyData == Keys.Enter)
             {
-                ResourceCollectorXNA.SE.Instance.ExScript(scriptsComboBox.SelectedItem.ToString());
+                OpenScriptsForm(toolStripTextBox1.Text, false);
             }
-            catch { }
+        }
+
+        public void OpenScriptsForm(string str, bool invert)
+        {
+            FormScripts fs = new FormScripts(Eggs.Filter(ResourceCollectorXNA.SE.Instance, str, invert));
+            fs.ShowDialog();
         }
     }
 }
