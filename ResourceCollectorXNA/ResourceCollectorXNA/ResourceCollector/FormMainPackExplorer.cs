@@ -502,7 +502,7 @@ namespace ResourceCollector
 
            List<string> resc = new List<string>();
 
-            //добавь свои паки и радуйся жизни!!! ))) или грузи из конфига...
+           //добавь свои паки и радуйся жизни!!! ))) или грузи из конфига...
            resc.Add( @"D:\projects\ULJANIK493DEMO\PhysX test2\PhysX test2\Data\Ship.pack");
 
            foreach (string s in resc)
@@ -524,6 +524,7 @@ namespace ResourceCollector
                 packs.AddPack(FileName, br);
                 AppConfiguration.PackPlaceFolder = System.IO.Path.GetDirectoryName(FileName);
                 ResourceCollectorXNA.SE.Instance.scriptscope.SetVariable("pack", packs.packs[0]);
+                ResourceCollectorXNA.SE.Instance.scriptscope.SetVariable("tv", treeView1);
                 ResourceCollectorXNA.SE.Instance.scriptscope.SetVariable("objects", packs.packs[0].Objects);
                 if (!packs.SuccessLast) ClearInterface();
                 UpdateData();

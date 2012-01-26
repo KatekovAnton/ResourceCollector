@@ -328,6 +328,13 @@ namespace ResourceCollector
            // FormMainPackExplorer.Instance.UpdateData();
         }
 
+        public void Attach(List<PackContent> obj)
+        {
+            foreach (PackContent pc in obj)
+                Attach(pc);
+        }
+
+
         public PackContent getobject(string name)
         {
             for(int i=0;i<Objects.Count;i++)

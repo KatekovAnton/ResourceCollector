@@ -1,10 +1,14 @@
 ﻿using System;
 using System.IO;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using ResourceCollectorXNA;
+using ResourceCollectorXNA.Content;
+using ResourceCollector.Content;
 
 namespace ResourceCollector
 {
@@ -122,6 +126,64 @@ namespace ResourceCollector
           }
       }
 
+      public static List<PackContent> GetObjects(int loadedformat, string search_pattern = "")
+      { 
+          List<PackContent> objects = new List<PackContent>();
+          for (int i = 0; i < PackList.Instance.packs.Count; i++)
+              for (int j = 0; j < PackList.Instance.packs[i].Objects.Count; j++)
+              {
+                  if (!((loadedformat == PackList.Instance.packs[i].Objects[j].loadedformat) || ( loadedformat == PackList.Instance.packs[i].Objects[j].forsavingformat )))
+                      continue;
+                  string name = PackList.Instance.packs[i].Objects[j].name;
+                  if (Regex.Match(name, search_pattern).Success) objects.Add(PackList.Instance.packs[i].Objects[j]);
+              }
+          return objects;
+      }
+
+      public static void Rename(int loadedformat, string search_pattern, string replace_string)
+      {
+          List<PackContent> objects = GetObjects(loadedformat, search_pattern);
+          foreach (PackContent pc in objects)
+          {
+              pc.name = Regex.Replace(pc.name, search_pattern, replace_string);  
+          }
+      }
+
+      public static void Mirror(Hashtable hashtable, bool delete = false)
+      {
+          List<dynamic> keys = new List<dynamic>();
+          foreach (dynamic k in hashtable.Keys)
+              keys.Add(k);
+
+          foreach (dynamic k in keys)
+          {
+              hashtable.Add(hashtable[k], k);
+              if (delete) hashtable.Remove(k);
+          }
+      }
+
+      public static List<PackContent> CreateCollisionMeshes(string search_pattern)
+      {
+          var ccc = new List<PackContent>();
+
+          ccc = Eggs.GetObjects(ElementType.MeshSkinnedOptimazedForLoading, search_pattern);
+          ccc.InsertRange(0, Eggs.GetObjects(ElementType.MeshSkinnedOptimazedForStore, search_pattern));
+
+          var cccr = new List<PackContent>();
+          foreach (PackContent pc in ccc)
+          {
+              MeshSkinned m = null;
+              if (pc != null) m = pc as MeshSkinned;
+              if (m != null)
+              {
+                  CollisionMesh cm = new CollisionMesh(m);
+                  cm.name = "cm_" + pc.name;
+                  ResourceCollectorXNA.ConsoleWindow.TraceMessage("Created CollisionMesh  " + cm.name);
+                  cccr.Add(cm);
+              }
+          }
+          return cccr;
+      }
 
     }
 }

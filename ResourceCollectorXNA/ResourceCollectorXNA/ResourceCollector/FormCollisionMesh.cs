@@ -25,28 +25,33 @@ namespace ResourceCollector.Content
 
         private void listBox1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            if (listBox1.SelectedItem == null)
-                return;
+            if (listBox1.SelectedItem == null) return;
+
             PackContent pa = p.getobject(listBox1.SelectedItem.ToString());
             MeshSkinned m = null;
 
-            if (pa != null)
-                m = pa as MeshSkinned;
-
-
+            if (pa != null) m = pa as MeshSkinned;
+            
             if (m != null)
             {
                 cm = new CollisionMesh(m);
                 cm.name = textBox1.Text + "\0";
+                ResourceCollectorXNA.ConsoleWindow.TraceMessage("Created CollisionMesh  " + cm.name);
                 this.DialogResult = System.Windows.Forms.DialogResult.OK;
                 Close();
             }
         }
 
+
         private void button1_Click(object sender, EventArgs e)
         {
             this.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             Close();
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            textBox1.Text = "cm_" + listBox1.SelectedItem.ToString();
         }
     }
 }

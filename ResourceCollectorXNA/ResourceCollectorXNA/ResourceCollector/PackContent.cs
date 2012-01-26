@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,8 +16,10 @@ namespace ResourceCollector
         public int imgindex;
         
     }*/
+
     public class ElementType
     {
+        static Hashtable formats = new Hashtable();
         public const int MissingObject = -1;
         public const int MeshSkinnedOptimazedForStore = 0;
         public const int MeshSkinnedOptimazedForLoading = 1;
@@ -43,10 +46,38 @@ namespace ResourceCollector
 
         public const int LevelContent = 100;
 
+        static public void Init()
+        { 
+            
+                formats.Add( ElementType.MeshSkinnedOptimazedForLoading     ,"Mesh Skinned New format (recomendated)");
+                formats.Add( ElementType.MeshSkinnedOptimazedForStore       ,"Mesh Skinned Old format (not recomendated)");
+                formats.Add( ElementType.PNGTexture                         , "Texture (PNG)");
+                formats.Add( ElementType.Skeleton                           , "Skeleton");
+                formats.Add( ElementType.BaseAnimation                      , "Base Animation");
+                formats.Add( ElementType.Character                          , "Character description");
+                formats.Add( ElementType.MeshList                           , "Mesh List");
+                formats.Add( ElementType.SkeletonWithAddInfo                , "Skeleton with additional information");
+                formats.Add( ElementType.TextureList                        , "Texture list");
+                formats.Add( ElementType.CollisionMesh                      , "Collision mesh");
+                formats.Add( ElementType.ConvexMesh                         , "Convex mesh");
+                formats.Add( ElementType.StringList                         , "String list");
+                formats.Add( ElementType.LevelObjectDescription             , "Level object description");
+                formats.Add( ElementType.GameObjectDescription              , "Game object description");
+                formats.Add( ElementType.RenderObjectDescription            , "Render object description");
+                formats.Add( ElementType.Material                           , "Material");
+                formats.Add( ElementType.LevelContent                       , "Level");
+                formats.Add( ElementType.ParticelRenderObjectDescription    , "Particle Object Description");
+
+                Eggs.Mirror(formats);
+
+        }
 
         public static string ReturnString(int format)
         {
-            switch (format)
+            if (formats.ContainsKey(format))
+                return (string)formats[format];
+            else return "wrong format";
+            /*switch (format)
             {
                 case ElementType.MeshSkinnedOptimazedForLoading:
                     return "Mesh Skinned New format (recomendated)";
@@ -86,12 +117,15 @@ namespace ResourceCollector
                     return "Particle Object Description";
                 default:
                     return "wrong format";
-            }
-
+            }*/
         }
+
         public static int ReturnFormat(string format)
         {
-            switch (format)
+            if (formats.ContainsKey(format))
+                return (int)formats[format];
+            else return -1;
+           /* switch (format)
             {
                 case "Mesh Skinned New format (recomendated)":
                     return ElementType.MeshSkinnedOptimazedForLoading;
@@ -131,7 +165,7 @@ namespace ResourceCollector
                     return ElementType.ParticelRenderObjectDescription;
                 default:
                     return -1;
-            }
+            }*/
         }
     }
     public enum NodeType
@@ -225,7 +259,12 @@ namespace ResourceCollector
             label3.Text = this.headersize.ToString();
             label4.Text = this.size.ToString();
         }
+
+
     }
+
+    
+
     public class MissingObject : PackContent
     {
         byte[] data;

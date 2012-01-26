@@ -1,5 +1,9 @@
 import clr
 import sys
+
+clr.AddReference("System.Windows.Forms")
+from System.Windows.Forms import *  
+
 clr.AddReference("ResourceCollectorXNA")
 from ResourceCollectorXNA import *
 from ResourceCollector import *
@@ -20,3 +24,5 @@ def wr(obj): ConsoleWindow.TraceMessage(obj.ToString())
 def Ex(obj) : SE.Instance.Execute(obj)
 def ExScript(obj) : SE.Instance.ExScript(obj)
 def update() : FormMainPackExplorer.Instance.UpdateData()
+def getobjects(format, search = "") : return Eggs.GetObjects(format,search)
+def rename(format, search, replace) : Eggs.Rename(format,search,replace)

@@ -38,6 +38,8 @@ namespace ResourceCollectorXNA
                 }
             }
             catch { }
+
+            ResourceCollector.ElementType.Init();
             game = new MyGame();
             game.Run();
         }
