@@ -82,6 +82,7 @@
             this.label15 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
+            this.autoCompleteComboBox1 = new ResourceCollector.AutoCompleteComboBox();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -109,7 +110,7 @@
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(50, 17);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(46, 17);
             this.toolStripStatusLabel1.Text = "Current:";
             // 
             // toolStripProgressBar1
@@ -120,7 +121,7 @@
             // toolStripStatusLabel2
             // 
             this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(37, 17);
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(33, 17);
             this.toolStripStatusLabel2.Text = "Total:";
             // 
             // toolStripProgressBar2
@@ -152,27 +153,27 @@
             this.toolStripDropDownButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton1.Image")));
             this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
-            this.toolStripDropDownButton1.Size = new System.Drawing.Size(38, 22);
+            this.toolStripDropDownButton1.Size = new System.Drawing.Size(36, 22);
             this.toolStripDropDownButton1.Text = "File";
             // 
             // newPackToolStripMenuItem
             // 
             this.newPackToolStripMenuItem.Name = "newPackToolStripMenuItem";
-            this.newPackToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.newPackToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             this.newPackToolStripMenuItem.Text = "New pack";
             this.newPackToolStripMenuItem.Click += new System.EventHandler(this.newPackToolStripMenuItem_Click);
             // 
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             this.openToolStripMenuItem.Text = "Open and clear";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             this.saveToolStripMenuItem.Text = "Save full";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
@@ -187,34 +188,34 @@
             this.toolStripDropDownButton4.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton4.Image")));
             this.toolStripDropDownButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripDropDownButton4.Name = "toolStripDropDownButton4";
-            this.toolStripDropDownButton4.Size = new System.Drawing.Size(49, 22);
+            this.toolStripDropDownButton4.Size = new System.Drawing.Size(46, 22);
             this.toolStripDropDownButton4.Text = "Tools";
             // 
             // animationToolsToolStripMenuItem
             // 
             this.animationToolsToolStripMenuItem.Name = "animationToolsToolStripMenuItem";
-            this.animationToolsToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.animationToolsToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
             this.animationToolsToolStripMenuItem.Text = "Animation tools";
             this.animationToolsToolStripMenuItem.Click += new System.EventHandler(this.animationToolsToolStripMenuItem_Click);
             // 
             // importPackToolStripMenuItem
             // 
             this.importPackToolStripMenuItem.Name = "importPackToolStripMenuItem";
-            this.importPackToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.importPackToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
             this.importPackToolStripMenuItem.Text = "Import pack";
             this.importPackToolStripMenuItem.Click += new System.EventHandler(this.importPackToolStripMenuItem_Click);
             // 
             // combineMeshesToolStripMenuItem
             // 
             this.combineMeshesToolStripMenuItem.Name = "combineMeshesToolStripMenuItem";
-            this.combineMeshesToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.combineMeshesToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
             this.combineMeshesToolStripMenuItem.Text = "Combine meshes";
             this.combineMeshesToolStripMenuItem.Click += new System.EventHandler(this.combineMeshesToolStripMenuItem_Click);
             // 
             // xNAMonitorToolStripMenuItem
             // 
             this.xNAMonitorToolStripMenuItem.Name = "xNAMonitorToolStripMenuItem";
-            this.xNAMonitorToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.xNAMonitorToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
             this.xNAMonitorToolStripMenuItem.Text = "XNA Monitor";
             this.xNAMonitorToolStripMenuItem.Click += new System.EventHandler(this.xNAMonitorToolStripMenuItem_Click);
             // 
@@ -226,7 +227,7 @@
             this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
             this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(60, 22);
+            this.toolStripButton1.Size = new System.Drawing.Size(57, 22);
             this.toolStripButton1.Text = "Objects";
             this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
@@ -245,13 +246,13 @@
             this.toolStripDropDownButton3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton3.Image")));
             this.toolStripDropDownButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripDropDownButton3.Name = "toolStripDropDownButton3";
-            this.toolStripDropDownButton3.Size = new System.Drawing.Size(62, 22);
+            this.toolStripDropDownButton3.Size = new System.Drawing.Size(57, 22);
             this.toolStripDropDownButton3.Text = "Options";
             // 
             // settingsToolStripMenuItem
             // 
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.settingsToolStripMenuItem.Text = "Settings";
             // 
             // toolStripDropDownButton2
@@ -262,13 +263,13 @@
             this.toolStripDropDownButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton2.Image")));
             this.toolStripDropDownButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripDropDownButton2.Name = "toolStripDropDownButton2";
-            this.toolStripDropDownButton2.Size = new System.Drawing.Size(53, 22);
+            this.toolStripDropDownButton2.Size = new System.Drawing.Size(49, 22);
             this.toolStripDropDownButton2.Text = "About";
             // 
             // aboutProgrammToolStripMenuItem
             // 
             this.aboutProgrammToolStripMenuItem.Name = "aboutProgrammToolStripMenuItem";
-            this.aboutProgrammToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.aboutProgrammToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
             this.aboutProgrammToolStripMenuItem.Text = "About programm";
             this.aboutProgrammToolStripMenuItem.Click += new System.EventHandler(this.aboutProgrammToolStripMenuItem_Click);
             // 
@@ -329,6 +330,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.autoCompleteComboBox1);
             this.groupBox2.Controls.Add(this.groupBox3);
             this.groupBox2.Location = new System.Drawing.Point(3, 249);
             this.groupBox2.Name = "groupBox2";
@@ -362,7 +364,7 @@
             this.checkBox9.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox9.Location = new System.Drawing.Point(6, 202);
             this.checkBox9.Name = "checkBox9";
-            this.checkBox9.Size = new System.Drawing.Size(58, 14);
+            this.checkBox9.Size = new System.Drawing.Size(78, 17);
             this.checkBox9.TabIndex = 8;
             this.checkBox9.Text = "Particle ros";
             this.checkBox9.UseVisualStyleBackColor = true;
@@ -375,7 +377,7 @@
             this.checkBox8.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox8.Location = new System.Drawing.Point(6, 180);
             this.checkBox8.Name = "checkBox8";
-            this.checkBox8.Size = new System.Drawing.Size(43, 14);
+            this.checkBox8.Size = new System.Drawing.Size(57, 17);
             this.checkBox8.TabIndex = 7;
             this.checkBox8.Text = "Levels";
             this.checkBox8.UseVisualStyleBackColor = true;
@@ -388,7 +390,7 @@
             this.checkBox7.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox7.Location = new System.Drawing.Point(6, 157);
             this.checkBox7.Name = "checkBox7";
-            this.checkBox7.Size = new System.Drawing.Size(51, 14);
+            this.checkBox7.Size = new System.Drawing.Size(68, 17);
             this.checkBox7.TabIndex = 6;
             this.checkBox7.Text = "Materials";
             this.checkBox7.UseVisualStyleBackColor = true;
@@ -401,7 +403,7 @@
             this.checkBox6.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox6.Location = new System.Drawing.Point(6, 134);
             this.checkBox6.Name = "checkBox6";
-            this.checkBox6.Size = new System.Drawing.Size(58, 14);
+            this.checkBox6.Size = new System.Drawing.Size(77, 17);
             this.checkBox6.TabIndex = 5;
             this.checkBox6.Text = "Characters";
             this.checkBox6.UseVisualStyleBackColor = true;
@@ -414,7 +416,7 @@
             this.checkBox5.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox5.Location = new System.Drawing.Point(6, 111);
             this.checkBox5.Name = "checkBox5";
-            this.checkBox5.Size = new System.Drawing.Size(76, 14);
+            this.checkBox5.Size = new System.Drawing.Size(101, 17);
             this.checkBox5.TabIndex = 4;
             this.checkBox5.Text = "Collison meshes";
             this.checkBox5.UseVisualStyleBackColor = true;
@@ -427,7 +429,7 @@
             this.checkBox4.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox4.Location = new System.Drawing.Point(6, 88);
             this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(74, 14);
+            this.checkBox4.Size = new System.Drawing.Size(98, 17);
             this.checkBox4.TabIndex = 3;
             this.checkBox4.Text = "Render objects";
             this.checkBox4.UseVisualStyleBackColor = true;
@@ -440,7 +442,7 @@
             this.checkBox3.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox3.Location = new System.Drawing.Point(6, 65);
             this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(67, 14);
+            this.checkBox3.Size = new System.Drawing.Size(89, 17);
             this.checkBox3.TabIndex = 2;
             this.checkBox3.Text = "Level objects";
             this.checkBox3.UseVisualStyleBackColor = true;
@@ -453,7 +455,7 @@
             this.checkBox2.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox2.Location = new System.Drawing.Point(6, 42);
             this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(50, 14);
+            this.checkBox2.Size = new System.Drawing.Size(67, 17);
             this.checkBox2.TabIndex = 1;
             this.checkBox2.Text = "Textures";
             this.checkBox2.UseVisualStyleBackColor = true;
@@ -466,7 +468,7 @@
             this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox1.Location = new System.Drawing.Point(6, 19);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(47, 14);
+            this.checkBox1.Size = new System.Drawing.Size(63, 17);
             this.checkBox1.TabIndex = 0;
             this.checkBox1.Text = "Meshes";
             this.checkBox1.UseVisualStyleBackColor = true;
@@ -645,6 +647,15 @@
             this.label8.TabIndex = 19;
             this.label8.Text = "Index:";
             // 
+            // autoCompleteComboBox1
+            // 
+            this.autoCompleteComboBox1.FormattingEnabled = true;
+            this.autoCompleteComboBox1.LimitToList = true;
+            this.autoCompleteComboBox1.Location = new System.Drawing.Point(9, 251);
+            this.autoCompleteComboBox1.Name = "autoCompleteComboBox1";
+            this.autoCompleteComboBox1.Size = new System.Drawing.Size(191, 21);
+            this.autoCompleteComboBox1.TabIndex = 3;
+            // 
             // FormMainPackExplorer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -731,6 +742,7 @@
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.TreeView treeView1;
         private System.Windows.Forms.CheckBox checkBox9;
+        private AutoCompleteComboBox autoCompleteComboBox1;
     }
 }
 
