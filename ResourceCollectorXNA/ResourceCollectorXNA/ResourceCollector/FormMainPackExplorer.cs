@@ -65,8 +65,10 @@ namespace ResourceCollector
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenFileDialog ofd = new OpenFileDialog();
-          
+            if (sender != null)
+            {
+                OpenFileDialog ofd = new OpenFileDialog();
+
                 ofd.Filter = "Паки *.pack|*.pack";
                 string path = AppConfiguration.PackPlaceFolder;
                 if (path.Length > 2)
@@ -85,7 +87,23 @@ namespace ResourceCollector
                     ClearInterface();
                 ofd.Dispose();
                 UpdateData();
-           
+            }
+            else
+            {
+                string FileName = @"D:\projects\ULJANIK493DEMO\PhysX test2\PhysX test2\Data\Ship.pack";
+                if (MessageBox.Show("Load last pack?\n\n" + FileName, "", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
+                {
+                    ResourceCollectorXNA.Engine.GameEngine.Instance.CreateNewLevel();
+                    ResourceCollectorXNA.Engine.GameEngine.Instance.UpdateLevelPart();
+                    treeView1.Nodes.Clear();
+                    ClearInterface();
+                    packs.packs = new List<Pack>();
+                    packs.AddPack(FileName, br);
+                    AppConfiguration.PackPlaceFolder = System.IO.Path.GetDirectoryName(FileName);
+                    UpdateData();
+                }
+            }
+
         }
 
         private void Form1_SizeChanged(object sender, EventArgs e)
@@ -487,6 +505,23 @@ namespace ResourceCollector
         private void checkBox9_CheckedChanged(object sender, EventArgs e)
         {
             FormatUpdate();
+        }
+
+        private void toolStripDropDownButton1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void FormMainPackExplorer_Load(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            timer1.Enabled = false;
+            openToolStripMenuItem_Click(null, null);
+            
         }
     }
 }

@@ -22,21 +22,27 @@ namespace ResourceCollector
         private void button2_Click(object sender, EventArgs e)
         {
             var fileDialog = new OpenFileDialog();
-            try
-            {
+            fileDialog.Multiselect = true;
+            
                 if (fileDialog.ShowDialog() != DialogResult.Cancel)
                 {
-                    var path = fileDialog.FileName.Split('\\', '/');
-                    var image = new ImageContent(path[path.Length - 1], new Bitmap(fileDialog.FileName));
+                   foreach (string f_name in fileDialog.FileNames)
+                    {
+                       try
+                       {
+                            var path = f_name.Split('\\', '/');
+                            var image = new ImageContent(path[path.Length - 1], new Bitmap(f_name));
 
-                    packs.packs[0].Attach(image);
-                    FormMainPackExplorer.Instance.UpdateData();
+                            packs.packs[0].Attach(image);
+                            FormMainPackExplorer.Instance.UpdateData();
+                       }
+                       catch 
+                       {
+                           MessageBox.Show(string.Format("File «{0}» contains no image data!", f_name));
+                       }
+                    }
                 }
-            }
-            catch
-            {
-                MessageBox.Show(string.Format("File «{0}» contains no image data!", fileDialog.FileName));
-            }
+            
         }
 
         private void button3_Click(object sender, EventArgs e)

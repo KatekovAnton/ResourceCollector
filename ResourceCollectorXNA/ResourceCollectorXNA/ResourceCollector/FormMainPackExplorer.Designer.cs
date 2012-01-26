@@ -82,6 +82,7 @@
             this.label15 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.autoCompleteComboBox1 = new ResourceCollector.AutoCompleteComboBox();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -110,7 +111,7 @@
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(46, 17);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(50, 17);
             this.toolStripStatusLabel1.Text = "Current:";
             // 
             // toolStripProgressBar1
@@ -121,7 +122,7 @@
             // toolStripStatusLabel2
             // 
             this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(33, 17);
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(37, 17);
             this.toolStripStatusLabel2.Text = "Total:";
             // 
             // toolStripProgressBar2
@@ -153,27 +154,28 @@
             this.toolStripDropDownButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton1.Image")));
             this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
-            this.toolStripDropDownButton1.Size = new System.Drawing.Size(36, 22);
+            this.toolStripDropDownButton1.Size = new System.Drawing.Size(38, 22);
             this.toolStripDropDownButton1.Text = "File";
+            this.toolStripDropDownButton1.Click += new System.EventHandler(this.toolStripDropDownButton1_Click);
             // 
             // newPackToolStripMenuItem
             // 
             this.newPackToolStripMenuItem.Name = "newPackToolStripMenuItem";
-            this.newPackToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.newPackToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.newPackToolStripMenuItem.Text = "New pack";
             this.newPackToolStripMenuItem.Click += new System.EventHandler(this.newPackToolStripMenuItem_Click);
             // 
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.openToolStripMenuItem.Text = "Open and clear";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.saveToolStripMenuItem.Text = "Save full";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
@@ -188,34 +190,34 @@
             this.toolStripDropDownButton4.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton4.Image")));
             this.toolStripDropDownButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripDropDownButton4.Name = "toolStripDropDownButton4";
-            this.toolStripDropDownButton4.Size = new System.Drawing.Size(46, 22);
+            this.toolStripDropDownButton4.Size = new System.Drawing.Size(49, 22);
             this.toolStripDropDownButton4.Text = "Tools";
             // 
             // animationToolsToolStripMenuItem
             // 
             this.animationToolsToolStripMenuItem.Name = "animationToolsToolStripMenuItem";
-            this.animationToolsToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.animationToolsToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
             this.animationToolsToolStripMenuItem.Text = "Animation tools";
             this.animationToolsToolStripMenuItem.Click += new System.EventHandler(this.animationToolsToolStripMenuItem_Click);
             // 
             // importPackToolStripMenuItem
             // 
             this.importPackToolStripMenuItem.Name = "importPackToolStripMenuItem";
-            this.importPackToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.importPackToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
             this.importPackToolStripMenuItem.Text = "Import pack";
             this.importPackToolStripMenuItem.Click += new System.EventHandler(this.importPackToolStripMenuItem_Click);
             // 
             // combineMeshesToolStripMenuItem
             // 
             this.combineMeshesToolStripMenuItem.Name = "combineMeshesToolStripMenuItem";
-            this.combineMeshesToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.combineMeshesToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
             this.combineMeshesToolStripMenuItem.Text = "Combine meshes";
             this.combineMeshesToolStripMenuItem.Click += new System.EventHandler(this.combineMeshesToolStripMenuItem_Click);
             // 
             // xNAMonitorToolStripMenuItem
             // 
             this.xNAMonitorToolStripMenuItem.Name = "xNAMonitorToolStripMenuItem";
-            this.xNAMonitorToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.xNAMonitorToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
             this.xNAMonitorToolStripMenuItem.Text = "XNA Monitor";
             this.xNAMonitorToolStripMenuItem.Click += new System.EventHandler(this.xNAMonitorToolStripMenuItem_Click);
             // 
@@ -227,14 +229,14 @@
             this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
             this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(57, 22);
+            this.toolStripButton1.Size = new System.Drawing.Size(60, 22);
             this.toolStripButton1.Text = "Objects";
             this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
             // newToolStripMenuItem
             // 
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
             this.newToolStripMenuItem.Text = "New";
             this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
             // 
@@ -246,13 +248,13 @@
             this.toolStripDropDownButton3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton3.Image")));
             this.toolStripDropDownButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripDropDownButton3.Name = "toolStripDropDownButton3";
-            this.toolStripDropDownButton3.Size = new System.Drawing.Size(57, 22);
+            this.toolStripDropDownButton3.Size = new System.Drawing.Size(62, 22);
             this.toolStripDropDownButton3.Text = "Options";
             // 
             // settingsToolStripMenuItem
             // 
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.settingsToolStripMenuItem.Text = "Settings";
             // 
             // toolStripDropDownButton2
@@ -263,13 +265,13 @@
             this.toolStripDropDownButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton2.Image")));
             this.toolStripDropDownButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripDropDownButton2.Name = "toolStripDropDownButton2";
-            this.toolStripDropDownButton2.Size = new System.Drawing.Size(49, 22);
+            this.toolStripDropDownButton2.Size = new System.Drawing.Size(53, 22);
             this.toolStripDropDownButton2.Text = "About";
             // 
             // aboutProgrammToolStripMenuItem
             // 
             this.aboutProgrammToolStripMenuItem.Name = "aboutProgrammToolStripMenuItem";
-            this.aboutProgrammToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.aboutProgrammToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
             this.aboutProgrammToolStripMenuItem.Text = "About programm";
             this.aboutProgrammToolStripMenuItem.Click += new System.EventHandler(this.aboutProgrammToolStripMenuItem_Click);
             // 
@@ -647,6 +649,12 @@
             this.label8.TabIndex = 19;
             this.label8.Text = "Index:";
             // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // autoCompleteComboBox1
             // 
             this.autoCompleteComboBox1.FormattingEnabled = true;
@@ -669,6 +677,7 @@
             this.MinimizeBox = false;
             this.Name = "FormMainPackExplorer";
             this.Text = "Resource Collector (Content manager for Paradise Render)";
+            this.Load += new System.EventHandler(this.FormMainPackExplorer_Load);
             this.SizeChanged += new System.EventHandler(this.Form1_SizeChanged);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
@@ -743,6 +752,7 @@
         private System.Windows.Forms.TreeView treeView1;
         private System.Windows.Forms.CheckBox checkBox9;
         private AutoCompleteComboBox autoCompleteComboBox1;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 

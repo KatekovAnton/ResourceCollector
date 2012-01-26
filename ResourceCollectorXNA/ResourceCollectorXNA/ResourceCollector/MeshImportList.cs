@@ -78,9 +78,15 @@ namespace ResourceCollector.Content
 
         private void treeView1_MouseMove(object sender, MouseEventArgs e)
         {
+        
             md = e.Button == System.Windows.Forms.MouseButtons.Left;
             mr = e.Button == System.Windows.Forms.MouseButtons.Right;
-            richTextBox1.Text = md.ToString();
+           TreeNode c = treeView1.GetNodeAt(e.Location);
+           if (c != null)
+           {
+               if (md) c.Checked = true;
+               if (mr) c.Checked = false;
+           }
         }
 
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
@@ -95,7 +101,7 @@ namespace ResourceCollector.Content
 
         private void treeView1_NodeMouseHover(object sender, TreeNodeMouseHoverEventArgs e)
         {
-            if (md) e.Node.Checked = true;
+            
         }
     }
 }
