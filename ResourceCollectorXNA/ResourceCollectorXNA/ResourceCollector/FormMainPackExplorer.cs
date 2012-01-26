@@ -363,6 +363,13 @@ namespace ResourceCollector
                 ResourceCollector.Content.MeshImportList m = new Content.MeshImportList(ofd.FileName);
                 if (m.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
+                    if (packs.packs.Count == 0)
+                    {
+                        MessageBox.Show("Open Pack First");
+                        openToolStripMenuItem_Click(sender, e);
+                    }
+
+
                     for (int i = 0; i < m.treeView1.Nodes.Count; i++)
                     {
                         if (m.treeView1.Nodes[i].Checked)

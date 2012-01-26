@@ -175,9 +175,17 @@ namespace ResourceCollector
             headersize = (int)br.BaseStream.Position;
             for (int i = loadedObjectCount; i < loadedObjectCount+objectcount; i++)
             {
+                try
+                {
                     br.BaseStream.Seek(headersize + Objects[i].offset, System.IO.SeekOrigin.Begin);
                     Objects[i].loadbody(br);
                     Objects[i].SuccessedReadBody = true;
+                }
+                catch (Exception ee)
+                {
+                    ResourceCollectorXNA.ConsoleWindow.TraceMessage(Objects[i].name);
+                    ResourceCollectorXNA.ConsoleWindow.TraceMessage("\tload body failed   >  "+ ee.Message);
+                }
               
             }
 

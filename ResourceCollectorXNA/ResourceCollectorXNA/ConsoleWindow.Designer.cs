@@ -52,6 +52,7 @@
             this.MaximizeBox = false;
             this.Name = "ConsoleWindow";
             this.Text = "ConsoleWindow";
+            this.Load += new System.EventHandler(this.ConsoleWindow_Load);
             this.Resize += new System.EventHandler(this.ConsoleWindow_Resize);
             this.ResumeLayout(false);
 

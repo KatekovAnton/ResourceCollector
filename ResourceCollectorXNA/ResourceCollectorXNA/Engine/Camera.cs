@@ -31,7 +31,7 @@ namespace ResourceCollectorXNA.Engine{
                 determ = 0.001f;
             _cameraYaw = Convert.ToSingle(Math.Atan(Convert.ToSingle((cameratarget.Value.X - cameraposition.Value.X) / determ)));
             View = Matrix.CreateLookAt(cameraposition.Value, cameratarget.Value, new Vector3(0, 1, 0));
-            Projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.PiOver4, GameEngine.Device.Viewport.AspectRatio, 1, 150.0f);
+            Projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.PiOver4, GameEngine.Device.Viewport.AspectRatio, 1, 250.0f);
             cameraFrustum.Matrix = View * Projection;
         }
 

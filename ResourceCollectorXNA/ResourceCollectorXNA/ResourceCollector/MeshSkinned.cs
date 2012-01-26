@@ -804,22 +804,23 @@ namespace ResourceCollector
                         faces = new SkinnedFace[num_faces];
                         for (int i = 0; i < num_faces; i++)
                         {
-                            faces[i] = new SkinnedFace();
-                            faces[i].cv0 = br.ReadInt32();
-                            faces[i].cv1 = br.ReadInt32();
-                            faces[i].cv2 = br.ReadInt32();
+                                faces[i] = new SkinnedFace();
+                                faces[i].cv0 = br.ReadInt32();
+                                faces[i].cv1 = br.ReadInt32();
+                                faces[i].cv2 = br.ReadInt32();
 
-                            faces[i].v0 = vertexes[faces[i].cv0 - 1]; size += 4;
-                            faces[i].v1 = vertexes[faces[i].cv1 - 1]; size += 4;
-                            faces[i].v2 = vertexes[faces[i].cv2 - 1]; size += 4;
+                                faces[i].v0 = vertexes[faces[i].cv0 - 1]; size += 4;
+                                faces[i].v1 = vertexes[faces[i].cv1 - 1]; size += 4;
+                                faces[i].v2 = vertexes[faces[i].cv2 - 1]; size += 4;
 
-                            faces[i].tv0 = br.ReadInt32();
-                            faces[i].tv1 = br.ReadInt32();
-                            faces[i].tv2 = br.ReadInt32();
+                                faces[i].tv0 = br.ReadInt32();
+                                faces[i].tv1 = br.ReadInt32();
+                                faces[i].tv2 = br.ReadInt32();
 
-                            faces[i].v0.textureccordinates = tvertexes[faces[i].tv0 - 1]; size += 4;
-                            faces[i].v1.textureccordinates = tvertexes[faces[i].tv1 - 1]; size += 4;
-                            faces[i].v2.textureccordinates = tvertexes[faces[i].tv2 - 1]; size += 4;
+                                faces[i].v0.textureccordinates = tvertexes[faces[i].tv0 - 1]; size += 4;
+                                faces[i].v1.textureccordinates = tvertexes[faces[i].tv1 - 1]; size += 4;
+                                faces[i].v2.textureccordinates = tvertexes[faces[i].tv2 - 1]; size += 4;
+                           
                         }
 
                         skinvertexnumber = br.ReadInt32(); size += 4;

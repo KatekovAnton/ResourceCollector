@@ -17,7 +17,7 @@ namespace ResourceCollector.Content
         {
             InitializeComponent();
             s = str;
-           
+            ResourceCollectorXNA.ConsoleWindow.SetOUT(richTextBox1);
         }
 
         private void MeshImportList_Shown(object sender, EventArgs e)
@@ -60,6 +60,31 @@ namespace ResourceCollector.Content
         {
             for (int i = 0; i < treeView1.Nodes.Count; i++)
                 treeView1.Nodes[i].Checked = false;
+        }
+
+        private void MeshImportList_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MeshImportList_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            ResourceCollectorXNA.ConsoleWindow.SetOUT(null);
+        }
+
+        private void treeView1_NodeMouseHover(object sender, TreeNodeMouseHoverEventArgs e)
+        {
+            if (md) e.Node.Checked = true;
+            if (mr) e.Node.Checked = false;
+        }
+        bool md;
+        bool mr;
+
+        private void treeView1_MouseMove(object sender, MouseEventArgs e)
+        {
+            md = e.Button == System.Windows.Forms.MouseButtons.Left;
+            mr = e.Button == System.Windows.Forms.MouseButtons.Right;
+            richTextBox1.Text = md.ToString();
         }
     }
 }
