@@ -64,6 +64,27 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\x86\Debug\Community.CsharpSqlite.dll</HintPath>
     </Reference>
+    <Reference Include="IronPython, Version=2.7.0.40, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\IronPython.dll</HintPath>
+    </Reference>
+    <Reference Include="IronPython.Modules, Version=2.7.0.40, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\IronPython.Modules.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Dynamic, Version=1.1.0.20, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\Microsoft.Dynamic.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Scripting, Version=1.1.0.20, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\Microsoft.Scripting.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Scripting.Metadata, Version=1.1.0.20, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\Microsoft.Scripting.Metadata.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Xna.Framework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86">
       <Private>False</Private>
     </Reference>
@@ -433,6 +454,8 @@
     <Compile Include="ResourceCollector\SkeletonWithAddInfo.cs" />
     <Compile Include="ResourceCollector\TextureListContent.cs" />
     <Compile Include="ResourceCollector\LevelObjectDescription.cs" />
+    <Compile Include="SE.cs" />
+    <Compile Include="UIContent.cs" />
     <Compile Include="WindowsFormsElements.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -443,6 +466,11 @@
     </Content>
     <Content Include="Game.ico" />
     <Content Include="GameThumbnail.png" />
+    <Content Include="IronPython.dll" />
+    <Content Include="IronPython.Modules.dll" />
+    <Content Include="Microsoft.Dynamic.dll" />
+    <Content Include="Microsoft.Scripting.dll" />
+    <Content Include="Microsoft.Scripting.Metadata.dll" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ResourceCollectorXNAContent\ResourceCollectorXNAContent.contentproj">
