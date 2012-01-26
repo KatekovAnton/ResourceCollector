@@ -85,8 +85,17 @@ namespace ResourceCollector.Content
 
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
+
+        }
+
+        private void treeView1_BeforeSelect(object sender, TreeViewCancelEventArgs e)
+        {
+
+        }
+
+        private void treeView1_NodeMouseHover(object sender, TreeNodeMouseHoverEventArgs e)
+        {
             if (md) e.Node.Checked = true;
-            if (mr) e.Node.Checked = false;
         }
     }
 }
