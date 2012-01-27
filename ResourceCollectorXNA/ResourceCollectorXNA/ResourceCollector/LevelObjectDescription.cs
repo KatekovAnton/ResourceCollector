@@ -58,9 +58,12 @@ namespace ResourceCollector.Content
 
         public System.Windows.Forms.TreeNode TreeNode;
 
-        public LevelObjectDescription()
+        public LevelObjectDescription(string name = "", Pack pack = null)
         {
-            name = "NewWorldObject" + DateTime.Now.Millisecond.ToString() ;
+            if (name != "")    this.name = name;
+            else    this.name = "New World Object" + DateTime.Now.Millisecond.ToString() ;
+
+            this.Pack = pack;
           //  LODs = new List<Model>();
             this.ShapeType = 1;
             this.loadedformat = this.forsavingformat = ElementType.LevelObjectDescription;

@@ -310,7 +310,7 @@
             // settingsToolStripMenuItem
             // 
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.settingsToolStripMenuItem.Text = "Settings";
             this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
             // 
@@ -866,7 +866,7 @@
             // 
             this.renderOdjectToolStripMenuItem.Name = "renderOdjectToolStripMenuItem";
             this.renderOdjectToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.renderOdjectToolStripMenuItem.Text = "RenderOdject";
+            this.renderOdjectToolStripMenuItem.Text = "RenderObject";
             this.renderOdjectToolStripMenuItem.Click += new System.EventHandler(this.textureToolStripMenuItem_Click);
             // 
             // autoCompleteComboBox1

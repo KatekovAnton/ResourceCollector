@@ -1,4 +1,4 @@
-﻿pattern = Eggs.Question("Need pattern!!!")
+﻿pattern = quest("Ineed search pattern (RegEx)")
 if pattern != "Cancel":
     pack.Attach(Eggs.CreateCollisionMeshes(pattern))
     pack.Attach(Eggs.CreateRenderObjectDescriptions(pattern))

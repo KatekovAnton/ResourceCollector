@@ -202,11 +202,10 @@ namespace ResourceCollector
               RenderObjectDescription rod = new RenderObjectDescription();
               rod.pack = PackList.Instance.packs[0];
               //3 раза
-              for (int i = 0; i < 3; i++)
-              {
-                  // add lod, subset, meshes
-                  rod.addlod().AddSubSet(new string[] { pc.name });
-              }
+              // add lod, subset, meshes
+              rod.addlod().AddSubSet(new string[] { pc.name });
+              rod.addlod().AddSubSet(new string[] { pc.name });
+              rod.addlod().AddSubSet(new string[] { pc.name });
 
               rod.name = "rod_" + pc.name;
               rod.IsShadowCaster = true;
@@ -229,6 +228,8 @@ namespace ResourceCollector
           {
               Material mat = new Material("mat_" + pc.name, PackList.Instance.packs[0]);
               mat.AddLod().Addmat().DiffuseTextureName = pc.name;
+              mat.AddLod().Addmat().DiffuseTextureName = pc.name;
+              mat.AddLod().Addmat().DiffuseTextureName = pc.name;
               cccr.Add(mat);
               ResourceCollectorXNA.ConsoleWindow.TraceMessage("\t\t\t" + mat.name);
           }
@@ -239,21 +240,27 @@ namespace ResourceCollector
       public static List<PackContent> CreateLevelObjectDescriptions(string search_pattern = "")
       {
           var ccc = Eggs.GetObjects(ElementType.PNGTexture, search_pattern);
-          List<PackContent> cccr = new List<PackContent>();
-          ResourceCollectorXNA.ConsoleWindow.TraceMessage("Created DiffuseMaterials:");
+          var cccr = new List<PackContent>();
+          ResourceCollectorXNA.ConsoleWindow.TraceMessage("Created LevelObjectDescriptions:");
           foreach (PackContent pc in ccc)
           {
-              Material mat = new Material("mat_" + pc.name, PackList.Instance.packs[0]);
-              mat.AddLod().Addmat().DiffuseTextureName = pc.name;
-              cccr.Add(mat);
-              ResourceCollectorXNA.ConsoleWindow.TraceMessage("\t\t\t" + mat.name);
+              LevelObjectDescription lod = new LevelObjectDescription("lo_" + pc.name, PackList.Instance.packs[0]);
+
+          /*    if (rod.createpropertieswindow(rod.Pack, tv) == System.Windows.Forms.DialogResult.OK)
+              {
+                  rod.Pack.Attach(rod);
+                  FormMainPackExplorer.Instance.UpdateData();
+              }*/
+              ResourceCollectorXNA.ConsoleWindow.TraceMessage("\t\t\t" + lod.name);
+              cccr.Add(lod);
           }
+           
           ResourceCollectorXNA.ConsoleWindow.TraceMessage("");
           return cccr;
       }
 
-      /*   
   //LOD
+       /*
    LevelObjectDescription rod = new LevelObjectDescription();
           rod.Pack = packs.packs[0];
           if (rod.createpropertieswindow(rod.Pack, tv) == System.Windows.Forms.DialogResult.OK)
@@ -261,7 +268,8 @@ namespace ResourceCollector
               rod.Pack.Attach(rod);
               FormMainPackExplorer.Instance.UpdateData();
           }
-  */
+       */
+
        public static string Question(string message)
        {
            ResourceCollectorXNA.Question q = new Question(message);
@@ -270,6 +278,11 @@ namespace ResourceCollector
                return q.answer;
            }
            return "Cancel";
+       }
+
+       public static void Message(string message)
+       {
+           MessageBox.Show(message);
        }
 
       public static string GetInfo(dynamic val)

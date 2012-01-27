@@ -19,6 +19,8 @@ from System.Math import *
 # это похоже на враппер
 # желательно использовать функции, объ€вленные здесь, так как возможно их прототипы будут изменены
 
+def quest(obj) : return Eggs.Question(obj)
+def mess(obj) : return Eggs.Message(obj)
 def ofd() : return Eggs.ofd()
 def wr(obj): ConsoleWindow.TraceMessage(obj.ToString())
 def Ex(obj) : SE.Instance.Execute(obj)
