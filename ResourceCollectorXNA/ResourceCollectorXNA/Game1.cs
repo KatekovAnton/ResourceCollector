@@ -162,6 +162,7 @@ namespace ResourceCollectorXNA
 
         protected override void Draw(GameTime gameTime)
         {
+            return;
             base.Draw(gameTime);
             GameEngine.Instance.Draw();
 

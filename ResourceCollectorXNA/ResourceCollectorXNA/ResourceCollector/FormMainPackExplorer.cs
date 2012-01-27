@@ -77,7 +77,9 @@ namespace ResourceCollector
                 if (ofd.ShowDialog() == DialogResult.OK)
                   add_pack(ofd.FileName);
                 ofd.Dispose();
+                AppConfiguration.AddRecentFile(ofd.FileName);
                 UpdateData();
+                UpdateRecentPacks();
             }
             else
             {
@@ -128,6 +130,18 @@ namespace ResourceCollector
 
         }
 
+        private void UpdateRecentPacks()
+        {
+            rescentToolStripMenuItem.DropDownItems.Clear();
+            List<string> resc = new List<string>();
+
+            //добавь свои паки и радуйся жизни!!! ))) или грузи из конфига...
+            resc.AddRange(AppConfiguration.RecentFiles());
+
+            foreach (string s in resc)
+                rescentToolStripMenuItem.DropDownItems.Add(s, null, new EventHandler(rescent_click));
+        }
+
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (packs.packs.Count != 0)
@@ -140,6 +154,7 @@ namespace ResourceCollector
                 {
                     packs.Save(0, sfd.FileName);
                     AppConfiguration.PackPlaceFolder = System.IO.Path.GetDirectoryName(sfd.FileName);
+                    AppConfiguration.AddRecentFile(sfd.FileName);
                 }
             }
         }
@@ -496,13 +511,7 @@ namespace ResourceCollector
         {
            ResourceCollectorXNA.SE.Instance.ExScript("_onload");
 
-           List<string> resc = new List<string>();
-
-           //добавь свои паки и радуйся жизни!!! ))) или грузи из конфига...
-           resc.Add( @"D:\projects\ULJANIK493DEMO\PhysX test2\PhysX test2\Data\Ship.pack");
-
-           foreach (string s in resc)
-                rescentToolStripMenuItem.DropDownItems.Add(s, null , new EventHandler(rescent_click));
+           UpdateRecentPacks();
         }
 
         private void rescent_click(object sender, EventArgs e)
