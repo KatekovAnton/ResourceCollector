@@ -232,6 +232,23 @@ namespace ResourceCollector
               cccr.Add(mat);
               ResourceCollectorXNA.ConsoleWindow.TraceMessage("\t\t\t" + mat.name);
           }
+          ResourceCollectorXNA.ConsoleWindow.TraceMessage("");
+          return cccr;
+      }
+
+      public static List<PackContent> CreateLevelObjectDescriptions(string search_pattern = "")
+      {
+          var ccc = Eggs.GetObjects(ElementType.PNGTexture, search_pattern);
+          List<PackContent> cccr = new List<PackContent>();
+          ResourceCollectorXNA.ConsoleWindow.TraceMessage("Created DiffuseMaterials:");
+          foreach (PackContent pc in ccc)
+          {
+              Material mat = new Material("mat_" + pc.name, PackList.Instance.packs[0]);
+              mat.AddLod().Addmat().DiffuseTextureName = pc.name;
+              cccr.Add(mat);
+              ResourceCollectorXNA.ConsoleWindow.TraceMessage("\t\t\t" + mat.name);
+          }
+          ResourceCollectorXNA.ConsoleWindow.TraceMessage("");
           return cccr;
       }
 
@@ -244,8 +261,16 @@ namespace ResourceCollector
               rod.Pack.Attach(rod);
               FormMainPackExplorer.Instance.UpdateData();
           }
-         */
-
+  */
+       public static string Question(string message)
+       {
+           ResourceCollectorXNA.Question q = new Question(message);
+           if (q.ShowDialog() == DialogResult.OK)
+           {
+               return q.answer;
+           }
+           return "Cancel";
+       }
 
       public static string GetInfo(dynamic val)
       {
