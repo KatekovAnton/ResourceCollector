@@ -64,10 +64,8 @@ namespace ResourceCollector
                 visibleformats.Add(ElementType.ParticelRenderObjectDescription);
         }
 
-        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        public  void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (sender != null)
-            {
                 OpenFileDialog ofd = new OpenFileDialog();
 
                 ofd.Filter = "Паки *.pack|*.pack";
@@ -80,12 +78,6 @@ namespace ResourceCollector
                 AppConfiguration.AddRecentFile(ofd.FileName);
                 UpdateData();
                 UpdateRecentPacks();
-            }
-            else
-            {
-               
-            }
-
         }
 
 
@@ -142,7 +134,7 @@ namespace ResourceCollector
                 rescentToolStripMenuItem.DropDownItems.Add(s, null, new EventHandler(rescent_click));
         }
 
-        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        public void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (packs.packs.Count != 0)
             {
@@ -358,7 +350,7 @@ namespace ResourceCollector
             }
         }
 
-        private void importPackToolStripMenuItem_Click(object sender, EventArgs e)
+        public  void importPackToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
             if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
@@ -394,7 +386,7 @@ namespace ResourceCollector
 
             bool enabled_ = (packs!=null) && (packs.packs!=null) && (packs.packs.Count > 0);
                 toolStripButton1.Enabled = enabled_;
-                scripts_toolmenu.Enabled = enabled_;
+           //     scripts_toolmenu.Enabled = enabled_;
 
             if (enabled_)
             for (int i = 0; i < packs.packs.Count; i++)
@@ -612,6 +604,21 @@ namespace ResourceCollector
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+        }
+
+        public void add_new_object(int format)
+        {
+            FormNewElement f = new FormNewElement(packs, treeView1);
+            switch (format)
+            {
+                case ElementType.PNGTexture: f.button2_Click(null, null); break;
+                case ElementType.CollisionMesh: f.button4_Click(null, null); break;
+                case ElementType.LevelObjectDescription: f.button7_Click(null, null); break;
+                case ElementType.RenderObjectDescription: f.button6_Click(null, null); break;
+                case ElementType.ParticelRenderObjectDescription: f.button11_Click(null, null); break;
+                case ElementType.Material: f.button10_Click(null, null); break;
+                default: break;
+            }
         }
 
         private void textureToolStripMenuItem_Click(object sender, EventArgs e)

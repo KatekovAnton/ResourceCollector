@@ -39,9 +39,7 @@ namespace ResourceCollectorXNA
 
             if (instance.listBox1.Items.Count > 500)
                 instance.listBox1.Items.RemoveAt(500);
-            try
-            { instance.Show(); instance.Activate(); }
-            catch { }
+          
              
         }
         private void ConsoleWindow_Resize(object sender, EventArgs e)

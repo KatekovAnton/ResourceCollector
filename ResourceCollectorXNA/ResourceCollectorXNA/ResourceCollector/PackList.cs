@@ -24,6 +24,8 @@ namespace ResourceCollector
             p.Init(filename, br);
             if (p.fullsucces)
                 packs.Add(p);
+            for (int i = 0; i< p.Objects.Count;i++)
+                if (!p.Objects[i].name.EndsWith("\0")) p.rename(i, p.Objects[i].name + "\0");
         }
 
         public PackContent GetObject(string name)
@@ -54,6 +56,7 @@ namespace ResourceCollector
         {
             if (packs != null && packs.Count > number && packs[number] != null && packs[number].Objects != null)
             {
+
                 packs[number].Save(filename);
             }
         }

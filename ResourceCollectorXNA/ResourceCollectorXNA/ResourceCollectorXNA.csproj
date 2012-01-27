@@ -470,6 +470,9 @@
     <None Include="Scripts\clear_extentions.py">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Scripts\ADD_TEXTURES_TO_PACK.py">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <Compile Include="SE.cs" />
     <Compile Include="UIContent.cs" />
     <Compile Include="WindowsFormsElements.cs">
@@ -487,6 +490,21 @@
     <Content Include="Microsoft.Dynamic.dll" />
     <Content Include="Microsoft.Scripting.dll" />
     <Content Include="Microsoft.Scripting.Metadata.dll" />
+    <None Include="Scripts\SAVE_PACK.py">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Scripts\OPEN_PACK.py">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Scripts\CLEAR_PACK.py">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Scripts\IMPORT_PACK.py">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Scripts\_helper.py">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Scripts\create_scene.py">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

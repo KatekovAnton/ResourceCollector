@@ -278,21 +278,21 @@
             // textureToolStripMenuItem
             // 
             this.textureToolStripMenuItem.Name = "textureToolStripMenuItem";
-            this.textureToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.textureToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.textureToolStripMenuItem.Text = "Texture";
             this.textureToolStripMenuItem.Click += new System.EventHandler(this.textureToolStripMenuItem_Click);
             // 
             // collisionMeshToolStripMenuItem
             // 
             this.collisionMeshToolStripMenuItem.Name = "collisionMeshToolStripMenuItem";
-            this.collisionMeshToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.collisionMeshToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.collisionMeshToolStripMenuItem.Text = "CollisionMesh";
             this.collisionMeshToolStripMenuItem.Click += new System.EventHandler(this.textureToolStripMenuItem_Click);
             // 
             // particleToolStripMenuItem
             // 
             this.particleToolStripMenuItem.Name = "particleToolStripMenuItem";
-            this.particleToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.particleToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.particleToolStripMenuItem.Text = "Particle";
             this.particleToolStripMenuItem.Click += new System.EventHandler(this.textureToolStripMenuItem_Click);
             // 
@@ -310,7 +310,7 @@
             // settingsToolStripMenuItem
             // 
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.settingsToolStripMenuItem.Text = "Settings";
             this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
             // 
@@ -339,7 +339,6 @@
             this.formToolStripMenuItem,
             this.rUNToolStripMenuItem,
             this.editorToolStripMenuItem});
-            this.scripts_toolmenu.Enabled = false;
             this.scripts_toolmenu.Image = ((System.Drawing.Image)(resources.GetObject("scripts_toolmenu.Image")));
             this.scripts_toolmenu.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.scripts_toolmenu.Name = "scripts_toolmenu";
@@ -851,21 +850,21 @@
             // levelObjectToolStripMenuItem
             // 
             this.levelObjectToolStripMenuItem.Name = "levelObjectToolStripMenuItem";
-            this.levelObjectToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.levelObjectToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.levelObjectToolStripMenuItem.Text = "LevelObject";
             this.levelObjectToolStripMenuItem.Click += new System.EventHandler(this.textureToolStripMenuItem_Click);
             // 
             // materialToolStripMenuItem
             // 
             this.materialToolStripMenuItem.Name = "materialToolStripMenuItem";
-            this.materialToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.materialToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.materialToolStripMenuItem.Text = "Material";
             this.materialToolStripMenuItem.Click += new System.EventHandler(this.textureToolStripMenuItem_Click);
             // 
             // renderOdjectToolStripMenuItem
             // 
             this.renderOdjectToolStripMenuItem.Name = "renderOdjectToolStripMenuItem";
-            this.renderOdjectToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.renderOdjectToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.renderOdjectToolStripMenuItem.Text = "RenderObject";
             this.renderOdjectToolStripMenuItem.Click += new System.EventHandler(this.textureToolStripMenuItem_Click);
             // 

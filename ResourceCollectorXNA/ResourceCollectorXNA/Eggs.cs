@@ -132,24 +132,23 @@ namespace ResourceCollector
 
           for (int i = 0; i < PackList.Instance.packs.Count; i++)
             objects.AddRange(PackList.Instance.packs[i].Objects.FindAll(o => (Regex.Match(o.name , search_pattern).Success) && (o.loadedformat == loadedformat || o.forsavingformat == loadedformat))); // .ConvertAll(o => o.name).ToArray()); ;
-
-             /* for (int j = 0; j < PackList.Instance.packs[i].Objects.Count; j++)
-              {
-                  if (!((loadedformat == PackList.Instance.packs[i].Objects[j].loadedformat) || ( loadedformat == PackList.Instance.packs[i].Objects[j].forsavingformat )))
-                      continue;
-
-                  string name = PackList.Instance.packs[i].Objects[j].name;
-                  if (Regex.Match(name, search_pattern).Success) objects.Add(PackList.Instance.packs[i].Objects[j]);
-              }*/
+             
           return objects;
       }
 
       public static void Rename(int loadedformat, string search_pattern, string replace_string)
       {
           List<PackContent> objects = GetObjects(loadedformat, search_pattern);
+          int i = 0;
           foreach (PackContent pc in objects)
           {
-              pc.name = Regex.Replace(pc.name, search_pattern, replace_string);  
+              string new_name = Regex.Replace(pc.name, search_pattern, replace_string.Replace(@"\c",i.ToString()));
+              i++;
+
+              if (!replace_string.EndsWith("\0"))
+                  new_name += "\0";
+              ResourceCollectorXNA.ConsoleWindow.TraceMessage(pc.name.Substring(0, pc.name.Length-1) + " \t  was renamed to: \t " + new_name);
+              pc.name = new_name;
           }
       }
 
@@ -169,7 +168,7 @@ namespace ResourceCollector
       public static List<PackContent> CreateCollisionMeshes(string search_pattern = "")
       {
           var ccc = Eggs.GetObjects(ElementType.MeshSkinnedOptimazedForLoading, search_pattern);
-          ccc.InsertRange(0, Eggs.GetObjects(ElementType.MeshSkinnedOptimazedForStore, search_pattern));
+         // ccc.AddRange(Eggs.GetObjects(ElementType.MeshSkinnedOptimazedForStore, search_pattern));
 
           var cccr = new List<PackContent>();
           ResourceCollectorXNA.ConsoleWindow.TraceMessage("Created CollisionMeshes:");
@@ -203,9 +202,11 @@ namespace ResourceCollector
               rod.pack = PackList.Instance.packs[0];
               //3 раза
               // add lod, subset, meshes
-              rod.addlod().AddSubSet(new string[] { pc.name });
-              rod.addlod().AddSubSet(new string[] { pc.name });
-              rod.addlod().AddSubSet(new string[] { pc.name });
+              string m_name = GetObjectName(ElementType.MeshSkinnedOptimazedForLoading, pc.name);
+
+              rod.addlod().AddSubSet(new string[] { m_name });
+              rod.addlod().AddSubSet(new string[] { m_name });
+              rod.addlod().AddSubSet(new string[] { m_name });
 
               rod.name = "rod_" + pc.name;
               rod.IsShadowCaster = true;
@@ -227,9 +228,12 @@ namespace ResourceCollector
           foreach (PackContent pc in ccc)
           {
               Material mat = new Material("mat_" + pc.name, PackList.Instance.packs[0]);
-              mat.AddLod().Addmat().DiffuseTextureName = pc.name;
-              mat.AddLod().Addmat().DiffuseTextureName = pc.name;
-              mat.AddLod().Addmat().DiffuseTextureName = pc.name;
+              string diff_name = GetObjectName(ElementType.PNGTexture, pc.name);
+
+              mat.AddLod().Addmat().DiffuseTextureName = diff_name;
+              mat.AddLod().Addmat().DiffuseTextureName = diff_name;
+              mat.AddLod().Addmat().DiffuseTextureName = diff_name;
+
               cccr.Add(mat);
               ResourceCollectorXNA.ConsoleWindow.TraceMessage("\t\t\t" + mat.name);
           }
@@ -239,18 +243,25 @@ namespace ResourceCollector
 
       public static List<PackContent> CreateLevelObjectDescriptions(string search_pattern = "")
       {
-          var ccc = Eggs.GetObjects(ElementType.PNGTexture, search_pattern);
+          var ccc = Eggs.GetObjects(ElementType.MeshSkinnedOptimazedForLoading, search_pattern);
+      //    ccc.AddRange(Eggs.GetObjects(ElementType.MeshSkinnedOptimazedForStore, search_pattern));
+
           var cccr = new List<PackContent>();
+
           ResourceCollectorXNA.ConsoleWindow.TraceMessage("Created LevelObjectDescriptions:");
           foreach (PackContent pc in ccc)
           {
               LevelObjectDescription lod = new LevelObjectDescription("lo_" + pc.name, PackList.Instance.packs[0]);
-
-          /*    if (rod.createpropertieswindow(rod.Pack, tv) == System.Windows.Forms.DialogResult.OK)
-              {
-                  rod.Pack.Attach(rod);
-                  FormMainPackExplorer.Instance.UpdateData();
-              }*/
+              
+              lod.RODName = GetObjectName(ElementType.RenderObjectDescription, "rod_"+pc.name);
+              lod.matname = GetObjectName(ElementType.Material, "mat_tex_"+pc.name);
+         //   lod.PhysicCollisionName = "cm_"+pc.name;
+              lod.BehaviourType = LevelObjectDescription.objectstaticbehaviourmodel;
+              lod.RCCMName =  GetObjectName(ElementType.CollisionMesh, "cm_" + pc.name);
+              lod.IsAnimated = false;
+              lod.IsRCCMAnimated = false;
+              lod.IsRCCMEnabled = true;
+              
               ResourceCollectorXNA.ConsoleWindow.TraceMessage("\t\t\t" + lod.name);
               cccr.Add(lod);
           }
@@ -259,16 +270,33 @@ namespace ResourceCollector
           return cccr;
       }
 
-  //LOD
-       /*
-   LevelObjectDescription rod = new LevelObjectDescription();
-          rod.Pack = packs.packs[0];
-          if (rod.createpropertieswindow(rod.Pack, tv) == System.Windows.Forms.DialogResult.OK)
+
+      public static string GetObjectName(int format, string name)
+      {
+          string nn = name;
+          if (PackList.Instance.packs[0].getobject(format, name) == null)
           {
-              rod.Pack.Attach(rod);
-              FormMainPackExplorer.Instance.UpdateData();
+              FormObjectPicker f = new FormObjectPicker(PackList.Instance.packs[0], format, false, ElementType.ReturnString(format) + " not found:  " + name, "^"+ name.TrimEnd("1234567890_\0".ToCharArray()) );
+              if (f.ShowDialog() == DialogResult.OK)
+              {
+                  nn = f.PickedContent[0];
+              }
           }
-       */
+          return nn;
+      }
+
+      public static PackContent NULL = null;
+       public static void ClearPack(string search_pattern = "", int format = -1)
+       {
+           for (int i = 0; i < PackList.Instance.packs[0].Objects.Count;i++)
+           {
+               if (((format == -1) || (PackList.Instance.packs[0].Objects[i].loadedformat == format) || (PackList.Instance.packs[0].Objects[i].forsavingformat == format)) && Regex.IsMatch(PackList.Instance.packs[0].Objects[i].name, search_pattern))
+               {
+                   PackList.Instance.packs[0].DropElement(i--);
+               }
+           }
+       
+       }
 
        public static string Question(string message)
        {

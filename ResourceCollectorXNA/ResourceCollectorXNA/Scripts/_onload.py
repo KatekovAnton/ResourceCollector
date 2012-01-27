@@ -28,3 +28,7 @@ def ExScript(obj) : SE.Instance.ExScript(obj)
 def update() : FormMainPackExplorer.Instance.UpdateData()
 def getobjects(format, search = "") : return Eggs.GetObjects(format,search)
 def rename(format, search, replace) : Eggs.Rename(format,search,replace)
+
+# константы и подсказки
+ExScript("_helper")
+Null = Eggs.NULL

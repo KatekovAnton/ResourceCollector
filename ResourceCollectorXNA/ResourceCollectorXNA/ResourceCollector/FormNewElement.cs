@@ -32,8 +32,9 @@ namespace ResourceCollector
                        {
                             var path = f_name.Split('\\', '/');
                             var image = new ImageContent(path[path.Length - 1], new Bitmap(f_name));
-
+                            image.name = "tex_" + image.name.Substring(0,image.name.IndexOf("."))+"\0";
                             packs.packs[0].Attach(image);
+
                             FormMainPackExplorer.Instance.UpdateData();
                        }
                        catch 

@@ -16,18 +16,19 @@ namespace ResourceCollector
         { }
         public void AddObjectsToPack(string filename, System.IO.BinaryReader br)
         {
-            var loadedObjectCount = Objects.Count;
+            var loadedObjectCount = Objects.Count; 
+            System.IO.FileStream str1 = null;
             try
             {
-                System.IO.FileStream str1 = new System.IO.FileStream(filename, System.IO.FileMode.Open);
-                br = new System.IO.BinaryReader(str1);
+                str1 = new System.IO.FileStream(filename, System.IO.FileMode.Open);
+                
             }
             catch (Exception EX)
             {
-                br.Close();
                 MessageBox.Show(EX.ToString());
                 return;
             }
+            br = new System.IO.BinaryReader(str1);
             int foratID = br.ReadInt32();
             headersize += 4;
             if (foratID != formayid)
@@ -246,12 +247,22 @@ namespace ResourceCollector
             recalculateparameters();
             if (System.IO.File.Exists(fln))
                 System.IO.File.Delete(fln);
-            System.IO.FileStream str1;
-            str1 = new System.IO.FileStream(fln, (System.IO.File.Exists(fln) ? System.IO.FileMode.Create : 0) | System.IO.FileMode.CreateNew);
+            System.IO.FileStream str1= null;
+            try
+            {
+                str1 = new System.IO.FileStream(fln, (System.IO.File.Exists(fln) ? System.IO.FileMode.Create : 0) | System.IO.FileMode.CreateNew);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("stream creation error");
+                return;
+            }
             System.IO.BinaryWriter bw = new System.IO.BinaryWriter(str1);
-
             bw.Write(Pack.formayid);
             bw.Write(Objects.Count);
+
+            for (int i = 0; i < Objects.Count; i++) if (!Objects[i].name.EndsWith("\0")) rename(i, Objects[i].name + "\0");
+
             for (int i = 0; i < Objects.Count; i++)
             {
                 Objects[i].saveheader(bw);
@@ -304,11 +315,11 @@ namespace ResourceCollector
 
         public bool rename(int Elementnumver, string newname)
         {
-            for (int i = 0; i < Objects.Count; i++)
+          /*  for (int i = 0; i < Objects.Count; i++)
             {
                 if (newname == Objects[i].name && i != Elementnumver)
                     return false;
-            }
+            }*/ if (Elementnumver >= Objects.Count ) return false;
             Objects[Elementnumver].name = newname;
             return true;
         }

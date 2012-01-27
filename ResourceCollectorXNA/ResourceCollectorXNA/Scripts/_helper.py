@@ -1,0 +1,19 @@
+﻿# ElementType.
+__MissingObject = ElementType.MissingObject
+__MeshSkinnedOptimazedForStore = ElementType.MeshSkinnedOptimazedForStore
+__MeshSkinnedOptimazedForLoading = ElementType.MeshSkinnedOptimazedForLoading
+__PNGTexture = ElementType.PNGTexture
+__MeshList = ElementType.MeshList
+__StringList = ElementType.StringList
+__LevelObjectDescription = ElementType.LevelObjectDescription
+__GameObjectDescription = ElementType.GameObjectDescription
+__RenderObjectDescription = ElementType.RenderObjectDescription
+__ParticelRenderObjectDescription = ElementType.ParticelRenderObjectDescription
+__CollisionMesh = ElementType.CollisionMesh
+__ConvexMesh = ElementType.ConvexMesh
+__Skeleton = ElementType.Skeleton
+__SkeletonWithAddInfo = ElementType.SkeletonWithAddInfo
+__BaseAnimation = ElementType.BaseAnimation
+__Character = ElementType.Character
+__TextureList = ElementType.TextureList
+__Material = ElementType.Material

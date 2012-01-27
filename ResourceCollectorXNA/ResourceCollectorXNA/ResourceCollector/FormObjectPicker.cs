@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-
+using System.Text.RegularExpressions;
 namespace ResourceCollector
 {
     public partial class FormObjectPicker : Form
@@ -18,13 +18,49 @@ namespace ResourceCollector
             private set;
         }
         bool multiselect;
-        public FormObjectPicker(Pack p, int filter, bool multiselect = false)
+        public FormObjectPicker(Pack p, int filter, bool multiselect = false, string label = "", string found_regex = "")
         {
+
             this.multiselect = multiselect;
             PickedContent = new List<string>();
             InitializeComponent();
             checkedListBox1.Items.AddRange(
                 p.Objects.FindAll(o => o.loadedformat == filter || o.forsavingformat == filter).ConvertAll(o => o.name).ToArray()); ;
+
+            if (label != "") { label1.Text = label; label1.Visible = true; }
+
+            if (found_regex != "")
+            {
+                int i =0;
+                foreach (dynamic val in checkedListBox1.Items)
+                {
+                    
+                    try
+                    {
+                        if (Regex.IsMatch(val, found_regex))
+                        {
+
+                            checkedListBox1.SetItemChecked(i, true);
+                            if (multiselect)
+                            {
+                                checkedListBox1.SelectedItems.Add(val);
+                                button1.Focus();
+                            }
+                            else
+                            {
+                                checkedListBox1.SelectedItem = val;
+                                button1.Focus();
+                                break;
+                            }
+
+                        }
+                    }
+                    catch { }
+                    i++;
+                }
+            }
+
+
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -118,6 +154,11 @@ namespace ResourceCollector
                     }
                 }
             }
+        }
+
+        private void FormObjectPicker_Load(object sender, EventArgs e)
+        {
+
         }
 
        
