@@ -48,6 +48,9 @@
             this.xNAMonitorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripDropDownButton();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.textureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.collisionMeshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.particleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripDropDownButton3 = new System.Windows.Forms.ToolStripDropDownButton();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripDropDownButton2 = new System.Windows.Forms.ToolStripDropDownButton();
@@ -56,6 +59,7 @@
             this.formToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rUNToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripTextBox1 = new System.Windows.Forms.ToolStripTextBox();
+            this.editorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.treeView1 = new System.Windows.Forms.TreeView();
@@ -64,7 +68,6 @@
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
-            this.autoCompleteComboBox1 = new ResourceCollector.AutoCompleteComboBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -94,6 +97,10 @@
             this.label15 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
+            this.levelObjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.materialToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.renderOdjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.autoCompleteComboBox1 = new ResourceCollector.AutoCompleteComboBox();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -246,6 +253,7 @@
             this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.toolStripButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newToolStripMenuItem});
+            this.toolStripButton1.Enabled = false;
             this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
             this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton1.Name = "toolStripButton1";
@@ -255,10 +263,38 @@
             // 
             // newToolStripMenuItem
             // 
+            this.newToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.textureToolStripMenuItem,
+            this.materialToolStripMenuItem,
+            this.collisionMeshToolStripMenuItem,
+            this.levelObjectToolStripMenuItem,
+            this.renderOdjectToolStripMenuItem,
+            this.particleToolStripMenuItem});
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.newToolStripMenuItem.Text = "New";
             this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
+            // 
+            // textureToolStripMenuItem
+            // 
+            this.textureToolStripMenuItem.Name = "textureToolStripMenuItem";
+            this.textureToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.textureToolStripMenuItem.Text = "Texture";
+            this.textureToolStripMenuItem.Click += new System.EventHandler(this.textureToolStripMenuItem_Click);
+            // 
+            // collisionMeshToolStripMenuItem
+            // 
+            this.collisionMeshToolStripMenuItem.Name = "collisionMeshToolStripMenuItem";
+            this.collisionMeshToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.collisionMeshToolStripMenuItem.Text = "CollisionMesh";
+            this.collisionMeshToolStripMenuItem.Click += new System.EventHandler(this.textureToolStripMenuItem_Click);
+            // 
+            // particleToolStripMenuItem
+            // 
+            this.particleToolStripMenuItem.Name = "particleToolStripMenuItem";
+            this.particleToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.particleToolStripMenuItem.Text = "Particle";
+            this.particleToolStripMenuItem.Click += new System.EventHandler(this.textureToolStripMenuItem_Click);
             // 
             // toolStripDropDownButton3
             // 
@@ -276,6 +312,7 @@
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
             this.settingsToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.settingsToolStripMenuItem.Text = "Settings";
+            this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
             // 
             // toolStripDropDownButton2
             // 
@@ -300,7 +337,9 @@
             this.scripts_toolmenu.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.scripts_toolmenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.formToolStripMenuItem,
-            this.rUNToolStripMenuItem});
+            this.rUNToolStripMenuItem,
+            this.editorToolStripMenuItem});
+            this.scripts_toolmenu.Enabled = false;
             this.scripts_toolmenu.Image = ((System.Drawing.Image)(resources.GetObject("scripts_toolmenu.Image")));
             this.scripts_toolmenu.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.scripts_toolmenu.Name = "scripts_toolmenu";
@@ -311,7 +350,7 @@
             // formToolStripMenuItem
             // 
             this.formToolStripMenuItem.Name = "formToolStripMenuItem";
-            this.formToolStripMenuItem.Size = new System.Drawing.Size(104, 22);
+            this.formToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.formToolStripMenuItem.Text = "All";
             this.formToolStripMenuItem.Click += new System.EventHandler(this.formToolStripMenuItem_Click);
             // 
@@ -320,7 +359,7 @@
             this.rUNToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripTextBox1});
             this.rUNToolStripMenuItem.Name = "rUNToolStripMenuItem";
-            this.rUNToolStripMenuItem.Size = new System.Drawing.Size(104, 22);
+            this.rUNToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.rUNToolStripMenuItem.Text = "Other";
             // 
             // toolStripTextBox1
@@ -328,6 +367,12 @@
             this.toolStripTextBox1.Name = "toolStripTextBox1";
             this.toolStripTextBox1.Size = new System.Drawing.Size(100, 23);
             this.toolStripTextBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.toolStripTextBox1_KeyUp);
+            // 
+            // editorToolStripMenuItem
+            // 
+            this.editorToolStripMenuItem.Name = "editorToolStripMenuItem";
+            this.editorToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.editorToolStripMenuItem.Text = "Editor";
             // 
             // toolStripButton2
             // 
@@ -448,17 +493,6 @@
             this.label13.Size = new System.Drawing.Size(66, 23);
             this.label13.TabIndex = 43;
             this.label13.Text = "By Regex:";
-            // 
-            // autoCompleteComboBox1
-            // 
-            this.autoCompleteComboBox1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.autoCompleteComboBox1.FormattingEnabled = true;
-            this.autoCompleteComboBox1.LimitToList = true;
-            this.autoCompleteComboBox1.Location = new System.Drawing.Point(7, 20);
-            this.autoCompleteComboBox1.Name = "autoCompleteComboBox1";
-            this.autoCompleteComboBox1.Size = new System.Drawing.Size(174, 21);
-            this.autoCompleteComboBox1.TabIndex = 3;
-            this.autoCompleteComboBox1.SelectedIndexChanged += new System.EventHandler(this.autoCompleteComboBox1_SelectedIndexChanged);
             // 
             // groupBox3
             // 
@@ -814,6 +848,38 @@
             this.label8.TabIndex = 19;
             this.label8.Text = "Index:";
             // 
+            // levelObjectToolStripMenuItem
+            // 
+            this.levelObjectToolStripMenuItem.Name = "levelObjectToolStripMenuItem";
+            this.levelObjectToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.levelObjectToolStripMenuItem.Text = "LevelObject";
+            this.levelObjectToolStripMenuItem.Click += new System.EventHandler(this.textureToolStripMenuItem_Click);
+            // 
+            // materialToolStripMenuItem
+            // 
+            this.materialToolStripMenuItem.Name = "materialToolStripMenuItem";
+            this.materialToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.materialToolStripMenuItem.Text = "Material";
+            this.materialToolStripMenuItem.Click += new System.EventHandler(this.textureToolStripMenuItem_Click);
+            // 
+            // renderOdjectToolStripMenuItem
+            // 
+            this.renderOdjectToolStripMenuItem.Name = "renderOdjectToolStripMenuItem";
+            this.renderOdjectToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.renderOdjectToolStripMenuItem.Text = "RenderOdject";
+            this.renderOdjectToolStripMenuItem.Click += new System.EventHandler(this.textureToolStripMenuItem_Click);
+            // 
+            // autoCompleteComboBox1
+            // 
+            this.autoCompleteComboBox1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.autoCompleteComboBox1.FormattingEnabled = true;
+            this.autoCompleteComboBox1.LimitToList = true;
+            this.autoCompleteComboBox1.Location = new System.Drawing.Point(7, 20);
+            this.autoCompleteComboBox1.Name = "autoCompleteComboBox1";
+            this.autoCompleteComboBox1.Size = new System.Drawing.Size(174, 21);
+            this.autoCompleteComboBox1.TabIndex = 3;
+            this.autoCompleteComboBox1.SelectedIndexChanged += new System.EventHandler(this.autoCompleteComboBox1_SelectedIndexChanged);
+            // 
             // FormMainPackExplorer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -828,7 +894,6 @@
             this.Name = "FormMainPackExplorer";
             this.Text = "Resource Collector (Content manager for Paradise Render)";
             this.Load += new System.EventHandler(this.FormMainPackExplorer_Load);
-            this.SizeChanged += new System.EventHandler(this.Form1_SizeChanged);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
@@ -917,6 +982,13 @@
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.ToolStripButton toolStripButton2;
+        private System.Windows.Forms.ToolStripMenuItem editorToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem textureToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem collisionMeshToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem particleToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem levelObjectToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem materialToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem renderOdjectToolStripMenuItem;
     }
 }
 

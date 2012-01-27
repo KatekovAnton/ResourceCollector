@@ -86,16 +86,6 @@ namespace ResourceCollector
 
         }
 
-        private void Form1_SizeChanged(object sender, EventArgs e)
-        {
-           
-            /*    int a = this.Width - groupBox1.Width - 30;
-                a = a > splitContainer1.Panel1MinSize ? a : splitContainer1.Panel1MinSize;
-                splitContainer1.SplitterDistance = a;
-               // groupBox1.Height = Height - groupBox1.Location.Y - 90;
-            */
-            
-        }
 
         void treeView1NodeMouseClick(TreeNode tn)
         {
@@ -386,6 +376,12 @@ namespace ResourceCollector
         {
             treeView1.Nodes.Clear();
             autoCompleteComboBox1.Items.Clear();
+
+            bool enabled_ = (packs!=null) && (packs.packs!=null) && (packs.packs.Count > 0);
+                toolStripButton1.Enabled = enabled_;
+                scripts_toolmenu.Enabled = enabled_;
+
+            if (enabled_)
             for (int i = 0; i < packs.packs.Count; i++)
             {
                 
@@ -603,5 +599,30 @@ namespace ResourceCollector
         {
             ResourceCollectorXNA.ConsoleWindow.TraceMessage(ResourceCollectorXNA.Program.help);
         }
+
+        private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textureToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string name = ((ToolStripMenuItem)sender).Text;
+
+            FormNewElement f = new FormNewElement(packs, treeView1);
+            switch (name)
+            {
+                case "Texture": f.button2_Click(null, null); break;
+                case "CollisionMesh": f.button4_Click(null, null); break;
+                case "LevelObject": f.button7_Click(null, null); break;
+                case "RenderObject": f.button6_Click(null, null); break;
+                case "Particle": f.button11_Click(null, null); break;
+                case "Material": f.button10_Click(null, null); break;
+                    
+                default: break;
+            }
+        }
+
+        
     }
 }

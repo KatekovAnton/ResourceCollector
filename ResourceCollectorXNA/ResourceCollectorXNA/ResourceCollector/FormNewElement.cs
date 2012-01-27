@@ -19,7 +19,7 @@ namespace ResourceCollector
             tv = _tv;
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        public  void button2_Click(object sender, EventArgs e)
         {
             var fileDialog = new OpenFileDialog();
             fileDialog.Multiselect = true;
@@ -42,10 +42,10 @@ namespace ResourceCollector
                        }
                     }
                 }
-            
+                if (sender == null) this.Close();
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        public void button3_Click(object sender, EventArgs e)
         {
             TextureListContent tl = new TextureListContent();
             tl.Pack = packs.packs[0];
@@ -54,9 +54,10 @@ namespace ResourceCollector
                 packs.packs[0].Attach(tl);
                 FormMainPackExplorer.Instance.UpdateData();
             }
+            if (sender == null) this.Close();
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        public void button4_Click(object sender, EventArgs e)
         {
             FormCollisionMesh ccc = new FormCollisionMesh(tv, packs.packs[0]);
             if(ccc.ShowDialog() == System.Windows.Forms.DialogResult.OK)
@@ -64,9 +65,10 @@ namespace ResourceCollector
                 packs.packs[0].Attach(ccc.cm);
                 FormMainPackExplorer.Instance.UpdateData();
             }
+            if (sender == null) this.Close();
         }
 
-        private void button7_Click(object sender, EventArgs e)
+        public void button7_Click(object sender, EventArgs e)
         {
             LevelObjectDescription rod = new LevelObjectDescription();
             rod.Pack = packs.packs[0];
@@ -75,9 +77,10 @@ namespace ResourceCollector
                 rod.Pack.Attach(rod);
                 FormMainPackExplorer.Instance.UpdateData();
             }
+            if (sender == null) this.Close();
         }
 
-        private void button8_Click(object sender, EventArgs e)
+        public void button8_Click(object sender, EventArgs e)
         {
             if (packs.packs.Count > 0)
             {
@@ -95,9 +98,10 @@ namespace ResourceCollector
             }
             else
                 MessageBox.Show("Load some packs first");
+            if (sender == null) this.Close();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        public void button1_Click(object sender, EventArgs e)
         {
             ResourceCollectorXNA.Engine.Logic.LevelTerrain lt = new ResourceCollectorXNA.Engine.Logic.LevelTerrain(new  Microsoft.Xna.Framework.Vector2(1000,1000));
             foreach (ResourceCollectorXNA.Engine.Logic.TerrainObject obj in lt.terrain)
@@ -108,7 +112,7 @@ namespace ResourceCollector
             Close();
         }
 
-        private void button6_Click(object sender, EventArgs e)
+        public void button6_Click(object sender, EventArgs e)
         {
             RenderObjectDescription rod = new RenderObjectDescription();
             rod.pack = packs.packs[0];
@@ -118,9 +122,10 @@ namespace ResourceCollector
                 rod.pack.Attach(rod);
                 FormMainPackExplorer.Instance.UpdateData();
             }
+            if (sender == null) this.Close();
         }
 
-        private void button9_Click(object sender, EventArgs e)
+        public void button9_Click(object sender, EventArgs e)
         {
             if (packs.packs.Count > 0)
             {
@@ -138,9 +143,10 @@ namespace ResourceCollector
             }
             else
                 MessageBox.Show("Load some packs first");
+            if (sender == null) this.Close();
         }
 
-        private void button10_Click(object sender, EventArgs e)
+        public void button10_Click(object sender, EventArgs e)
         {
             Material rod = new Material();
             rod.pack = packs.packs[0];
@@ -149,9 +155,10 @@ namespace ResourceCollector
                 rod.pack.Attach(rod);
                 FormMainPackExplorer.Instance.UpdateData();
             }
+            if (sender == null) this.Close();
         }
 
-        private void button11_Click(object sender, EventArgs e)
+        public void button11_Click(object sender, EventArgs e)
         {
             ParticleRenderObjectDescription prod = new ParticleRenderObjectDescription();
             prod.pack = packs.packs[0];
@@ -160,9 +167,10 @@ namespace ResourceCollector
                 prod.pack.Attach(prod);
                 FormMainPackExplorer.Instance.UpdateData();
             }
+            if (sender == null) this.Close();
         }
 
-        private void FormNewElement_Load(object sender, EventArgs e)
+        public void FormNewElement_Load(object sender, EventArgs e)
         {
 
         }
