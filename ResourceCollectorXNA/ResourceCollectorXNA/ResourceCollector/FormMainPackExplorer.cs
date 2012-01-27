@@ -502,7 +502,7 @@ namespace ResourceCollector
            resc.Add( @"D:\projects\ULJANIK493DEMO\PhysX test2\PhysX test2\Data\Ship.pack");
 
            foreach (string s in resc)
-           rescentToolStripMenuItem.DropDownItems.Add(s, null , new EventHandler(rescent_click));
+                rescentToolStripMenuItem.DropDownItems.Add(s, null , new EventHandler(rescent_click));
         }
 
         private void rescent_click(object sender, EventArgs e)
