@@ -45,26 +45,47 @@ namespace ResourceCollector
             }
         }
 
-        public static string RecentFile(int index)
+        private const int maxrecentCount = 5;
+
+        public static string[] RecentFiles()
         {
-          /*  get
+            List<string> res = new List<string>();
+            for (int i = 0; i < maxrecentCount; i++)
             {
-                if (properties.Keys.Contains(_packPlaceFolder))
-                    return properties[_packPlaceFolder];
+                if (properties.Keys.Contains("Recent" + i.ToString()))
+                    res.Add(properties["Recent" + i.ToString()]);
                 else
-                    return "C:\\";
-            }*/
-            return "sdf";
+                    break;
+            }
+            return res.ToArray();
         }
 
-        public static void AddRecentFile()
+        public static void AddRecentFile(string file)
         {
-            
-            /*set
+            List<string> res = new List<string>();
+            for (int i = 0; i < maxrecentCount; i++)
             {
-                properties[_packPlaceFolder] = value;
-                SaveProperties();
-            }*/
+                if (properties.Keys.Contains("Recent" + i.ToString()))
+                {
+                    res.Add(properties["Recent" + i.ToString()]);
+                    properties.Remove("Recent" + i.ToString());
+                }
+                else
+                    break;
+            }
+
+            for (int i = 0; i < res.Count; i++)
+                if (res[i].CompareTo(file) == 0)
+                    res.RemoveAt(i);
+
+            res.Insert(0, file);
+            if (res.Count > maxrecentCount)
+                res.RemoveAt(maxrecentCount);
+
+            for (int i = 0; i < res.Count; i++)
+                properties.Add("Recent" + i.ToString(), res[i]);
+
+            SaveProperties();
         }
 
 
