@@ -45,6 +45,29 @@ namespace ResourceCollector
             }
         }
 
+        public static string RecentFile(int index)
+        {
+          /*  get
+            {
+                if (properties.Keys.Contains(_packPlaceFolder))
+                    return properties[_packPlaceFolder];
+                else
+                    return "C:\\";
+            }*/
+            return "sdf";
+        }
+
+        public static void AddRecentFile()
+        {
+            
+            /*set
+            {
+                properties[_packPlaceFolder] = value;
+                SaveProperties();
+            }*/
+        }
+
+
         public static void SaveProperties()
         { 
             string path = AppPath + "\\config.bin";
