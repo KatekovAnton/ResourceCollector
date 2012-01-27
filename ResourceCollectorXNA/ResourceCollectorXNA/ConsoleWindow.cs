@@ -33,8 +33,8 @@ namespace ResourceCollectorXNA
 
             
             string str = DateTime.Now.ToString();
-            instance.listBox1.Items.Insert(0,str.Substring(11,str.Length-11) + "->  " + message);
-
+            instance.listBox1.Items.Add(str.Substring(11,str.Length-11) + "->  " + message);
+            instance.listBox1.SelectedIndex = instance.listBox1.Items.Count-1;
             if (instance.OUT != null) instance.OUT.Text += "\n"+(string)instance.listBox1.Items[0];
 
             if (instance.listBox1.Items.Count > 500)

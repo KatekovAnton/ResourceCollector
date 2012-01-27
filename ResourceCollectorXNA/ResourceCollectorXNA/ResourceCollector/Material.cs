@@ -25,6 +25,14 @@ namespace ResourceCollector.Content
             {
                 mats = new List<SubsetMaterial>();
             }
+
+            public SubsetMaterial Addmat()
+            {
+                var lod = new SubsetMaterial();
+                mats.Add(lod);
+                return lod;
+            }
+
             public override string ToString()
             {
                 return "Subset count = " + mats.Count();
@@ -35,11 +43,21 @@ namespace ResourceCollector.Content
         public Pack pack;
         public System.Windows.Forms.TreeNode TreeNode;
 
-        public Material()
+        public Material(string name = "", Pack pack = null)
         {
             loadedformat = forsavingformat = ElementType.Material;
+            if (name != "") this.name = name; else
             name = "New Material " + DateTime.Now.Millisecond.ToString();
+            this.pack = pack;
             lodMats = new List<Lod>();
+        }
+
+
+        public Lod AddLod()
+        {
+            Lod lod = new Lod();
+            lodMats.Add(lod);
+            return lod;
         }
 
         public override void calcbodysize()

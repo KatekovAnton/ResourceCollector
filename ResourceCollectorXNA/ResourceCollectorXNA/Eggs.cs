@@ -129,14 +129,18 @@ namespace ResourceCollector
       public static List<PackContent> GetObjects(int loadedformat, string search_pattern = "")
       { 
           List<PackContent> objects = new List<PackContent>();
+
           for (int i = 0; i < PackList.Instance.packs.Count; i++)
-              for (int j = 0; j < PackList.Instance.packs[i].Objects.Count; j++)
+            objects.AddRange(PackList.Instance.packs[i].Objects.FindAll(o => (Regex.Match(o.name , search_pattern).Success) && (o.loadedformat == loadedformat || o.forsavingformat == loadedformat))); // .ConvertAll(o => o.name).ToArray()); ;
+
+             /* for (int j = 0; j < PackList.Instance.packs[i].Objects.Count; j++)
               {
                   if (!((loadedformat == PackList.Instance.packs[i].Objects[j].loadedformat) || ( loadedformat == PackList.Instance.packs[i].Objects[j].forsavingformat )))
                       continue;
+
                   string name = PackList.Instance.packs[i].Objects[j].name;
                   if (Regex.Match(name, search_pattern).Success) objects.Add(PackList.Instance.packs[i].Objects[j]);
-              }
+              }*/
           return objects;
       }
 
@@ -162,14 +166,13 @@ namespace ResourceCollector
           }
       }
 
-      public static List<PackContent> CreateCollisionMeshes(string search_pattern)
+      public static List<PackContent> CreateCollisionMeshes(string search_pattern = "")
       {
-          var ccc = new List<PackContent>();
-
-          ccc = Eggs.GetObjects(ElementType.MeshSkinnedOptimazedForLoading, search_pattern);
+          var ccc = Eggs.GetObjects(ElementType.MeshSkinnedOptimazedForLoading, search_pattern);
           ccc.InsertRange(0, Eggs.GetObjects(ElementType.MeshSkinnedOptimazedForStore, search_pattern));
 
           var cccr = new List<PackContent>();
+          ResourceCollectorXNA.ConsoleWindow.TraceMessage("Created CollisionMeshes:");
           foreach (PackContent pc in ccc)
           {
               MeshSkinned m = null;
@@ -178,11 +181,89 @@ namespace ResourceCollector
               {
                   CollisionMesh cm = new CollisionMesh(m);
                   cm.name = "cm_" + pc.name;
-                  ResourceCollectorXNA.ConsoleWindow.TraceMessage("Created CollisionMesh  " + cm.name);
+                  ResourceCollectorXNA.ConsoleWindow.TraceMessage("\t\t\t" + cm.name);
                   cccr.Add(cm);
               }
           }
+          ResourceCollectorXNA.ConsoleWindow.TraceMessage("");
           return cccr;
+      }
+
+
+      public static List<PackContent> CreateRenderObjectDescriptions(string search_pattern = "")
+      {
+         var ccc = Eggs.GetObjects(ElementType.MeshSkinnedOptimazedForLoading, search_pattern);
+          // ccc.InsertRange(0, Eggs.GetObjects(ElementType.MeshSkinnedOptimazedForStore, search_pattern)); // why only MeshSkinnedOptimazedForLoading???
+
+          var cccr = new List<PackContent>();
+             ResourceCollectorXNA.ConsoleWindow.TraceMessage("Created RenderObjectDescriptions:");
+          foreach (PackContent pc in ccc)
+          {
+              RenderObjectDescription rod = new RenderObjectDescription();
+              rod.pack = PackList.Instance.packs[0];
+              //3 раза
+              for (int i = 0; i < 3; i++)
+              {
+                  // add lod, subset, meshes
+                  rod.addlod().AddSubSet(new string[] { pc.name });
+              }
+
+              rod.name = "rod_" + pc.name;
+              rod.IsShadowCaster = true;
+              rod.IsShadowReceiver = true;
+
+              cccr.Add(rod);
+              ResourceCollectorXNA.ConsoleWindow.TraceMessage("\t\t\t" + rod.name);
+          }
+          ResourceCollectorXNA.ConsoleWindow.TraceMessage("");
+          return cccr;
+       
+      }
+
+      public static List<PackContent> CreateDiffuseMaterials(string search_pattern = "")
+      {
+          var ccc = Eggs.GetObjects(ElementType.PNGTexture, search_pattern);
+          List<PackContent> cccr = new List<PackContent>();
+          ResourceCollectorXNA.ConsoleWindow.TraceMessage("Created DiffuseMaterials:");
+          foreach (PackContent pc in ccc)
+          {
+              Material mat = new Material("mat_" + pc.name, PackList.Instance.packs[0]);
+              mat.AddLod().Addmat().DiffuseTextureName = pc.name;
+              cccr.Add(mat);
+              ResourceCollectorXNA.ConsoleWindow.TraceMessage("\t\t\t" + mat.name);
+          }
+          return cccr;
+      }
+
+      /*   
+  //LOD
+   LevelObjectDescription rod = new LevelObjectDescription();
+          rod.Pack = packs.packs[0];
+          if (rod.createpropertieswindow(rod.Pack, tv) == System.Windows.Forms.DialogResult.OK)
+          {
+              rod.Pack.Attach(rod);
+              FormMainPackExplorer.Instance.UpdateData();
+          }
+         */
+
+
+      public static string GetInfo(dynamic val)
+      {
+          if (val != null)
+          {
+              string str = val.ToString() + " : \n";
+              try
+              {
+              
+              }
+              catch (Exception ee) 
+              {
+                  return str + "\n" + "ERROR: " + ee.Message;
+              }
+              return str;
+          }
+          else
+          return "NULL";
       }
 
     }

@@ -22,9 +22,11 @@ namespace ResourceCollector.Content
         public bool isSelfIllumination;
       //  public string matname;
 
-        public void addlod()
+        public Model addlod()
         {
-            LODs.Add(new Model());
+            Model m = new Model();
+            LODs.Add(m);
+            return m;
         }
 
         public RenderObjectDescription(System.Windows.Forms.TreeNode _TreeNode)
@@ -98,6 +100,13 @@ namespace ResourceCollector.Content
             {
                 subsets = new List<SubSet>(array);
             }
+            public SubSet AddSubSet(string[] meshnames)
+            {
+                var lod = new SubSet(meshnames);
+                subsets.Add(lod);
+                return lod;
+            }
+
 
         }
 

@@ -331,7 +331,14 @@ namespace ResourceCollector
         public void Attach(List<PackContent> obj)
         {
             foreach (PackContent pc in obj)
-                Attach(pc);
+            {
+                pc.number = Objects.Count;
+                pc.offset = 0;
+                Objects.Add(pc);
+            }
+
+            ResourceCollectorXNA.ConsoleWindow.TraceMessage("> > > > > > > > > > > > > > > > > > > > > > > > Added objects: " + obj.Count);
+            ResourceCollectorXNA.ConsoleWindow.TraceMessage("");
         }
 
 
@@ -342,6 +349,19 @@ namespace ResourceCollector
                 {
                     return Objects[i];
                 }
+            ResourceCollectorXNA.ConsoleWindow.TraceMessage("Object not found:  " + name);
+            return null;
+        }
+
+        public PackContent getobject(int loadedformat, string name)
+        {
+            for (int i = 0; i < Objects.Count; i++)
+                if (Objects[i].name == name)
+                    if ((Objects[i].loadedformat == loadedformat) || (Objects[i].forsavingformat == loadedformat))
+                {
+                    return Objects[i];
+                }
+            ResourceCollectorXNA.ConsoleWindow.TraceMessage("Object not found:  "+ ElementType.ReturnString(loadedformat) + "     " + name);
             return null;
         }
 
