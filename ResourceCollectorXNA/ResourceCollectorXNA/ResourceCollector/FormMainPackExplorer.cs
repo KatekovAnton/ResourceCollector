@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -80,7 +81,7 @@ namespace ResourceCollector
                 UpdateRecentPacks();
         }
 
-
+        
         void treeView1NodeMouseClick(TreeNode tn)
         {
             CurrentContent = packs.findobject(tn.Text, ref contentcoords);
@@ -352,32 +353,62 @@ namespace ResourceCollector
 
         public  void importPackToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenFileDialog ofd = new OpenFileDialog();
-            if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            if (sender == null || sender.GetType() == typeof(ToolStripMenuItem))
             {
-                ResourceCollector.Content.MeshImportList m = new Content.MeshImportList(ofd.FileName);
-                if (m.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                OpenFileDialog ofd = new OpenFileDialog();
+                if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
-                    if (packs.packs.Count == 0)
+                    ResourceCollector.Content.MeshImportList m = new Content.MeshImportList(ofd.FileName);
+                    if (m.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                     {
-                        MessageBox.Show("Open Pack First");
-                        openToolStripMenuItem_Click(sender, e);
-                    }
-
-
-                    for (int i = 0; i < m.treeView1.Nodes.Count; i++)
-                    {
-                        if (m.treeView1.Nodes[i].Checked)
+                        if (packs.packs.Count == 0)
                         {
-                            packs.packs[0].Attach(m.p.Objects[i]);
-                            if (m.p.Objects[i].forsavingformat == ElementType.MeshSkinnedOptimazedForStore)
-                                m.p.Objects[i].forsavingformat = ElementType.MeshSkinnedOptimazedForLoading;
+                            MessageBox.Show("Open Pack First");
+                            openToolStripMenuItem_Click(sender, e);
                         }
+
+                        for (int i = 0; i < m.treeView1.Nodes.Count; i++)
+                        {
+                            if (m.treeView1.Nodes[i].Checked)
+                            {
+                                packs.packs[0].Attach(m.p.Objects[i]);
+                                if (m.p.Objects[i].forsavingformat == ElementType.MeshSkinnedOptimazedForStore)
+                                    m.p.Objects[i].forsavingformat = ElementType.MeshSkinnedOptimazedForLoading;
+                            }
+                        }
+                        FormMainPackExplorer.Instance.UpdateData();
                     }
-                    FormMainPackExplorer.Instance.UpdateData();
+                }
+            }
+            else
+            {
+                if (sender.GetType() == typeof(string))
+                {
+                    import_pack_all((string)sender);
                 }
             }
         }
+
+        public void import_pack_all(string file_name)
+        {
+            if (packs.packs.Count == 0)
+            {
+                MessageBox.Show("Open Pack First");
+                openToolStripMenuItem_Click(null, null);
+            }
+
+            Pack p = new Pack();
+            p.Init(file_name, null);
+
+            packs.packs[0].Attach(p.Objects);
+
+            foreach (ResourceCollector.PackContent pc in packs.packs[0].Objects)
+                if (pc.forsavingformat == ElementType.MeshSkinnedOptimazedForStore)
+                    pc.forsavingformat = ElementType.MeshSkinnedOptimazedForLoading;
+            
+            FormMainPackExplorer.Instance.UpdateData();
+        }
+
 
         public void UpdateData()
         {
@@ -511,7 +542,7 @@ namespace ResourceCollector
             add_pack(((ToolStripItem)sender).Text);
         }
 
-        void add_pack(string FileName)
+        public void add_pack(string FileName)
         {
                 ResourceCollectorXNA.Engine.GameEngine.Instance.CreateNewLevel();
                 ResourceCollectorXNA.Engine.GameEngine.Instance.UpdateLevelPart();
@@ -543,6 +574,8 @@ namespace ResourceCollector
         public void OpenScriptsForm(string str, bool invert)
         {
             FormScripts fs = new FormScripts(Eggs.Filter(ResourceCollectorXNA.SE.Instance, str, invert));
+            if (fs!=null)
+                if (!fs.IsDisposed)
             fs.ShowDialog();
         }
 
@@ -619,6 +652,34 @@ namespace ResourceCollector
                 case ElementType.Material: f.button10_Click(null, null); break;
                 default: break;
             }
+        }
+
+        public void add_new_textures_from_path(string Path)
+        {
+            try
+            {
+                string[] FileNames = Directory.GetFiles(Path);
+                foreach (string f_name in FileNames)
+                {
+                    try
+                    {
+                        var path = f_name.Split('\\', '/');
+                        var image = new ImageContent(path[path.Length - 1], new Bitmap(f_name));
+                        image.name = "tex_" + image.name.Substring(0, image.name.IndexOf(".")) + "\0";
+                        packs.packs[0].Attach(image);
+                    }
+                    catch
+                    {
+                        ResourceCollectorXNA.ConsoleWindow.TraceMessage(string.Format("File «{0}» contains no image data!", f_name));
+                    }
+                }
+            }
+            catch (Exception ee)
+            {
+                Eggs.Message(ee.Message);
+            }
+
+            FormMainPackExplorer.Instance.UpdateData();
         }
 
         private void textureToolStripMenuItem_Click(object sender, EventArgs e)

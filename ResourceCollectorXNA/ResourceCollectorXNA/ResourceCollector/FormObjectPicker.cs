@@ -18,7 +18,7 @@ namespace ResourceCollector
             private set;
         }
         bool multiselect;
-        public FormObjectPicker(Pack p, int filter, bool multiselect = false, string label = "", string found_regex = "")
+        public FormObjectPicker(Pack p, int filter, bool multiselect = false, string label = "", string found_regex = "", bool auto = false)
         {
 
             this.multiselect = multiselect;
@@ -44,7 +44,6 @@ namespace ResourceCollector
                             if (multiselect)
                             {
                                 checkedListBox1.SelectedItems.Add(val);
-                                button1.Focus();
                             }
                             else
                             {
@@ -59,6 +58,9 @@ namespace ResourceCollector
                     i++;
                 }
             }
+
+            if (auto)
+            { button1_Click(null, null); }
 
 
         }
@@ -103,8 +105,7 @@ namespace ResourceCollector
             }
             else
             {
-                this.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-                this.Close();
+                Eggs.Message("Select somethig!!!");
             }
         }
 
@@ -158,7 +159,13 @@ namespace ResourceCollector
 
         private void FormObjectPicker_Load(object sender, EventArgs e)
         {
+            button1.Focus();
+        }
 
+        private void FormObjectPicker_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter && checkedListBox1.CheckedItems.Count > 0)
+                button1_Click(null, null);
         }
 
        

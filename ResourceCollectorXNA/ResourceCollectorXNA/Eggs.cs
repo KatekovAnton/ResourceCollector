@@ -14,6 +14,20 @@ namespace ResourceCollector
 {
    public static class Eggs
     {
+       private static StreamWriter _sw;
+       public static StreamWriter sw 
+       {
+           get
+           {
+               if (_sw == null)
+               {
+                   _sw = new StreamWriter(AppConfiguration.PackPlaceFolder + "\\eggs.cfg", false);
+                   _sw.AutoFlush = true;
+               }
+               return _sw;
+           }
+       }
+       
        public static List<string> Filter(List<string> list, string search_pattern = "", bool invert = false)
         {
             List<string> new_list = new List<string>();
@@ -136,17 +150,19 @@ namespace ResourceCollector
           return objects;
       }
 
-      public static void Rename(int loadedformat, string search_pattern, string replace_string)
+      public static void Rename(int loadedformat, string search_pattern, string replace_string, bool incfg = false)
       {
-          List<PackContent> objects = GetObjects(loadedformat, search_pattern);
+                    List<PackContent> objects = GetObjects(loadedformat, search_pattern);
           int i = 0;
           foreach (PackContent pc in objects)
           {
               string new_name = Regex.Replace(pc.name, search_pattern, replace_string.Replace(@"\c",i.ToString()));
               i++;
 
-              if (!replace_string.EndsWith("\0"))
-                  new_name += "\0";
+              if (!replace_string.EndsWith("\0")) new_name += "\0";
+              if (incfg)
+              sw.WriteLine("{0} = \"{1}\"", new_name, pc.name.Substring(0, pc.name.Length - 1));
+
               ResourceCollectorXNA.ConsoleWindow.TraceMessage(pc.name.Substring(0, pc.name.Length-1) + " \t  was renamed to: \t " + new_name);
               pc.name = new_name;
           }
@@ -276,11 +292,17 @@ namespace ResourceCollector
           string nn = name;
           if (PackList.Instance.packs[0].getobject(format, name) == null)
           {
-              FormObjectPicker f = new FormObjectPicker(PackList.Instance.packs[0], format, false, ElementType.ReturnString(format) + " not found:  " + name, "^"+ name.TrimEnd("1234567890_\0".ToCharArray()) );
+              FormObjectPicker f = new FormObjectPicker(PackList.Instance.packs[0], format, false, ElementType.ReturnString(format) + " not found:  " + name, "^"+ name.TrimEnd("1234567890_\0".ToCharArray()) ,true);
+              if (f.PickedContent.Count>0)
+              {
+                  nn = f.PickedContent[0];
+              }
+              else
               if (f.ShowDialog() == DialogResult.OK)
               {
                   nn = f.PickedContent[0];
               }
+              f.Close();
           }
           return nn;
       }

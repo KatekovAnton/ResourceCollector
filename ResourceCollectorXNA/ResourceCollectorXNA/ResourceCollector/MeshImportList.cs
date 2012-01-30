@@ -37,7 +37,7 @@ namespace ResourceCollector.Content
             }
 
             TreeNodeCollection c = treeView1.Nodes[0].Nodes;
-           TreeNode[] nodes = new TreeNode[c.Count];
+            TreeNode[] nodes = new TreeNode[c.Count];
 
            c.CopyTo(nodes,0);
             treeView1.Nodes.Clear();

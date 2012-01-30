@@ -48,6 +48,7 @@
             // 
             // button2
             // 
+            this.button2.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.button2.Location = new System.Drawing.Point(102, 2);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(82, 23);
@@ -91,8 +92,10 @@
             // 
             // FormObjectPicker
             // 
+            this.AcceptButton = this.button1;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.button2;
             this.ClientSize = new System.Drawing.Size(198, 420);
             this.Controls.Add(this.checkedListBox1);
             this.Controls.Add(this.label1);
@@ -103,6 +106,7 @@
             this.Name = "FormObjectPicker";
             this.Text = "ObjectPicker";
             this.Load += new System.EventHandler(this.FormObjectPicker_Load);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.FormObjectPicker_KeyUp);
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
