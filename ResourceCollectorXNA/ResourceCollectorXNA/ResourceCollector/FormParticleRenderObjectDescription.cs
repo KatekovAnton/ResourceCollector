@@ -26,7 +26,6 @@ namespace ResourceCollector
 
 
 
-            checkBox1.Checked = _obj.ShadowCaster;
             checkBox2.Checked = _obj.ShadowReceiver;
             checkBox3.Checked = _obj.Transparent;
             checkBox4.Checked = _obj.SelfIlmn;
@@ -52,11 +51,6 @@ namespace ResourceCollector
                 textBox3.Text = _obj.TextureName;
 
             }
-        }
-
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-            _obj.ShadowCaster = checkBox1.Checked;
         }
 
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
