@@ -700,6 +700,12 @@ namespace ResourceCollector
             }
         }
 
+        private void intellectualRenamerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ResourceCollectorXNA.FormRenamer.Show();
+            UpdateData();
+        }
+
         
     }
 }

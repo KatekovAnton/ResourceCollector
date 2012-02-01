@@ -48,7 +48,6 @@ namespace ResourceCollector
 
         static public void Init()
         { 
-            
                 formats.Add( ElementType.MeshSkinnedOptimazedForLoading     ,"Mesh Skinned New format (recomendated)");
                 formats.Add( ElementType.MeshSkinnedOptimazedForStore       ,"Mesh Skinned Old format (not recomendated)");
                 formats.Add( ElementType.PNGTexture                         , "Texture (PNG)");
@@ -67,9 +66,7 @@ namespace ResourceCollector
                 formats.Add( ElementType.Material                           , "Material");
                 formats.Add( ElementType.LevelContent                       , "Level");
                 formats.Add( ElementType.ParticelRenderObjectDescription    , "Particle Object Description");
-
                 Eggs.Mirror(formats);
-
         }
 
         public static string ReturnString(int format)
@@ -77,47 +74,6 @@ namespace ResourceCollector
             if (formats.ContainsKey(format))
                 return (string)formats[format];
             else return "wrong format";
-            /*switch (format)
-            {
-                case ElementType.MeshSkinnedOptimazedForLoading:
-                    return "Mesh Skinned New format (recomendated)";
-                case ElementType.MeshSkinnedOptimazedForStore:
-                    return "Mesh Skinned Old format (not recomendated)";
-                case ElementType.PNGTexture:
-                    return "Texture (PNG)";
-                case ElementType.Skeleton:
-                    return "Skeleton";
-                case ElementType.BaseAnimation:
-                    return "Base Animation";
-                case ElementType.Character:
-                    return "Character description";
-                case ElementType.MeshList:
-                    return "Mesh List";
-                case ElementType.SkeletonWithAddInfo:
-                    return "Skeleton with additional information";
-                case ElementType.TextureList:
-                    return "Texture list";
-                case ElementType.CollisionMesh:
-                    return "Collision mesh";
-                case ElementType.ConvexMesh:
-                    return "Convex mesh";
-                case ElementType.StringList:
-                    return "String list";
-                case ElementType.LevelObjectDescription:
-                    return "Level object description";
-                case ElementType.GameObjectDescription:
-                    return "Game object description";
-                case ElementType.RenderObjectDescription:
-                    return "Render object description";
-                case ElementType.Material:
-                    return "Material";
-                case ElementType.LevelContent:
-                    return "Level";
-                case ElementType.ParticelRenderObjectDescription:
-                    return "Particle Object Description";
-                default:
-                    return "wrong format";
-            }*/
         }
 
         public static int ReturnFormat(string format)
@@ -125,47 +81,6 @@ namespace ResourceCollector
             if (formats.ContainsKey(format))
                 return (int)formats[format];
             else return -1;
-           /* switch (format)
-            {
-                case "Mesh Skinned New format (recomendated)":
-                    return ElementType.MeshSkinnedOptimazedForLoading;
-                case "Mesh Skinned Old format (not recomendated))":
-                    return ElementType.MeshSkinnedOptimazedForStore;
-                case "Texture (PNG)":
-                    return ElementType.PNGTexture;
-                case "Skeleton":
-                    return ElementType.Skeleton;
-                case "Base Animation":
-                    return ElementType.BaseAnimation;
-                case "Character description":
-                    return ElementType.Character;
-                case "Mesh List":
-                    return ElementType.MeshList;
-                case "Skeleton with additional information":
-                    return ElementType.SkeletonWithAddInfo;
-                case "Texture list":
-                    return ElementType.TextureList;
-                case "Collision mesh":
-                    return ElementType.CollisionMesh;
-                case "Convex mesh":
-                    return ElementType.ConvexMesh;
-                case "String list":
-                    return ElementType.StringList;
-                case "Level object description":
-                    return ElementType.LevelObjectDescription;
-                case "Game object description":
-                    return ElementType.GameObjectDescription;
-                case "Render object description":
-                    return ElementType.RenderObjectDescription;
-                case "Material":
-                    return ElementType.Material;
-                case "Level":
-                    return ElementType.LevelContent;
-                case "Particle Object Description":
-                    return ElementType.ParticelRenderObjectDescription;
-                default:
-                    return -1;
-            }*/
         }
     }
     public enum NodeType

@@ -147,6 +147,12 @@
     <Compile Include="Engine\Logic\BehaviourModel\ObjectBoneRelatedBehaviourModel.cs" />
     <Compile Include="Engine\Logic\BehaviourModel\ObjectRelatedBehaviourModel.cs" />
     <Compile Include="Engine\Logic\DummyObject.cs" />
+    <Compile Include="FormRenamer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormRenamer.Designer.cs">
+      <DependentUpon>FormRenamer.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormScripts.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -552,6 +558,9 @@
   <ItemGroup>
     <EmbeddedResource Include="ConsoleWindow.resx">
       <DependentUpon>ConsoleWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormRenamer.resx">
+      <DependentUpon>FormRenamer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormScripts.resx">
       <DependentUpon>FormScripts.cs</DependentUpon>

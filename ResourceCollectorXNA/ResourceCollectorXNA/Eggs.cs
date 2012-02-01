@@ -140,15 +140,31 @@ namespace ResourceCollector
           }
       }
 
-      public static List<PackContent> GetObjects(int loadedformat, string search_pattern = "")
+      public static List<PackContent> GetObjects(int loadedformat, string search_pattern = "" ,  int in_pack = -1)
       { 
           List<PackContent> objects = new List<PackContent>();
 
+          if (in_pack < 0)
           for (int i = 0; i < PackList.Instance.packs.Count; i++)
-            objects.AddRange(PackList.Instance.packs[i].Objects.FindAll(o => (Regex.Match(o.name , search_pattern).Success) && (o.loadedformat == loadedformat || o.forsavingformat == loadedformat))); // .ConvertAll(o => o.name).ToArray()); ;
+            objects.AddRange(PackList.Instance.packs[i].Objects.FindAll(o => (Regex.Match(o.name , search_pattern).Success) && (o.loadedformat == loadedformat || o.forsavingformat == loadedformat)));
+          else
+              objects.AddRange(PackList.Instance.packs[in_pack].Objects.FindAll(o => (Regex.Match(o.name, search_pattern).Success) && (o.loadedformat == loadedformat || o.forsavingformat == loadedformat)));
              
           return objects;
       }
+
+      public static List<PackContent> GetObjects(string search_pattern = "",  int in_pack = -1, bool use_types = false)
+      {
+          List<PackContent> objects = new List<PackContent>();
+
+          if (in_pack < 0)
+          for (int i = 0; i < PackList.Instance.packs.Count; i++)
+              objects.AddRange(PackList.Instance.packs[i].Objects.FindAll(o => (Regex.Match((use_types ? ElementType.ReturnString(o.loadedformat) + " " : "") + o.name, search_pattern).Success)));
+          else
+              objects.AddRange(PackList.Instance.packs[in_pack].Objects.FindAll(o => (Regex.Match((use_types ? ElementType.ReturnString(o.loadedformat) + " " : "") + o.name, search_pattern).Success)));
+          return objects;
+      }
+
 
       public static void Rename(int loadedformat, string search_pattern, string replace_string, bool incfg = false)
       {

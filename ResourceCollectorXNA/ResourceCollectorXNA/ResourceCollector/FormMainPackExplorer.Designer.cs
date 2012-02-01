@@ -49,7 +49,10 @@
             this.toolStripButton1 = new System.Windows.Forms.ToolStripDropDownButton();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.textureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.materialToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.collisionMeshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.levelObjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.renderOdjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.particleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripDropDownButton3 = new System.Windows.Forms.ToolStripDropDownButton();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -68,6 +71,7 @@
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
+            this.autoCompleteComboBox1 = new ResourceCollector.AutoCompleteComboBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -97,10 +101,7 @@
             this.label15 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.levelObjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.materialToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.renderOdjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.autoCompleteComboBox1 = new ResourceCollector.AutoCompleteComboBox();
+            this.intellectualRenamerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -213,7 +214,8 @@
             this.animationToolsToolStripMenuItem,
             this.importPackToolStripMenuItem,
             this.combineMeshesToolStripMenuItem,
-            this.xNAMonitorToolStripMenuItem});
+            this.xNAMonitorToolStripMenuItem,
+            this.intellectualRenamerToolStripMenuItem});
             this.toolStripDropDownButton4.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton4.Image")));
             this.toolStripDropDownButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripDropDownButton4.Name = "toolStripDropDownButton4";
@@ -223,28 +225,28 @@
             // animationToolsToolStripMenuItem
             // 
             this.animationToolsToolStripMenuItem.Name = "animationToolsToolStripMenuItem";
-            this.animationToolsToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.animationToolsToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
             this.animationToolsToolStripMenuItem.Text = "Animation tools";
             this.animationToolsToolStripMenuItem.Click += new System.EventHandler(this.animationToolsToolStripMenuItem_Click);
             // 
             // importPackToolStripMenuItem
             // 
             this.importPackToolStripMenuItem.Name = "importPackToolStripMenuItem";
-            this.importPackToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.importPackToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
             this.importPackToolStripMenuItem.Text = "Import pack";
             this.importPackToolStripMenuItem.Click += new System.EventHandler(this.importPackToolStripMenuItem_Click);
             // 
             // combineMeshesToolStripMenuItem
             // 
             this.combineMeshesToolStripMenuItem.Name = "combineMeshesToolStripMenuItem";
-            this.combineMeshesToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.combineMeshesToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
             this.combineMeshesToolStripMenuItem.Text = "Combine meshes";
             this.combineMeshesToolStripMenuItem.Click += new System.EventHandler(this.combineMeshesToolStripMenuItem_Click);
             // 
             // xNAMonitorToolStripMenuItem
             // 
             this.xNAMonitorToolStripMenuItem.Name = "xNAMonitorToolStripMenuItem";
-            this.xNAMonitorToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.xNAMonitorToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
             this.xNAMonitorToolStripMenuItem.Text = "XNA Monitor";
             this.xNAMonitorToolStripMenuItem.Click += new System.EventHandler(this.xNAMonitorToolStripMenuItem_Click);
             // 
@@ -271,7 +273,7 @@
             this.renderOdjectToolStripMenuItem,
             this.particleToolStripMenuItem});
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
             this.newToolStripMenuItem.Text = "New";
             this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
             // 
@@ -282,12 +284,33 @@
             this.textureToolStripMenuItem.Text = "Texture";
             this.textureToolStripMenuItem.Click += new System.EventHandler(this.textureToolStripMenuItem_Click);
             // 
+            // materialToolStripMenuItem
+            // 
+            this.materialToolStripMenuItem.Name = "materialToolStripMenuItem";
+            this.materialToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.materialToolStripMenuItem.Text = "Material";
+            this.materialToolStripMenuItem.Click += new System.EventHandler(this.textureToolStripMenuItem_Click);
+            // 
             // collisionMeshToolStripMenuItem
             // 
             this.collisionMeshToolStripMenuItem.Name = "collisionMeshToolStripMenuItem";
             this.collisionMeshToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.collisionMeshToolStripMenuItem.Text = "CollisionMesh";
             this.collisionMeshToolStripMenuItem.Click += new System.EventHandler(this.textureToolStripMenuItem_Click);
+            // 
+            // levelObjectToolStripMenuItem
+            // 
+            this.levelObjectToolStripMenuItem.Name = "levelObjectToolStripMenuItem";
+            this.levelObjectToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.levelObjectToolStripMenuItem.Text = "LevelObject";
+            this.levelObjectToolStripMenuItem.Click += new System.EventHandler(this.textureToolStripMenuItem_Click);
+            // 
+            // renderOdjectToolStripMenuItem
+            // 
+            this.renderOdjectToolStripMenuItem.Name = "renderOdjectToolStripMenuItem";
+            this.renderOdjectToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.renderOdjectToolStripMenuItem.Text = "RenderObject";
+            this.renderOdjectToolStripMenuItem.Click += new System.EventHandler(this.textureToolStripMenuItem_Click);
             // 
             // particleToolStripMenuItem
             // 
@@ -349,7 +372,7 @@
             // formToolStripMenuItem
             // 
             this.formToolStripMenuItem.Name = "formToolStripMenuItem";
-            this.formToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.formToolStripMenuItem.Size = new System.Drawing.Size(105, 22);
             this.formToolStripMenuItem.Text = "All";
             this.formToolStripMenuItem.Click += new System.EventHandler(this.formToolStripMenuItem_Click);
             // 
@@ -358,7 +381,7 @@
             this.rUNToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripTextBox1});
             this.rUNToolStripMenuItem.Name = "rUNToolStripMenuItem";
-            this.rUNToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.rUNToolStripMenuItem.Size = new System.Drawing.Size(105, 22);
             this.rUNToolStripMenuItem.Text = "Other";
             // 
             // toolStripTextBox1
@@ -370,7 +393,7 @@
             // editorToolStripMenuItem
             // 
             this.editorToolStripMenuItem.Name = "editorToolStripMenuItem";
-            this.editorToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.editorToolStripMenuItem.Size = new System.Drawing.Size(105, 22);
             this.editorToolStripMenuItem.Text = "Editor";
             // 
             // toolStripButton2
@@ -492,6 +515,17 @@
             this.label13.Size = new System.Drawing.Size(66, 23);
             this.label13.TabIndex = 43;
             this.label13.Text = "By Regex:";
+            // 
+            // autoCompleteComboBox1
+            // 
+            this.autoCompleteComboBox1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.autoCompleteComboBox1.FormattingEnabled = true;
+            this.autoCompleteComboBox1.LimitToList = true;
+            this.autoCompleteComboBox1.Location = new System.Drawing.Point(7, 20);
+            this.autoCompleteComboBox1.Name = "autoCompleteComboBox1";
+            this.autoCompleteComboBox1.Size = new System.Drawing.Size(174, 21);
+            this.autoCompleteComboBox1.TabIndex = 3;
+            this.autoCompleteComboBox1.SelectedIndexChanged += new System.EventHandler(this.autoCompleteComboBox1_SelectedIndexChanged);
             // 
             // groupBox3
             // 
@@ -847,37 +881,12 @@
             this.label8.TabIndex = 19;
             this.label8.Text = "Index:";
             // 
-            // levelObjectToolStripMenuItem
+            // intellectualRenamerToolStripMenuItem
             // 
-            this.levelObjectToolStripMenuItem.Name = "levelObjectToolStripMenuItem";
-            this.levelObjectToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
-            this.levelObjectToolStripMenuItem.Text = "LevelObject";
-            this.levelObjectToolStripMenuItem.Click += new System.EventHandler(this.textureToolStripMenuItem_Click);
-            // 
-            // materialToolStripMenuItem
-            // 
-            this.materialToolStripMenuItem.Name = "materialToolStripMenuItem";
-            this.materialToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
-            this.materialToolStripMenuItem.Text = "Material";
-            this.materialToolStripMenuItem.Click += new System.EventHandler(this.textureToolStripMenuItem_Click);
-            // 
-            // renderOdjectToolStripMenuItem
-            // 
-            this.renderOdjectToolStripMenuItem.Name = "renderOdjectToolStripMenuItem";
-            this.renderOdjectToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
-            this.renderOdjectToolStripMenuItem.Text = "RenderObject";
-            this.renderOdjectToolStripMenuItem.Click += new System.EventHandler(this.textureToolStripMenuItem_Click);
-            // 
-            // autoCompleteComboBox1
-            // 
-            this.autoCompleteComboBox1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.autoCompleteComboBox1.FormattingEnabled = true;
-            this.autoCompleteComboBox1.LimitToList = true;
-            this.autoCompleteComboBox1.Location = new System.Drawing.Point(7, 20);
-            this.autoCompleteComboBox1.Name = "autoCompleteComboBox1";
-            this.autoCompleteComboBox1.Size = new System.Drawing.Size(174, 21);
-            this.autoCompleteComboBox1.TabIndex = 3;
-            this.autoCompleteComboBox1.SelectedIndexChanged += new System.EventHandler(this.autoCompleteComboBox1_SelectedIndexChanged);
+            this.intellectualRenamerToolStripMenuItem.Name = "intellectualRenamerToolStripMenuItem";
+            this.intellectualRenamerToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.intellectualRenamerToolStripMenuItem.Text = "IntellectualRenamer";
+            this.intellectualRenamerToolStripMenuItem.Click += new System.EventHandler(this.intellectualRenamerToolStripMenuItem_Click);
             // 
             // FormMainPackExplorer
             // 
@@ -988,6 +997,7 @@
         private System.Windows.Forms.ToolStripMenuItem levelObjectToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem materialToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem renderOdjectToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem intellectualRenamerToolStripMenuItem;
     }
 }
 
