@@ -88,14 +88,15 @@ namespace ResourceCollector
 
       public delegate void void_obj(dynamic obj);
 
-
-
+      /// <summary>
+      /// просто просит у пользователя имя файла через OpenFileDialog
+      /// </summary>
       public static string ofd()
       {
           var ofd = new OpenFileDialog();
           if (ofd.ShowDialog() == DialogResult.OK)
               return ofd.FileName;
-          return "";
+          return Cancel;
 
       }
 
@@ -107,7 +108,9 @@ namespace ResourceCollector
           }
       }
 
-
+       /// <summary>
+      /// двигает выделенные элементы listBox на index позиций
+       /// </summary>
       public static void MoveListboxItem(int index, ListBox listBox)
       {
           if (listBox.SelectedItems != null) //is there an item selected?
@@ -139,8 +142,14 @@ namespace ResourceCollector
               }
           }
       }
-
-      public static List<PackContent> GetObjects(int loadedformat, string search_pattern = "" ,  int in_pack = -1)
+       /// <summary>
+       /// получает объекты из пака(паков) в соответствие с шаблоном поиска по имени и типом
+       /// </summary>
+       /// <param name="loadedformat">тип, -1</param>
+      /// <param name="search_pattern">шаблоном поиска по имени и типом</param>
+      /// <param name="in_pack">-1 для всех паков, или номер пака</param>
+       /// <returns></returns>
+      public static List<PackContent> GetObjects(int loadedformat, string search_pattern = "" , int in_pack = -1)
       { 
           List<PackContent> objects = new List<PackContent>();
 
@@ -152,8 +161,14 @@ namespace ResourceCollector
              
           return objects;
       }
-
-      public static List<PackContent> GetObjects(string search_pattern = "",  int in_pack = -1, bool use_types = false)
+       /// <summary>
+       /// получает объекты из пака(паков) в соответствие с шаблоном поиска по имени
+       /// </summary>
+       /// <param name="search_pattern">шаблоном поиска</param>
+       /// <param name="in_pack">-1 для всех паков, или номер пака</param>
+       /// <param name="use_types">использовать для поиска имена типов?</param>
+       /// <returns></returns>
+      public static List<PackContent> GetObjects(string search_pattern = "", int in_pack = -1, bool use_types = false)
       {
           List<PackContent> objects = new List<PackContent>();
 
@@ -165,10 +180,16 @@ namespace ResourceCollector
           return objects;
       }
 
-
+       /// <summary>
+       /// Групповое переименование объектов
+       /// </summary>
+       /// <param name="loadedformat">фильтр по loadedformat, -1 == для всех типов</param>
+       /// <param name="search_pattern">шаблон поиска</param>
+       /// <param name="replace_string">шаблон замены</param>
+       /// <param name="incfg">true - записать лог в файл, который можно использовать потом в кач-ве cfg, false - не записывать</param>
       public static void Rename(int loadedformat, string search_pattern, string replace_string, bool incfg = false)
       {
-                    List<PackContent> objects = GetObjects(loadedformat, search_pattern);
+          List<PackContent> objects = GetObjects(loadedformat, search_pattern);
           int i = 0;
           foreach (PackContent pc in objects)
           {
@@ -184,6 +205,11 @@ namespace ResourceCollector
           }
       }
 
+       /// <summary>
+       /// Отражает Hashtable наоборот
+       /// </summary>
+       /// <param name="hashtable">какая таблица</param>
+       /// <param name="delete">true - удалить предыдущие элементы, false - оставить</param>
       public static void Mirror(Hashtable hashtable, bool delete = false)
       {
           List<dynamic> keys = new List<dynamic>();
@@ -302,8 +328,14 @@ namespace ResourceCollector
           return cccr;
       }
 
-
-      public static string GetObjectName(int format, string name)
+       
+       /// <summary>
+       /// ф-ция автоматически подбирает нужный элемент из пака 0. в случае, если такого элемента нет - спрашивает у юзера, какой элемент подставить вместо него. в случае если есть элемент с похожим именем - пердлагает его
+       /// </summary>
+       /// <param name="format">ElementType.____</param>
+       /// <param name="name">имя нужного объекта</param>
+       /// <returns></returns>
+      public static string GetObjectName(int format, string name) // советую элементы назначать через эту ф-цию.
       {
           string nn = name;
           if (PackList.Instance.packs[0].getobject(format, name) == null)
@@ -324,16 +356,25 @@ namespace ResourceCollector
       }
 
       public static PackContent NULL = null;
-       public static void ClearPack(string search_pattern = "", int format = -1)
-       {
-           for (int i = 0; i < PackList.Instance.packs[0].Objects.Count;i++)
-           {
-               if (((format == -1) || (PackList.Instance.packs[0].Objects[i].loadedformat == format) || (PackList.Instance.packs[0].Objects[i].forsavingformat == format)) && Regex.IsMatch(PackList.Instance.packs[0].Objects[i].name, search_pattern))
-               {
-                   PackList.Instance.packs[0].DropElement(i--);
-               }
-           }
        
+       /// <summary>
+       /// Очистка пака (паков). Удаляет элементы в соответствии с шаблоном и типом
+       /// </summary>
+       /// <param name="search_pattern">шаблон имени для объектов</param>
+       /// <param name="format">loadedformat фильтр, -1 для всех объектов</param>
+       /// <param name="pack">в каком паке выполнить очистку. null - во всех</param>
+       public static void ClearPack(string search_pattern = "", int format = -1, Pack pack = null)
+       {
+           if (pack == null)
+           {
+               foreach (Pack pack_ in PackList.Instance.packs)   ClearPack(search_pattern, format, pack_);
+           }
+           else
+           {
+                   for (int i = 0; i < pack.Objects.Count; i++)
+                       if (((format < 0) || (pack.Objects[i].loadedformat == format) || (pack.Objects[i].forsavingformat == format)) && Regex.IsMatch(pack.Objects[i].name, search_pattern))
+                           pack.DropElement(i--);
+           }
        }
 
        public static string Question(string message)
@@ -343,14 +384,29 @@ namespace ResourceCollector
            {
                return q.answer;
            }
-           return "Cancel";
+           return Cancel;
        }
-
+       public static string Cancel = "Cancel";
+       /// <summary>
+       /// создает новый MessageBox
+       /// </summary>
        public static void Message(string message)
        {
            MessageBox.Show(message);
        }
 
+       /// <summary>
+       /// Сообщение в ConsoleWindow
+       /// </summary>
+       public static void wr(string message)
+       {
+           ResourceCollectorXNA.ConsoleWindow.TraceMessage(message);
+       }
+
+       //TODO:
+       /// <summary>
+       ///  получает инфу об объекте
+       /// </summary>
       public static string GetInfo(dynamic val)
       {
           if (val != null)
@@ -368,6 +424,34 @@ namespace ResourceCollector
           }
           else
           return "NULL";
+      }
+
+       /// <summary>
+       /// выполняет различные проверки на корректность пака. возвращает тру если пак хорош
+       /// </summary>
+      public static bool CheckPack(bool need_view)
+      {
+         if (need_view) wr("Проверка пака на корректность...");
+          bool correct = true;
+       //TODO : выполнять различные проверки на корректность пака 
+          string hash = "";
+          foreach (Pack pack in PackList.Instance.packs)
+          {
+              foreach (var pc in pack.Objects)
+              {
+                  string name = pc.name.TrimEnd('\0');
+                  if (Regex.IsMatch(hash, "\\b" + name + "\\b" ))
+                  {
+                      wr("Сопадение имен: " + name);
+                      correct = false;
+                  }
+                  hash += name+ " ";               
+              }
+          }
+
+          if (!correct) Message("Pack is not correct. See ConsoleWindow for details..");
+          else if (need_view) wr("Пак нормальный :)");
+          return correct;
       }
 
     }

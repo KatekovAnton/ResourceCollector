@@ -387,6 +387,8 @@ namespace ResourceCollector
                     import_pack_all((string)sender);
                 }
             }
+
+            Eggs.CheckPack(true);
         }
 
         public void import_pack_all(string file_name)
@@ -556,6 +558,7 @@ namespace ResourceCollector
                 ResourceCollectorXNA.SE.Instance.scriptscope.SetVariable("objects", packs.packs[0].Objects);
                 if (!packs.SuccessLast) ClearInterface();
                 UpdateData();
+                Eggs.CheckPack(true);
         }
         
         private void formToolStripMenuItem_Click(object sender, EventArgs e)

@@ -22,7 +22,7 @@ from System.IO import *
 def quest(obj) : return Eggs.Question(obj)
 def mess(obj) : return Eggs.Message(obj)
 def ofd() : return Eggs.ofd()
-def wr(obj): ConsoleWindow.TraceMessage(obj.ToString())
+def wr(obj): Eggs.wr(obj.ToString())
 def Ex(obj) : SE.Instance.Execute(obj)
 def ExScript(obj) : SE.Instance.ExScript(obj)
 def update() : FormMainPackExplorer.Instance.UpdateData()
