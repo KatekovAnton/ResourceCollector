@@ -80,10 +80,10 @@ namespace ResourceCollectorXNA
 
         public virtual void ExScript(string script_name)
         {
+
                scriptscope.SetVariable("counter", scripts[script_name].counter++);
                Execute(scripts[script_name].data);
-               if (LastException!=null)
-                 ConsoleWindow.TraceMessage("Executing Script " + script_name + " : " + LastException.Message);
+               if (LastException!=null)  ConsoleWindow.TraceMessage("Executing Script " + script_name + " : " + LastException.Message);
         }
 
         public virtual void FillByVariables(string name_pattern)
