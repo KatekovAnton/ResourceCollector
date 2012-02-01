@@ -42,14 +42,16 @@ namespace ResourceCollectorXNA
           
              
         }
-        private void ConsoleWindow_Resize(object sender, EventArgs e)
-        {
-            this.Width = 500;
-        }
-
+        
         private void ConsoleWindow_Load(object sender, EventArgs e)
         {
-
+            try
+            {
+                this.Top = 0;
+                this.Left = MainWindow.ActiveForm.ClientSize.Width - this.Width - 20;
+                this.Height = MainWindow.ActiveForm.ClientSize.Height - 20;
+            }
+            catch { }
         }
     }
 }

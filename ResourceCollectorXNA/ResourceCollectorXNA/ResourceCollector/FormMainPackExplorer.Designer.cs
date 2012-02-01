@@ -101,8 +101,8 @@
             this.label15 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.autoCompleteComboBox1 = new ResourceCollector.AutoCompleteComboBox();
             this.eXITToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.autoCompleteComboBox1 = new ResourceCollector.AutoCompleteComboBox();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -381,7 +381,7 @@
             // formToolStripMenuItem
             // 
             this.formToolStripMenuItem.Name = "formToolStripMenuItem";
-            this.formToolStripMenuItem.Size = new System.Drawing.Size(105, 22);
+            this.formToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.formToolStripMenuItem.Text = "All";
             this.formToolStripMenuItem.Click += new System.EventHandler(this.formToolStripMenuItem_Click);
             // 
@@ -390,7 +390,7 @@
             this.rUNToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripTextBox1});
             this.rUNToolStripMenuItem.Name = "rUNToolStripMenuItem";
-            this.rUNToolStripMenuItem.Size = new System.Drawing.Size(105, 22);
+            this.rUNToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.rUNToolStripMenuItem.Text = "Other";
             // 
             // toolStripTextBox1
@@ -402,8 +402,9 @@
             // editorToolStripMenuItem
             // 
             this.editorToolStripMenuItem.Name = "editorToolStripMenuItem";
-            this.editorToolStripMenuItem.Size = new System.Drawing.Size(105, 22);
+            this.editorToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.editorToolStripMenuItem.Text = "Editor";
+            this.editorToolStripMenuItem.Click += new System.EventHandler(this.editorToolStripMenuItem_Click);
             // 
             // toolStripButton2
             // 
@@ -879,6 +880,13 @@
             this.label8.TabIndex = 19;
             this.label8.Text = "Index:";
             // 
+            // eXITToolStripMenuItem
+            // 
+            this.eXITToolStripMenuItem.Name = "eXITToolStripMenuItem";
+            this.eXITToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.eXITToolStripMenuItem.Text = "EXIT";
+            this.eXITToolStripMenuItem.Click += new System.EventHandler(this.eXITToolStripMenuItem_Click);
+            // 
             // autoCompleteComboBox1
             // 
             this.autoCompleteComboBox1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -889,13 +897,6 @@
             this.autoCompleteComboBox1.Size = new System.Drawing.Size(174, 21);
             this.autoCompleteComboBox1.TabIndex = 3;
             this.autoCompleteComboBox1.SelectedIndexChanged += new System.EventHandler(this.autoCompleteComboBox1_SelectedIndexChanged);
-            // 
-            // eXITToolStripMenuItem
-            // 
-            this.eXITToolStripMenuItem.Name = "eXITToolStripMenuItem";
-            this.eXITToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
-            this.eXITToolStripMenuItem.Text = "EXIT";
-            this.eXITToolStripMenuItem.Click += new System.EventHandler(this.eXITToolStripMenuItem_Click);
             // 
             // FormMainPackExplorer
             // 

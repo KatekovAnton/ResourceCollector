@@ -209,6 +209,7 @@ namespace ResourceCollector
                 {
                     if (contentcoords.X != -1 && contentcoords.Y != -1)
                     {
+                      Eggs.UnBufferize(CurrentContent);
                         packs.Drop(contentcoords.X, contentcoords.Y);
                         ClearInterface();
                         treeView1.Nodes.Remove(treeView1.SelectedNode);
@@ -252,6 +253,7 @@ namespace ResourceCollector
                 CurrentContent = packs.findobject(treeView1.SelectedNode.Text, ref contentcoords);
                 if (CurrentContent != null)
                 {
+                   Eggs.Bufferize(CurrentContent);
                     if (CurrentContent.createpropertieswindow(packs.packs[0], treeView1) == System.Windows.Forms.DialogResult.OK)
                     {
                         //Set any changed data
@@ -716,6 +718,11 @@ namespace ResourceCollector
                // напиши нормальный выход из приложения с сохранением последнего сеанса (все что надо сохранить..)
             if (Eggs.CheckPack(true, "Все равно выйти?"))
                 MyGame.Instance.Exit();
+
+        }
+
+        public  void editorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
 
         }
 

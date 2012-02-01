@@ -37,14 +37,14 @@
             this.listBox1.FormattingEnabled = true;
             this.listBox1.Location = new System.Drawing.Point(0, 0);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(635, 602);
+            this.listBox1.Size = new System.Drawing.Size(422, 603);
             this.listBox1.TabIndex = 0;
             // 
             // ConsoleWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(635, 602);
+            this.ClientSize = new System.Drawing.Size(422, 603);
             this.ControlBox = false;
             this.Controls.Add(this.listBox1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
@@ -53,7 +53,6 @@
             this.Name = "ConsoleWindow";
             this.Text = "ConsoleWindow";
             this.Load += new System.EventHandler(this.ConsoleWindow_Load);
-            this.Resize += new System.EventHandler(this.ConsoleWindow_Resize);
             this.ResumeLayout(false);
 
         }

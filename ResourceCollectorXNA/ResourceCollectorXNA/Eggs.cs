@@ -14,6 +14,7 @@ namespace ResourceCollector
 {
    public static class Eggs
     {
+       public static List<PackContent> Buffer = new List<PackContent>();
        private static StreamWriter _sw;
        public static StreamWriter sw 
        {
@@ -27,7 +28,24 @@ namespace ResourceCollector
                return _sw;
            }
        }
-       
+
+       public static void Bufferize(List<PackContent> obj)
+       {
+           foreach (PackContent pc in obj)
+           if (!Buffer.Contains(pc)) Buffer.Add(pc); 
+       }
+       public static void UnBufferize(List<PackContent> obj)
+       {
+           foreach (PackContent pc in obj)
+               if (Buffer.Contains(pc)) Buffer.Remove(pc);
+       }
+
+       public static void Bufferize(PackContent obj)
+       {    if (!Buffer.Contains(obj)) Buffer.Add(obj); }
+
+       public static void UnBufferize(PackContent obj)
+       {   if (Eggs.Buffer.Contains(obj)) Eggs.Buffer.Remove(obj);  }
+
        public static List<string> Filter(List<string> list, string search_pattern = "", bool invert = false)
         {
             List<string> new_list = new List<string>();

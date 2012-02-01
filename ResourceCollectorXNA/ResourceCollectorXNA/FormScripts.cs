@@ -82,5 +82,10 @@ namespace ResourceCollector
         {
             Close();
         }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            FormMainPackExplorer.Instance.editorToolStripMenuItem_Click(sender, e);
+        }
     }
 }
