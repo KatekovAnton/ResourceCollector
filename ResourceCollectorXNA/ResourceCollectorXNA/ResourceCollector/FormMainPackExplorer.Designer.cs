@@ -46,6 +46,7 @@
             this.importPackToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.combineMeshesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.xNAMonitorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.intellectualRenamerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripDropDownButton();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.textureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -71,7 +72,6 @@
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
-            this.autoCompleteComboBox1 = new ResourceCollector.AutoCompleteComboBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -101,7 +101,8 @@
             this.label15 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.intellectualRenamerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.autoCompleteComboBox1 = new ResourceCollector.AutoCompleteComboBox();
+            this.eXITToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -172,7 +173,8 @@
             this.newPackToolStripMenuItem,
             this.openToolStripMenuItem,
             this.saveToolStripMenuItem,
-            this.rescentToolStripMenuItem});
+            this.rescentToolStripMenuItem,
+            this.eXITToolStripMenuItem});
             this.toolStripDropDownButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton1.Image")));
             this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
@@ -205,7 +207,7 @@
             // 
             this.rescentToolStripMenuItem.Name = "rescentToolStripMenuItem";
             this.rescentToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
-            this.rescentToolStripMenuItem.Text = "Rescent";
+            this.rescentToolStripMenuItem.Text = "Recent";
             // 
             // toolStripDropDownButton4
             // 
@@ -249,6 +251,13 @@
             this.xNAMonitorToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
             this.xNAMonitorToolStripMenuItem.Text = "XNA Monitor";
             this.xNAMonitorToolStripMenuItem.Click += new System.EventHandler(this.xNAMonitorToolStripMenuItem_Click);
+            // 
+            // intellectualRenamerToolStripMenuItem
+            // 
+            this.intellectualRenamerToolStripMenuItem.Name = "intellectualRenamerToolStripMenuItem";
+            this.intellectualRenamerToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.intellectualRenamerToolStripMenuItem.Text = "IntellectualRenamer";
+            this.intellectualRenamerToolStripMenuItem.Click += new System.EventHandler(this.intellectualRenamerToolStripMenuItem_Click);
             // 
             // toolStripButton1
             // 
@@ -515,17 +524,6 @@
             this.label13.Size = new System.Drawing.Size(66, 23);
             this.label13.TabIndex = 43;
             this.label13.Text = "By Regex:";
-            // 
-            // autoCompleteComboBox1
-            // 
-            this.autoCompleteComboBox1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.autoCompleteComboBox1.FormattingEnabled = true;
-            this.autoCompleteComboBox1.LimitToList = true;
-            this.autoCompleteComboBox1.Location = new System.Drawing.Point(7, 20);
-            this.autoCompleteComboBox1.Name = "autoCompleteComboBox1";
-            this.autoCompleteComboBox1.Size = new System.Drawing.Size(174, 21);
-            this.autoCompleteComboBox1.TabIndex = 3;
-            this.autoCompleteComboBox1.SelectedIndexChanged += new System.EventHandler(this.autoCompleteComboBox1_SelectedIndexChanged);
             // 
             // groupBox3
             // 
@@ -881,12 +879,23 @@
             this.label8.TabIndex = 19;
             this.label8.Text = "Index:";
             // 
-            // intellectualRenamerToolStripMenuItem
+            // autoCompleteComboBox1
             // 
-            this.intellectualRenamerToolStripMenuItem.Name = "intellectualRenamerToolStripMenuItem";
-            this.intellectualRenamerToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
-            this.intellectualRenamerToolStripMenuItem.Text = "IntellectualRenamer";
-            this.intellectualRenamerToolStripMenuItem.Click += new System.EventHandler(this.intellectualRenamerToolStripMenuItem_Click);
+            this.autoCompleteComboBox1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.autoCompleteComboBox1.FormattingEnabled = true;
+            this.autoCompleteComboBox1.LimitToList = true;
+            this.autoCompleteComboBox1.Location = new System.Drawing.Point(7, 20);
+            this.autoCompleteComboBox1.Name = "autoCompleteComboBox1";
+            this.autoCompleteComboBox1.Size = new System.Drawing.Size(174, 21);
+            this.autoCompleteComboBox1.TabIndex = 3;
+            this.autoCompleteComboBox1.SelectedIndexChanged += new System.EventHandler(this.autoCompleteComboBox1_SelectedIndexChanged);
+            // 
+            // eXITToolStripMenuItem
+            // 
+            this.eXITToolStripMenuItem.Name = "eXITToolStripMenuItem";
+            this.eXITToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.eXITToolStripMenuItem.Text = "EXIT";
+            this.eXITToolStripMenuItem.Click += new System.EventHandler(this.eXITToolStripMenuItem_Click);
             // 
             // FormMainPackExplorer
             // 
@@ -998,6 +1007,7 @@
         private System.Windows.Forms.ToolStripMenuItem materialToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem renderOdjectToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem intellectualRenamerToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem eXITToolStripMenuItem;
     }
 }
 

@@ -429,7 +429,7 @@ namespace ResourceCollector
        /// <summary>
        /// выполняет различные проверки на корректность пака. возвращает тру если пак хорош
        /// </summary>
-      public static bool CheckPack(bool need_view)
+      public static bool CheckPack(bool need_view, string question = "")
       {
          if (need_view) wr("Проверка пака на корректность...");
           bool correct = true;
@@ -449,7 +449,12 @@ namespace ResourceCollector
               }
           }
 
-          if (!correct) Message("Pack is not correct. See ConsoleWindow for details..");
+          if (!correct)
+          {
+              Message("Pack is not correct. See ConsoleWindow for details..");
+              if (question != "")
+              correct = Eggs.Question(question) != Eggs.Cancel;
+          }
           else if (need_view) wr("Пак нормальный :)");
           return correct;
       }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -52,8 +53,20 @@ namespace ResourceCollector
             List<string> res = new List<string>();
             for (int i = 0; i < maxrecentCount; i++)
             {
-                if (properties.Keys.Contains("Recent" + i.ToString()))
-                    res.Add(properties["Recent" + i.ToString()]);
+                string key ="Recent" + i.ToString();
+                if (properties.Keys.Contains(key))
+                {
+                    bool ok = false;
+                    try
+                    {
+                       ok = File.Exists(properties[key]);
+                    }
+                    catch 
+                    { }
+                    if (ok)
+                        res.Add(properties[key]);
+                    else properties.Remove(key);
+                }
                 else
                     break;
             }

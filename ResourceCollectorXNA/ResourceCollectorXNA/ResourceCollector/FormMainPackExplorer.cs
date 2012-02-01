@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
+using ResourceCollectorXNA;
 
 namespace ResourceCollector
 {
@@ -707,6 +708,15 @@ namespace ResourceCollector
         {
             ResourceCollectorXNA.FormRenamer.Show();
             UpdateData();
+        }
+
+        private void eXITToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //TODO 
+               // напиши нормальный выход из приложения с сохранением последнего сеанса (все что надо сохранить..)
+            if (Eggs.CheckPack(true, "Все равно выйти?"))
+                MyGame.Instance.Exit();
+
         }
 
         

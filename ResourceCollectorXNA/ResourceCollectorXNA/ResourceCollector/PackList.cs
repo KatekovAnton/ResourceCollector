@@ -54,10 +54,7 @@ namespace ResourceCollector
         }
         public void Save(int number, string filename)
         {
-            bool f = Eggs.CheckPack(true);
-            if (!f) f = Eggs.Question("Для того чтоб все равно сохранить пак нажми ОК") != Eggs.Cancel;
-
-            if (f)
+            if (Eggs.CheckPack(true, "Для того чтоб все равно сохранить пак нажми ОК"))
             if (packs != null && packs.Count > number && packs[number] != null && packs[number].Objects != null)
             {
                 packs[number].Save(filename);
