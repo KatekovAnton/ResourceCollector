@@ -17,27 +17,46 @@ namespace ResourceCollectorXNA.Engine.Logic
         //mixed
         public RaycastBoundObject raycastaspect;
         public Matrix transform = Matrix.Identity;
-
+        //for one
+        public BehaviourModel.ObjectBehaviourModel behaviourmodel;
         public bool neetforceupdate = false;
         protected PivotObject(){ }
 
         public bool moved;
-        public abstract void SetActive(bool active);
-        public abstract void Move(Vector3 d);
-        public abstract void SetGlobalPose(Matrix newPose);
-        public abstract Render.RenderObject HaveRenderAspect();
-        public abstract Render.Materials.Material HaveMaterial();
-        public virtual void Update()
+
+        public void SetActive(bool active)
         {
-            if (neetforceupdate)
-            {
-                raycastaspect.boundingShape.Update(transform);
-                neetforceupdate = false;
-            }
+            editorAspect.isActive = active;
         }
-        public virtual void BeginDoFrame()
+
+        public void Move(Microsoft.Xna.Framework.Vector3 d)
+        {
+            behaviourmodel.Move(d);
+            moved = true;
+        }
+
+        public void SetGlobalPose(Microsoft.Xna.Framework.Matrix newPose)
+        {
+            behaviourmodel.SetGlobalPose(newPose, null);
+            transform = newPose;
+            moved = true;
+        }
+
+        public void BeginDoFrame()
         {
             moved = false;
+            behaviourmodel.BeginDoFrame();
         }
+
+        public void Update()
+        {
+            transform = behaviourmodel.globalpose;
+            if (behaviourmodel.moved || neetforceupdate)
+                raycastaspect.boundingShape.Update(transform);
+            neetforceupdate = false;
+        }
+
+        public abstract Render.RenderObject HaveRenderAspect();
+        public abstract Render.Materials.Material HaveMaterial();
     }
 }

@@ -146,6 +146,7 @@
     <Compile Include="Eggs.cs" />
     <Compile Include="Engine\Logic\BehaviourModel\ObjectBoneRelatedBehaviourModel.cs" />
     <Compile Include="Engine\Logic\BehaviourModel\ObjectRelatedBehaviourModel.cs" />
+    <Compile Include="Engine\Logic\DummyObject.cs" />
     <Compile Include="FormScripts.cs">
       <SubType>Form</SubType>
     </Compile>
