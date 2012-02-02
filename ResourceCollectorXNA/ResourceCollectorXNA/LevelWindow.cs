@@ -143,24 +143,20 @@ namespace ResourceCollectorXNA
                 MessageBox.Show("too short nbame");
                 return;
             }
-            if (PackList.Instance.packs.Count == 0)
-            {
-                MessageBox.Show("no packs loaded!");
+            
+            SaveFileDialog sfd = new SaveFileDialog();
+            if (sfd.ShowDialog() != System.Windows.Forms.DialogResult.OK)
                 return;
-            }
-            
-            ResourceCollectorXNA.Engine.EngineLevel level = GameEngine.Instance.gameLevel;
 
-            if (level.levelContent.pack == null)
-            {
-                level.levelContent.name = textBox1.Text + "\0";
-                level.levelContent.pack = PackList.Instance.packs[0];
-                PackList.Instance.packs[0].Attach(level.levelContent);
-            }
-            else
-                textBox1.Text = level.levelContent.name.Substring(0,level.levelContent.name.Length-1);
-            
+            ResourceCollectorXNA.Engine.EngineLevel level = GameEngine.Instance.gameLevel;
             level.FillContent();
+
+            System.IO.BinaryWriter bw = new System.IO.BinaryWriter(new System.IO.FileStream(sfd.FileName, System.IO.FileMode.OpenOrCreate));
+            level.levelContent.savebody(bw);
+            bw.Flush();
+            bw.Close();
+            bw.Dispose();
+
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -170,12 +166,27 @@ namespace ResourceCollectorXNA
                 MessageBox.Show("no packs loaded!");
                 return;
             }
-            FormObjectPicker fop = new FormObjectPicker(PackList.Instance.packs[0], ElementType.LevelContent);
+
+            OpenFileDialog ofd = new OpenFileDialog();
+            if (ofd.ShowDialog() != System.Windows.Forms.DialogResult.OK)
+                return;
+
+            LevelContent lc = new LevelContent();
+            try
+            {
+                lc.loadbody(new System.IO.BinaryReader(new System.IO.FileStream(ofd.FileName, System.IO.FileMode.Open)));
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+                return;
+            }
+            /*FormObjectPicker fop = new FormObjectPicker(PackList.Instance.packs[0], ElementType.LevelContent);
             if (fop.ShowDialog() != System.Windows.Forms.DialogResult.OK)
                 return;
-            LevelContent lc = PackList.Instance.packs[0].getobject(fop.PickedContent[0]) as LevelContent;
+            LevelContent lc = PackList.Instance.packs[0].getobject(fop.PickedContent[0]) as LevelContent;*/
             Engine.EngineLevel el = new Engine.EngineLevel(lc);
-            textBox1.Text = lc.name.Substring(0,lc.name.Length-1);
+            textBox1.Text = ofd.FileName;
             GameEngine.Instance.LoadNewLevel(el);
             GameEngine.Instance.UpdateLevelPart();
             RenderWindow.Instance.Activate();
@@ -186,6 +197,25 @@ namespace ResourceCollectorXNA
             if (MessageBox.Show("all not saved data will be lost! shure?", "attention", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.No)
                 return;
             GameEngine.Instance.CreateNewLevel();
+            RenderWindow.Instance.Activate();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if (PackList.Instance.packs.Count == 0)
+            {
+                MessageBox.Show("no packs loaded!");
+                return;
+            }
+
+           FormObjectPicker fop = new FormObjectPicker(PackList.Instance.packs[0], ElementType.LevelContent);
+            if (fop.ShowDialog() != System.Windows.Forms.DialogResult.OK)
+                return;
+            LevelContent lc = PackList.Instance.packs[0].getobject(fop.PickedContent[0]) as LevelContent;
+            Engine.EngineLevel el = new Engine.EngineLevel(lc);
+            textBox1.Text = lc.name.Substring(0, lc.name.Length - 1);
+            GameEngine.Instance.LoadNewLevel(el);
+            GameEngine.Instance.UpdateLevelPart();
             RenderWindow.Instance.Activate();
         }
     }

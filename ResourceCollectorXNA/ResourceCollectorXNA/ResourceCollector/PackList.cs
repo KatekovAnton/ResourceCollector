@@ -38,6 +38,24 @@ namespace ResourceCollector
 
             return null;
         }
+
+        public PackContent[] GetObjects(string[] names)
+        {
+            PackContent[] contents = new PackContent[names.Length];
+            int number = 0;
+            for (int n = 0; n < names.Length; n++)
+                for (int j = 0; j < packs.Count; j++)
+                    if (packs[j].Objects != null)
+                        for (int i = 0; i < packs[j].Objects.Count; i++)
+                            if (packs[j].Objects[i].name == names[n])
+                            {
+                                contents[number] = packs[j].Objects[i];
+                                number++;
+                            }
+
+            return contents;
+        }
+
         public PackContent findobject(string name, ref System.Drawing.Point cc)
         {
             for (int j = 0; j < packs.Count; j++)

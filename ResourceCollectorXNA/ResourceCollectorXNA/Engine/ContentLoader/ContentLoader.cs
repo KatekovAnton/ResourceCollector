@@ -30,7 +30,7 @@ namespace ResourceCollectorXNA.Engine.ContentLoader
             Logic.SceneGraph.OTBoundingShape bs = null;
             if (description.IsRCCMEnabled)
             {
-                ResourceCollector.Content.CollisionMesh cm = packs.getobject(description.RCCMName) as ResourceCollector.Content.CollisionMesh;
+                ResourceCollector.Content.CollisionMesh cm = ResourceCollector.PackList.Instance.GetObject(description.RCCMName) as ResourceCollector.Content.CollisionMesh;
 
                 if (cm.Enginereadedobject.Count == 0)
                     ObjectRCCM = EngineCollisionMesh.FromcontentCollisionMesh(cm);
@@ -49,7 +49,7 @@ namespace ResourceCollectorXNA.Engine.ContentLoader
 
         private static Material loadMaterial(string name, ResourceCollector.Pack packs)
         {
-            ResourceCollector.Content.Material mat = packs.getobject(name) as ResourceCollector.Content.Material;
+            ResourceCollector.Content.Material mat =  ResourceCollector.PackList.Instance.GetObject(name) as ResourceCollector.Content.Material;
             if (mat.Enginereadedobject.Count == 0)
             {
                 XNAevents.Add("creating material " + name);
@@ -61,7 +61,7 @@ namespace ResourceCollectorXNA.Engine.ContentLoader
                     {
                         mats[j] = new TextureMaterial.SubsetMaterial();
                         Content.EngineTexture texture;
-                        ResourceCollector.ImageContent inage = packs.getobject(mat.lodMats[i].mats[j].DiffuseTextureName) as ResourceCollector.ImageContent;
+                        ResourceCollector.ImageContent inage = ResourceCollector.PackList.Instance.GetObject(mat.lodMats[i].mats[j].DiffuseTextureName) as ResourceCollector.ImageContent;
                         if (inage.Enginereadedobject.Count == 0)
                         {
                             texture = new Content.EngineTexture();
@@ -92,7 +92,7 @@ namespace ResourceCollectorXNA.Engine.ContentLoader
                 {
                     for (int j = 0; j < mat.lodMats[i].mats.Count; j++)
                     {
-                        ResourceCollector.ImageContent inage = packs.getobject(mat.lodMats[i].mats[j].DiffuseTextureName) as ResourceCollector.ImageContent;
+                        ResourceCollector.ImageContent inage = ResourceCollector.PackList.Instance.GetObject(mat.lodMats[i].mats[j].DiffuseTextureName) as ResourceCollector.ImageContent;
                         inage.Enginereadedobject.Add(inage.Enginereadedobject[0]);
                     }
                 }
@@ -104,7 +104,7 @@ namespace ResourceCollectorXNA.Engine.ContentLoader
             ResourceCollector.Content.LevelObjectDescription description,
             ResourceCollector.Pack packs)
         {
-            ResourceCollector.Content.RenderObjectDescription rod = packs.getobject(description.RODName) as ResourceCollector.Content.RenderObjectDescription;
+            ResourceCollector.Content.RenderObjectDescription rod = ResourceCollector.PackList.Instance.GetObject(description.RODName) as ResourceCollector.Content.RenderObjectDescription;
             if (rod.Enginereadedobject.Count == 0)
             {
                 XNAevents.Add("creating render object " + description.RODName);
@@ -114,7 +114,7 @@ namespace ResourceCollectorXNA.Engine.ContentLoader
                     UnAnimRenderObject.SubSet[] modelsubsets = new UnAnimRenderObject.SubSet[rod.LODs[i].subsets.Count];
                     for (int j = 0; j < modelsubsets.Length; j++)
                     {
-                        ResourceCollector.PackContent[] objects = packs.GetObjects(rod.LODs[i].subsets[j].MeshNames);
+                        ResourceCollector.PackContent[] objects = ResourceCollector.PackList.Instance.GetObjects(rod.LODs[i].subsets[j].MeshNames);
                         ResourceCollector.MeshSkinned[] subsetmeshes = new ResourceCollector.MeshSkinned[objects.Length];
                         for (int t = 0; t < subsetmeshes.Length; t++)
                             subsetmeshes[t] = objects[t] as ResourceCollector.MeshSkinned;

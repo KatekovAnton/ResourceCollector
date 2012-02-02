@@ -31,6 +31,7 @@ namespace ResourceCollectorXNA.Engine.Actions
                     StartTransform[i] = @object[i].transform;
             }
         }
+
         public bool Valid()
         {
             return StartTransform.Length > 0 ? StartTransform[0] != operatingObject[0].transform : false;
@@ -40,8 +41,8 @@ namespace ResourceCollectorXNA.Engine.Actions
         {
             operatingObject = null;
         }
-
     }
+
     public class PivotActionUpdateParameters
     {
         public Ray ray;
@@ -54,5 +55,4 @@ namespace ResourceCollectorXNA.Engine.Actions
             this.mousepos = mousepos;
         }
     }
-
 }

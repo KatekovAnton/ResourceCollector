@@ -20,6 +20,11 @@ namespace ResourceCollectorXNA.Engine.Actions
 
         }
 
+        public override void onActionDeleted()
+        {
+            
+        }
+
         public override void CancelAction(GameEditor Editor)
         {
             MyContainer<PivotObject> objects = new MyContainer<PivotObject>(operatingObject.Length, 1);

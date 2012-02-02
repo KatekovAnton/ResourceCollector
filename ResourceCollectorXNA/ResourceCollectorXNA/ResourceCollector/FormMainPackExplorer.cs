@@ -66,20 +66,28 @@ namespace ResourceCollector
                 visibleformats.Add(ElementType.ParticelRenderObjectDescription);
         }
 
-        public  void openToolStripMenuItem_Click(object sender, EventArgs e)
+        public void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
-                OpenFileDialog ofd = new OpenFileDialog();
+            OpenFileDialog ofd = new OpenFileDialog();
 
-                ofd.Filter = "Паки *.pack|*.pack";
-                string path = AppConfiguration.PackPlaceFolder;
-                if (path.Length > 2)
-                    ofd.InitialDirectory = path;
-                if (ofd.ShowDialog() == DialogResult.OK)
-                  add_pack(ofd.FileName);
-                ofd.Dispose();
-                AppConfiguration.AddRecentFile(ofd.FileName);
-                UpdateData();
-                UpdateRecentPacks();
+            ofd.Filter = "Паки *.pack|*.pack";
+            string path = AppConfiguration.PackPlaceFolder;
+            if (path.Length > 2)
+                ofd.InitialDirectory = path;
+
+
+            if (ofd.ShowDialog() != DialogResult.OK)
+                return;
+
+           bool b= ResourceCollectorXNA.Engine.GameEngine.Instance.CreateNewLevel();
+            if(b)
+                RenderWindow.Instance.Activate();
+
+            add_pack(ofd.FileName);
+            ofd.Dispose();
+            AppConfiguration.AddRecentFile(ofd.FileName);
+            UpdateData();
+            UpdateRecentPacks();
         }
 
         

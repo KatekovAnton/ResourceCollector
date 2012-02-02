@@ -49,6 +49,11 @@ namespace ResourceCollectorXNA.Engine
             activeObject = new ObjectContainer();
         }
 
+        public void unload()
+        {
+            actions.Clear();
+        }
+
         public void setNewLevel(GameScene scene)
         {
             Clear();
@@ -114,7 +119,7 @@ namespace ResourceCollectorXNA.Engine
 
         public void Clear()
         {
-            actions.clear();
+            actions.Clear();
             SetActiveObjects(new ObjectContainer(), true);
             GameEngine.levelController.Cleared();
         }

@@ -80,9 +80,10 @@ namespace ResourceCollectorXNA.Engine
             needclear = true;
         }
 
-        public void CreateNewLevel()
+        public bool CreateNewLevel()
         {
             neednewlevel = true;
+            return gameLevel.objects.Count != 0;
         }
 
         public void LoadNewLevel(Engine.EngineLevel _futureGameLevel)
@@ -188,6 +189,7 @@ namespace ResourceCollectorXNA.Engine
                         ContentLoader.ContentLoader.UnloadPivotObject(p);
                 objectstoadd.Clear();
                 gameLevel.unload();
+                editor.Clear();
                 neednewlevel = false;
 
                 GraphicPipeleine.NewFrame(lightDir);

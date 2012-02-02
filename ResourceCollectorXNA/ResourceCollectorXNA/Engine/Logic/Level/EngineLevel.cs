@@ -32,7 +32,7 @@ namespace ResourceCollectorXNA.Engine
             idgenertor = new IdGenerator(levelContent.generator);
             for(int i = 0;i<levelContent.objectInformation.Count;i++)
             {
-                ResourceCollector.Content.LevelObjectDescription lod = levelContent.pack.getobject(levelContent.objectInformation[i].descriptionName) as ResourceCollector.Content.LevelObjectDescription;
+                ResourceCollector.Content.LevelObjectDescription lod = PackList.Instance.GetObject(levelContent.objectInformation[i].descriptionName) as ResourceCollector.Content.LevelObjectDescription;
                 LevelObject lo = ContentLoader.ContentLoader.LevelObjectFromDescription(lod, levelContent.pack);
                 lo.SetGlobalPose(levelContent.objectInformation[i].objectMatrix);
                 lo.editorAspect.group_id = levelContent.objectInformation[i].group_id;
@@ -46,9 +46,8 @@ namespace ResourceCollectorXNA.Engine
         public void unload()
         {
             for (int i = 0; i < objects.Count; i++)
-            {
                 ContentLoader.ContentLoader.UnloadPivotObject(objects[i]);
-            }
+            
             Clear();
         }
 
