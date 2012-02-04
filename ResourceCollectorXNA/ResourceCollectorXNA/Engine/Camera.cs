@@ -70,38 +70,26 @@ namespace ResourceCollectorXNA.Engine{
 
 
             Vector3 translateDirection = Vector3.Zero;
-            if(!GameEngine.actionToInterface) {
-                if(states.IsKeyDown(Keys.W)) // Forwards
+            if (!GameEngine.actionToInterface)
+            {
+                if (states.IsKeyDown(Keys.W)) // Forwards
                     translateDirection += Vector3.TransformNormal(Vector3.Forward, cameraRotation);
 
-                if(states.IsKeyDown(Keys.S)) // Backwards
+                if (states.IsKeyDown(Keys.S)) // Backwards
                     translateDirection += Vector3.TransformNormal(Vector3.Backward, cameraRotation);
 
-                if(states.IsKeyDown(Keys.A)) // Left
-                    translateDirection += Vector3.TransformNormal(Vector3.Left, cameraRotation);
 
-                if(states.IsKeyDown(Keys.D)) // Right
-                    translateDirection += Vector3.TransformNormal(Vector3.Right, cameraRotation);
-
-                Keys[] oneMomenetKeys = states.GetPressedKeys();   // oneMomenetKeys.Contains() почему-то не работает
-                Boolean flag1 = false;
-                Boolean flag2 = false;
-                if(oneMomenetKeys.Length == 2) {
-                    flag1 = (oneMomenetKeys[0] == Keys.LeftControl || oneMomenetKeys[1] == Keys.LeftControl);
-                    flag2 = (oneMomenetKeys[0] == Keys.Space || oneMomenetKeys[1] == Keys.Space);
+                if (MouseManager.Manager.mmbState == ButtonState.Pressed)
+                {
+                    translateDirection += Vector3.TransformNormal(Vector3.Left * MouseManager.Manager.d_mouse.X, cameraRotation);
+                    translateDirection += Vector3.TransformNormal(Vector3.Up * MouseManager.Manager.d_mouse.Y, cameraRotation);
                 }
-                
-                if(flag1 && flag2) {
-                    translateDirection += Vector3.TransformNormal(Vector3.Down, cameraRotation);
-                }
-
-                if(states.IsKeyDown(Keys.Space) && (oneMomenetKeys.Length == 1)) {
-                    translateDirection += Vector3.TransformNormal(Vector3.Up, cameraRotation);
-                }
+                //ебучее колесо не пашет
+                translateDirection += Vector3.TransformNormal(Vector3.Forward * MouseManager.Manager.scrollWheelDelta, cameraRotation);
             }
             Vector3 newPosition = position;
             if(translateDirection.LengthSquared() > 0)
-                newPosition += Vector3.Normalize(translateDirection) * distance;
+                newPosition += translateDirection * distance;
 
             View = Matrix.CreateLookAt(newPosition, newPosition + newForward, Vector3.Up);
 

@@ -137,6 +137,7 @@ namespace ResourceCollectorXNA
         {
             if (MDIParent.ActiveMdiChild == renderWindow)
             {
+                MouseManager.Manager.Update();
                 HandleKeyboard(Keyboard.GetState());
                 System.Drawing.Point formpos = renderWindow.DesktopLocation;
                 //132,55

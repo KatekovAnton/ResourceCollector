@@ -14,14 +14,14 @@ namespace ResourceCollectorXNA
     {
         public static RenderWindow Instance;
 
-        class mosecapturer : Engine.Interface.IMouseUserInterface
+        class mosecapturer : IMouseUserInterface
         {
             public bool havemose;
             public bool captureMouse()
             {
                 if (!havemose)
                 {
-                    if (!Engine.Interface.MouseManager.IsMouseCaptured)
+                    if (!MouseManager.IsMouseCaptured)
                         havemose = true;
                     return havemose;
                 }
@@ -272,7 +272,7 @@ namespace ResourceCollectorXNA
 
         private void xnaPanel1_MouseClick(object sender, MouseEventArgs e)
         {
-            if (e.Button == System.Windows.Forms.MouseButtons.Right && !Engine.Interface.MouseManager.IsMouseCaptured)
+            if (e.Button == System.Windows.Forms.MouseButtons.Right && !MouseManager.IsMouseCaptured)
             {
                 contextMenuStrip1.Close();
                 if (capturer.captureMouse())

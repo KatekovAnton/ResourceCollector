@@ -5,7 +5,7 @@ using System.Text;
 
 using Microsoft.Xna.Framework.Input;
 
-namespace ResourceCollectorXNA.Engine.Interface
+namespace ResourceCollectorXNA
 {
     public class KeyScan
     {

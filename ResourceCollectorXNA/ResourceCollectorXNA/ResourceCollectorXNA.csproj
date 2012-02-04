@@ -209,11 +209,11 @@
     <Compile Include="Engine\EditorObject\EditorObject.cs" />
     <Compile Include="Engine\Engine.cs" />
     <Compile Include="Engine\Helpers\FPSCounter.cs" />
-    <Compile Include="Engine\Interface\IInterfaceUser.cs" />
-    <Compile Include="Engine\Interface\KeyboardManager.cs" />
-    <Compile Include="Engine\Interface\IKeyboardUserInterface.cs" />
-    <Compile Include="Engine\Interface\MouseManager.cs" />
-    <Compile Include="Engine\Interface\IMouseUserInterface.cs" />
+    <Compile Include="BaseExtensions\IInterfaceUser.cs" />
+    <Compile Include="BaseExtensions\KeyboardManager.cs" />
+    <Compile Include="BaseExtensions\IKeyboardUserInterface.cs" />
+    <Compile Include="BaseExtensions\MouseManager.cs" />
+    <Compile Include="BaseExtensions\IMouseUserInterface.cs" />
     <Compile Include="Engine\Interface\MoveArrows.cs" />
     <Compile Include="Engine\Interface\RotateCircles.cs" />
     <Compile Include="Engine\Interface\TransformManager.cs" />
