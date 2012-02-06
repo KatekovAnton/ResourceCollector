@@ -136,8 +136,17 @@ namespace ResourceCollector
                 {
                     string str = fop.PickedContent[0];
                     LevelObjectDescription wod1 = packs.packs[0].getobject(str) as LevelObjectDescription;
-                    ResourceCollectorXNA.Engine.Logic.LevelObject testsidelevelobject1 = ResourceCollectorXNA.Engine.ContentLoader.ContentLoader.LevelObjectFromDescription(wod1, packs.packs[0]);
-                    testsidelevelobject1.SetGlobalPose(Microsoft.Xna.Framework.Matrix.CreateTranslation(3, 20, 0));
+                    ResourceCollectorXNA.Engine.Logic.LevelObject testsidelevelobject1 = null;
+                    try
+                    {
+                        testsidelevelobject1 = ResourceCollectorXNA.Engine.ContentLoader.ContentLoader.LevelObjectFromDescription(wod1, packs.packs[0]);
+                    }
+                    catch (Exception ecx)
+                    {
+                        MessageBox.Show(ecx.ToString());
+                        return;
+                    }
+                        testsidelevelobject1.SetGlobalPose(Microsoft.Xna.Framework.Matrix.CreateTranslation(3, 20, 0));
                     ResourceCollectorXNA.MyGame.AddOject(testsidelevelobject1);
                     Close();
                 }

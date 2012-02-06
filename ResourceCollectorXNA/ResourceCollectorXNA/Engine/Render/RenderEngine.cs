@@ -38,7 +38,7 @@ namespace ResourceCollectorXNA.Engine.Render
         private DebugRender.DebugRenderer debugRenderer;
         private MyContainer<PivotObject> debugRenderArray;
         private Camera Camera;
-
+        RasterizerState rs;
         public RenderPipeline(GraphicsDevice dev, Camera c)
         {
             Device = dev;
@@ -52,6 +52,9 @@ namespace ResourceCollectorXNA.Engine.Render
             debugRenderArray = new MyContainer<PivotObject>(10, 3);
             EnableShadows = SmoothShadows = EnableGrass = true;
             EnableDebugRender = true;
+           rs = createNewState(RasterizerState.CullClockwise);
+            rs.CullMode = CullMode.None;
+            Device.RasterizerState = rs;
             //EnableShadows = false;
             //SmoothShadows = false;
             if (EnableShadows)
@@ -296,8 +299,8 @@ namespace ResourceCollectorXNA.Engine.Render
         
         public void RenderToPicture(Camera Camera, Vector3 lightDir)
         {
-            
-            Device.RasterizerState = RasterizerState.CullClockwise;
+
+            Device.RasterizerState = rs;
             Device.DepthStencilState = DepthStencilState.Default;
             Device.BlendState = BlendState.Opaque;
 
@@ -311,7 +314,7 @@ namespace ResourceCollectorXNA.Engine.Render
             }
 
             this.Device.Clear(Color.LightGray);
-
+            Device.RasterizerState = rs;
 
             ResourceCollectorXNA.Engine.Render.Materials.Material.ObjectRenderEffect.Parameters["Projection"].SetValue(Camera.Projection);
             ResourceCollectorXNA.Engine.Render.Materials.Material.ObjectRenderEffect.Parameters["View"].SetValue(Camera.View);
@@ -421,6 +424,20 @@ namespace ResourceCollectorXNA.Engine.Render
                 shadowRenderTarget.Dispose();
             Disposed = true;
         }
+
+        public RasterizerState createNewState(RasterizerState aotherstate)
+        {
+            RasterizerState res = new RasterizerState();
+            res.CullMode = aotherstate.CullMode;
+            res.DepthBias = aotherstate.DepthBias;
+            res.FillMode = aotherstate.FillMode;
+            res.MultiSampleAntiAlias = aotherstate.MultiSampleAntiAlias;
+            res.ScissorTestEnable = aotherstate.ScissorTestEnable;
+            res.SlopeScaleDepthBias = aotherstate.SlopeScaleDepthBias;
+
+            return res;
+        }
+
         ~RenderPipeline()
         {
             if (!Disposed)

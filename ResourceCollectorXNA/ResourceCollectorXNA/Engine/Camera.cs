@@ -72,10 +72,10 @@ namespace ResourceCollectorXNA.Engine{
             Vector3 translateDirection = Vector3.Zero;
             if (!GameEngine.actionToInterface)
             {
-                if (states.IsKeyDown(Keys.W)) // Forwards
+                if (states.IsKeyDown(Keys.S)) // Forwards
                     translateDirection += Vector3.TransformNormal(Vector3.Forward, cameraRotation);
 
-                if (states.IsKeyDown(Keys.S)) // Backwards
+                if (states.IsKeyDown(Keys.X)) // Backwards
                     translateDirection += Vector3.TransformNormal(Vector3.Backward, cameraRotation);
 
 

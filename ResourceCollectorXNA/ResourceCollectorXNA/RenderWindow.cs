@@ -8,9 +8,14 @@ using System.Windows.Forms;
 
 using Microsoft.Xna.Framework;
 
+using ResourceCollector;
+using ResourceCollector.Content;
+using ResourceCollectorXNA.Engine;
+using ResourceCollectorXNA.Engine.ContentLoader;
+
 namespace ResourceCollectorXNA
 {
-    public partial class RenderWindow : Form
+    public partial class RenderWindow : Form,IKeyboardUserInterface
     {
         public static RenderWindow Instance;
 
@@ -50,6 +55,16 @@ namespace ResourceCollectorXNA
         Engine.GameEngine engine;
         public static bool islocal = true;
         public IntPtr PanelHandle;
+        public List<HotKey> _hotkeys;
+        public bool IsKeyboardCaptured()
+        {
+            return false;
+        }
+
+        public List<HotKey> hotkeys()
+        {
+            return _hotkeys;
+        }
 
         public RenderWindow()
         {
@@ -60,6 +75,52 @@ namespace ResourceCollectorXNA
             Engine.GameEngine.renderController = new RCViewControllers.RenderWindowVC(this);
             capturer = new mosecapturer();
             Instance = this;
+            _hotkeys = new List<HotKey>();
+            _hotkeys.Add(new HotKey(new Microsoft.Xna.Framework.Input.Keys[] { Microsoft.Xna.Framework.Input.Keys.A }, ToggleAngular));
+            _hotkeys.Add(new HotKey(new Microsoft.Xna.Framework.Input.Keys[] { Microsoft.Xna.Framework.Input.Keys.E }, HotRotate));
+            _hotkeys.Add(new HotKey(new Microsoft.Xna.Framework.Input.Keys[] { Microsoft.Xna.Framework.Input.Keys.W }, HotMove));
+            _hotkeys.Add(new HotKey(new Microsoft.Xna.Framework.Input.Keys[] { Microsoft.Xna.Framework.Input.Keys.Q }, HotSelect));
+            KeyboardManager.Manager.AddKeyboardUser(this);
+        }
+
+        public void ToggleAngular()
+        {
+            int curr = 0;
+            if (xnaRadioButton1.Checked)
+                curr = 0;
+            else if (xnaRadioButton2.Checked)
+                curr = 1;
+            else if (xnaRadioButton3.Checked)
+                curr = 2;
+
+            curr++;
+            if (curr > 2)
+                curr -= 3;
+
+            if (curr == 0)
+                xnaRadioButton1.Checked = true;
+            else if (curr == 1)
+                xnaRadioButton2.Checked = true;
+            else if (curr == 2)
+                xnaRadioButton3.Checked = true;
+        }
+
+        public void HotMove()
+        {
+            toolStripMenuItem2.Checked = true;
+            toolStripMenuItem2_Click(null, null);
+        }
+
+        public void HotRotate()
+        {
+            toolStripMenuItem3.Checked = true;
+            toolStripMenuItem3_Click(null, null);
+        }
+
+        public void HotSelect()
+        {
+            selectToolStripMenuItem.Checked = true;
+            selectToolStripMenuItem_Click(null, null);
         }
 
         private void xnaPanel1_SizeChanged(object sender, EventArgs e)
@@ -67,6 +128,7 @@ namespace ResourceCollectorXNA
             engine.ResetDevice(ClientSize);
         }
 
+        
 
         Engine.Interface.TransformManagerState state;
         
@@ -164,7 +226,6 @@ namespace ResourceCollectorXNA
             else
                 localPointToolStripMenuItem.Checked = true;
         }
-
 
         public void setMove(string[] args)
         {
@@ -300,6 +361,38 @@ namespace ResourceCollectorXNA
         private void xnaButton3_Click(object sender, EventArgs e)
         {
             engine.clear();
+        }
+
+        private void addObjectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (PackList.Instance.packs.Count > 0)
+            {
+                FormObjectPicker fop = new FormObjectPicker(PackList.Instance.packs[0], ElementType.LevelObjectDescription);
+                if (fop.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    string str = fop.PickedContent[0];
+                    LevelObjectDescription wod1 = PackList.Instance.GetObject(str) as LevelObjectDescription;
+                    ResourceCollectorXNA.Engine.Logic.LevelObject testsidelevelobject1 = null;
+                    try
+                    {
+                        testsidelevelobject1 = ResourceCollectorXNA.Engine.ContentLoader.ContentLoader.LevelObjectFromDescription(wod1, PackList.Instance.packs[0]);
+                    }
+                    catch (Exception ecx)
+                    {
+                        MessageBox.Show(ecx.ToString());
+                        return;
+                    }
+                    testsidelevelobject1.SetGlobalPose(Microsoft.Xna.Framework.Matrix.CreateTranslation(3, 20, 0));
+                    ResourceCollectorXNA.MyGame.AddOject(testsidelevelobject1);
+                }
+            }
+            else
+                MessageBox.Show("Load some packs first");
+        }
+
+        private void centerCameraToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
