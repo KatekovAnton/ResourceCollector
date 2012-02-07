@@ -149,6 +149,7 @@ namespace ResourceCollector
 
         private void pictureBox1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
+            
             PictureBox pic = (PictureBox)sender;
             Object[] obj = new Object[listBox1.Items.Count];
             listBox1.Items.CopyTo(obj, 0);
@@ -156,7 +157,12 @@ namespace ResourceCollector
             needlg.comboBox1.SelectedIndex = (int)pic.Tag;
             if (needlg.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
+                if (needlg.comboBox2.SelectedIndex < 0)
+                {
+                    MessageBox.Show("select nodeTo first");
+                    return;
 
+                }
                 NodeEvent nodeev = new NodeEvent(needlg.textBox1.Text, (AnimationNode)listBox1.Items[needlg.comboBox1.SelectedIndex],
                     (AnimationNode)listBox1.Items[needlg.comboBox2.SelectedIndex], chev.listBox1.Items[needlg.CharEventIndex].ToString());
 
